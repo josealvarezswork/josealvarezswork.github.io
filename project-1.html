@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project MOA — Jose Alvarez</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #070709;
+        --text: #f2f2f2;
+        --muted: rgba(255, 255, 255, 0.62);
+        --muted2: rgba(255, 255, 255, 0.36);
+        --stroke: rgba(255, 255, 255, 0.08);
+
+        --serif: "Playfair Display", serif;
+        --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+        --max: 1080px;
+        --radius: 18px;
+
+        --accent: #ff6a2d;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(900px 500px at 28% 16%, rgba(255,255,255,0.06), transparent 60%),
+          radial-gradient(900px 600px at 78% 44%, rgba(255,255,255,0.04), transparent 65%),
+          var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        position: relative;
+      }
+      a { color: inherit; text-decoration: none; }
+
+      /* Accent bar */
+      .accent-bar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 6px;
+        height: 100vh;
+        background: linear-gradient(180deg, var(--accent) 0%, rgba(255,106,45,0.3) 100%);
+        z-index: 100;
+      }
+
+      .container {
+        width: min(var(--max), calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      /* NAV */
+      .site-header { padding: 28px 0; }
+      .nav {
+        width: min(var(--max), calc(100% - 48px));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand { display: inline-flex; align-items: center; gap: 10px; }
+      .brand-mark {
+        width: 22px; height: 22px; border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.18);
+        position: relative;
+      }
+      .brand-mark::before {
+        content: "";
+        position: absolute;
+        inset: 5px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.9);
+      }
+      .brand-text { line-height: 1.05; }
+      .brand-name { display: block; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
+      .brand-sub { display: block; font-size: 11px; letter-spacing: 0.06em; opacity: 0.7; }
+      .nav-links { display: flex; gap: 38px; font-size: 12px; letter-spacing: 0.04em; opacity: 0.9; }
+      .nav-links a { position: relative; transition: opacity 150ms ease; }
+      .nav-links a:hover { opacity: 0.7; }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0; bottom: -8px;
+        width: 100%; height: 1px;
+        background: rgba(255,255,255,0.3);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 160ms ease;
+      }
+      .nav-links a:hover::after { transform: scaleX(1); }
+
+      /* HERO */
+      .hero { padding: 64px 0 24px; }
+      .hero-wrap { padding-bottom: 22px; border-bottom: 1px solid var(--stroke); }
+      .kicker {
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.46);
+        margin: 0 0 10px;
+      }
+      .hero-title {
+        font-family: var(--serif);
+        font-weight: 700;
+        font-size: clamp(46px, 6.4vw, 92px);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        margin: 0 0 10px;
+
+        transform: translateX(calc(var(--tX, 0) * 1px)) translateY(calc(var(--tY, 0) * 1px));
+        opacity: var(--tO, 1);
+        will-change: transform, opacity;
+      }
+      .hero-title .accent { color: var(--accent); }
+      .hero-sub {
+        margin: 0;
+        max-width: 78ch;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      /* ===== Block A: Vertical intro ONLY (text + sticky media) ===== */
+      .case-intro { padding: 28px 0 64px; }
+      .grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 34px;
+        align-items: start;
+        padding-top: 26px;
+      }
+
+      .section {
+        padding: 22px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .section:last-child { border-bottom: none; }
+
+      .h2 {
+        font-family: var(--serif);
+        font-size: 22px;
+        margin: 0 0 8px;
+        letter-spacing: -0.01em;
+      }
+      .p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13.5px;
+        line-height: 1.85;
+      }
+
+      /* Snapshot chips (siguen siendo datos, pero abajo del storytelling) */
+      .snapshot {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .chip {
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 14px;
+        padding: 12px;
+        background: rgba(255,255,255,0.02);
+      }
+      .chip b {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.55);
+        margin-bottom: 6px;
+      }
+      .chip span { display: block; font-size: 13px; color: rgba(255,255,255,0.82); line-height: 1.5; }
+
+      .list {
+        margin: 10px 0 0;
+        padding-left: 16px;
+        color: var(--muted);
+        font-size: 13.5px;
+        line-height: 1.85;
+      }
+
+      /* MEDIA: sin “caja”, sin borde, sin cards — imágenes libres */
+      .media-rail {
+        position: sticky;
+        top: 90px;
+        height: calc(100vh - 120px);
+        overflow: hidden;         /* para el efecto de desplazamiento */
+      }
+      .media-stage {
+        position: relative;
+        height: 100%;
+      }
+      .media-stack {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        will-change: transform;
+        transform: translateY(calc(var(--mY, 0) * 1px));
+      }
+      .media-img {
+        width: 100%;
+        display: block;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.10);
+        margin-bottom: 16px;
+        background: rgba(0,0,0,0.35);
+      }
+
+      /* ===== Block B+: Horizontal sections full width ===== */
+      .case-section {
+        padding: 72px 0;
+        border-top: 1px solid rgba(255,255,255,0.06);
+      }
+      .section-inner {
+        width: min(var(--max), calc(100% - 48px));
+        margin: 0 auto;
+      }
+      .case-section h2 {
+        font-family: var(--serif);
+        font-size: 26px;
+        margin: 0 0 12px;
+        letter-spacing: -0.01em;
+      }
+      .case-section p {
+        margin: 0;
+        max-width: 78ch;
+        font-size: 14px;
+        line-height: 1.9;
+        color: var(--muted);
+      }
+
+      /* Media inside sections after Product Goal */
+      .section-media { margin-top: 18px; }
+
+      /* 1 image => side align */
+      .media--side {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 22px;
+        align-items: start;
+      }
+      .media--side .media-figure img {
+        width: 100%;
+        display: block;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(0,0,0,0.35);
+      }
+
+      /* 2-3 images => below */
+      .media--below .media-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        max-width: 900px;
+      }
+      .media--below .media-grid img {
+        width: 100%;
+        display: block;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(0,0,0,0.35);
+      }
+
+      /* Footer */
+      .site-footer {
+        padding: 34px 0 52px;
+        background: rgba(0,0,0,0.28);
+        border-top: 1px solid var(--stroke);
+      }
+      .footer-top {
+        display: flex;
+        gap: 28px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 26px;
+      }
+      .footer-item {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: lowercase;
+        color: rgba(255,255,255,0.55);
+      }
+      .footer-cta {
+        text-align: center;
+        font-family: var(--serif);
+        font-size: clamp(34px, 4.6vw, 64px);
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+      }
+      .cta-accent {
+        font-style: italic;
+        background: linear-gradient(90deg, #ff7a18, #b64cff, #31d17c);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Responsive */
+      @media (max-width: 980px) {
+        .grid { grid-template-columns: 1fr; }
+        .media-rail { position: relative; top: auto; height: auto; overflow: visible; }
+        .media-stack { position: relative; transform: none !important; }
+        .snapshot { grid-template-columns: 1fr; }
+        .media--side { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="accent-bar" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="./index.html" aria-label="Home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">
+            <span class="brand-name">Jose Alvarez</span>
+            <span class="brand-sub">Design</span>
+          </span>
+        </a>
+
+        <div class="nav-links">
+          <a href="./resume.html">Resume</a>
+          <a href="./about.html">About</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-wrap" id="heroWrap">
+        <p class="kicker">Case Study</p>
+
+        <h1 class="hero-title" id="heroTitle">
+          Project <span class="accent">MOA</span>
+        </h1>
+
+        <p class="hero-sub">
+          Designing a product system that <b>[main action]</b> for <b>[user/team]</b>.
+        </p>
+
+        <p class="hero-sub" style="margin-top: 10px; color: rgba(255,255,255,0.5)">
+          A brief description of what the product/system does and why it exists.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Block A (vertical) — images ONLY accompany these sections ===== -->
+    <section class="case-intro" id="caseIntro">
+      <div class="container grid">
+        <!-- LEFT -->
+        <div class="left" id="leftColumn">
+          <div id="mediaRange">
+            <!-- Snapshot (Storytelling + then chips) -->
+            <div class="section" id="sec-snapshot">
+              <div class="h2">Context & Project Snapshot</div>
+
+              <p class="p">
+                I designed this project as a product system—not a single screen—because the real issue
+                was consistency. As workflows grew, the team needed a repeatable way to transform messy,
+                unstructured inputs into decisions and outputs that stayed aligned over time.
+              </p>
+
+              <p class="p" style="margin-top:10px">
+                My responsibility was end-to-end: defining the system logic, shaping the UX structure,
+                and translating it into a UI that could scale as requirements evolved.
+              </p>
+
+              <div class="snapshot">
+                <div class="chip">
+                  <b>Role</b>
+                  <span>UI/UX Product Designer<br />(Product concept, UX structure & system design)</span>
+                </div>
+                <div class="chip">
+                  <b>Timeline</b>
+                  <span>X weeks</span>
+                </div>
+                <div class="chip">
+                  <b>Team</b>
+                  <span>Solo / With X developers / PM</span>
+                </div>
+                <div class="chip">
+                  <b>Tools</b>
+                  <span>Figma, Notion, (others)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Problem (Storytelling) -->
+            <div class="section" id="sec-problem">
+              <div class="h2">The Problem — Product Challenge</div>
+
+              <p class="p">
+                Teams were struggling with <b>[structural problem]</b>. Information lived in different places,
+                changed constantly, and was interpreted differently by each person—creating friction in handoffs
+                and slowing down decisions.
+              </p>
+
+              <p class="p" style="margin-top:10px">
+                The impact wasn’t “bad UX”—it was real product drag: <b>[time lost]</b>, <b>[inconsistent outputs]</b>,
+                and <b>[avoidable rework]</b>.
+              </p>
+
+              <p class="p" style="margin-top:10px">
+                <b>Why it mattered:</b> Without a system, the team couldn’t move fast without sacrificing clarity.
+                Fixing this meant creating a shared way to structure inputs and produce consistent outcomes.
+              </p>
+            </div>
+
+            <!-- Goal (Storytelling) -->
+            <div class="section" id="sec-goal">
+              <div class="h2">Product Goal</div>
+
+              <p class="p">
+                The goal was to design a system that turns <b>[unstructured input]</b> into <b>[consistent output]</b>,
+                so teams can make decisions faster without losing alignment.
+              </p>
+
+              <p class="p" style="margin-top:10px">
+                Instead of adding more “documentation,” the focus was to create a product framework that guides
+                thinking—so the output becomes predictable, reusable, and scalable.
+              </p>
+
+              <ul class="list">
+                <li><b>Constraints:</b> time</li>
+                <li><b>Constraints:</b> technical</li>
+                <li><b>Constraints:</b> scope</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT (images free, sticky, moving) -->
+        <aside class="media-rail" aria-label="Intro media">
+          <div class="media-stage">
+            <div class="media-stack" id="mediaStack">
+              <img class="media-img" src="./assets/project-moa-01.png" alt="Project intro screen 1" />
+              <img class="media-img" src="./assets/project-moa-02.png" alt="Project intro screen 2" />
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== From here: Horizontal sections ===== -->
+
+    <!-- 5. THE SYSTEM — example with ONE image aligned to the side -->
+    <section class="case-section" id="sec-system">
+      <div class="section-inner">
+        <div class="media--side">
+          <div class="media-copy">
+            <h2>The System — How it Works</h2>
+            <p>
+              The system starts by capturing intent as structured inputs. Those inputs are processed into modular
+              blocks that can be reused across contexts. The output is a consistent set of UI and artifacts that
+              teams can rely on as a single source of truth.
+            </p>
+          </div>
+
+          <figure class="media-figure">
+            <img src="./assets/system-overview.png" alt="System overview" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. KEY DESIGN DECISIONS — example with 2-3 images below -->
+    <section class="case-section" id="sec-decisions">
+      <div class="section-inner">
+        <h2>Key Design Decisions</h2>
+        <p>
+          Each decision responds directly to the problem: reduce ambiguity, increase reuse, and make outputs
+          predictable at scale.
+        </p>
+
+        <div class="section-media media--below">
+          <div class="media-grid">
+            <img src="./assets/decision-01.png" alt="Decision visual 1" />
+            <img src="./assets/decision-02.png" alt="Decision visual 2" />
+            <!-- Opcional tercera -->
+            <!-- <img src="./assets/decision-03.png" alt="Decision visual 3" /> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. UX & UI IMPLEMENTATION (sin imágenes, o agrega media--side/media--below según necesites) -->
+    <section class="case-section" id="sec-implementation">
+      <div class="section-inner">
+        <h2>UX & UI Implementation</h2>
+        <p>
+          Information architecture, key user flows, and UI foundations were designed as a consequence of the system.
+          The UI supports the system by making structure visible and repeatable.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. WORKING OUTPUT -->
+    <section class="case-section" id="sec-output">
+      <div class="section-inner">
+        <h2>Working Output</h2>
+        <p>
+          This is not a concept — this system is functional. Include prototypes, screenshots, short gifs, or links.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. OUTCOME & IMPACT -->
+    <section class="case-section" id="sec-impact">
+      <div class="section-inner">
+        <h2>Outcome & Impact</h2>
+        <p>
+          The system reduced clarification loops and created a shared structure that teams could reuse, iterate, and
+          scale without losing alignment.
+        </p>
+      </div>
+    </section>
+
+    <!-- 10. LEARNINGS -->
+    <section class="case-section" id="sec-learnings">
+      <div class="section-inner">
+        <h2>Learnings & Next Steps</h2>
+        <p>
+          What worked, what I’d improve, and how the next iteration would increase adoption and reduce friction.
+        </p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <span class="footer-item">made in colombia</span>
+          <span class="footer-item">+57 000 000 0000</span>
+          <a class="footer-item" href="mailto:your@email.com">email</a>
+          <a class="footer-item" href="#" target="_blank" rel="noreferrer">linkedin</a>
+        </div>
+
+        <div class="footer-cta">
+          <span>Let’s make something </span><span class="cta-accent">beautiful</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const heroWrap = document.getElementById("heroWrap");
+        const heroTitle = document.getElementById("heroTitle");
+        const mediaRange = document.getElementById("mediaRange");
+        const mediaStack = document.getElementById("mediaStack");
+
+        if (!heroWrap || !heroTitle) return;
+
+        function clamp(n, min, max) {
+          return Math.max(min, Math.min(max, n));
+        }
+
+        function update() {
+          const vh = window.innerHeight;
+
+          // HERO title drift left + fade
+          const heroRect = heroWrap.getBoundingClientRect();
+          const progTitle = clamp((-heroRect.top) / (vh * 0.55), 0, 1);
+
+          const x = -220 * progTitle;
+          const y = -18 * progTitle;
+          const o = 1 - 0.85 * progTitle;
+
+          heroTitle.style.setProperty("--tX", x.toFixed(2));
+          heroTitle.style.setProperty("--tY", y.toFixed(2));
+          heroTitle.style.setProperty("--tO", o.toFixed(3));
+
+          // Media scroll (only in Block A)
+          if (!mediaRange || !mediaStack) return;
+
+          const r = mediaRange.getBoundingClientRect();
+          const start = vh * 0.15;
+          const end = vh * 0.85;
+          const total = r.height - (end - start);
+
+          const raw = (start - r.top) / (total || 1);
+          const prog = clamp(raw, 0, 1);
+
+          const travel = 260; // ajusta si quieres más desplazamiento
+          const mY = -travel * prog;
+          mediaStack.style.setProperty("--mY", mY.toFixed(2));
+        }
+
+        update();
+        window.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update);
+      })();
+    </script>
+  </body>
+</html>

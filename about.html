@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — Jose Alvarez</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #070709;
+        --text: #f2f2f2;
+        --muted: rgba(255, 255, 255, 0.62);
+        --muted2: rgba(255, 255, 255, 0.36);
+        --stroke: rgba(255, 255, 255, 0.08);
+
+        --serif: "Playfair Display", serif;
+        --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+        --max: 900px;
+        --radius: 18px;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(900px 500px at 28% 16%, rgba(255,255,255,0.06), transparent 60%),
+          radial-gradient(900px 600px at 78% 44%, rgba(255,255,255,0.04), transparent 65%),
+          var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+      }
+      a { color: inherit; text-decoration: none; }
+
+      .container {
+        width: min(var(--max), calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      /* NAV */
+      .site-header { padding: 28px 0; }
+      .nav {
+        width: min(1080px, calc(100% - 48px));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand { display: inline-flex; align-items: center; gap: 10px; }
+      .brand-mark {
+        width: 22px; height: 22px; border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.18);
+        position: relative;
+      }
+      .brand-mark::before {
+        content: "";
+        position: absolute;
+        inset: 5px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.9);
+      }
+      .brand-text { line-height: 1.05; }
+      .brand-name { display: block; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
+      .brand-sub { display: block; font-size: 11px; letter-spacing: 0.06em; opacity: 0.7; }
+      .nav-links { display: flex; gap: 38px; font-size: 12px; letter-spacing: 0.04em; opacity: 0.9; }
+      .nav-links a { position: relative; }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0; bottom: -8px;
+        width: 100%; height: 1px;
+        background: rgba(255,255,255,0.2);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 160ms ease;
+      }
+      .nav-links a:hover::after { transform: scaleX(1); }
+      .nav-links a.active::after { transform: scaleX(1); }
+
+      /* QUOTE SECTION */
+      .quote-section {
+        padding: 80px 0 60px;
+      }
+
+      .quote-block {
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .quote-mark {
+        position: absolute;
+        left: -10px;
+        top: -30px;
+        font-family: var(--serif);
+        font-size: 120px;
+        line-height: 1;
+        color: rgba(255,255,255,0.12);
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .quote-text {
+        font-family: var(--serif);
+        font-size: clamp(26px, 4vw, 38px);
+        font-weight: 500;
+        line-height: 1.35;
+        letter-spacing: -0.01em;
+        margin: 0 0 24px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .quote-text .highlight {
+        background: linear-gradient(90deg, #ffd700, #ff8c00);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .quote-attribution {
+        font-size: 13px;
+        color: var(--muted2);
+        letter-spacing: 0.08em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .quote-attribution::before {
+        content: "";
+        width: 24px;
+        height: 1px;
+        background: rgba(255,255,255,0.25);
+      }
+
+      /* INTRO SECTION */
+      .intro-section {
+        padding: 50px 0 70px;
+        border-top: 1px solid var(--stroke);
+      }
+
+      .intro-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 40px;
+        align-items: start;
+      }
+
+      .intro-text h2 {
+        font-family: var(--sans);
+        font-size: 15px;
+        font-weight: 500;
+        margin: 0 0 16px;
+        color: var(--text);
+      }
+
+      .intro-text p {
+        font-size: 14px;
+        line-height: 1.85;
+        color: var(--muted);
+        margin: 0 0 14px;
+        max-width: 52ch;
+      }
+
+      .intro-photo {
+        width: 140px;
+        height: 175px;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.05);
+        flex-shrink: 0;
+      }
+
+      .intro-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* LISTS SECTION */
+      .lists-section {
+        padding: 50px 0 80px;
+        border-top: 1px solid var(--stroke);
+      }
+
+      .lists-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+      }
+
+      .list-column h3 {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted2);
+        margin: 0 0 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .list-column h3 .icon {
+        font-size: 14px;
+      }
+
+      .list-column ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .list-column li {
+        font-size: 13.5px;
+        line-height: 1.7;
+        color: rgba(255,255,255,0.78);
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+      }
+
+      .list-column li:last-child {
+        border-bottom: none;
+      }
+
+      .list-column li em {
+        color: var(--muted2);
+        font-style: normal;
+      }
+
+      /* Footer */
+      .site-footer {
+        padding: 34px 0 52px;
+        background: rgba(0,0,0,0.28);
+        border-top: 1px solid var(--stroke);
+      }
+      .site-footer .container {
+        width: min(1080px, calc(100% - 48px));
+      }
+      .footer-top {
+        display: flex;
+        gap: 28px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 26px;
+      }
+      .footer-item {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: lowercase;
+        color: rgba(255,255,255,0.55);
+      }
+      .footer-cta {
+        text-align: center;
+        font-family: var(--serif);
+        font-size: clamp(34px, 4.6vw, 64px);
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+      }
+      .cta-accent {
+        font-style: italic;
+        background: linear-gradient(90deg, #ff7a18, #b64cff, #31d17c);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Responsive */
+      @media (max-width: 700px) {
+        .intro-grid {
+          grid-template-columns: 1fr;
+        }
+        .intro-photo {
+          order: -1;
+          width: 120px;
+          height: 150px;
+        }
+        .lists-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .quote-text {
+          font-size: clamp(22px, 5vw, 30px);
+        }
+        .quote-mark {
+          font-size: 80px;
+          top: -20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="./index.html" aria-label="Home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">
+            <span class="brand-name">Jose Alvarez</span>
+            <span class="brand-sub">Design</span>
+          </span>
+        </a>
+
+        <div class="nav-links">
+          <a href="./resume.html">Resume</a>
+          <a href="./about.html" class="active">About</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- QUOTE -->
+      <section class="quote-section">
+        <div class="container">
+          <blockquote class="quote-block">
+            <span class="quote-mark" aria-hidden="true">"</span>
+            <p class="quote-text">
+              Good design
+              <span class="highlight">reduces friction</span> Great product design removes
+              <span class="highlight">unnecessary work.</span>
+            </p>
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- INTRO -->
+      <section class="intro-section">
+        <div class="container">
+          <div class="intro-grid">
+            <div class="intro-text">
+              <h2>Hi, I'm Jose Alvarez</h2>
+
+              <p>
+                I believe a good product starts with a real need — the need to solve problems that slow us down, 
+                complicate our daily lives, or waste valuable time.
+              </p>
+              <p>My focus as a Product Designer is to identify those friction points and turn them into clear, 
+                efficient, and usable solutions, where every decision serves a purpose and respects the user’s time.
+
+              <p>
+                Based in Colombia, creativity has been my strongest skill from an early age.
+                 Starting with drawing and gradually exploring areas like visual editing and digital tools, 
+                 I discovered that I genuinely enjoy creating things that make life easier.
+                 That curiosity evolved into a focus on designing digital products and systems that reduce friction,
+                  save time, and solve real everyday problems — not only for myself, but for others as well.
+              </p>
+
+            </div>
+
+            <div class="intro-photo">
+              <!-- Add your photo here -->
+              <!-- <img src="./images/profile.jpg" alt="Jose Alvarez" /> -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LISTS -->
+      <section class="lists-section">
+        <div class="container">
+          <div class="lists-grid">
+            <div class="list-column">
+              <h3><span class="icon">♥</span> Things I Enjoy</h3>
+              <ul>
+                <li>Exploring new design tools and workflows</li>
+                <li>Building side projects with emerging tech</li>
+                <li>Reading about product strategy and UX research</li>
+                <li>Music discovery <em>(always looking for new sounds)</em></li>
+                <li>Photography and visual storytelling</li>
+                <li>Long walks to clear the mind</li>
+              </ul>
+            </div>
+
+            <div class="list-column">
+              <h3><span class="icon">★</span> Highlights</h3>
+              <ul>
+                <li>Designed products used by thousands of users</li>
+                <li>Collaborated with teams across multiple countries</li>
+                <li>Built and shipped multiple design systems</li>
+                <li>Self-taught developer <em>(enough to prototype ideas)</em></li>
+                <li>Continuous learner — always improving</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <span class="footer-item">made in colombia</span>
+          <span class="footer-item">+57 000 000 0000</span>
+          <a class="footer-item" href="mailto:your@email.com">email</a>
+          <a class="footer-item" href="#" target="_blank" rel="noreferrer">linkedin</a>
+        </div>
+
+        <div class="footer-cta">
+          <span>Let's make something </span><span class="cta-accent">beautiful</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
