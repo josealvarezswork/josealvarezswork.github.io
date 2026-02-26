@@ -912,6 +912,30 @@
       font-family: 'Inter', system-ui, sans-serif;
     }
 
+    .design-tokens-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .component-library-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    /* Hide scrollbar for sliders */
+    .design-tokens-grid::-webkit-scrollbar,
+    .component-library-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .design-tokens-grid,
+    .component-library-grid {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
     @media(max-width:640px) {
       .hero {
         padding: 48px 0 40px
@@ -941,6 +965,38 @@
       .ux-artifacts-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
+      }
+
+      .design-tokens-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 12px;
+        padding-bottom: 12px;
+        margin: 0 -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .design-tokens-grid > * {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
+      }
+
+      .component-library-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 12px;
+        padding-bottom: 12px;
+        margin: 0 -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .component-library-grid > * {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
       }
     }
   </style>
@@ -1513,7 +1569,7 @@
             <span style="width:24px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">🎨</span>
             Design Tokens
           </h3>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+          <div class="design-tokens-grid">
             <!-- Colors -->
             <div class="pws-card" style="padding:20px">
               <h4 style="font-size:12px;font-weight:600;margin-bottom:16px;color:var(--text-muted)">Phase Colors</h4>
@@ -1568,7 +1624,7 @@
             <span style="width:24px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">📦</span>
             Component Library
           </h3>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+          <div class="component-library-grid">
             <!-- Buttons -->
             <div class="pws-card" style="padding:20px">
               <h4 style="font-size:11px;font-weight:600;margin-bottom:16px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em">Buttons — Variants</h4>
