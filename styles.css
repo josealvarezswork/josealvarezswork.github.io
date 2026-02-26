@@ -169,6 +169,46 @@ a { color: inherit; text-decoration: none; }
   border-color: rgba(255,255,255,0.16);
 }
 
+.card[href="#"] {
+  cursor: default;
+}
+
+.card[href="#"]:hover,
+.card-dev-overlay:hover ~ .card-inner,
+.card[href="#"]:hover .card-image {
+  transform: none;
+  border-color: var(--stroke);
+}
+
+.card-dev-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  z-index: 10;
+}
+
+.card[href="#"]:hover .card-dev-overlay {
+  opacity: 1;
+}
+
+.card-dev-overlay span {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  padding: 12px 24px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+}
+
 .card--green { background: #4f7c63; }
 .card--orange { background: #ff6a2d; }
 
