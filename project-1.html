@@ -897,6 +897,21 @@
       border-color: var(--text-faint)
     }
 
+    .figma-plugin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .ux-artifacts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
     @media(max-width:640px) {
       .hero {
         padding: 48px 0 40px
@@ -916,6 +931,16 @@
 
       .persona-card {
         grid-template-columns: 1fr
+      }
+
+      .figma-plugin-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .ux-artifacts-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
       }
     }
   </style>
@@ -1240,7 +1265,7 @@
         </div>
 
         <!-- Figma Plugin showcase -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:56px;align-items:start">
+        <div class="figma-plugin-grid">
           <div>
             <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:16px">Figma Plugin</h3>
             <p class="section-text" style="margin-bottom:20px;font-size:1.05rem;line-height:1.7">Full workflow inside
@@ -1366,7 +1391,7 @@
         <div style="margin-top:64px">
           <h3 style="font-family:var(--serif);font-size:1.4rem;margin-bottom:12px">Generated UX Artifacts</h3>
           <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px">Some artifacts the tool generates automatically:</p>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;font-family:'Inter',system-ui,sans-serif">
+          <div class="ux-artifacts-grid">
             <!-- Project Identity - Definition Phase 1 (Yellow) -->
             <div style="display:flex;flex-direction:column">
               <span style="font-size:10px;font-weight:500;color:#d6d3d1;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Definition</span>
@@ -1475,10 +1500,162 @@
       </div>
     </section>
 
+    <!-- DESIGN SYSTEM -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label solution">07 — Design System</span>
+        <h2 class="section-title">UI Kit built for consistency and scalability</h2>
+        <p class="section-text">Created a complete design system with <strong>design tokens, reusable components, and variants</strong> to ensure visual consistency across the webapp and Figma plugin.</p>
+
+        <!-- Design Tokens -->
+        <div style="margin-top:40px">
+          <h3 style="font-size:14px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px">
+            <span style="width:24px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">🎨</span>
+            Design Tokens
+          </h3>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+            <!-- Colors -->
+            <div class="pws-card" style="padding:20px">
+              <h4 style="font-size:12px;font-weight:600;margin-bottom:16px;color:var(--text-muted)">Phase Colors</h4>
+              <div style="display:flex;gap:8px">
+                <div style="text-align:center">
+                  <div style="width:40px;height:40px;background:linear-gradient(135deg,#fef9c3,#facc15);border-radius:8px;margin-bottom:6px"></div>
+                  <span style="font-size:10px;color:var(--text-faint)">Definition</span>
+                </div>
+                <div style="text-align:center">
+                  <div style="width:40px;height:40px;background:linear-gradient(135deg,#dcfce7,#16a34a);border-radius:8px;margin-bottom:6px"></div>
+                  <span style="font-size:10px;color:var(--text-faint)">Strategy</span>
+                </div>
+                <div style="text-align:center">
+                  <div style="width:40px;height:40px;background:linear-gradient(135deg,#ffedd5,#ea580c);border-radius:8px;margin-bottom:6px"></div>
+                  <span style="font-size:10px;color:var(--text-faint)">Validation</span>
+                </div>
+                <div style="text-align:center">
+                  <div style="width:40px;height:40px;background:linear-gradient(135deg,#dbeafe,#2563eb);border-radius:8px;margin-bottom:6px"></div>
+                  <span style="font-size:10px;color:var(--text-faint)">User</span>
+                </div>
+              </div>
+            </div>
+            <!-- Typography -->
+            <div class="pws-card" style="padding:20px">
+              <h4 style="font-size:12px;font-weight:600;margin-bottom:16px;color:var(--text-muted)">Typography</h4>
+              <div style="font-family:Inter,system-ui,sans-serif">
+                <div style="font-size:18px;font-weight:800;margin-bottom:4px">Heading</div>
+                <div style="font-size:14px;margin-bottom:4px">Body text</div>
+                <div style="font-size:12px;font-weight:600;margin-bottom:4px">Label</div>
+                <div style="font-size:11px;font-family:monospace;color:var(--text-faint)">DM Mono</div>
+              </div>
+            </div>
+            <!-- Spacing -->
+            <div class="pws-card" style="padding:20px">
+              <h4 style="font-size:12px;font-weight:600;margin-bottom:16px;color:var(--text-muted)">Spacing Scale</h4>
+              <div style="display:flex;align-items:flex-end;gap:8px">
+                <div style="width:8px;height:8px;background:var(--accent);border-radius:2px;opacity:.4"></div>
+                <div style="width:12px;height:12px;background:var(--accent);border-radius:2px;opacity:.5"></div>
+                <div style="width:16px;height:16px;background:var(--accent);border-radius:2px;opacity:.6"></div>
+                <div style="width:24px;height:24px;background:var(--accent);border-radius:3px;opacity:.7"></div>
+                <div style="width:32px;height:32px;background:var(--accent);border-radius:4px;opacity:.8"></div>
+                <div style="width:48px;height:48px;background:var(--accent);border-radius:6px;opacity:.9"></div>
+              </div>
+              <div style="font-size:10px;color:var(--text-faint);margin-top:8px;font-family:monospace">4 · 8 · 12 · 16 · 24 · 32 · 48</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Component Library -->
+        <div style="margin-top:40px">
+          <h3 style="font-size:14px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px">
+            <span style="width:24px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">📦</span>
+            Component Library
+          </h3>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+            <!-- Buttons -->
+            <div class="pws-card" style="padding:20px">
+              <h4 style="font-size:11px;font-weight:600;margin-bottom:16px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em">Buttons — Variants</h4>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;font-family:Inter,system-ui,sans-serif">
+                <span style="padding:10px 16px;background:#1c1917;color:#fff;border-radius:10px;font-size:12px;font-weight:600">Primary</span>
+                <span style="padding:10px 16px;background:#fff;color:#1c1917;border:1px solid #e7e5e4;border-radius:10px;font-size:12px;font-weight:600">Secondary</span>
+                <span style="padding:10px 16px;background:#16a34a;color:#fff;border-radius:10px;font-size:12px;font-weight:600">Success</span>
+                <span style="padding:10px 16px;background:#2563eb;color:#fff;border-radius:10px;font-size:12px;font-weight:600">Accent</span>
+              </div>
+            </div>
+            <!-- Inputs -->
+            <div class="pws-card" style="padding:20px">
+              <h4 style="font-size:11px;font-weight:600;margin-bottom:16px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em">Form Inputs — States</h4>
+              <div style="display:flex;flex-direction:column;gap:8px;font-family:Inter,system-ui,sans-serif">
+                <div style="padding:10px 12px;background:#fff;border:1px solid #e7e5e4;border-radius:10px;font-size:12px;color:#a8a29e">Default state</div>
+                <div style="padding:10px 12px;background:#fff;border:2px solid #2563eb;border-radius:10px;font-size:12px;color:#1c1917;box-shadow:0 0 0 3px rgba(37,99,235,.1)">Focus state</div>
+              </div>
+            </div>
+            <!-- Badges -->
+            <div class="pws-card" style="padding:20px">
+              <h4 style="font-size:11px;font-weight:600;margin-bottom:16px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em">Badges — Variants</h4>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;font-family:Inter,system-ui,sans-serif">
+                <span style="padding:5px 10px;background:#fef9c3;color:#ca8a04;border-radius:999px;font-size:10px;font-weight:600;border:1px solid rgba(202,138,4,.25)">Required</span>
+                <span style="padding:5px 10px;background:rgba(22,163,74,.1);color:#16a34a;border-radius:999px;font-size:10px;font-weight:600;border:1px solid rgba(22,163,74,.25)">Complete</span>
+                <span style="padding:5px 10px;background:rgba(37,99,235,.1);color:#2563eb;border-radius:999px;font-size:10px;font-weight:600;border:1px solid rgba(37,99,235,.25)">0/10</span>
+                <span style="padding:5px 10px;background:#f5f5f4;color:#78716c;border-radius:999px;font-size:10px;font-weight:600;border:1px solid #e7e5e4">Default</span>
+              </div>
+            </div>
+            <!-- Cards -->
+            <div class="pws-card" style="padding:20px">
+              <h4 style="font-size:11px;font-weight:600;margin-bottom:16px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em">Cards — Phase Borders</h4>
+              <div style="display:flex;gap:8px">
+                <div style="flex:1;padding:12px;background:#fff;border:2px solid #facc15;border-radius:10px;box-shadow:0 4px 12px rgba(250,204,21,.15)">
+                  <div style="font-size:10px;font-weight:600;color:#ca8a04">Form</div>
+                </div>
+                <div style="flex:1;padding:12px;background:#fff;border:2px solid #16a34a;border-radius:10px;box-shadow:0 4px 12px rgba(22,163,74,.15)">
+                  <div style="font-size:10px;font-weight:600;color:#16a34a">Generate</div>
+                </div>
+                <div style="flex:1;padding:12px;background:#fff;border:2px solid #2563eb;border-radius:10px;box-shadow:0 4px 12px rgba(37,99,235,.1)">
+                  <div style="font-size:10px;font-weight:600;color:#2563eb">Paste</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Figma Structure -->
+        <div style="margin-top:40px">
+          <h3 style="font-size:14px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px">
+            <span style="width:24px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">⚙️</span>
+            Figma Implementation
+          </h3>
+          <div class="features-list">
+            <div class="feature-row">
+              <div class="feature-info">
+                <h4>Variables & Tokens</h4>
+                <p>Color, spacing, and typography tokens defined as Figma variables for easy theming</p>
+              </div><span class="feature-badge shipped">Implemented</span>
+            </div>
+            <div class="feature-row">
+              <div class="feature-info">
+                <h4>Component Variants</h4>
+                <p>Buttons, inputs, badges with multiple states (default, hover, focus, disabled)</p>
+              </div><span class="feature-badge shipped">Implemented</span>
+            </div>
+            <div class="feature-row">
+              <div class="feature-info">
+                <h4>Auto Layout</h4>
+                <p>All components built with auto layout for responsive behavior and easy modifications</p>
+              </div><span class="feature-badge shipped">Implemented</span>
+            </div>
+            <div class="feature-row">
+              <div class="feature-info">
+                <h4>Phase System</h4>
+                <p>4-phase color coding (Definition, Strategy, Validation, User) applied consistently</p>
+              </div><span class="feature-badge shipped">Implemented</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- PRINCIPLES -->
     <section class="section">
       <div class="container">
-        <span class="section-label">07 — Design Principles</span>
+        <span class="section-label">08 — Design Principles</span>
         <h2 class="section-title">Three principles behind every decision</h2>
         <div class="principles">
           <div class="principle">
@@ -1506,7 +1683,7 @@
     <!-- AI REFLECTION -->
     <section class="section">
       <div class="container">
-        <span class="section-label insight">08 — On AI + Design</span>
+        <span class="section-label insight">09 — On AI + Design</span>
         <h2 class="section-title">AI as a tool, not a replacement</h2>
         <p class="section-text">Building this tool clarified my perspective on AI in design. It's not about replacing
           designers — it's about <strong>augmenting judgment with structure</strong>.</p>
@@ -1538,7 +1715,7 @@
       <div class="container">
         <div class="results-grid">
           <div>
-            <span class="section-label">09 — Results</span>
+            <span class="section-label">10 — Results</span>
             <h2 class="section-title">Projected outcomes</h2>
             <div class="result-metric">
               <div class="value">~50%</div>
