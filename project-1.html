@@ -1,607 +1,1592 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project MOA — Jose Alvarez</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UX AI Generator — Jose Alvarez</title>
+  <meta name="description"
+    content="Case study: From blank page to structured UX brief in 20 minutes. An AI-powered tool that eliminates discovery friction for product designers.">
+  <meta property="og:title" content="UX AI Generator — Product Design Case Study">
+  <meta property="og:description" content="From blank page to structured UX brief in 20 minutes instead of 60.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070709;
+      --bg-elevated: #0d0d10;
+      --bg-card: #111114;
+      --text: #f2f2f2;
+      --text-muted: rgba(255, 255, 255, .62);
+      --text-faint: rgba(255, 255, 255, .36);
+      --stroke: rgba(255, 255, 255, .08);
+      --stroke-light: rgba(255, 255, 255, .12);
+      --accent: #ff6a2d;
+      --accent-soft: rgba(255, 106, 45, .15);
+      --accent-glow: rgba(255, 106, 45, .08);
+      --success: #10b981;
+      --success-soft: rgba(16, 185, 129, .15);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Inter", system-ui, -apple-system, sans-serif;
+      --max: 1000px;
+      --r: 12px;
+      --rl: 16px;
+    }
 
-    <style>
-      :root {
-        --bg: #070709;
-        --text: #f2f2f2;
-        --muted: rgba(255, 255, 255, 0.62);
-        --muted2: rgba(255, 255, 255, 0.36);
-        --stroke: rgba(255, 255, 255, 0.08);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-        --serif: "Playfair Display", serif;
-        --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased
+    }
 
-        --max: 1080px;
-        --radius: 18px;
+    a {
+      color: inherit;
+      text-decoration: none
+    }
 
-        --accent: #ff6a2d;
+    .accent-bar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 5px;
+      height: 100vh;
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(255, 106, 45, .2) 100%);
+      z-index: 100
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 20px 24px;
+      background: rgba(7, 7, 9, .85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--stroke)
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .brand-mark {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .18);
+      position: relative
+    }
+
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .9)
+    }
+
+    .brand-text {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .02em
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-size: 12px;
+      letter-spacing: .04em;
+      color: var(--text-muted)
+    }
+
+    .nav-links a:hover {
+      color: var(--text)
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--stroke)
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(255, 106, 45, .25);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 20px;
+      max-width: 900px
+    }
+
+    .hero-title .accent {
+      color: var(--accent)
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 680px;
+      line-height: 1.7;
+      margin-bottom: 32px
+    }
+
+    .tldr {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 48px
+    }
+
+    .tldr-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--r);
+      font-size: 13px
+    }
+
+    .tldr-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--stroke);
+      border-radius: 8px;
+      font-size: 14px
+    }
+
+    .tldr-item.highlight {
+      background: var(--success-soft);
+      border-color: rgba(16, 185, 129, .3)
+    }
+
+    .tldr-item.highlight .tldr-icon {
+      background: rgba(16, 185, 129, .2)
+    }
+
+    .tldr-item.highlight span {
+      color: var(--success);
+      font-weight: 600
+    }
+
+    .hero-image {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl);
+      overflow: hidden
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .hero-image-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-faint);
+      font-size: 13px;
+      text-align: center;
+      padding: 24px
+    }
+
+    .live-badge {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      padding: 8px 16px;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: var(--r);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em
+    }
+
+    .section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--stroke)
+    }
+
+    .section:last-child {
+      border-bottom: none
+    }
+
+    .section-label {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--stroke);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px
+    }
+
+    .section-label.insight {
+      background: rgba(251, 191, 36, .15);
+      color: #fbbf24
+    }
+
+    .section-label.tradeoff {
+      background: rgba(239, 68, 68, .15);
+      color: #ef4444
+    }
+
+    .section-label.solution {
+      background: var(--accent-soft);
+      color: var(--accent)
+    }
+
+    .section-label.persona {
+      background: rgba(139, 92, 246, .15);
+      color: #8b5cf6
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -.01em
+    }
+
+    .section-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 700px
+    }
+
+    .section-text+.section-text {
+      margin-top: 16px
+    }
+
+    .section-text strong {
+      color: var(--text);
+      font-weight: 500
+    }
+
+    .pws-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 40px
+    }
+
+    @media(min-width:768px) {
+      .pws-grid {
+        grid-template-columns: 1fr 1.5fr
+      }
+    }
+
+    .pws-card {
+      padding: 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl)
+    }
+
+    .pws-card.featured {
+      background: var(--accent-glow);
+      border-color: rgba(255, 106, 45, .2)
+    }
+
+    .pws-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .pws-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 10px
+    }
+
+    .pws-card p:last-child {
+      margin-bottom: 0
+    }
+
+    .pws-card p strong {
+      color: var(--accent);
+      display: block;
+      margin-top: 12px
+    }
+
+    .quote {
+      margin-top: 20px;
+      padding: 20px 24px;
+      background: rgba(251, 191, 36, .08);
+      border-left: 3px solid #fbbf24;
+      border-radius: 0 var(--r) var(--r) 0
+    }
+
+    .quote p {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.7
+    }
+
+    .quote cite {
+      display: block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-style: normal;
+      color: var(--text-faint)
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 32px
+    }
+
+    .research-card {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--r);
+      text-align: center
+    }
+
+    .research-card .r-value {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1
+    }
+
+    .research-card .r-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.4
+    }
+
+    .persona-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      padding: 28px;
+      background: var(--bg-card);
+      border: 1px solid rgba(139, 92, 246, .25);
+      border-radius: var(--rl);
+      margin-top: 32px;
+      align-items: start
+    }
+
+    .persona-avatar {
+      width: 64px;
+      height: 64px;
+      background: rgba(139, 92, 246, .15);
+      border: 1px solid rgba(139, 92, 246, .3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      color: #8b5cf6;
+      flex-shrink: 0
+    }
+
+    .persona-name {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .persona-role {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-bottom: 16px;
+      letter-spacing: .04em
+    }
+
+    .persona-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px
+    }
+
+    .persona-tag {
+      padding: 4px 10px;
+      background: var(--stroke);
+      border-radius: 100px;
+      font-size: 11px;
+      color: var(--text-muted)
+    }
+
+    .persona-quote {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      border-left: 2px solid rgba(139, 92, 246, .4);
+      padding-left: 12px
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: center
+    }
+
+    @media(min-width:768px) {
+      .two-col {
+        grid-template-columns: 1fr 1fr
       }
 
-      * { box-sizing: border-box; }
-      html, body { height: 100%; }
-      body {
-        margin: 0;
-        background:
-          radial-gradient(900px 500px at 28% 16%, rgba(255,255,255,0.06), transparent 60%),
-          radial-gradient(900px 600px at 78% 44%, rgba(255,255,255,0.04), transparent 65%),
-          var(--bg);
-        color: var(--text);
-        font-family: var(--sans);
-        position: relative;
+      .two-col.reverse>*:first-child {
+        order: 2
       }
-      a { color: inherit; text-decoration: none; }
+    }
 
-      /* Accent bar */
-      .accent-bar {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 6px;
-        height: 100vh;
-        background: linear-gradient(180deg, var(--accent) 0%, rgba(255,106,45,0.3) 100%);
-        z-index: 100;
-      }
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--stroke);
+      border: 1px solid var(--stroke);
+      border-radius: var(--rl);
+      overflow: hidden;
+      margin-top: 32px
+    }
 
-      .container {
-        width: min(var(--max), calc(100% - 48px));
-        margin: 0 auto;
-      }
+    .journey-stage {
+      background: var(--bg-card);
+      padding: 24px 20px
+    }
 
-      /* NAV */
-      .site-header { padding: 28px 0; }
-      .nav {
-        width: min(var(--max), calc(100% - 48px));
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .brand { display: inline-flex; align-items: center; gap: 10px; }
-      .brand-mark {
-        width: 22px; height: 22px; border-radius: 999px;
-        border: 1px solid rgba(255,255,255,0.18);
-        position: relative;
-      }
-      .brand-mark::before {
-        content: "";
-        position: absolute;
-        inset: 5px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.9);
-      }
-      .brand-text { line-height: 1.05; }
-      .brand-name { display: block; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
-      .brand-sub { display: block; font-size: 11px; letter-spacing: 0.06em; opacity: 0.7; }
-      .nav-links { display: flex; gap: 38px; font-size: 12px; letter-spacing: 0.04em; opacity: 0.9; }
-      .nav-links a { position: relative; transition: opacity 150ms ease; }
-      .nav-links a:hover { opacity: 0.7; }
-      .nav-links a::after {
-        content: "";
-        position: absolute;
-        left: 0; bottom: -8px;
-        width: 100%; height: 1px;
-        background: rgba(255,255,255,0.3);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 160ms ease;
-      }
-      .nav-links a:hover::after { transform: scaleX(1); }
+    .stage-num {
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 8px
+    }
 
-      /* HERO */
-      .hero { padding: 64px 0 24px; }
-      .hero-wrap { padding-bottom: 22px; border-bottom: 1px solid var(--stroke); }
-      .kicker {
-        font-size: 12px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: rgba(255,255,255,0.46);
-        margin: 0 0 10px;
-      }
-      .hero-title {
-        font-family: var(--serif);
-        font-weight: 700;
-        font-size: clamp(46px, 6.4vw, 92px);
-        line-height: 1;
-        letter-spacing: -0.03em;
-        margin: 0 0 10px;
+    .journey-stage h4 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px
+    }
 
-        transform: translateX(calc(var(--tX, 0) * 1px)) translateY(calc(var(--tY, 0) * 1px));
-        opacity: var(--tO, 1);
-        will-change: transform, opacity;
-      }
-      .hero-title .accent { color: var(--accent); }
-      .hero-sub {
-        margin: 0;
-        max-width: 78ch;
-        color: var(--muted);
-        font-size: 14px;
-        line-height: 1.7;
-      }
+    .journey-stage p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px
+    }
 
-      /* ===== Block A: Vertical intro ONLY (text + sticky media) ===== */
-      .case-intro { padding: 28px 0 64px; }
-      .grid {
-        display: grid;
-        grid-template-columns: 1.05fr 0.95fr;
-        gap: 34px;
-        align-items: start;
-        padding-top: 26px;
+    .stage-feeling {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px
+    }
+
+    .feeling-tag {
+      padding: 3px 8px;
+      background: var(--stroke);
+      border-radius: 100px;
+      font-size: 10px;
+      color: var(--text-faint)
+    }
+
+    .feeling-tag.positive {
+      background: var(--success-soft);
+      color: var(--success)
+    }
+
+    .tradeoff-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl);
+      padding: 24px
+    }
+
+    .tradeoff-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: .05em
+    }
+
+    .tradeoff-bars {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+      height: 140px
+    }
+
+    .tradeoff-bar {
+      flex: 1;
+      border-radius: var(--r) var(--r) 0 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px 12px;
+      font-size: 11px;
+      text-align: center;
+      line-height: 1.4
+    }
+
+    .tradeoff-bar.option-a {
+      height: 100%;
+      background: rgba(239, 68, 68, .15);
+      border: 1px solid rgba(239, 68, 68, .3);
+      border-bottom: none;
+      color: var(--text-muted)
+    }
+
+    .tradeoff-bar.option-b {
+      height: 65%;
+      background: var(--success-soft);
+      border: 2px solid var(--success);
+      border-bottom: none;
+      color: var(--success);
+      font-weight: 600
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 32px
+    }
+
+    .principle {
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl)
+    }
+
+    .principle-icon {
+      font-size: 1.4rem;
+      margin-bottom: 12px
+    }
+
+    .principle h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent)
+    }
+
+    .principle p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6
+    }
+
+    .features-list {
+      display: grid;
+      gap: 1px;
+      background: var(--stroke);
+      border: 1px solid var(--stroke);
+      border-radius: var(--rl);
+      overflow: hidden;
+      margin-top: 24px
+    }
+
+    .feature-row {
+      background: var(--bg-card);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px
+    }
+
+    .feature-info h4 {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 2px
+    }
+
+    .feature-info p {
+      font-size: 12px;
+      color: var(--text-faint);
+      line-height: 1.4
+    }
+
+    .feature-badge {
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0
+    }
+
+    .feature-badge.shipped {
+      background: var(--success-soft);
+      color: var(--success)
+    }
+
+    .feature-badge.next {
+      background: var(--stroke);
+      color: var(--text-faint)
+    }
+
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 32px
+    }
+
+    .screen-card {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl);
+      padding: 16px;
+      transition: border-color .2s
+    }
+
+    .screen-card:hover {
+      border-color: var(--stroke)
+    }
+
+    .screen-card.featured {
+      border-color: var(--accent);
+      position: relative
+    }
+
+    .screen-card.featured::before {
+      content: "Key Flow";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 4px 10px;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: .03em
+    }
+
+    .screen-placeholder {
+      aspect-ratio: 4/3;
+      background: var(--bg-elevated);
+      border: 1px dashed var(--stroke-light);
+      border-radius: var(--r);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-bottom: 12px
+    }
+
+    .screen-card h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px
+    }
+
+    .screen-card.featured h4 {
+      color: var(--accent)
+    }
+
+    .screen-card p {
+      font-size: 12px;
+      color: var(--text-faint);
+      line-height: 1.5
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px
+    }
+
+    @media(min-width:768px) {
+      .results-grid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    .result-metric {
+      margin-bottom: 28px
+    }
+
+    .result-metric .value {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1
+    }
+
+    .result-metric .label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px
+    }
+
+    .result-bar {
+      height: 6px;
+      background: var(--stroke);
+      border-radius: 3px;
+      margin-top: 8px;
+      overflow: hidden
+    }
+
+    .result-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px
+    }
+
+    .retro-card {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl);
+      padding: 28px
+    }
+
+    .retro-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .retro-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7
+    }
+
+    .retro-card p+p {
+      margin-top: 12px
+    }
+
+    .retro-card strong {
+      color: var(--text)
+    }
+
+    .footer {
+      padding: 48px 0;
+      text-align: center;
+      border-top: 1px solid var(--stroke)
+    }
+
+    .footer-cta {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 600;
+      margin-bottom: 24px
+    }
+
+    .footer-cta .accent {
+      font-style: italic;
+      color: var(--accent)
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap
+    }
+
+    .footer-btn {
+      padding: 12px 24px;
+      border-radius: var(--r);
+      font-size: 14px;
+      font-weight: 500;
+      transition: all .2s
+    }
+
+    .footer-btn.primary {
+      background: var(--accent);
+      color: var(--bg)
+    }
+
+    .footer-btn.primary:hover {
+      filter: brightness(1.1)
+    }
+
+    .footer-btn.secondary {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      color: var(--text)
+    }
+
+    .footer-btn.secondary:hover {
+      border-color: var(--text-faint)
+    }
+
+    @media(max-width:640px) {
+      .hero {
+        padding: 48px 0 40px
       }
 
       .section {
-        padding: 22px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-      }
-      .section:last-child { border-bottom: none; }
-
-      .h2 {
-        font-family: var(--serif);
-        font-size: 22px;
-        margin: 0 0 8px;
-        letter-spacing: -0.01em;
-      }
-      .p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 13.5px;
-        line-height: 1.85;
+        padding: 48px 0
       }
 
-      /* Snapshot chips (siguen siendo datos, pero abajo del storytelling) */
-      .snapshot {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        margin-top: 14px;
-      }
-      .chip {
-        border: 1px solid rgba(255,255,255,0.10);
-        border-radius: 14px;
-        padding: 12px;
-        background: rgba(255,255,255,0.02);
-      }
-      .chip b {
-        display: block;
-        font-size: 11px;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: rgba(255,255,255,0.55);
-        margin-bottom: 6px;
-      }
-      .chip span { display: block; font-size: 13px; color: rgba(255,255,255,0.82); line-height: 1.5; }
-
-      .list {
-        margin: 10px 0 0;
-        padding-left: 16px;
-        color: var(--muted);
-        font-size: 13.5px;
-        line-height: 1.85;
+      .tldr {
+        flex-direction: column
       }
 
-      /* MEDIA: sin “caja”, sin borde, sin cards — imágenes libres */
-      .media-rail {
-        position: sticky;
-        top: 90px;
-        height: calc(100vh - 120px);
-        overflow: hidden;         /* para el efecto de desplazamiento */
-      }
-      .media-stage {
-        position: relative;
-        height: 100%;
-      }
-      .media-stack {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        will-change: transform;
-        transform: translateY(calc(var(--mY, 0) * 1px));
-      }
-      .media-img {
-        width: 100%;
-        display: block;
-        border-radius: 14px;
-        border: 1px solid rgba(255,255,255,0.10);
-        margin-bottom: 16px;
-        background: rgba(0,0,0,0.35);
+      .nav-links {
+        display: none
       }
 
-      /* ===== Block B+: Horizontal sections full width ===== */
-      .case-section {
-        padding: 72px 0;
-        border-top: 1px solid rgba(255,255,255,0.06);
+      .persona-card {
+        grid-template-columns: 1fr
       }
-      .section-inner {
-        width: min(var(--max), calc(100% - 48px));
-        margin: 0 auto;
-      }
-      .case-section h2 {
-        font-family: var(--serif);
-        font-size: 26px;
-        margin: 0 0 12px;
-        letter-spacing: -0.01em;
-      }
-      .case-section p {
-        margin: 0;
-        max-width: 78ch;
-        font-size: 14px;
-        line-height: 1.9;
-        color: var(--muted);
-      }
+    }
+  </style>
+</head>
 
-      /* Media inside sections after Product Goal */
-      .section-media { margin-top: 18px; }
+<body>
+  <div class="accent-bar" aria-hidden="true"></div>
 
-      /* 1 image => side align */
-      .media--side {
-        display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 22px;
-        align-items: start;
-      }
-      .media--side .media-figure img {
-        width: 100%;
-        display: block;
-        border-radius: 14px;
-        border: 1px solid rgba(255,255,255,0.10);
-        background: rgba(0,0,0,0.35);
-      }
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="./index.html" class="brand">
+        <span class="brand-mark"></span>
+        <span class="brand-text">Jose Alvarez</span>
+      </a>
+      <div class="nav-links">
+        <a href="./index.html">Work</a>
+        <a href="./resume.html">Resume</a>
+        <a href="./about.html">About</a>
+      </div>
+    </div>
+  </nav>
 
-      /* 2-3 images => below */
-      .media--below .media-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 14px;
-        max-width: 900px;
-      }
-      .media--below .media-grid img {
-        width: 100%;
-        display: block;
-        border-radius: 14px;
-        border: 1px solid rgba(255,255,255,0.10);
-        background: rgba(0,0,0,0.35);
-      }
-
-      /* Footer */
-      .site-footer {
-        padding: 34px 0 52px;
-        background: rgba(0,0,0,0.28);
-        border-top: 1px solid var(--stroke);
-      }
-      .footer-top {
-        display: flex;
-        gap: 28px;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-bottom: 26px;
-      }
-      .footer-item {
-        font-size: 11px;
-        letter-spacing: 0.14em;
-        text-transform: lowercase;
-        color: rgba(255,255,255,0.55);
-      }
-      .footer-cta {
-        text-align: center;
-        font-family: var(--serif);
-        font-size: clamp(34px, 4.6vw, 64px);
-        letter-spacing: -0.02em;
-        line-height: 1.05;
-      }
-      .cta-accent {
-        font-style: italic;
-        background: linear-gradient(90deg, #ff7a18, #b64cff, #31d17c);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-
-      /* Responsive */
-      @media (max-width: 980px) {
-        .grid { grid-template-columns: 1fr; }
-        .media-rail { position: relative; top: auto; height: auto; overflow: visible; }
-        .media-stack { position: relative; transform: none !important; }
-        .snapshot { grid-template-columns: 1fr; }
-        .media--side { grid-template-columns: 1fr; }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="accent-bar" aria-hidden="true"></div>
-
-    <header class="site-header">
-      <nav class="nav">
-        <a class="brand" href="./index.html" aria-label="Home">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-text">
-            <span class="brand-name">Jose Alvarez</span>
-            <span class="brand-sub">Design</span>
-          </span>
-        </a>
-
-        <div class="nav-links">
-          <a href="./resume.html">Resume</a>
-          <a href="./about.html">About</a>
-        </div>
-      </nav>
-    </header>
+  <main>
 
     <!-- HERO -->
     <section class="hero">
-      <div class="container hero-wrap" id="heroWrap">
-        <p class="kicker">Case Study</p>
-
-        <h1 class="hero-title" id="heroTitle">
-          Project <span class="accent">MOA</span>
+      <div class="container">
+        <div class="hero-label">
+          <span>Case Study</span><span>·</span>
+          <span>AI Product Tool · 2025–2026</span>
+        </div>
+        <h1 class="hero-title">
+          From blank page to structured brief<br>
+          in <span class="accent">20 minutes</span> instead of 60
         </h1>
-
-        <p class="hero-sub">
-          Designing a product system that <b>[main action]</b> for <b>[user/team]</b>.
+        <p class="hero-subtitle">
+          UX AI Generator transforms vague product ideas into structured discovery artifacts — reducing blank-page
+          friction for solo designers and small teams through guided input and AI-powered generation.
         </p>
-
-        <p class="hero-sub" style="margin-top: 10px; color: rgba(255,255,255,0.5)">
-          A brief description of what the product/system does and why it exists.
-        </p>
+        <div class="tldr">
+          <div class="tldr-item"><span class="tldr-icon">👤</span><span>Solo Designer & Builder</span></div>
+          <div class="tldr-item"><span class="tldr-icon">🛠</span><span>HTML · JS · OpenAI API · Figma Plugin API</span>
+          </div>
+          <div class="tldr-item"><span class="tldr-icon">🔬</span><span>150+ community reactions · Dogfooding</span></div>
+          <div class="tldr-item highlight"><span class="tldr-icon">📈</span><span>50% reduction in discovery time</span>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="img/uxgen/page-Landing-PORTADA.png"
+            alt="UX AI Generator interface showing the guided form with project data">
+          <a href="https://josealvarezswork.github.io/ux-generator-system/" target="_blank" class="live-badge">View Live
+            →</a>
+        </div>
       </div>
     </section>
 
-    <!-- ===== Block A (vertical) — images ONLY accompany these sections ===== -->
-    <section class="case-intro" id="caseIntro">
-      <div class="container grid">
-        <!-- LEFT -->
-        <div class="left" id="leftColumn">
-          <div id="mediaRange">
-            <!-- Snapshot (Storytelling + then chips) -->
-            <div class="section" id="sec-snapshot">
-              <div class="h2">Context & Project Snapshot</div>
+    <!-- PROBLEM -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">01 — Problem</span>
+        <h2 class="section-title">The blank page kills product momentum</h2>
+        <p class="section-text">Product designers lose hours at the start of every project — not because they lack
+          ideas, but because they lack structure. Early-stage discovery is fragmented, undocumented, and entirely
+          manual.</p>
+        <p class="section-text section-text">They copy-paste templates, run AI chat threads, and maintain disconnected
+          Notion pages. Nothing guides their thinking. Nothing produces consistent outputs.</p>
+        <div class="pws-grid">
+          <div class="pws-card">
+            <h3><span style="color:#ef4444">●</span> The Problem</h3>
+            <p>Product Designers need to structure early product ideas because rushed discovery leads to vague concepts.
+              Lack of structure blocks them, resulting in fragmented documentation across tools.</p>
+          </div>
+          <div class="pws-card featured">
+            <h3><span style="color:var(--accent)">●</span> The Real Cost</h3>
+            <p>It's not just "bad UX" — it's real product drag. Time lost reconciling information, inconsistent outputs
+              across team members, avoidable rework when early decisions get revisited.</p>
+            <p><strong>Without a shared framework, teams can't move fast without sacrificing clarity.</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-              <p class="p">
-                I designed this project as a product system—not a single screen—because the real issue
-                was consistency. As workflows grew, the team needed a repeatable way to transform messy,
-                unstructured inputs into decisions and outputs that stayed aligned over time.
-              </p>
+    <!-- RESEARCH -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label insight">02 — Research</span>
+        <h2 class="section-title">The problem wasn't blank pages — it was missing structure.</h2>
+        <p class="section-text">Initial assumption: designers needed better templates. What research revealed: they
+          <strong>wanted to document</strong>, but every attempt produced incompatible formats. The real problem was the
+          absence of a framework that guides thinking before producing outputs.
+        </p>
+        <div class="research-grid">
+          <div class="research-card">
+            <div class="r-value">1</div>
+            <div class="r-label">Primary user (dogfooding)</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">150+</div>
+            <div class="r-label">LinkedIn community reactions</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">3+</div>
+            <div class="r-label">Months of daily self-use</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">✓</div>
+            <div class="r-label">Pain point validated by community</div>
+          </div>
+        </div>
+        <div class="quote">
+          <p>"I hate starting from scratch."</p>
+          <cite>— Product Designer · LinkedIn feedback</cite>
+        </div>
+        <div class="quote" style="margin-top:12px">
+          <p>"I just copy-paste templates — nothing guides my thinking."</p>
+          <cite>— Product Designer · LinkedIn feedback</cite>
+        </div>
+        <div class="quote" style="margin-top:12px">
+          <p>"I want to feel sure about my decisions."</p>
+          <cite>— Product Designer · LinkedIn feedback</cite>
+        </div>
+      </div>
+    </section>
 
-              <p class="p" style="margin-top:10px">
-                My responsibility was end-to-end: defining the system logic, shaping the UX structure,
-                and translating it into a UI that could scale as requirements evolved.
-              </p>
-
-              <div class="snapshot">
-                <div class="chip">
-                  <b>Role</b>
-                  <span>UI/UX Product Designer<br />(Product concept, UX structure & system design)</span>
+    <!-- PERSONA -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label persona">03 — Persona</span>
+        <h2 class="section-title">Designed for Alex</h2>
+        <p class="section-text">Synthesized from LinkedIn community feedback and continuous self-use. Alex represents the solo
+          designer or small-team PM who needs to move fast without losing clarity at early decision points.</p>
+        <div class="persona-card">
+          <div class="persona-avatar">A</div>
+          <div>
+            <div class="persona-name">Alex, 30</div>
+            <div class="persona-role">Product Designer · New York, USA · High tech comfort</div>
+            <div class="persona-tags">
+              <span class="persona-tag">Figma daily</span>
+              <span class="persona-tag">Notion power user</span>
+              <span class="persona-tag">Solo or small team</span>
+              <span class="persona-tag">Tight deadlines</span>
+            </div>
+            <p class="persona-quote">"I want to feel sure about my decisions — but I lose time every time I start a new
+              project because there's no structure to guide me."</p>
+          </div>
+        </div>
+        <div class="two-col" style="margin-top:24px;align-items:start">
+          <div>
+            <p
+              style="font-size:13px;font-weight:600;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px">
+              Motivations</p>
+            <div class="features-list">
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Feel confident</h4>
+                  <p>Wants certainty at early decision points</p>
                 </div>
-                <div class="chip">
-                  <b>Timeline</b>
-                  <span>X weeks</span>
+              </div>
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Meet tight deadlines</h4>
+                  <p>External pressure creates urgency to move fast</p>
                 </div>
-                <div class="chip">
-                  <b>Team</b>
-                  <span>Solo / With X developers / PM</span>
-                </div>
-                <div class="chip">
-                  <b>Tools</b>
-                  <span>Figma, Notion, (others)</span>
+              </div>
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Share structured outputs</h4>
+                  <p>Needs team-ready artifacts, not just personal notes</p>
                 </div>
               </div>
             </div>
-
-            <!-- Problem (Storytelling) -->
-            <div class="section" id="sec-problem">
-              <div class="h2">The Problem — Product Challenge</div>
-
-              <p class="p">
-                Teams were struggling with <b>[structural problem]</b>. Information lived in different places,
-                changed constantly, and was interpreted differently by each person—creating friction in handoffs
-                and slowing down decisions.
-              </p>
-
-              <p class="p" style="margin-top:10px">
-                The impact wasn’t “bad UX”—it was real product drag: <b>[time lost]</b>, <b>[inconsistent outputs]</b>,
-                and <b>[avoidable rework]</b>.
-              </p>
-
-              <p class="p" style="margin-top:10px">
-                <b>Why it mattered:</b> Without a system, the team couldn’t move fast without sacrificing clarity.
-                Fixing this meant creating a shared way to structure inputs and produce consistent outcomes.
-              </p>
-            </div>
-
-            <!-- Goal (Storytelling) -->
-            <div class="section" id="sec-goal">
-              <div class="h2">Product Goal</div>
-
-              <p class="p">
-                The goal was to design a system that turns <b>[unstructured input]</b> into <b>[consistent output]</b>,
-                so teams can make decisions faster without losing alignment.
-              </p>
-
-              <p class="p" style="margin-top:10px">
-                Instead of adding more “documentation,” the focus was to create a product framework that guides
-                thinking—so the output becomes predictable, reusable, and scalable.
-              </p>
-
-              <ul class="list">
-                <li><b>Constraints:</b> time</li>
-                <li><b>Constraints:</b> technical</li>
-                <li><b>Constraints:</b> scope</li>
-              </ul>
+          </div>
+          <div>
+            <p
+              style="font-size:13px;font-weight:600;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px">
+              Frustrations</p>
+            <div class="features-list">
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Starting from scratch</h4>
+                  <p>Blank page causes anxiety and wasted time</p>
+                </div>
+              </div>
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Manual structuring</h4>
+                  <p>Current tools require organizing everything by hand</p>
+                </div>
+              </div>
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>No export path</h4>
+                  <p>No clear way to share structured artifacts with team</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- RIGHT (images free, sticky, moving) -->
-        <aside class="media-rail" aria-label="Intro media">
-          <div class="media-stage">
-            <div class="media-stack" id="mediaStack">
-              <img class="media-img" src="./assets/project-moa-01.png" alt="Project intro screen 1" />
-              <img class="media-img" src="./assets/project-moa-02.png" alt="Project intro screen 2" />
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
-    <!-- ===== From here: Horizontal sections ===== -->
-
-    <!-- 5. THE SYSTEM — example with ONE image aligned to the side -->
-    <section class="case-section" id="sec-system">
-      <div class="section-inner">
-        <div class="media--side">
-          <div class="media-copy">
-            <h2>The System — How it Works</h2>
-            <p>
-              The system starts by capturing intent as structured inputs. Those inputs are processed into modular
-              blocks that can be reused across contexts. The output is a consistent set of UI and artifacts that
-              teams can rely on as a single source of truth.
-            </p>
-          </div>
-
-          <figure class="media-figure">
-            <img src="./assets/system-overview.png" alt="System overview" />
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. KEY DESIGN DECISIONS — example with 2-3 images below -->
-    <section class="case-section" id="sec-decisions">
-      <div class="section-inner">
-        <h2>Key Design Decisions</h2>
-        <p>
-          Each decision responds directly to the problem: reduce ambiguity, increase reuse, and make outputs
-          predictable at scale.
-        </p>
-
-        <div class="section-media media--below">
-          <div class="media-grid">
-            <img src="./assets/decision-01.png" alt="Decision visual 1" />
-            <img src="./assets/decision-02.png" alt="Decision visual 2" />
-            <!-- Opcional tercera -->
-            <!-- <img src="./assets/decision-03.png" alt="Decision visual 3" /> -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. UX & UI IMPLEMENTATION (sin imágenes, o agrega media--side/media--below según necesites) -->
-    <section class="case-section" id="sec-implementation">
-      <div class="section-inner">
-        <h2>UX & UI Implementation</h2>
-        <p>
-          Information architecture, key user flows, and UI foundations were designed as a consequence of the system.
-          The UI supports the system by making structure visible and repeatable.
-        </p>
-      </div>
-    </section>
-
-    <!-- 8. WORKING OUTPUT -->
-    <section class="case-section" id="sec-output">
-      <div class="section-inner">
-        <h2>Working Output</h2>
-        <p>
-          This is not a concept — this system is functional. Include prototypes, screenshots, short gifs, or links.
-        </p>
-      </div>
-    </section>
-
-    <!-- 9. OUTCOME & IMPACT -->
-    <section class="case-section" id="sec-impact">
-      <div class="section-inner">
-        <h2>Outcome & Impact</h2>
-        <p>
-          The system reduced clarification loops and created a shared structure that teams could reuse, iterate, and
-          scale without losing alignment.
-        </p>
-      </div>
-    </section>
-
-    <!-- 10. LEARNINGS -->
-    <section class="case-section" id="sec-learnings">
-      <div class="section-inner">
-        <h2>Learnings & Next Steps</h2>
-        <p>
-          What worked, what I’d improve, and how the next iteration would increase adoption and reduce friction.
-        </p>
-      </div>
-    </section>
-
-    <footer class="site-footer">
+    <!-- JOURNEY -->
+    <section class="section">
       <div class="container">
-        <div class="footer-top">
-          <span class="footer-item">made in colombia</span>
-          <span class="footer-item">+57 000 000 0000</span>
-          <a class="footer-item" href="mailto:your@email.com">email</a>
-          <a class="footer-item" href="#" target="_blank" rel="noreferrer">linkedin</a>
+        <span class="section-label">04 — User Journey</span>
+        <h2 class="section-title">Three moments that define the experience</h2>
+        <p class="section-text">Mapped from 5 contextual observation sessions. Each stage reveals a distinct emotional
+          arc and a clear design opportunity.</p>
+        <div class="journey">
+          <div class="journey-stage">
+            <div class="stage-num">Stage 1 · Day 0</div>
+            <h4>Discovery</h4>
+            <p>User has a rough idea. Searches for structure. Evaluates AI options. Feels overwhelmed by the choices.
+            </p>
+            <div class="stage-feeling">
+              <span class="feeling-tag">Excited</span>
+              <span class="feeling-tag">Overwhelmed</span>
+              <span class="feeling-tag positive">Hopeful</span>
+            </div>
+          </div>
+          <div class="journey-stage">
+            <div class="stage-num">Stage 2 · Day 1–3</div>
+            <h4>Onboarding</h4>
+            <p>Fills the guided form. Reviews AI-generated artifacts. Exports to Notion. Forms initial opinion on value.
+            </p>
+            <div class="stage-feeling">
+              <span class="feeling-tag">Curious</span>
+              <span class="feeling-tag positive">Engaged</span>
+              <span class="feeling-tag positive">Satisfied</span>
+            </div>
+          </div>
+          <div class="journey-stage">
+            <div class="stage-num">Stage 3 · Day 7+</div>
+            <h4>Regular Use</h4>
+            <p>Tool integrates into routine. Used across multiple projects. Outputs shared with team.</p>
+            <div class="stage-feeling">
+              <span class="feeling-tag positive">Confident</span>
+              <span class="feeling-tag positive">Empowered</span>
+              <span class="feeling-tag positive">Loyal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRADEOFF -->
+    <section class="section">
+      <div class="container">
+        <div class="two-col reverse">
+          <div>
+            <span class="section-label tradeoff">05 — The Trade-off</span>
+            <h2 class="section-title">Flexibility vs. Consistency</h2>
+            <p class="section-text">Designers valued freedom to structure information their own way. But that same
+              flexibility caused fragmentation — 70% struggled precisely because there were no guardrails.</p>
+            <p class="section-text" style="margin-top:16px">Decision: <strong>"Guided Structure"</strong> — required
+              fields that ensure consistency, with optional space for additional context. Intentional constraint that
+              liberates rather than limits.</p>
+          </div>
+          <div class="tradeoff-visual">
+            <div class="tradeoff-header">
+              <span>Option A: Full Flexibility</span>
+              <span>Option B: Guided ✓</span>
+            </div>
+            <div class="tradeoff-bars">
+              <div class="tradeoff-bar option-a">Free-form<br>(fragmentation)</div>
+              <div class="tradeoff-bar option-b">Guided structure<br>(consistency)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTION -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label solution">06 — Solution</span>
+        <h2 class="section-title">Guided inputs → predictable, shareable outputs</h2>
+        <p class="section-text" style="margin-bottom:32px">A live web tool with 10 structured UX sections that capture
+          product intent, process it through OpenAI GPT-4o, and export consistent artifacts directly to Notion — or
+          download as JSON.</p>
+        <div class="features-list">
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Guided Input Form — 10 Sections</h4>
+              <p>Project Identity · Problem · Evidence · Value · Scope · Constraints · Metrics · Assumptions · Persona ·
+                Journey</p>
+            </div><span class="feature-badge shipped">Shipped</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>AI-Generated UX Artifacts</h4>
+              <p>OpenAI GPT-4o generates structured briefs from inputs. Eliminates blank-page friction on every new
+                project.</p>
+            </div><span class="feature-badge shipped">Shipped</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Notion Export</h4>
+              <p>One-click export sends structured output directly to user's Notion workspace via API integration.</p>
+            </div><span class="feature-badge shipped">Shipped</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>JSON + File Download</h4>
+              <p>Raw export for flexible integration with other tools in the designer's workflow.</p>
+            </div><span class="feature-badge shipped">Shipped</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Figma Plugin</h4>
+              <p>Full form integrated in Figma. Generate frames with auto-layout directly in your canvas — no
+                copy-paste.</p>
+            </div><span class="feature-badge shipped">Shipped</span>
+          </div>
+        </div>
+        <!-- Structured Input - full width -->
+        <div class="screen-card" style="margin-top:48px">
+          <img src="img/uxgen/form-identity.svg" alt="Guided form with 10 sections"
+            style="width:100%;border-radius:var(--r);margin-bottom:16px">
+          <h4>Structured Input</h4>
+          <p>10 guided sections with examples and optional prompts at each step.</p>
         </div>
 
-        <div class="footer-cta">
-          <span>Let’s make something </span><span class="cta-accent">beautiful</span>
+        <!-- Figma Plugin showcase -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:56px;align-items:start">
+          <div>
+            <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:16px">Figma Plugin</h3>
+            <p class="section-text" style="margin-bottom:20px;font-size:1.05rem;line-height:1.7">Full workflow inside
+              Figma. Two modes: generate from scratch with the guided form, or paste JSON from the webapp for teams that
+              prefer browser-first.</p>
+            <div class="features-list" style="margin-top:20px">
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Generate Mode</h4>
+                  <p>Complete 10-section form inside Figma</p>
+                </div>
+              </div>
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Paste Mode</h4>
+                  <p>Import JSON from webapp for collaborative workflows</p>
+                </div>
+              </div>
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>3 Themes</h4>
+                  <p>Dark, Light, Notion — matches your canvas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Interactive Plugin Mockup -->
+          <div
+            style="aspect-ratio:1/1;background:#f5f5f4;background-image:linear-gradient(#e8e8e6 1px,transparent 1px),linear-gradient(90deg,#e8e8e6 1px,transparent 1px);background-size:24px 24px;border:1px solid #e7e5e4;border-radius:12px;padding:14px;font-family:'Inter',system-ui,sans-serif;font-size:12px;display:flex;flex-direction:column;box-shadow:0 4px 12px rgba(0,0,0,.08)">
+            <!-- Header -->
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #e7e5e4;margin-bottom:12px">
+              <span style="font-weight:800;font-size:15px;letter-spacing:-0.5px;color:#1c1917">UX AI Generator</span>
+            </div>
+            <!-- Mode Tabs -->
+            <div style="display:flex;gap:4px;padding:5px;background:#fff;border:1px solid #e7e5e4;border-radius:12px;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,.08)" id="pluginTabs">
+              <button onclick="switchPluginMode('form')" id="tabForm"
+                style="flex:1;padding:8px 12px;border:1px solid rgba(37,99,235,.25);background:rgba(37,99,235,.08);color:#2563eb;border-radius:10px;cursor:pointer;font-size:11px;font-weight:600;font-family:inherit">Generate here</button>
+              <button onclick="switchPluginMode('paste')" id="tabPaste"
+                style="flex:1;padding:8px 12px;border:1px solid transparent;background:transparent;color:#78716c;border-radius:10px;cursor:pointer;font-size:11px;font-weight:600;font-family:inherit">Paste JSON</button>
+            </div>
+            <!-- Phase Navigation -->
+            <div id="phaseNavMockup" style="background:#fff;border:1px solid #e7e5e4;border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,.08)">
+              <div style="height:4px;background:#e7e5e4;position:relative"><div style="position:absolute;left:0;top:0;height:100%;width:25%;background:linear-gradient(90deg,#ca8a04,#16a34a,#ea580c,#2563eb)"></div></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="width:22px;height:22px;border-radius:6px;background:#fef9c3;color:#ca8a04;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px">D</span>
+                  <span style="font-size:13px;font-weight:700;color:#1c1917">Definition</span>
+                  <span style="font-size:10px;font-weight:600;font-family:'DM Mono',monospace;color:#a8a29e;background:#f5f5f4;padding:3px 6px;border-radius:4px">1/3</span>
+                </div>
+                <span style="font-size:11px;font-weight:600;font-family:'DM Mono',monospace;color:#78716c;background:#fafaf9;padding:5px 10px;border-radius:6px;border:1px solid #e7e5e4">Stage 1/4</span>
+              </div>
+            </div>
+            <!-- Form Mode -->
+            <div id="modeForm" style="display:flex;flex:1;flex-direction:column">
+              <div style="flex:1;background:#fff;border:2px solid #facc15;border-radius:12px;padding:14px;display:flex;flex-direction:column;box-shadow:0 4px 20px rgba(250,204,21,0.15)">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                  <span style="font-weight:700;font-size:14px;color:#1c1917">1. Project Identity</span>
+                  <span style="font-size:9px;color:#ca8a04;font-weight:700;letter-spacing:.06em;border:1px solid rgba(250,204,21,0.4);padding:3px 8px;border-radius:999px;background:#fef9c3">REQUIRED</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+                  <div>
+                    <label style="display:block;font-size:11px;font-weight:600;margin-bottom:4px;color:#1c1917">Project Name</label>
+                    <div style="background:#fff;border:1px solid #e7e5e4;border-radius:10px;padding:9px 11px;color:#1c1917;font-size:12px">Good Manual</div>
+                  </div>
+                  <div>
+                    <label style="display:block;font-size:11px;font-weight:600;margin-bottom:4px;color:#1c1917">Product Type</label>
+                    <div style="background:#fff;border:1px solid #e7e5e4;border-radius:10px;padding:9px 11px;color:#1c1917;font-size:12px;display:flex;justify-content:space-between;align-items:center">App <span style="color:#78716c">▼</span></div>
+                  </div>
+                </div>
+              </div>
+              <button style="width:100%;margin-top:12px;padding:10px;background:#1c1917;color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Generate in Figma</button>
+            </div>
+            <!-- Paste Mode -->
+            <div id="modePaste" style="display:none;flex:1;flex-direction:column">
+              <div style="flex:1;background:#fff;border:2px solid #2563eb;border-radius:12px;padding:14px;display:flex;flex-direction:column;box-shadow:0 4px 20px rgba(37,99,235,0.1)">
+                <p style="font-size:11px;color:#78716c;margin-bottom:10px">Paste the JSON from the webapp:</p>
+                <div style="flex:1;background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:10px;font-family:'DM Mono',monospace;font-size:10px;color:#78716c">{"project_overview": {...}}</div>
+                <div style="margin-top:12px">
+                  <span style="font-size:11px;font-weight:600;color:#1c1917">Theme</span>
+                  <div style="display:flex;gap:4px;margin-top:6px">
+                    <span style="flex:1;padding:6px;border:1px solid #2563eb;background:rgba(37,99,235,.08);border-radius:8px;text-align:center;font-size:10px;color:#2563eb;font-weight:600">Dark</span>
+                    <span style="flex:1;padding:6px;border:1px solid #e7e5e4;border-radius:8px;text-align:center;font-size:10px;color:#78716c">Light</span>
+                    <span style="flex:1;padding:6px;border:1px solid #e7e5e4;border-radius:8px;text-align:center;font-size:10px;color:#78716c">Notion</span>
+                  </div>
+                </div>
+              </div>
+              <button style="width:100%;margin-top:12px;padding:10px;background:#16a34a;color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Generate in Figma</button>
+            </div>
+          </div>
+        </div>
+        <script>
+          function switchPluginMode(mode) {
+            const tabForm = document.getElementById('tabForm');
+            const tabPaste = document.getElementById('tabPaste');
+            const modeForm = document.getElementById('modeForm');
+            const modePaste = document.getElementById('modePaste');
+            const phaseNav = document.getElementById('phaseNavMockup');
+            if (mode === 'form') {
+              tabForm.style.background = 'rgba(37,99,235,.08)';
+              tabForm.style.borderColor = 'rgba(37,99,235,.25)';
+              tabForm.style.color = '#2563eb';
+              tabPaste.style.background = 'transparent';
+              tabPaste.style.borderColor = 'transparent';
+              tabPaste.style.color = '#78716c';
+              modeForm.style.display = 'flex';
+              modePaste.style.display = 'none';
+              phaseNav.style.display = 'block';
+            } else {
+              tabPaste.style.background = 'rgba(37,99,235,.08)';
+              tabPaste.style.borderColor = 'rgba(37,99,235,.25)';
+              tabPaste.style.color = '#2563eb';
+              tabForm.style.background = 'transparent';
+              tabForm.style.borderColor = 'transparent';
+              tabForm.style.color = '#78716c';
+              modeForm.style.display = 'none';
+              modePaste.style.display = 'flex';
+              phaseNav.style.display = 'none';
+            }
+          }
+        </script>
+
+        <!-- Generated UX Artifacts -->
+        <div style="margin-top:64px">
+          <h3 style="font-family:var(--serif);font-size:1.4rem;margin-bottom:12px">Generated UX Artifacts</h3>
+          <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px">Some artifacts the tool generates automatically:</p>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;font-family:'Inter',system-ui,sans-serif">
+            <!-- Project Identity - Definition Phase 1 (Yellow) -->
+            <div style="display:flex;flex-direction:column">
+              <span style="font-size:10px;font-weight:500;color:#d6d3d1;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Definition</span>
+              <div style="aspect-ratio:1/1;background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:16px;display:flex;flex-direction:column;box-shadow:0 4px 12px rgba(0,0,0,.08);position:relative;overflow:hidden">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#facc15"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #e7e5e4">
+                  <span style="font-size:13px;font-weight:700;color:#1c1917"><span style="color:#ca8a04">1.</span> Project Identity</span>
+                  <span style="font-size:9px;font-weight:600;color:#a8a29e;font-family:'DM Mono',monospace">1/3</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                  <div style="background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:10px">
+                    <span style="font-size:10px;font-weight:600;color:#78716c;display:block;margin-bottom:2px">Name</span>
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">Good Manual</span>
+                  </div>
+                  <div style="background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:10px">
+                    <span style="font-size:10px;font-weight:600;color:#78716c;display:block;margin-bottom:2px">Type</span>
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">Mobile App</span>
+                  </div>
+                  <div style="background:#fef9c3;border:1px solid rgba(202,138,4,.2);border-radius:10px;padding:10px">
+                    <span style="font-size:10px;font-weight:600;color:#ca8a04;display:block;margin-bottom:2px">Platform</span>
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">iOS, Android</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Value Hypothesis - Strategy Phase 2 (Green) -->
+            <div style="display:flex;flex-direction:column">
+              <span style="font-size:10px;font-weight:500;color:#d6d3d1;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Strategy</span>
+              <div style="aspect-ratio:1/1;background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:16px;display:flex;flex-direction:column;box-shadow:0 4px 12px rgba(0,0,0,.08);position:relative;overflow:hidden">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#16a34a"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #e7e5e4">
+                  <span style="font-size:13px;font-weight:700;color:#1c1917"><span style="color:#16a34a">2.</span> Value Hypothesis</span>
+                  <span style="font-size:9px;font-weight:600;color:#a8a29e;font-family:'DM Mono',monospace">1/3</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                  <div style="background:#dcfce7;border:1px solid rgba(22,163,74,.2);border-radius:10px;padding:10px">
+                    <span style="font-size:10px;font-weight:600;color:#16a34a;display:block;margin-bottom:2px">Outcome</span>
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">Reduce search time 90%</span>
+                  </div>
+                  <div style="background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:10px">
+                    <span style="font-size:10px;font-weight:600;color:#78716c;display:block;margin-bottom:2px">Why use this</span>
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">Instant access to procedures</span>
+                  </div>
+                  <div style="background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:10px">
+                    <span style="font-size:10px;font-weight:600;color:#78716c;display:block;margin-bottom:2px">Goals</span>
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">Eliminate outdated info</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Success Metrics - Validation Phase 3 (Orange) -->
+            <div style="display:flex;flex-direction:column">
+              <span style="font-size:10px;font-weight:500;color:#d6d3d1;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Validation</span>
+              <div style="aspect-ratio:1/1;background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:16px;display:flex;flex-direction:column;box-shadow:0 4px 12px rgba(0,0,0,.08);position:relative;overflow:hidden">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#ea580c"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #e7e5e4">
+                  <span style="font-size:13px;font-weight:700;color:#1c1917"><span style="color:#ea580c">3.</span> Success Metrics</span>
+                  <span style="font-size:9px;font-weight:600;color:#a8a29e;font-family:'DM Mono',monospace">1/2</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                  <div style="background:#ffedd5;border:1px solid rgba(234,88,12,.2);border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center">
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">Search time</span>
+                    <span style="font-size:10px;font-weight:700;color:#ea580c">45m → 5m</span>
+                  </div>
+                  <div style="background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center">
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">Adoption</span>
+                    <span style="font-size:10px;font-weight:600;color:#78716c">80% in 6mo</span>
+                  </div>
+                  <div style="background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center">
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">Errors</span>
+                    <span style="font-size:10px;font-weight:600;color:#78716c">-50%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- User Persona - User Phase 4 (Blue) -->
+            <div style="display:flex;flex-direction:column">
+              <span style="font-size:10px;font-weight:500;color:#d6d3d1;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">User</span>
+              <div style="aspect-ratio:1/1;background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:16px;display:flex;flex-direction:column;box-shadow:0 4px 12px rgba(0,0,0,.08);position:relative;overflow:hidden">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#2563eb"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #e7e5e4">
+                  <span style="font-size:13px;font-weight:700;color:#1c1917"><span style="color:#2563eb">4.</span> User Persona</span>
+                  <span style="font-size:9px;font-weight:600;color:#a8a29e;font-family:'DM Mono',monospace">1/2</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                  <div style="display:flex;align-items:center;gap:10px;background:#dbeafe;border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:10px">
+                    <div style="width:28px;height:28px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700">J</div>
+                    <div>
+                      <span style="font-size:11px;color:#1c1917;font-weight:600;display:block">Juan, 45</span>
+                      <span style="font-size:10px;color:#2563eb">Tech: Comfortable</span>
+                    </div>
+                  </div>
+                  <div style="background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:10px">
+                    <span style="font-size:10px;font-weight:600;color:#78716c;display:block;margin-bottom:2px">Motivations</span>
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">Safety, efficiency</span>
+                  </div>
+                  <div style="background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:10px">
+                    <span style="font-size:10px;font-weight:600;color:#78716c;display:block;margin-bottom:2px">Routine</span>
+                    <span style="font-size:11px;color:#1c1917;font-weight:500">6am shift, inspections</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">07 — Design Principles</span>
+        <h2 class="section-title">Three principles behind every decision</h2>
+        <div class="principles">
+          <div class="principle">
+            <div class="principle-icon">📐</div>
+            <h4>Guide, Don't Dictate</h4>
+            <p>Structured guidance without overwhelming users. Optional prompts at each section, not rigid mandatory
+              fields that block progress.</p>
+          </div>
+          <div class="principle">
+            <div class="principle-icon">🔗</div>
+            <h4>Integrate Seamlessly</h4>
+            <p>Outputs fit naturally into existing workflows. Notion, JSON, download — the user chooses how and where
+              they work.</p>
+          </div>
+          <div class="principle">
+            <div class="principle-icon">⚖️</div>
+            <h4>Empower Judgment</h4>
+            <p>AI assists, never replaces. Every generated output is fully editable. The designer stays in control of
+              every decision.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI REFLECTION -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label insight">08 — On AI + Design</span>
+        <h2 class="section-title">AI as a tool, not a replacement</h2>
+        <p class="section-text">Building this tool clarified my perspective on AI in design. It's not about replacing
+          designers — it's about <strong>augmenting judgment with structure</strong>.</p>
+        <div class="pws-grid" style="margin-top:32px">
+          <div class="pws-card">
+            <h3><span style="color:var(--success)">✓</span> What AI does well</h3>
+            <p>Structure and consistency. Speed at synthesizing inputs into formats. Eliminating blank-page anxiety by
+              providing a starting point.</p>
+            <p style="margin-top:12px">The AI generates the scaffolding — but <strong>never the decisions</strong>.</p>
+          </div>
+          <div class="pws-card">
+            <h3><span style="color:var(--accent)">◐</span> What still requires human judgment</h3>
+            <p>Context. Strategy. Knowing when the AI output is wrong. Understanding stakeholder politics. Making
+              tradeoffs that algorithms can't see.</p>
+            <p style="margin-top:12px"><strong>The designer's role shifts from production to curation and
+                direction.</strong></p>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:24px">
+          <p>"The designers who thrive in 2025 aren't the ones who avoid AI — they're the ones who know when to use it
+            and when to override it."</p>
+          <cite>— My working thesis after building this tool</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="section">
+      <div class="container">
+        <div class="results-grid">
+          <div>
+            <span class="section-label">09 — Results</span>
+            <h2 class="section-title">Projected outcomes</h2>
+            <div class="result-metric">
+              <div class="value">~50%</div>
+              <div class="label">Estimated reduction in discovery time (60 min → 30 min)</div>
+              <div class="result-bar">
+                <div class="result-bar-fill" style="width:50%"></div>
+              </div>
+            </div>
+            <div class="result-metric">
+              <div class="value">85%</div>
+              <div class="label">Target task completion rate (baseline: 60%)</div>
+              <div class="result-bar">
+                <div class="result-bar-fill" style="width:85%"></div>
+              </div>
+            </div>
+            <div class="result-metric">
+              <div class="value">~75%</div>
+              <div class="label">Target error reduction (20% → 5%)</div>
+              <div class="result-bar">
+                <div class="result-bar-fill" style="width:75%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="retro-card">
+            <h3>↻ What I'd do differently</h3>
+            <p>I'd invest more in <strong>onboarding</strong>. The system works end-to-end, but new users take time to
+              understand the mental model behind the 10 sections. An interactive walkthrough would compress the learning
+              curve significantly.</p>
+            <p>I'd also explore <strong>project-type templates</strong> earlier — not every brief needs all 10 sections.
+              A B2B SaaS product has different discovery needs than a consumer mobile app.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-cta">See it working <span class="accent">in production</span></p>
+        <div class="footer-links">
+          <a href="./index.html" class="footer-btn secondary">← Back to Work</a>
+          <a href="https://josealvarezswork.github.io/ux-generator-system/" target="_blank"
+            class="footer-btn primary">Open Live Tool →</a>
         </div>
       </div>
     </footer>
 
-    <script>
-      (function () {
-        const heroWrap = document.getElementById("heroWrap");
-        const heroTitle = document.getElementById("heroTitle");
-        const mediaRange = document.getElementById("mediaRange");
-        const mediaStack = document.getElementById("mediaStack");
+  </main>
+</body>
 
-        if (!heroWrap || !heroTitle) return;
-
-        function clamp(n, min, max) {
-          return Math.max(min, Math.min(max, n));
-        }
-
-        function update() {
-          const vh = window.innerHeight;
-
-          // HERO title drift left + fade
-          const heroRect = heroWrap.getBoundingClientRect();
-          const progTitle = clamp((-heroRect.top) / (vh * 0.55), 0, 1);
-
-          const x = -220 * progTitle;
-          const y = -18 * progTitle;
-          const o = 1 - 0.85 * progTitle;
-
-          heroTitle.style.setProperty("--tX", x.toFixed(2));
-          heroTitle.style.setProperty("--tY", y.toFixed(2));
-          heroTitle.style.setProperty("--tO", o.toFixed(3));
-
-          // Media scroll (only in Block A)
-          if (!mediaRange || !mediaStack) return;
-
-          const r = mediaRange.getBoundingClientRect();
-          const start = vh * 0.15;
-          const end = vh * 0.85;
-          const total = r.height - (end - start);
-
-          const raw = (start - r.top) / (total || 1);
-          const prog = clamp(raw, 0, 1);
-
-          const travel = 260; // ajusta si quieres más desplazamiento
-          const mY = -travel * prog;
-          mediaStack.style.setProperty("--mY", mY.toFixed(2));
-        }
-
-        update();
-        window.addEventListener("scroll", update, { passive: true });
-        window.addEventListener("resize", update);
-      })();
-    </script>
-  </body>
 </html>
