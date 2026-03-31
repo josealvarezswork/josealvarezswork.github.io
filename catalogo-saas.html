@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ByMakers — Case Study · Jose Alvarez</title>
+  <meta name="description"
+    content="Case study: ByMakers — plataforma multi-tenant de catálogos digitales para emprendedores — una vitrina profesional sin necesidad de pagar por un sitio web.">
+  <meta property="og:title" content="ByMakers — Product Case Study">
+  <meta property="og:description" content="Una vitrina profesional para cualquier emprendedor que necesite mostrar sus productos sin pagar por un sitio web.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070709;
+      --bg-elevated: #0d0d10;
+      --bg-card: #111114;
+      --text: #f2f2f2;
+      --text-muted: rgba(255, 255, 255, .62);
+      --text-faint: rgba(255, 255, 255, .36);
+      --stroke: rgba(255, 255, 255, .08);
+      --stroke-light: rgba(255, 255, 255, .12);
+      --accent: #06b6d4;
+      --accent-soft: rgba(6, 182, 212, .15);
+      --accent-glow: rgba(6, 182, 212, .08);
+      --success: #10b981;
+      --success-soft: rgba(16, 185, 129, .15);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Inter", system-ui, -apple-system, sans-serif;
+      --max: 1040px;
+      --r: 12px;
+      --rl: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased
+    }
+
+    a { color: inherit; text-decoration: none }
+
+    /* ── Accent bar ── */
+    .accent-bar {
+      position: fixed;
+      top: 0; right: 0;
+      width: 5px; height: 100vh;
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(6, 182, 212, .2) 100%);
+      z-index: 100
+    }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      padding: 20px 24px;
+      background: rgba(7, 7, 9, .85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--stroke)
+    }
+    .nav-inner {
+      max-width: var(--max); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between
+    }
+    .brand { display: flex; align-items: center; gap: 10px }
+    .brand-mark {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.18);
+      position: relative
+    }
+    .brand-mark::before {
+      content: "";
+      position: absolute; inset: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.9)
+    }
+    .brand-text { font-size: 12px; font-weight: 600; letter-spacing: .02em }
+    .nav-links { display: flex; gap: 32px; font-size: 12px; letter-spacing: .04em; color: var(--text-muted) }
+    .nav-links a:hover { color: var(--text) }
+    .btn-download {
+      padding: 6px 12px;
+      border: 1px solid rgba(6, 182, 212, 0.5);
+      border-radius: 999px;
+      font-weight: 500
+    }
+
+    /* ── Layout ── */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px }
+
+    /* ── Hero ── */
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--stroke) }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(6, 182, 212, .25);
+      border-radius: 100px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 24px
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -.02em; margin-bottom: 20px; max-width: 900px
+    }
+    .hero-title .accent { color: var(--accent) }
+    .hero-subtitle {
+      font-size: 17px; color: var(--text-muted);
+      max-width: 680px; line-height: 1.7; margin-bottom: 32px
+    }
+
+    /* ── TL;DR chips ── */
+    .tldr { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 48px }
+    .tldr-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--r); font-size: 13px
+    }
+    .tldr-icon {
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--stroke); border-radius: 8px; font-size: 14px
+    }
+    .tldr-item.highlight {
+      background: var(--success-soft);
+      border-color: rgba(16, 185, 129, .3)
+    }
+    .tldr-item.highlight .tldr-icon { background: rgba(16, 185, 129, .2) }
+    .tldr-item.highlight span { color: var(--success); font-weight: 600 }
+
+    /* ── Hero image ── */
+    .hero-image {
+      position: relative; width: 100%; aspect-ratio: 16/9;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl); overflow: hidden
+    }
+
+    /* ── Sections ── */
+    .section { padding: 64px 0; border-bottom: 1px solid var(--stroke) }
+    .section:last-child { border-bottom: none }
+    .section-label {
+      display: inline-block; padding: 4px 10px;
+      background: var(--stroke); border-radius: 6px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 16px
+    }
+    .section-label.insight { background: rgba(251,191,36,.15); color: #fbbf24 }
+    .section-label.tradeoff { background: rgba(239,68,68,.15); color: #ef4444 }
+    .section-label.solution { background: var(--accent-soft); color: var(--accent) }
+    .section-label.persona { background: rgba(139,92,246,.15); color: #8b5cf6 }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 700; margin-bottom: 16px; letter-spacing: -.01em
+    }
+    .section-text { font-size: 15px; color: var(--text-muted); line-height: 1.8; max-width: 700px }
+    .section-text + .section-text { margin-top: 16px }
+    .section-text strong { color: var(--text); font-weight: 500 }
+
+    /* ── PWS Grid ── */
+    .pws-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 40px }
+    @media(min-width:768px) { .pws-grid { grid-template-columns: 1fr 1.5fr } }
+    .pws-card {
+      padding: 28px; background: var(--bg-card);
+      border: 1px solid var(--stroke-light); border-radius: var(--rl)
+    }
+    .pws-card.featured { background: var(--accent-glow); border-color: rgba(6,182,212,.2) }
+    .pws-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px }
+    .pws-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px }
+    .pws-card p:last-child { margin-bottom: 0 }
+    .pws-card p strong { color: var(--accent); display: block; margin-top: 12px }
+
+    /* ── Quote ── */
+    .quote {
+      margin-top: 20px; padding: 20px 24px;
+      background: rgba(251,191,36,.08);
+      border-left: 3px solid #fbbf24;
+      border-radius: 0 var(--r) var(--r) 0
+    }
+    .quote p { font-size: 15px; font-style: italic; color: var(--text); line-height: 1.7 }
+    .quote cite { display: block; margin-top: 8px; font-size: 12px; font-style: normal; color: var(--text-faint) }
+
+    /* ── Research grid ── */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px; margin-top: 32px
+    }
+    .research-card {
+      padding: 20px; background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--r); text-align: center
+    }
+    .research-card .r-value {
+      font-family: var(--serif); font-size: 2rem;
+      font-weight: 700; color: var(--accent); line-height: 1
+    }
+    .research-card .r-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; line-height: 1.4 }
+
+    /* ── Persona ── */
+    .persona-card {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 24px; padding: 28px;
+      background: var(--bg-card);
+      border: 1px solid rgba(139,92,246,.25);
+      border-radius: var(--rl); margin-top: 32px; align-items: start
+    }
+    .persona-avatar {
+      width: 64px; height: 64px;
+      background: rgba(139,92,246,.15);
+      border: 1px solid rgba(139,92,246,.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 1.6rem; color: #8b5cf6; flex-shrink: 0
+    }
+    .persona-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; margin-bottom: 4px }
+    .persona-role { font-size: 12px; color: var(--text-faint); margin-bottom: 16px; letter-spacing: .04em }
+    .persona-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px }
+    .persona-tag { padding: 4px 10px; background: var(--stroke); border-radius: 100px; font-size: 11px; color: var(--text-muted) }
+    .persona-quote { font-size: 13px; font-style: italic; color: var(--text-muted); border-left: 2px solid rgba(139,92,246,.4); padding-left: 12px }
+
+    /* ── Tradeoff ── */
+    .tradeoff-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl); overflow: hidden; margin-top: 32px
+    }
+    .tradeoff-header {
+      display: flex; justify-content: space-between;
+      padding: 14px 20px;
+      font-size: 12px; font-weight: 600;
+      border-bottom: 1px solid var(--stroke)
+    }
+    .tradeoff-bars { padding: 20px }
+    .tradeoff-bar {
+      padding: 10px 16px;
+      border-radius: 8px; font-size: 12px; font-weight: 500;
+      margin-bottom: 8px
+    }
+    .tradeoff-bar:last-child { margin-bottom: 0 }
+    .tradeoff-bar.option-a {
+      background: rgba(239,68,68,.1);
+      border: 1px solid rgba(239,68,68,.2);
+      color: #ef4444; width: 45%
+    }
+    .tradeoff-bar.option-b {
+      background: var(--accent-soft);
+      border: 1px solid rgba(6,182,212,.25);
+      color: var(--accent); width: 80%
+    }
+
+    /* ── Features list ── */
+    .features-list { margin-top: 32px; display: flex; flex-direction: column; gap: 1px; background: var(--stroke); border: 1px solid var(--stroke); border-radius: var(--rl); overflow: hidden }
+    .feature-row {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; padding: 18px 20px; background: var(--bg-card)
+    }
+    .feature-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px }
+    .feature-info p { font-size: 13px; color: var(--text-muted); line-height: 1.5 }
+    .feature-badge {
+      flex-shrink: 0; padding: 4px 10px;
+      border-radius: 100px; font-size: 10px; font-weight: 700;
+      letter-spacing: .04em; text-transform: uppercase
+    }
+    .feature-badge.shipped { background: var(--success-soft); color: var(--success) }
+    .feature-badge.next { background: rgba(251,191,36,.12); color: #fbbf24 }
+
+    /* ── Solution screens ── */
+    .solution-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 32px }
+    .screen-card {
+      background: var(--bg-card); border: 1px solid var(--stroke-light);
+      border-radius: var(--rl); padding: 16px; transition: border-color .2s
+    }
+    .screen-card:hover { border-color: var(--stroke) }
+    .screen-card.featured { border-color: var(--accent); position: relative }
+    .screen-card.featured::before {
+      content: "Pantalla clave";
+      position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+      padding: 4px 10px; background: var(--accent); color: #fff;
+      font-size: 10px; font-weight: 700; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: .03em
+    }
+    .screen-placeholder {
+      aspect-ratio: 4/3;
+      background: var(--bg-elevated); border: 1px dashed var(--stroke-light);
+      border-radius: var(--r); display: flex; align-items: center;
+      justify-content: center; font-size: 11px; color: var(--text-faint); margin-bottom: 12px
+    }
+    .screen-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px }
+    .screen-card.featured h4 { color: var(--accent) }
+    .screen-card p { font-size: 12px; color: var(--text-faint); line-height: 1.5 }
+
+    /* ── Principles ── */
+    .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 32px }
+    .principle { padding: 24px; background: var(--bg-card); border: 1px solid var(--stroke-light); border-radius: var(--rl) }
+    .principle-icon { font-size: 1.4rem; margin-bottom: 12px }
+    .principle h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--accent) }
+    .principle p { font-size: 13px; color: var(--text-muted); line-height: 1.6 }
+
+    /* ── Results ── */
+    .results-grid { display: grid; grid-template-columns: 1fr; gap: 24px }
+    @media(min-width:768px) { .results-grid { grid-template-columns: 1fr 1fr } }
+    .result-metric { margin-bottom: 28px }
+    .result-metric .value { font-size: 42px; font-weight: 700; color: var(--accent); line-height: 1 }
+    .result-metric .label { font-size: 13px; color: var(--text-muted); margin-top: 4px }
+    .result-bar { height: 6px; background: var(--stroke); border-radius: 3px; margin-top: 8px; overflow: hidden }
+    .result-bar-fill { height: 100%; background: var(--accent); border-radius: 3px }
+
+    /* ── Retro ── */
+    .retro-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 32px }
+    @media(min-width:768px) { .retro-grid { grid-template-columns: 1fr 1fr } }
+    .retro-card { background: var(--bg-card); border: 1px solid var(--stroke-light); border-radius: var(--rl); padding: 28px }
+    .retro-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px }
+    .retro-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7 }
+    .retro-card p + p { margin-top: 12px }
+    .retro-card strong { color: var(--text) }
+
+    /* ── Two col ── */
+    .two-col { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start }
+    @media(min-width:768px) { .two-col { grid-template-columns: 1fr 1fr } }
+
+    /* ── Footer ── */
+    .footer { padding: 48px 0; text-align: center; border-top: 1px solid var(--stroke) }
+    .footer-cta { font-family: var(--serif); font-size: clamp(28px, 4vw, 42px); font-weight: 600; margin-bottom: 24px }
+    .footer-cta .accent { font-style: italic; color: var(--accent) }
+    .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap }
+    .footer-btn { padding: 12px 24px; border-radius: var(--r); font-size: 14px; font-weight: 500; transition: all .2s }
+    .footer-btn.primary { background: var(--accent); color: #fff }
+    .footer-btn.primary:hover { filter: brightness(1.1) }
+    .footer-btn.secondary { background: var(--bg-card); border: 1px solid var(--stroke-light); color: var(--text) }
+    .footer-btn.secondary:hover { border-color: var(--text-faint) }
+
+    /* ── Responsive ── */
+    @media(max-width:640px) {
+      .hero { padding: 48px 0 40px }
+      .section { padding: 48px 0 }
+      .tldr { flex-direction: column }
+      .nav-links { display: none }
+      .persona-card { grid-template-columns: 1fr }
+      .tradeoff-bar.option-a { width: 60% }
+      .tradeoff-bar.option-b { width: 100% }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="accent-bar" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="./index.html" class="brand">
+        <span class="brand-mark"></span>
+        <span class="brand-text">Jose Alvarez</span>
+      </a>
+      <div class="nav-links">
+        <a href="./index.html">Work</a>
+        <a href="./resume.html">Resume</a>
+        <a href="./about.html">About</a>
+        <a href="./Jose_Alvarez_CV.pdf" download class="btn-download">Download CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-label">
+          <span>Case Study</span><span>·</span>
+          <span>ByMakers · bymakers.store · 2026</span>
+        </div>
+        <h1 class="hero-title">
+          Una vitrina profesional para cualquier<br>
+          emprendedor que <span class="accent">no puede pagar un sitio web</span>
+        </h1>
+        <p class="hero-subtitle">
+          Plataforma multi-tenant de catálogos digitales para emprendedores. Cualquier persona con productos
+          que vender obtiene su propio catálogo con link compartible — sin costos de desarrollo, sin actualizar
+          PDFs ni mandar fotos sueltas por WhatsApp.
+        </p>
+        <div class="tldr">
+          <div class="tldr-item"><span class="tldr-icon">🛠</span><span>Next.js 16 · Supabase · Tailwind · shadcn/ui</span></div>
+          <div class="tldr-item"><span class="tldr-icon">👤</span><span>Diseñador, developer y producto — solo</span></div>
+          <div class="tldr-item"><span class="tldr-icon">🧑‍💼</span><span>Emprendedores que venden por WhatsApp / LATAM</span></div>
+          <div class="tldr-item highlight"><span class="tldr-icon">📦</span><span>83+ productos live · 1er cliente en producción</span></div>
+        </div>
+
+        <!-- ByMakers UI clone — neutral -->
+        <div class="hero-image" style="background:#fafafa;border-color:#e5e5e5;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;font-family:'Inter',sans-serif;overflow:hidden;">
+
+            <!-- NAV -->
+            <nav style="background:rgba(255,255,255,0.97);border-bottom:1px solid #e5e5e5;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+              <div>
+                <div style="font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#171717;font-family:'Inter',sans-serif;">Mi Tienda</div>
+                <div style="font-size:7px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#737373;">bymakers.store/mitienda</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="color:#25D366;display:flex;align-items:center;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div style="position:relative;background:#f5f5f5;border-radius:100px;padding:5px 7px;display:flex;align-items:center;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#404040" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                  <span style="position:absolute;top:-4px;right:-4px;background:#171717;color:#fff;font-size:7px;font-weight:900;width:13px;height:13px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff;">2</span>
+                </div>
+              </div>
+            </nav>
+
+            <!-- HERO -->
+            <header style="background:linear-gradient(to bottom,#f5f5f5,#fafafa);padding:10px 16px 8px;text-align:center;flex-shrink:0;">
+              <div style="font-size:11px;font-style:italic;font-weight:700;color:#171717;font-family:'Inter',sans-serif;margin-bottom:8px;line-height:1.3;">"Todos tus productos,en un solo link"</div>
+              <div style="display:flex;justify-content:center;gap:5px;flex-wrap:wrap;">
+                <span style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:#171717;color:#fff;border-radius:100px;padding:3px 10px;">Todos</span>
+                <span style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:#fff;color:#404040;border:1px solid #e5e5e5;border-radius:100px;padding:3px 10px;">Ropa</span>
+                <span style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:#fff;color:#404040;border:1px solid #e5e5e5;border-radius:100px;padding:3px 10px;">Plantas</span>
+                <span style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:#fff;color:#404040;border:1px solid #e5e5e5;border-radius:100px;padding:3px 10px;">Comida</span>
+                <span style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:#fff;color:#404040;border:1px solid #e5e5e5;border-radius:100px;padding:3px 10px;">Belleza</span>
+              </div>
+            </header>
+
+            <!-- PRODUCT GRID -->
+            <main style="padding:10px 12px 12px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;flex:1;overflow:hidden;">
+
+              <!-- Card 1: Ropa -->
+              <div style="display:flex;flex-direction:column;">
+                <div style="position:relative;aspect-ratio:3/4;background:#fff;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);border:1px solid #e5e5e5;display:flex;align-items:center;justify-content:center;margin-bottom:6px;overflow:hidden;">
+                  <span style="font-size:34px;line-height:1;">👗</span>
+                  <div style="position:absolute;top:6px;left:6px;background:rgba(255,255,255,0.95);border-radius:100px;padding:2px 7px;font-size:6px;font-weight:700;color:#404040;letter-spacing:.04em;">REF. 001</div>
+                  <div style="position:absolute;bottom:6px;right:6px;background:#171717;border-radius:100px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;">
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                  </div>
+                </div>
+                <div style="padding:0 2px;">
+                  <div style="font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#171717;margin-bottom:2px;">Vestido Lila</div>
+                  <div style="font-size:10px;font-weight:800;color:#171717;">$72.000</div>
+                </div>
+              </div>
+
+              <!-- Card 2: Plantas -->
+              <div style="display:flex;flex-direction:column;">
+                <div style="position:relative;aspect-ratio:3/4;background:#fff;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);border:1px solid #e5e5e5;display:flex;align-items:center;justify-content:center;margin-bottom:6px;overflow:hidden;">
+                  <span style="font-size:34px;line-height:1;">🪴</span>
+                  <div style="position:absolute;top:6px;left:6px;background:rgba(255,255,255,0.95);border-radius:100px;padding:2px 7px;font-size:6px;font-weight:700;color:#404040;letter-spacing:.04em;">REF. 028</div>
+                  <div style="position:absolute;bottom:6px;right:6px;background:#171717;border-radius:100px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;">
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                  </div>
+                </div>
+                <div style="padding:0 2px;">
+                  <div style="font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#171717;margin-bottom:2px;">Suculenta Pack</div>
+                  <div style="font-size:10px;font-weight:800;color:#171717;">$28.000</div>
+                </div>
+              </div>
+
+              <!-- Card 3: Comida -->
+              <div style="display:flex;flex-direction:column;">
+                <div style="position:relative;aspect-ratio:3/4;background:#fff;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);border:1px solid #e5e5e5;display:flex;align-items:center;justify-content:center;margin-bottom:6px;overflow:hidden;">
+                  <span style="font-size:34px;line-height:1;">🍰</span>
+                  <div style="position:absolute;top:6px;left:6px;background:rgba(255,255,255,0.95);border-radius:100px;padding:2px 7px;font-size:6px;font-weight:700;color:#404040;letter-spacing:.04em;">REF. 055</div>
+                  <div style="position:absolute;bottom:6px;right:6px;background:#171717;border-radius:100px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;">
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                  </div>
+                </div>
+                <div style="padding:0 2px;">
+                  <div style="font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#171717;margin-bottom:2px;">Torta Artesanal</div>
+                  <div style="font-size:10px;font-weight:800;color:#171717;">$95.000</div>
+                </div>
+              </div>
+
+              <!-- Card 4: Belleza -->
+              <div style="display:flex;flex-direction:column;">
+                <div style="position:relative;aspect-ratio:3/4;background:#fff;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);border:1px solid #e5e5e5;display:flex;align-items:center;justify-content:center;margin-bottom:6px;overflow:hidden;">
+                  <span style="font-size:34px;line-height:1;">💄</span>
+                  <div style="position:absolute;top:6px;left:6px;background:rgba(255,255,255,0.95);border-radius:100px;padding:2px 7px;font-size:6px;font-weight:700;color:#404040;letter-spacing:.04em;">REF. 082</div>
+                  <div style="position:absolute;bottom:6px;right:6px;background:#171717;border-radius:100px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;">
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                  </div>
+                </div>
+                <div style="padding:0 2px;">
+                  <div style="font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#171717;margin-bottom:2px;">Kit Maquillaje</div>
+                  <div style="font-size:10px;font-weight:800;color:#171717;">$54.000</div>
+                </div>
+              </div>
+
+            </main>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 01 — PROBLEMA ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">01 — Problema</span>
+        <h2 class="section-title">Tener un sitio web cuesta. No tenerlo también.</h2>
+        <p class="section-text">
+          Para un emprendedor pequeño, pagar el desarrollo de un sitio web es inaccesible. La alternativa
+          es improvisar: álbumes de WhatsApp, PDFs que nadie actualiza, listas de precios por correo.
+          Cada vez que hay un producto nuevo o un precio cambia, hay que reenviar todo de nuevo.
+          El cliente recibe un PDF desactualizado o un link roto — y la venta se pierde.
+        </p>
+        <p class="section-text">
+          El problema no es falta de esfuerzo. Es que las herramientas disponibles están diseñadas para
+          empresas con presupuesto y equipo técnico. <strong>Un emprendedor solo necesita mostrar sus productos
+          de forma profesional y recibir pedidos — sin pagar por un sitio ni depender de un developer.</strong>
+        </p>
+
+        <div class="pws-grid">
+          <div class="pws-card">
+            <h3><span style="color:#ef4444">●</span> El problema</h3>
+            <p>Sin catálogo digital propio, los emprendedores improvisan con WhatsApp, PDFs y hojas de cálculo.
+              Cada cambio de precio o producto nuevo implica actualizar y reenviar manualmente a cada cliente.</p>
+          </div>
+          <div class="pws-card featured">
+            <h3><span style="color:var(--accent)">●</span> El costo real</h3>
+            <p>No es solo imagen. Es tiempo y ventas perdidas. Un PDF desactualizado genera desconfianza.
+              Un link roto cierra la conversación. Depender de WhatsApp para mostrar el catálogo escala
+              muy mal cuando el negocio crece.</p>
+            <p><strong>Un emprendedor que no puede mostrar sus productos de forma profesional compite con una mano atada.</strong></p>
+          </div>
+        </div>
+
+        <div class="quote">
+          <p>"Necesito algo donde mis clientes puedan ver todo con precios y me escriban directo — sin que yo tenga que mandar fotos cada vez."</p>
+          <cite>— Primera cliente · emprendedora en Colombia</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 02 — INVESTIGACIÓN ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label insight">02 — Investigación</span>
+        <h2 class="section-title">El problema no era tecnológico — era de acceso y confianza.</h2>
+        <p class="section-text">
+          La hipótesis inicial era que los emprendedores necesitaban un e-commerce. La investigación
+          — conversaciones con la primera clienta y observación de cómo operan los pequeños negocios
+          en Colombia — reveló algo distinto: no quieren e-commerce. Quieren seguir cerrando ventas por
+          WhatsApp porque es su canal de confianza. Lo que necesitan es una capa de presentación profesional
+          que se pueda compartir como link y que alimente su flujo existente de conversación.
+        </p>
+
+        <div class="research-grid">
+          <div class="research-card">
+            <div class="r-value">1</div>
+            <div class="r-label">Cliente real en producción (primera boutique)</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">83+</div>
+            <div class="r-label">Productos cargados en las primeras 2 semanas</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">2</div>
+            <div class="r-label">Modelos de precio (minorista / mayorista)</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">WA</div>
+            <div class="r-label">Canal de cierre preferido — no reemplazarlo</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 03 — USUARIO ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label persona">03 — Usuario principal</span>
+        <h2 class="section-title">No es una startup tech. Es alguien con productos, un celular y sin presupuesto para un sitio web.</h2>
+        <p class="section-text">
+          El producto tiene dos usuarios: el emprendedor (admin) y su cliente (catálogo público).
+          El case study se enfoca en el emprendedor porque es el usuario que paga — y el que tiene
+          las limitaciones técnicas y económicas más fuertes. El perfil aplica a cualquier rubro:
+          moda, artesanías, repuestos, comida, electrónica, lo que sea.
+        </p>
+
+        <div class="persona-card">
+          <div class="persona-avatar">L</div>
+          <div>
+            <div class="persona-name">Laura, 34</div>
+            <div class="persona-role">Emprendedora · Medellín, Colombia · Baja comodidad técnica · Sin presupuesto para desarrollo</div>
+            <div class="persona-tags">
+              <span class="persona-tag">WhatsApp como canal principal</span>
+              <span class="persona-tag">Instagram para exhibir</span>
+              <span class="persona-tag">50-300 productos</span>
+              <span class="persona-tag">Maneja todo sola</span>
+              <span class="persona-tag">No puede pagar un developer</span>
+            </div>
+            <div class="persona-quote">
+              "Necesito algo donde mis clientes vean todo con precio y me escriban directo — sin que yo tenga que andar mandando fotos ni actualizando PDFs."
+            </div>
+          </div>
+        </div>
+
+        <!-- Needs vs Frustrations -->
+        <div class="two-col" style="margin-top:40px">
+          <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--success);margin-bottom:16px">Lo que necesita</p>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+                <span style="color:var(--success);font-size:14px;flex-shrink:0">✓</span>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.5">Subir y actualizar productos rápido, desde el celular</p>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+                <span style="color:var(--success);font-size:14px;flex-shrink:0">✓</span>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.5">Un link permanente que siempre muestre el catálogo actualizado</p>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+                <span style="color:var(--success);font-size:14px;flex-shrink:0">✓</span>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.5">Que se vea profesional sin saber de diseño ni pagar a nadie</p>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+                <span style="color:var(--success);font-size:14px;flex-shrink:0">✓</span>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.5">Que el cliente navegue solo y pida directamente</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#ef4444;margin-bottom:16px">Lo que la frustra</p>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+                <span style="color:#ef4444;font-size:14px;flex-shrink:0">✗</span>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.5">Mandar fotos y precios por WhatsApp una y otra vez</p>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+                <span style="color:#ef4444;font-size:14px;flex-shrink:0">✗</span>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.5">PDFs o docs desactualizados que generan desconfianza</p>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+                <span style="color:#ef4444;font-size:14px;flex-shrink:0">✗</span>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.5">Perder ventas por no poder mostrar bien lo que vende</p>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+                <span style="color:#ef4444;font-size:14px;flex-shrink:0">✗</span>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.5">Shopify o e-commerce requieren presupuesto y conocimiento técnico</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 03b — BENCHMARK ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label insight">03b — Benchmark</span>
+        <h2 class="section-title">¿Qué existe hoy? Nadie resuelve exactamente esto.</h2>
+        <p class="section-text">
+          Las alternativas disponibles van hacia dos extremos: demasiado básicas o demasiado costosas.
+          Ninguna está optimizada para el emprendedor que solo necesita un catálogo profesional con link
+          compartible y cierre por conversación.
+        </p>
+
+        <!-- Benchmark table -->
+        <div style="margin-top:32px;overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead>
+              <tr style="border-bottom:2px solid var(--stroke-light)">
+                <th style="text-align:left;padding:10px 14px;color:var(--text-faint);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase">Herramienta</th>
+                <th style="text-align:center;padding:10px 14px;color:var(--text-faint);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase">Costo mensual</th>
+                <th style="text-align:center;padding:10px 14px;color:var(--text-faint);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase">Link propio</th>
+                <th style="text-align:center;padding:10px 14px;color:var(--text-faint);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase">Sin setup técnico</th>
+                <th style="text-align:center;padding:10px 14px;color:var(--text-faint);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase">Cierre por WhatsApp</th>
+                <th style="text-align:center;padding:10px 14px;color:var(--text-faint);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase">Solo catálogo (sin pagos)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- WhatsApp Business -->
+              <tr style="border-bottom:1px solid var(--stroke)">
+                <td style="padding:14px;font-weight:500;color:var(--text)">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-size:16px">💬</span>
+                    <div>
+                      <div>WhatsApp Business</div>
+                      <div style="font-size:11px;color:var(--text-faint)">Catálogo nativo</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--success);font-weight:600">Gratis</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:#ef4444">✗</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--success)">✓</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--success)">✓</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--success)">✓</span></td>
+              </tr>
+              <!-- Tiendanube -->
+              <tr style="border-bottom:1px solid var(--stroke)">
+                <td style="padding:14px;font-weight:500;color:var(--text)">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-size:16px">🛒</span>
+                    <div>
+                      <div>Tiendanube</div>
+                      <div style="font-size:11px;color:var(--text-faint)">E-commerce LATAM</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--text-muted)">Gratis + % ventas / desde ~$25.000 COP</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--success)">✓</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:#fbbf24">Parcial</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:#ef4444">✗</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:#ef4444">✗</span></td>
+              </tr>
+              <!-- Shopify -->
+              <tr style="border-bottom:1px solid var(--stroke)">
+                <td style="padding:14px;font-weight:500;color:var(--text)">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-size:16px">🏪</span>
+                    <div>
+                      <div>Shopify</div>
+                      <div style="font-size:11px;color:var(--text-faint)">E-commerce global</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align:center;padding:14px"><span style="color:#ef4444;font-weight:600">USD $39–$399 / mes</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--success)">✓</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:#ef4444">✗</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:#ef4444">✗</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:#ef4444">✗</span></td>
+              </tr>
+              <!-- PDF / Google Docs -->
+              <tr style="border-bottom:1px solid var(--stroke)">
+                <td style="padding:14px;font-weight:500;color:var(--text)">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-size:16px">📄</span>
+                    <div>
+                      <div>PDF / Google Docs</div>
+                      <div style="font-size:11px;color:var(--text-faint)">La solución "gratuita"</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--success);font-weight:600">Gratis</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:#fbbf24">Link fijo</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--success)">✓</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--success)">✓</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--success)">✓</span></td>
+              </tr>
+              <!-- Catálogo SaaS -->
+              <tr style="background:var(--accent-glow);border:1px solid rgba(6,182,212,.2)">
+                <td style="padding:14px;font-weight:500;color:var(--text)">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-size:16px">✦</span>
+                    <div>
+                      <div style="color:var(--accent);font-weight:700">ByMakers</div>
+                      <div style="font-size:11px;color:var(--text-faint)">bymakers.store</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--accent);font-weight:600">Bajo costo fijo · sin % de venta</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--accent);font-weight:700">✓</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--accent);font-weight:700">✓</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--accent);font-weight:700">✓</span></td>
+                <td style="text-align:center;padding:14px"><span style="color:var(--accent);font-weight:700">✓</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top:20px;padding:16px 20px;background:rgba(6,182,212,.06);border-left:3px solid var(--accent);border-radius:0 var(--r) var(--r) 0">
+          <p style="font-size:14px;color:var(--text-muted);line-height:1.7">
+            WhatsApp Business es gratis pero el catálogo vive <em>dentro</em> de la app — sin link externo, sin personalización de marca, sin poder compartirlo fuera del chat.
+            PDF y Google Docs son gratuitos pero estáticos — cada cambio requiere editar y reenviar.
+            <strong style="color:var(--text)">El hueco: profesional + linkeable + actualizable + sin e-commerce.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 04 — TRADE-OFF ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label tradeoff">04 — El trade-off</span>
+        <h2 class="section-title">E-commerce completo vs. catálogo con cierre por WhatsApp</h2>
+        <p class="section-text">
+          Construir un e-commerce completo (carrito, pasarela de pago, envíos) habría sido la solución
+          "completa" pero completamente equivocada para el usuario. Los emprendedores pequeños cierran ventas
+          a través de conversación directa — no quieren reemplazar eso, quieren llegar a esa conversación
+          mejor preparados. La decisión de producto: catálogo profesional + puente a WhatsApp, no una tienda.
+        </p>
+        <p class="section-text">
+          <strong>WhatsApp no es el problema — es el canal de confianza. El producto no lo reemplaza, lo potencia.</strong>
+        </p>
+
+        <div class="tradeoff-visual">
+          <div class="tradeoff-header">
+            <span style="color:#ef4444">E-commerce completo</span>
+            <span style="color:var(--accent)">Catálogo + WhatsApp ✓</span>
+          </div>
+          <div class="tradeoff-bars">
+            <div class="tradeoff-bar option-a">Adopción baja · Complejidad alta</div>
+            <div class="tradeoff-bar option-b">Adopción alta · Confianza mantenida</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 05 — SOLUCIÓN ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label solution">05 — Solución</span>
+        <h2 class="section-title">Un catálogo que cualquier emprendedor puede tener en minutos</h2>
+        <p class="section-text">
+          Una plataforma multi-tenant donde cada emprendedor obtiene su propio catálogo con link
+          compartible, personalizado con su marca. No necesita un developer ni pagar hosting.
+          Dashboard admin para gestionar productos, catálogo público para sus clientes,
+          integración con WhatsApp y generación de cotizaciones en PDF.
+        </p>
+
+        <div class="features-list">
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Catálogo público responsivo</h4>
+              <p>Grid de productos con filtro por categoría, modal de detalle con galería, selector de color/talla, carrito de productos.</p>
+            </div>
+            <span class="feature-badge shipped">Shipped</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Dashboard administrativo</h4>
+              <p>CRUD de productos, gestión de categorías, upload de imágenes con recorte inteligente (3 variantes WebP).</p>
+            </div>
+            <span class="feature-badge shipped">Shipped</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Personalización de marca</h4>
+              <p>5 paletas de color, 7 tipografías, vista previa en tiempo real. El catálogo se siente propio sin diseñador.</p>
+            </div>
+            <span class="feature-badge shipped">Shipped</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Integración WhatsApp</h4>
+              <p>El carrito genera un mensaje pre-armado con los productos seleccionados y abre WhatsApp directo. El cierre es humano.</p>
+            </div>
+            <span class="feature-badge shipped">Shipped</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Cotización PDF</h4>
+              <p>Generación de PDF con membrete personalizado, lista de productos, precios y totales. Para mayoristas que necesitan documento formal.</p>
+            </div>
+            <span class="feature-badge shipped">Shipped</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Precio dual (minorista / mayorista)</h4>
+              <p>Cada producto tiene dos precios. El catálogo público muestra uno u otro según el tipo de cliente.</p>
+            </div>
+            <span class="feature-badge shipped">Shipped</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Arquitectura multi-tenant</h4>
+              <p>Row Level Security en Supabase. Cada tenant aislado por completo. Routing dinámico por slug.</p>
+            </div>
+            <span class="feature-badge shipped">Shipped</span>
+          </div>
+        </div>
+
+        <!-- Animated flow demo -->
+        <style>
+          @keyframes bm-type    { 0%,4%{width:0;opacity:0} 9%{opacity:1} 42%,56%{width:100%} 61%,100%{width:0;opacity:0} }
+          @keyframes bm-cursor  { 0%,100%{opacity:1} 50%{opacity:0} }
+          @keyframes bm-save    { 0%,44%{transform:scale(1);background:#e11d48} 49%{transform:scale(.91);background:#be123c} 54%,100%{transform:scale(1);background:#e11d48} }
+          @keyframes bm-card-in { 0%,51%{opacity:0;transform:translateY(9px)} 59%,88%{opacity:1;transform:translateY(0)} 94%,100%{opacity:0;transform:translateY(0)} }
+          @keyframes bm-badge   { 0%,51%{opacity:0;transform:scale(.4)} 61%{opacity:1;transform:scale(1.2)} 65%,88%{opacity:1;transform:scale(1)} 94%,100%{opacity:0} }
+          @keyframes bm-wa-msg  { 0%,62%{opacity:0;transform:translateX(10px)} 70%,88%{opacity:1;transform:translateX(0)} 94%,100%{opacity:0} }
+          @keyframes bm-wa-rep  { 0%,66%{opacity:0;transform:translateX(10px)} 74%,88%{opacity:1;transform:translateX(0)} 94%,100%{opacity:0} }
+          @keyframes bm-notif   { 0%,68%{opacity:0;transform:scale(.5)} 76%,88%{opacity:1;transform:scale(1)} 94%,100%{opacity:0} }
+          @keyframes bm-arr1    { 0%,42%{opacity:.18;transform:translateX(0)} 50%,53%{opacity:1;transform:translateX(4px)} 58%,100%{opacity:.18;transform:translateX(0)} }
+          @keyframes bm-arr2    { 0%,60%{opacity:.18;transform:translateX(0)} 68%,71%{opacity:1;transform:translateX(4px)} 76%,100%{opacity:.18;transform:translateX(0)} }
+          @keyframes bm-s1      { 0%,4%{opacity:.28} 6%,47%{opacity:1} 53%,100%{opacity:.28} }
+          @keyframes bm-s2      { 0%,53%{opacity:.28} 59%,88%{opacity:1} 94%,100%{opacity:.28} }
+          @keyframes bm-s3      { 0%,64%{opacity:.28} 70%,88%{opacity:1} 94%,100%{opacity:.28} }
+          .bm { animation-duration:9s; animation-iteration-count:infinite; animation-timing-function:ease-in-out }
+          .bm-flow {
+            display:flex; align-items:stretch; gap:0;
+            margin-top:48px;
+            background:var(--bg-card); border:1px solid var(--stroke-light);
+            border-radius:var(--rl); overflow:hidden; padding:24px 16px
+          }
+          .bm-panel { flex:1; min-width:0; display:flex; flex-direction:column }
+          .bm-arrow { flex:0 0 28px; display:flex; align-items:center; justify-content:center; font-size:15px; color:var(--accent); padding-top:28px }
+          .bm-slabel {
+            display:flex; align-items:center; gap:6px; margin-bottom:10px;
+            font-size:9px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted)
+          }
+          .bm-snum {
+            width:17px; height:17px; border-radius:50%; background:var(--accent);
+            color:#fff; font-size:8px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0
+          }
+          .bm-screen { border-radius:9px; overflow:hidden; border:1px solid rgba(255,255,255,.1); flex:1 }
+          /* ── Panel 1: Dashboard ── */
+          .bm-dash { display:flex; background:#f9fafb; height:156px }
+          .bm-sb { width:30px; background:#fff; border-right:1px solid #e5e7eb; display:flex; flex-direction:column; align-items:center; padding:7px 0; gap:5px; flex-shrink:0 }
+          .bm-sb-logo { font-size:8px; font-weight:800; color:#e11d48; letter-spacing:-.5px }
+          .bm-sb-i { width:16px; height:5px; border-radius:2px; background:#f3f4f6 }
+          .bm-sb-i.on { background:#fce7f3 }
+          .bm-dmain { flex:1; padding:7px; overflow:hidden }
+          .bm-dfh { font-size:7px; font-weight:700; color:#111; margin-bottom:6px }
+          .bm-fl { margin-bottom:4px }
+          .bm-fll { font-size:5px; color:#9ca3af; margin-bottom:1.5px; text-transform:uppercase; letter-spacing:.04em }
+          .bm-fli { background:#fff; border:1px solid #d1d5db; border-radius:3px; padding:2.5px 5px; font-size:6px; color:#111; display:flex; align-items:center; gap:1px; height:13px; overflow:hidden }
+          .bm-typed { display:inline-block; white-space:nowrap; overflow:hidden; width:0; animation-name:bm-type }
+          .bm-cur { display:inline-block; width:1px; height:7px; background:#374151; vertical-align:middle; animation-name:bm-cursor; animation-duration:.75s; animation-iteration-count:infinite }
+          .bm-save { margin-top:7px; background:#e11d48; color:#fff; border-radius:4px; padding:3px 8px; font-size:6px; font-weight:700; display:inline-block; animation-name:bm-save }
+          /* ── Panel 2: Catalog ── */
+          .bm-cat { background:#f9fafb; height:156px; padding:7px; display:flex; flex-direction:column }
+          .bm-cath { display:flex; align-items:center; justify-content:space-between; margin-bottom:5px }
+          .bm-catname { font-size:6.5px; font-weight:700; color:#111 }
+          .bm-catcount { font-size:5px; color:#e11d48; background:#fce7f3; padding:2px 5px; border-radius:3px; font-weight:700 }
+          .bm-catg { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; flex:1 }
+          .bm-cc { background:#fff; border:1px solid #e5e7eb; border-radius:5px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5px; padding:3px; position:relative; font-size:13px }
+          .bm-ccl { font-size:4.5px; color:#9ca3af }
+          .bm-ccp { font-size:5px; color:#e11d48; font-weight:700 }
+          .bm-cc.nuevo { animation-name:bm-card-in; border-color:#fda4af }
+          .bm-nbadge { position:absolute; top:-3px; right:-3px; background:#e11d48; color:#fff; font-size:3.5px; font-weight:700; padding:1px 3px; border-radius:2px; letter-spacing:.03em; animation-name:bm-badge }
+          /* ── Panel 3: WhatsApp ── */
+          .bm-wa { height:156px; display:flex; flex-direction:column; background:#e5ddd5 }
+          .bm-wah { background:#075e54; padding:5px 7px; display:flex; align-items:center; gap:5px; flex-shrink:0 }
+          .bm-waav { width:15px; height:15px; border-radius:50%; background:#25d366; font-size:9px; display:flex; align-items:center; justify-content:center }
+          .bm-wahn { font-size:6px; color:#fff; font-weight:600 }
+          .bm-wahs { font-size:4.5px; color:rgba(255,255,255,.65) }
+          .bm-wandot { margin-left:auto; width:13px; height:13px; border-radius:50%; background:#25d366; font-size:7px; font-weight:700; color:#fff; display:flex; align-items:center; justify-content:center; animation-name:bm-notif }
+          .bm-wab { flex:1; padding:7px; display:flex; flex-direction:column; justify-content:flex-end; gap:4px }
+          .bm-wamsg { background:#fff; border-radius:6px 6px 6px 0; padding:4px 7px; max-width:88%; font-size:5.5px; color:#111; box-shadow:0 1px 1px rgba(0,0,0,.08); animation-name:bm-wa-msg }
+          .bm-warep { background:#dcf8c6; border-radius:6px 6px 0 6px; padding:4px 7px; max-width:88%; align-self:flex-end; font-size:5.5px; color:#111; box-shadow:0 1px 1px rgba(0,0,0,.08); animation-name:bm-wa-rep }
+          .bm-wt { font-size:4px; color:#9ca3af; text-align:right; margin-top:1.5px }
+        </style>
+
+        <div class="bm-flow">
+
+          <!-- ── Panel 1: Subir producto ── -->
+          <div class="bm-panel">
+            <div class="bm-slabel bm" style="animation-name:bm-s1">
+              <div class="bm-snum">1</div> Subir producto
+            </div>
+            <div class="bm-screen">
+              <div class="bm-dash">
+                <div class="bm-sb">
+                  <div class="bm-sb-logo">B</div>
+                  <div class="bm-sb-i"></div>
+                  <div class="bm-sb-i on"></div>
+                  <div class="bm-sb-i"></div>
+                  <div class="bm-sb-i"></div>
+                  <div class="bm-sb-i"></div>
+                </div>
+                <div class="bm-dmain">
+                  <div class="bm-dfh">Nuevo Producto</div>
+                  <div class="bm-fl">
+                    <div class="bm-fll">Nombre</div>
+                    <div class="bm-fli">
+                      <span class="bm-typed bm" style="animation-duration:9s">Matera Suculenta 🪴</span>
+                      <span class="bm-cur"></span>
+                    </div>
+                  </div>
+                  <div class="bm-fl">
+                    <div class="bm-fll">Precio</div>
+                    <div class="bm-fli">
+                      <span style="color:#d1d5db;font-size:6px">$</span>
+                      <span class="bm-typed bm" style="animation-duration:9s">28.000</span>
+                    </div>
+                  </div>
+                  <div class="bm-fl">
+                    <div class="bm-fll">Referencia</div>
+                    <div class="bm-fli" style="color:#e11d48">
+                      <span class="bm-typed bm" style="animation-duration:9s">MAT-001</span>
+                    </div>
+                  </div>
+                  <div class="bm-save bm" style="animation-duration:9s">Guardar producto</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrow 1 -->
+          <div class="bm-arrow">
+            <span class="bm" style="animation-name:bm-arr1;animation-duration:9s">→</span>
+          </div>
+
+          <!-- ── Panel 2: Aparece en catálogo ── -->
+          <div class="bm-panel">
+            <div class="bm-slabel bm" style="animation-name:bm-s2">
+              <div class="bm-snum">2</div> En el catálogo
+            </div>
+            <div class="bm-screen">
+              <div class="bm-cat">
+                <div class="bm-cath">
+                  <span class="bm-catname">Mi Tienda ✦</span>
+                  <span class="bm-catcount">3 productos</span>
+                </div>
+                <div class="bm-catg">
+                  <div class="bm-cc">
+                    <span>👗</span>
+                    <span class="bm-ccl">Blusa</span>
+                    <span class="bm-ccp">$45k</span>
+                  </div>
+                  <div class="bm-cc">
+                    <span>🍰</span>
+                    <span class="bm-ccl">Torta</span>
+                    <span class="bm-ccp">$35k</span>
+                  </div>
+                  <div class="bm-cc nuevo bm" style="animation-duration:9s">
+                    <div class="bm-nbadge bm" style="animation-duration:9s">NUEVO</div>
+                    <span>🪴</span>
+                    <span class="bm-ccl">Matera</span>
+                    <span class="bm-ccp">$28k</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrow 2 -->
+          <div class="bm-arrow">
+            <span class="bm" style="animation-name:bm-arr2;animation-duration:9s">→</span>
+          </div>
+
+          <!-- ── Panel 3: Llega pedido ── -->
+          <div class="bm-panel">
+            <div class="bm-slabel bm" style="animation-name:bm-s3">
+              <div class="bm-snum">3</div> Llega el pedido
+            </div>
+            <div class="bm-screen">
+              <div class="bm-wa">
+                <div class="bm-wah">
+                  <div class="bm-waav">🏪</div>
+                  <div>
+                    <div class="bm-wahn">Mi Tienda</div>
+                    <div class="bm-wahs">en línea</div>
+                  </div>
+                  <div class="bm-wandot bm" style="animation-duration:9s">1</div>
+                </div>
+                <div class="bm-wab">
+                  <div class="bm-wamsg bm" style="animation-duration:9s">
+                    Hola! Quiero la Matera Suculenta 🪴
+                    <div class="bm-wt">10:42 am</div>
+                  </div>
+                  <div class="bm-warep bm" style="animation-duration:9s">
+                    📦 Pedido listo — $28.000
+                    <div class="bm-wt" style="color:#8b9a6e">✓✓ 10:42 am</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 06 — DECISIONES TÉCNICAS ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label solution">06 — Decisiones técnicas</span>
+        <h2 class="section-title">Multi-tenancy real, no simulada</h2>
+        <p class="section-text">
+          Cada decisión técnica responde a una restricción del usuario real. Row Level Security en
+          Supabase para aislamiento total entre tenants. Imágenes optimizadas a WebP porque las
+          comerciantes y clientas están en planes de datos limitados. Server components para que
+          los catálogos públicos indexen en Google.
+        </p>
+
+        <div style="margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+          <!-- Pipeline de imágenes -->
+          <div style="background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);padding:24px">
+            <div style="font-size:1.2rem;margin-bottom:12px">🖼</div>
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;color:var(--accent)">Pipeline de imágenes</h4>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;padding:2px 8px;background:var(--stroke);border-radius:4px;color:var(--text-muted)">Upload</span>
+                <span style="font-size:10px;color:var(--text-faint)">→</span>
+                <span style="font-size:11px;padding:2px 8px;background:var(--stroke);border-radius:4px;color:var(--text-muted)">Crop</span>
+                <span style="font-size:10px;color:var(--text-faint)">→</span>
+                <span style="font-size:11px;padding:2px 8px;background:var(--accent-soft);border-radius:4px;color:var(--accent)">3× WebP</span>
+              </div>
+              <p style="font-size:12px;color:var(--text-muted);line-height:1.5;margin-top:4px">Thumbnail, card y large — optimizadas para planes de datos limitados en LATAM.</p>
+            </div>
+          </div>
+          <!-- Multi-tenant -->
+          <div style="background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);padding:24px">
+            <div style="font-size:1.2rem;margin-bottom:12px">🔒</div>
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;color:var(--accent)">Aislamiento por tenant</h4>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="font-size:11px;padding:6px 10px;background:var(--stroke);border-radius:4px;color:var(--text-muted)">Tenant A → RLS → Solo sus datos</div>
+              <div style="font-size:11px;padding:6px 10px;background:var(--stroke);border-radius:4px;color:var(--text-muted)">Tenant B → RLS → Solo sus datos</div>
+              <p style="font-size:12px;color:var(--text-muted);line-height:1.5;margin-top:4px">Row Level Security en Supabase. No hay forma de acceder a datos de otro tenant.</p>
+            </div>
+          </div>
+          <!-- Stack -->
+          <div style="background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);padding:24px">
+            <div style="font-size:1.2rem;margin-bottom:12px">⚡</div>
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;color:var(--accent)">Stack elegido</h4>
+            <div style="display:flex;flex-wrap:wrap;gap:4px">
+              <span style="font-size:10px;padding:3px 8px;background:var(--stroke);border-radius:100px;color:var(--text-muted)">Next.js 16</span>
+              <span style="font-size:10px;padding:3px 8px;background:var(--stroke);border-radius:100px;color:var(--text-muted)">React 19</span>
+              <span style="font-size:10px;padding:3px 8px;background:var(--stroke);border-radius:100px;color:var(--text-muted)">Supabase</span>
+              <span style="font-size:10px;padding:3px 8px;background:var(--stroke);border-radius:100px;color:var(--text-muted)">Tailwind 4</span>
+              <span style="font-size:10px;padding:3px 8px;background:var(--stroke);border-radius:100px;color:var(--text-muted)">shadcn/ui</span>
+              <span style="font-size:10px;padding:3px 8px;background:var(--stroke);border-radius:100px;color:var(--text-muted)">Zustand</span>
+              <span style="font-size:10px;padding:3px 8px;background:var(--stroke);border-radius:100px;color:var(--text-muted)">jsPDF</span>
+            </div>
+            <p style="font-size:12px;color:var(--text-muted);line-height:1.5;margin-top:8px">Server components para SEO. Client components para interactividad del carrito.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 07 — PRINCIPIOS ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">07 — Principios de diseño</span>
+        <h2 class="section-title">Tres principios detrás de cada decisión</h2>
+        <div class="principles">
+          <div class="principle">
+            <div class="principle-icon">📱</div>
+            <h4>Mobile-first, siempre</h4>
+            <p>El 90% de las usuarias administran desde el celular. Cada pantalla se diseñó
+              primero en 375px. Si no funciona en móvil, no existe.</p>
+          </div>
+          <div class="principle">
+            <div class="principle-icon">💬</div>
+            <h4>WhatsApp es el checkout</h4>
+            <p>No competir con el canal de confianza. Potenciarlo. El producto termina
+              donde WhatsApp empieza.</p>
+          </div>
+          <div class="principle">
+            <div class="principle-icon">🎨</div>
+            <h4>Profesional sin presupuesto</h4>
+            <p>Restricciones inteligentes: paletas curadas, tipografías probadas, layouts fijos.
+              El catálogo se ve bien aunque el emprendedor no sepa de diseño ni tenga equipo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 08 — RESULTADOS ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="two-col">
+          <div>
+            <span class="section-label solution">08 — Resultados</span>
+            <h2 class="section-title">En producción con el primer cliente</h2>
+            <p class="section-text">
+              No es un concepto ni un prototipo. Es un producto real con datos reales, una comerciante
+              real usándolo y clientas reales navegando el catálogo.
+            </p>
+          </div>
+          <div>
+            <div class="result-metric">
+              <div class="value">83+</div>
+              <div class="label">Productos cargados en las primeras semanas</div>
+              <div class="result-bar"><div class="result-bar-fill" style="width:80%"></div></div>
+            </div>
+            <div class="result-metric">
+              <div class="value">&lt;5 min</div>
+              <div class="label">Tiempo para subir un producto con foto</div>
+              <div class="result-bar"><div class="result-bar-fill" style="width:90%"></div></div>
+            </div>
+            <div class="result-metric">
+              <div class="value">0</div>
+              <div class="label">Conocimiento técnico requerido para administrar</div>
+              <div class="result-bar"><div class="result-bar-fill" style="width:100%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 09 — RETRO ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">09 — Retrospectiva</span>
+        <h2 class="section-title">Lo que construir un SaaS real me enseñó</h2>
+        <div class="retro-grid">
+          <div class="retro-card">
+            <h3>✅ Lo que funcionó</h3>
+            <p>Construir multi-tenant desde el día uno fue la decisión correcta. RLS forzó un modelado
+              de datos limpio desde el principio.</p>
+            <p>La decisión de <strong>WhatsApp como checkout</strong> se validó inmediatamente: la primera
+              clienta nunca pidió integración de pagos. El canal humano era suficiente y preferido.</p>
+          </div>
+          <div class="retro-card">
+            <h3>🔍 Lo que haría diferente</h3>
+            <p>Invertir antes en el flujo de onboarding. La primera clienta necesitó setup guiado — el
+              producto asumía que la usuaria sabría navegarlo sola.</p>
+            <p><strong>Analytics desde el día uno.</strong> Sin datos de uso, las decisiones de producto
+              se basan en conversación en vez de evidencia. Agregaría tracking de eventos y métricas
+              de conversión desde el primer deploy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-cta">
+        Hay más <span class="accent">trabajo por ver.</span>
+      </div>
+      <div class="footer-links">
+        <a href="./index.html" class="footer-btn primary">← Ver todos los proyectos</a>
+        <a href="./unipamplona.html" class="footer-btn secondary">Unipamplona Redesign →</a>
+        <a href="mailto:josealvarezswork@gmail.com" class="footer-btn secondary">Escribirme</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
