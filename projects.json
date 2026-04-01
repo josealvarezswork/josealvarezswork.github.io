@@ -19,11 +19,20 @@
       "category": "Product",
       "year": "2026",
       "color": "blue",
-      "link": "#",
-      "inDevelopment": true,
+      "link": "duogit.html",
       "images": [
         "./img/portada-duogit.jpg"
       ]
+    },
+    {
+      "id": "bymakers",
+      "title": "ByMakers",
+      "description": "Plataforma multi-tenant para emprendedores — un catálogo profesional con link compartible sin pagar desarrollo ni actualizar PDFs.",
+      "category": "Product",
+      "year": "2026",
+      "color": "cyan",
+      "link": "./bymakers.html",
+      "images": []
     }
   ]
 }
