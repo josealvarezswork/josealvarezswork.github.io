@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unipamplona — Rediseño UX · Jose Alvarez</title>
+  <meta name="description"
+    content="Case study: Rediseño del homepage y portal de la Universidad de Pamplona — arquitectura de información centrada en el usuario, menos carga cognitiva, navegación clara para aspirantes y estudiantes.">
+  <meta property="og:title" content="Unipamplona Redesign — UX Case Study">
+  <meta property="og:description" content="De una homepage institucional sobrecargada a un sistema que aspirantes y estudiantes realmente entienden.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070709;
+      --bg-elevated: #0d0d10;
+      --bg-card: #111114;
+      --text: #f2f2f2;
+      --text-muted: rgba(255, 255, 255, .62);
+      --text-faint: rgba(255, 255, 255, .36);
+      --stroke: rgba(255, 255, 255, .08);
+      --stroke-light: rgba(255, 255, 255, .12);
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, .15);
+      --accent-glow: rgba(59, 130, 246, .08);
+      --success: #10b981;
+      --success-soft: rgba(16, 185, 129, .15);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Inter", system-ui, -apple-system, sans-serif;
+      --max: 1040px;
+      --r: 12px;
+      --rl: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased
+    }
+
+    a { color: inherit; text-decoration: none }
+
+    /* ── Accent bar ── */
+    .accent-bar {
+      position: fixed;
+      top: 0; right: 0;
+      width: 5px; height: 100vh;
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(59, 130, 246, .2) 100%);
+      z-index: 100
+    }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      padding: 20px 24px;
+      background: rgba(7, 7, 9, .85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--stroke)
+    }
+    .nav-inner {
+      max-width: var(--max); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between
+    }
+    .brand { display: flex; align-items: center; gap: 10px }
+    .brand-mark {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.18);
+      position: relative
+    }
+    .brand-mark::before {
+      content: "";
+      position: absolute; inset: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.9)
+    }
+    .brand-text { font-size: 12px; font-weight: 600; letter-spacing: .02em }
+    .nav-links { display: flex; gap: 32px; font-size: 12px; letter-spacing: .04em; color: var(--text-muted) }
+    .nav-links a:hover { color: var(--text) }
+    .btn-download {
+      padding: 6px 12px;
+      border: 1px solid rgba(59, 130, 246, 0.5);
+      border-radius: 999px;
+      font-weight: 500
+    }
+
+    /* ── Layout ── */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px }
+
+    /* ── Hero ── */
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--stroke) }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 130, 246, .25);
+      border-radius: 100px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 24px
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -.02em; margin-bottom: 20px; max-width: 900px
+    }
+    .hero-title .accent { color: var(--accent) }
+    .hero-subtitle {
+      font-size: 17px; color: var(--text-muted);
+      max-width: 680px; line-height: 1.7; margin-bottom: 32px
+    }
+
+    /* ── TL;DR chips ── */
+    .tldr { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 48px }
+    .tldr-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--r); font-size: 13px
+    }
+    .tldr-icon {
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--stroke); border-radius: 8px; font-size: 14px
+    }
+    .tldr-item.highlight {
+      background: var(--success-soft);
+      border-color: rgba(16, 185, 129, .3)
+    }
+    .tldr-item.highlight .tldr-icon { background: rgba(16, 185, 129, .2) }
+    .tldr-item.highlight span { color: var(--success); font-weight: 600 }
+
+    /* ── Hero image ── */
+    .hero-image {
+      position: relative; width: 100%; aspect-ratio: 16/9;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl); overflow: hidden
+    }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover }
+    .hero-image-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: var(--text-faint); font-size: 13px;
+      text-align: center; padding: 24px
+    }
+    .before-after-badge {
+      position: absolute; bottom: 16px; right: 16px;
+      padding: 8px 16px;
+      background: var(--accent); color: #fff;
+      border-radius: var(--r); font-size: 12px;
+      font-weight: 700; letter-spacing: .04em
+    }
+
+    /* ── Sections ── */
+    .section { padding: 64px 0; border-bottom: 1px solid var(--stroke) }
+    .section:last-child { border-bottom: none }
+    .section-label {
+      display: inline-block; padding: 4px 10px;
+      background: var(--stroke); border-radius: 6px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 16px
+    }
+    .section-label.insight { background: rgba(251,191,36,.15); color: #fbbf24 }
+    .section-label.tradeoff { background: rgba(239,68,68,.15); color: #ef4444 }
+    .section-label.solution { background: var(--accent-soft); color: var(--accent) }
+    .section-label.persona { background: rgba(139,92,246,.15); color: #8b5cf6 }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 700; margin-bottom: 16px; letter-spacing: -.01em
+    }
+    .section-text { font-size: 15px; color: var(--text-muted); line-height: 1.8; max-width: 700px }
+    .section-text + .section-text { margin-top: 16px }
+    .section-text strong { color: var(--text); font-weight: 500 }
+
+    /* ── PWS Grid ── */
+    .pws-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 40px }
+    @media(min-width:768px) { .pws-grid { grid-template-columns: 1fr 1.5fr } }
+    .pws-card {
+      padding: 28px; background: var(--bg-card);
+      border: 1px solid var(--stroke-light); border-radius: var(--rl)
+    }
+    .pws-card.featured { background: var(--accent-glow); border-color: rgba(59,130,246,.2) }
+    .pws-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px }
+    .pws-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px }
+    .pws-card p:last-child { margin-bottom: 0 }
+    .pws-card p strong { color: var(--accent); display: block; margin-top: 12px }
+
+    /* ── Quote ── */
+    .quote {
+      margin-top: 20px; padding: 20px 24px;
+      background: rgba(251,191,36,.08);
+      border-left: 3px solid #fbbf24;
+      border-radius: 0 var(--r) var(--r) 0
+    }
+    .quote p { font-size: 15px; font-style: italic; color: var(--text); line-height: 1.7 }
+    .quote cite { display: block; margin-top: 8px; font-size: 12px; font-style: normal; color: var(--text-faint) }
+
+    /* ── Research grid ── */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px; margin-top: 32px
+    }
+    .research-card {
+      padding: 20px; background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--r); text-align: center
+    }
+    .research-card .r-value {
+      font-family: var(--serif); font-size: 2rem;
+      font-weight: 700; color: var(--accent); line-height: 1
+    }
+    .research-card .r-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; line-height: 1.4 }
+
+    /* ── Audit / before-after ── */
+    .audit-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 32px }
+    @media(min-width:768px) { .audit-grid { grid-template-columns: 1fr 1fr } }
+    .audit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl); overflow: hidden
+    }
+    .audit-header {
+      padding: 14px 20px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      border-bottom: 1px solid var(--stroke)
+    }
+    .audit-header.before { color: #ef4444; background: rgba(239,68,68,.08) }
+    .audit-header.after { color: var(--success); background: rgba(16,185,129,.08) }
+    .audit-body { padding: 20px }
+    .audit-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid var(--stroke)
+    }
+    .audit-item:last-child { border-bottom: none; padding-bottom: 0 }
+    .audit-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 6px
+    }
+    .audit-dot.bad { background: #ef4444 }
+    .audit-dot.good { background: var(--success) }
+    .audit-item p { font-size: 13px; color: var(--text-muted); line-height: 1.5 }
+
+    /* ── Persona ── */
+    .persona-card {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 24px; padding: 28px;
+      background: var(--bg-card);
+      border: 1px solid rgba(139,92,246,.25);
+      border-radius: var(--rl); margin-top: 32px; align-items: start
+    }
+    .persona-avatar {
+      width: 64px; height: 64px;
+      background: rgba(139,92,246,.15);
+      border: 1px solid rgba(139,92,246,.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 1.6rem; color: #8b5cf6; flex-shrink: 0
+    }
+    .persona-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; margin-bottom: 4px }
+    .persona-role { font-size: 12px; color: var(--text-faint); margin-bottom: 16px; letter-spacing: .04em }
+    .persona-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px }
+    .persona-tag { padding: 4px 10px; background: var(--stroke); border-radius: 100px; font-size: 11px; color: var(--text-muted) }
+    .persona-quote { font-size: 13px; font-style: italic; color: var(--text-muted); border-left: 2px solid rgba(139,92,246,.4); padding-left: 12px }
+
+    /* ── Journey ── */
+    .journey {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px; background: var(--stroke);
+      border: 1px solid var(--stroke);
+      border-radius: var(--rl); overflow: hidden; margin-top: 32px
+    }
+    .journey-stage { background: var(--bg-card); padding: 24px 20px }
+    .stage-num { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px }
+    .journey-stage h4 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 8px }
+    .journey-stage p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px }
+    .stage-feeling { display: flex; flex-wrap: wrap; gap: 4px }
+    .feeling-tag { padding: 3px 8px; background: var(--stroke); border-radius: 100px; font-size: 10px; color: var(--text-faint) }
+    .feeling-tag.bad { background: rgba(239,68,68,.15); color: #ef4444 }
+    .feeling-tag.ok { background: rgba(251,191,36,.12); color: #fbbf24 }
+    .feeling-tag.positive { background: var(--success-soft); color: var(--success) }
+
+    /* ── Principles ── */
+    .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 32px }
+    .principle { padding: 24px; background: var(--bg-card); border: 1px solid var(--stroke-light); border-radius: var(--rl) }
+    .principle-icon { font-size: 1.4rem; margin-bottom: 12px }
+    .principle h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--accent) }
+    .principle p { font-size: 13px; color: var(--text-muted); line-height: 1.6 }
+
+    /* ── Architecture cards ── */
+    .ia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 32px }
+    .ia-card { background: var(--bg-card); border: 1px solid var(--stroke-light); border-radius: var(--r); padding: 20px }
+    .ia-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; color: var(--accent); display: flex; align-items: center; gap: 8px }
+    .ia-card ul { list-style: none; display: flex; flex-direction: column; gap: 6px }
+    .ia-card ul li { font-size: 12px; color: var(--text-muted); padding: 6px 10px; background: var(--stroke); border-radius: 6px }
+
+    /* ── Solution screens ── */
+    .solution-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 32px }
+    .screen-card {
+      background: var(--bg-card); border: 1px solid var(--stroke-light);
+      border-radius: var(--rl); padding: 16px; transition: border-color .2s
+    }
+    .screen-card:hover { border-color: var(--stroke) }
+    .screen-card.featured { border-color: var(--accent); position: relative }
+    .screen-card.featured::before {
+      content: "Pantalla clave";
+      position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+      padding: 4px 10px; background: var(--accent); color: #fff;
+      font-size: 10px; font-weight: 700; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: .03em
+    }
+    .screen-placeholder {
+      aspect-ratio: 4/3;
+      background: var(--bg-elevated); border: 1px dashed var(--stroke-light);
+      border-radius: var(--r); display: flex; align-items: center;
+      justify-content: center; font-size: 11px; color: var(--text-faint); margin-bottom: 12px
+    }
+    .screen-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px }
+    .screen-card.featured h4 { color: var(--accent) }
+    .screen-card p { font-size: 12px; color: var(--text-faint); line-height: 1.5 }
+
+    /* ── Results ── */
+    .results-grid { display: grid; grid-template-columns: 1fr; gap: 24px }
+    @media(min-width:768px) { .results-grid { grid-template-columns: 1fr 1fr } }
+    .result-metric { margin-bottom: 28px }
+    .result-metric .value { font-size: 42px; font-weight: 700; color: var(--accent); line-height: 1 }
+    .result-metric .label { font-size: 13px; color: var(--text-muted); margin-top: 4px }
+    .result-bar { height: 6px; background: var(--stroke); border-radius: 3px; margin-top: 8px; overflow: hidden }
+    .result-bar-fill { height: 100%; background: var(--accent); border-radius: 3px }
+
+    /* ── Retro ── */
+    .retro-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 32px }
+    @media(min-width:768px) { .retro-grid { grid-template-columns: 1fr 1fr } }
+    .retro-card { background: var(--bg-card); border: 1px solid var(--stroke-light); border-radius: var(--rl); padding: 28px }
+    .retro-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px }
+    .retro-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7 }
+    .retro-card p + p { margin-top: 12px }
+    .retro-card strong { color: var(--text) }
+
+    /* ── Footer ── */
+    .footer { padding: 48px 0; text-align: center; border-top: 1px solid var(--stroke) }
+    .footer-cta { font-family: var(--serif); font-size: clamp(28px, 4vw, 42px); font-weight: 600; margin-bottom: 24px }
+    .footer-cta .accent { font-style: italic; color: var(--accent) }
+    .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap }
+    .footer-btn { padding: 12px 24px; border-radius: var(--r); font-size: 14px; font-weight: 500; transition: all .2s }
+    .footer-btn.primary { background: var(--accent); color: #fff }
+    .footer-btn.primary:hover { filter: brightness(1.1) }
+    .footer-btn.secondary { background: var(--bg-card); border: 1px solid var(--stroke-light); color: var(--text) }
+    .footer-btn.secondary:hover { border-color: var(--text-faint) }
+
+    /* ── Two col ── */
+    .two-col { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start }
+    @media(min-width:768px) { .two-col { grid-template-columns: 1fr 1fr } }
+
+    /* ── Before / After coded mockups ── */
+    .ba-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border-radius: var(--rl); overflow: hidden;
+      border: 1px solid var(--stroke-light)
+    }
+    .ba-panel { padding: 0; position: relative; overflow: hidden }
+    .ba-panel.ba-before { background: #f5f5f5; border-right: 1px solid var(--stroke-light) }
+    .ba-panel.ba-after { background: #0a0a0f }
+    .ba-tag {
+      position: absolute; top: 10px; left: 10px; z-index: 2;
+      padding: 3px 8px; border-radius: 4px;
+      font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase
+    }
+    .ba-tag.before { background: #ef4444; color: #fff }
+    .ba-tag.after { background: var(--accent); color: #fff }
+
+    /* ─ Before mock (light, cluttered) ─ */
+    .mock-before { font-family: Arial, sans-serif; font-size: 8px }
+    .mock-govco { background: #4a90d9; color: #fff; padding: 3px 8px; font-size: 7px; display:flex; gap:6px; align-items:center }
+    .mock-icon-bar { background: #8b0000; padding: 4px 8px; display:flex; gap:8px; align-items:center; justify-content:space-between }
+    .mock-icon-bar span { color: rgba(255,255,255,.9); font-size: 8px }
+    .mock-logo-row { background: #fff; padding: 6px 8px; display:flex; align-items:center; justify-content:space-between; border-bottom: 1px solid #ddd }
+    .mock-logo-row .mock-uni-name { font-weight: 700; color: #8b0000; font-size: 9px; line-height:1.2 }
+    .mock-badges { display:flex; gap:3px }
+    .mock-badge { width:14px; height:14px; border-radius:50%; background:#ddd; border:1px solid #aaa }
+    .mock-nav-tabs { background: #8b0000; display:flex; gap:0 }
+    .mock-tab { padding: 5px 7px; font-size: 7px; color:rgba(255,255,255,.8); border-right:1px solid rgba(255,255,255,.15) }
+    .mock-tab.active { background: #a00; color:#fff; font-weight:700 }
+    .mock-programs { background: #fff; padding: 4px 8px; border: 1px solid #ddd; display:flex; flex-wrap:wrap; gap:3px }
+    .mock-prog { font-size: 6px; color: #555; padding: 1px 4px; background: #f0f0f0; border-radius: 2px }
+    .mock-secondary-bar { background: #f7f7f7; padding: 3px 8px; display:flex; gap:10px; border-bottom:1px solid #e0e0e0 }
+    .mock-secondary-bar span { font-size: 7px; color: #666 }
+    .mock-hero-before { background: linear-gradient(135deg, #8b0000 0%, #5a0000 100%); padding:16px 8px; position:relative; min-height:60px; display:flex; align-items:center; justify-content:center }
+    .mock-hero-before p { color: rgba(255,255,255,.9); font-size:7px; font-weight:700; text-align:center; line-height:1.4 }
+    .mock-hero-overlay { position:absolute; inset:0; display:flex; gap:4px; padding:4px }
+    .mock-hero-slide { flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:2px }
+
+    /* ─ After mock (dark, clean) ─ */
+    .mock-after { font-family: var(--sans) }
+    .mock-nav-clean { background: rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.08); padding: 8px 10px; display:flex; align-items:center; justify-content:space-between }
+    .mock-nav-brand { font-size: 8px; font-weight: 700; color: #fff; display:flex; align-items:center; gap:4px }
+    .mock-nav-brand span { width:7px; height:7px; border-radius:50%; background:#fff; display:block }
+    .mock-nav-items { display:flex; gap:8px }
+    .mock-nav-item { font-size: 7px; color: rgba(255,255,255,.5) }
+    .mock-search-area { padding: 12px 10px 8px }
+    .mock-search-box { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 6px; padding: 5px 8px; font-size: 8px; color: rgba(255,255,255,.4); display:flex; align-items:center; gap:5px }
+    .mock-search-box span { color: rgba(255,255,255,.25); font-size:9px }
+    .mock-shortcuts-grid { padding: 4px 10px 10px; display:grid; grid-template-columns: repeat(3,1fr); gap:4px }
+    .mock-shortcut { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.07); border-radius: 5px; padding: 6px 4px; text-align:center }
+    .mock-shortcut-icon { font-size: 11px; display:block; margin-bottom:2px }
+    .mock-shortcut-label { font-size: 6px; color: rgba(255,255,255,.5) }
+    .mock-calendar-strip { margin: 0 10px 10px; background: rgba(59,130,246,.1); border: 1px solid rgba(59,130,246,.2); border-radius: 5px; padding: 6px 8px }
+    .mock-calendar-label { font-size: 6px; color: rgba(59,130,246,.8); text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px }
+    .mock-calendar-items { display:flex; flex-direction:column; gap:2px }
+    .mock-cal-item { font-size: 6.5px; color: rgba(255,255,255,.5); display:flex; gap:5px }
+    .mock-cal-date { color: #3b82f6; font-weight:600; min-width:28px }
+
+    /* ─ Nav comparison ─ */
+    .nav-comparison { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px }
+    .nav-comp-card { background: var(--bg-card); border: 1px solid var(--stroke-light); border-radius: var(--r); overflow:hidden }
+    .nav-comp-header { padding:10px 14px; font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; border-bottom:1px solid var(--stroke) }
+    .nav-comp-header.red { color:#ef4444; background:rgba(239,68,68,.06) }
+    .nav-comp-header.blue { color:var(--accent); background:var(--accent-glow) }
+    .nav-comp-body { padding:12px 14px; display:flex; flex-direction:column; gap:4px }
+    .nav-layer { padding:5px 10px; font-size:11px; border-radius:4px; color:var(--text-muted) }
+    .nav-layer.bad { background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.15) }
+    .nav-layer.good { background:rgba(59,130,246,.08); border:1px solid rgba(59,130,246,.15) }
+
+    /* ── Responsive ── */
+    @media(max-width:640px) {
+      .hero { padding: 48px 0 40px }
+      .section { padding: 48px 0 }
+      .tldr { flex-direction: column }
+      .nav-links { display: none }
+      .persona-card { grid-template-columns: 1fr }
+      .ba-split { grid-template-columns: 1fr }
+      .nav-comparison { grid-template-columns: 1fr }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="accent-bar" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="./index.html" class="brand">
+        <span class="brand-mark"></span>
+        <span class="brand-text">Jose Alvarez</span>
+      </a>
+      <div class="nav-links">
+        <a href="./index.html">Work</a>
+        <a href="./resume.html">Resume</a>
+        <a href="./about.html">About</a>
+        <a href="./Jose_Alvarez_CV.pdf" download class="btn-download">Download CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-label">
+          <span>Case Study</span><span>·</span>
+          <span>Homepage + Portal · UX Redesign · 2026</span>
+        </div>
+        <h1 class="hero-title">
+          Del caos informativo a un portal que<br>
+          los estudiantes <span class="accent">realmente entienden</span>
+        </h1>
+        <p class="hero-subtitle">
+          Rediseño del homepage y portal de la Universidad de Pamplona. Dos usuarios primarios, un sistema claro. Menos ruido, más claridad.
+        </p>
+        <div class="tldr">
+          <div class="tldr-item"><span class="tldr-icon">🎓</span><span>Portal Universitario Público</span></div>
+          <div class="tldr-item"><span class="tldr-icon">🗺️</span><span>IA · UX Research · UI Design</span></div>
+          <div class="tldr-item"><span class="tldr-icon">👥</span><span>Estudiantes activos como usuarios primarios</span></div>
+          <div class="tldr-item highlight"><span class="tldr-icon">📉</span><span>~70% menos elementos por pantalla</span></div>
+        </div>
+        <!-- Before / After coded mockup -->
+        <div class="ba-split">
+          <!-- BEFORE -->
+          <div class="ba-panel ba-before">
+            <span class="ba-tag before">Antes</span>
+            <div class="mock-before">
+              <div class="mock-govco">🛡 GOV.CO &nbsp;|&nbsp; ✉ &nbsp; 🔍 &nbsp; 🎓 &nbsp; 📄 &nbsp; 🔑 &nbsp; 💰 &nbsp; D &nbsp; ⊕</div>
+              <div class="mock-icon-bar">
+                <span style="font-weight:700;color:#fff;font-size:7px">UNIVERSIDAD DE PAMPLONA</span>
+                <div class="mock-badges">
+                  <div class="mock-badge"></div><div class="mock-badge"></div>
+                  <div class="mock-badge"></div><div class="mock-badge"></div>
+                </div>
+              </div>
+              <div class="mock-nav-tabs">
+                <div class="mock-tab active">Aspirantes</div>
+                <div class="mock-tab">Universidad</div>
+                <div class="mock-tab">Rectoría</div>
+                <div class="mock-tab">Organismos</div>
+                <div class="mock-tab">Acreditación</div>
+                <div class="mock-tab">Dependencias</div>
+                <div class="mock-tab">SIG</div>
+                <div class="mock-tab">Concursos</div>
+              </div>
+              <div class="mock-programs">
+                <span class="mock-prog">Adm. Empresas</span><span class="mock-prog">Arquitectura</span>
+                <span class="mock-prog">Bacteriología</span><span class="mock-prog">Biología</span>
+                <span class="mock-prog">Com. Social</span><span class="mock-prog">Derecho</span>
+                <span class="mock-prog">Economía</span><span class="mock-prog">Enfermería</span>
+                <span class="mock-prog">Filosofía</span><span class="mock-prog">Fisioterapia</span>
+                <span class="mock-prog">Ing. Alimentos</span><span class="mock-prog">Ing. Sistemas</span>
+                <span class="mock-prog">Ing. Eléctrica</span><span class="mock-prog">Ing. Electrónica</span>
+                <span class="mock-prog">+ 10 más…</span>
+              </div>
+              <div class="mock-secondary-bar">
+                <span>Atención al ciudadano</span><span>Transparencia</span>
+                <span>Participa</span><span>Línea atención ☎</span>
+              </div>
+              <div class="mock-hero-before">
+                <div class="mock-hero-overlay">
+                  <div class="mock-hero-slide"></div>
+                  <div class="mock-hero-slide"></div>
+                  <div class="mock-hero-slide"></div>
+                </div>
+                <p>ELECCIÓN DEL REPRESENTANTE DE LOS DOCENTES AL<br>CONSEJO SUPERIOR 2026–2028</p>
+              </div>
+            </div>
+          </div>
+          <!-- AFTER -->
+          <div class="ba-panel ba-after">
+            <span class="ba-tag after">Después</span>
+            <div class="mock-after">
+              <div class="mock-nav-clean">
+                <div class="mock-nav-brand"><span></span>Unipamplona</div>
+                <div class="mock-nav-items">
+                  <span class="mock-nav-item">Mi academia</span>
+                  <span class="mock-nav-item">Trámites</span>
+                  <span class="mock-nav-item">Servicios</span>
+                  <span class="mock-nav-item">Contacto</span>
+                </div>
+              </div>
+              <div class="mock-search-area">
+                <div class="mock-search-box">
+                  <span>🔍</span>
+                  Buscar en el portal…
+                </div>
+              </div>
+              <div class="mock-shortcuts-grid">
+                <div class="mock-shortcut"><span class="mock-shortcut-icon">📊</span><span class="mock-shortcut-label">Notas</span></div>
+                <div class="mock-shortcut"><span class="mock-shortcut-icon">📅</span><span class="mock-shortcut-label">Horario</span></div>
+                <div class="mock-shortcut"><span class="mock-shortcut-icon">📋</span><span class="mock-shortcut-label">Trámites</span></div>
+                <div class="mock-shortcut"><span class="mock-shortcut-icon">📚</span><span class="mock-shortcut-label">Biblioteca</span></div>
+                <div class="mock-shortcut"><span class="mock-shortcut-icon">📆</span><span class="mock-shortcut-label">Calendario</span></div>
+                <div class="mock-shortcut"><span class="mock-shortcut-icon">💬</span><span class="mock-shortcut-label">Soporte</span></div>
+              </div>
+              <div class="mock-calendar-strip">
+                <div class="mock-calendar-label">📌 Próximas fechas</div>
+                <div class="mock-calendar-items">
+                  <div class="mock-cal-item"><span class="mock-cal-date">Mar 24</span> Cierre inscripción de materias</div>
+                  <div class="mock-cal-item"><span class="mock-cal-date">Abr 02</span> Inicio semana de receso</div>
+                  <div class="mock-cal-item"><span class="mock-cal-date">Abr 14</span> Publicación de notas finales</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 01 — PROBLEMA ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">01 — Problema</span>
+        <h2 class="section-title">El portal existe. Pero nadie sabe bien cómo usarlo.</h2>
+        <p class="section-text">
+          La Universidad de Pamplona tiene un portal estudiantil en línea — pero el acceso a la información
+          está fragmentado en múltiples subsitios, menús profundos y páginas sin jerarquía visual clara.
+          El estudiante promedio necesita realizar tareas cotidianas: ver notas, consultar horarios,
+          hacer trámites, revisar el calendario académico. Ninguna de estas tareas es obvia desde la página principal.
+        </p>
+        <p class="section-text">
+          El resultado es un ciclo conocido: <strong>el estudiante entra, no encuentra lo que busca,
+          regresa, entra de nuevo, pregunta a un compañero o va directamente a la secretaría.</strong>
+          El portal existe, pero no reduce fricción — la genera.
+        </p>
+        <div class="pws-grid">
+          <div class="pws-card">
+            <h3><span style="color:#ef4444">●</span> El problema</h3>
+            <p>Un portal con años de capas de contenido acumulado sin una estrategia de arquitectura de información clara.
+              Cada dependencia agrega sus propios enlaces, banners y secciones sin sistema.</p>
+          </div>
+          <div class="pws-card featured">
+            <h3><span style="color:var(--accent)">●</span> El costo real</h3>
+            <p>No es solo "feo". Es tiempo perdido. Cada estudiante que no puede encontrar su horario,
+              sus notas o el formulario de un trámite está tomando ese tiempo de estudiar, trabajar o descansar.</p>
+            <p><strong>Un portal que no reduce fricción no es un portal de servicio — es un portal de imagen.</strong></p>
+          </div>
+        </div>
+
+        <!-- Homepage-level problems -->
+        <div style="margin-top:32px">
+          <p class="section-label tradeoff" style="margin-bottom:20px">Hallazgos clave — Homepage</p>
+          <div style="display:grid;grid-template-columns:1fr;gap:12px">
+            <div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+              <div style="font-size:1.2rem;flex-shrink:0;margin-top:2px">🏛</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">El hero está secuestrado por comunicados institucionales</div>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.6">El espacio más valioso de la página rota entre campañas internas. No hay orientación al usuario nuevo — solo noticias para quien ya conoce la institución.</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+              <div style="font-size:1.2rem;flex-shrink:0;margin-top:2px">🗂️</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">Doble dropdown desde el primer segundo</div>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.6">La navegación superior despliega 24 programas académicos antes de que el usuario sepa dónde está. Dos niveles de dropdown apilados en el primer fold.</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+              <div style="font-size:1.2rem;flex-shrink:0;margin-top:2px">🔄</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">Duplicación de contenido noticioso</div>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.6">Debajo del hero rotativo hay tres columnas con "Más noticias", "Está pasando" y "Enlaces" — información sin valor para las tareas reales del usuario que ya vio noticias en el hero.</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
+              <div style="font-size:1.2rem;flex-shrink:0;margin-top:2px">🚪</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">No existe una entrada clara para Estudiantes</div>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.6">El tab activo por defecto es "Aspirantes". El estudiante activo tiene que buscarse su propio camino — no hay punto de entrada dedicado visible desde el homepage.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote">
+          <p>"Profe, ¿dónde están las notas? Entré a la página y no encuentro nada."</p>
+          <cite>— Patrón de conversación repetido en cada inicio de semestre</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 02 — AUDITORÍA ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label tradeoff">02 — Auditoría del estado actual</span>
+        <h2 class="section-title">Qué tiene el portal hoy — y qué debería tener</h2>
+        <p class="section-text">
+          Análisis heurístico del portal actual bajo los principios de Nielsen y las guías de accesibilidad WCAG 2.1.
+          Se evaluó la página principal, la sección de estudiantes y las 5 tareas más frecuentes.
+        </p>
+
+        <div class="research-grid" style="margin-top:32px">
+          <div class="research-card">
+            <div class="r-value">5</div>
+            <div class="r-label">Barras de navegación apiladas verticalmente antes del contenido</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">8</div>
+            <div class="r-label">Tabs en el menú principal — ninguna dice "Estudiantes"</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">24</div>
+            <div class="r-label">Programas listados en dropdown abierto por defecto en el fold</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">0</div>
+            <div class="r-label">Accesos directos a tareas frecuentes (notas, horario, trámites)</div>
+          </div>
+        </div>
+
+        <!-- Comparación de capas de navegación -->
+        <div class="nav-comparison">
+          <div class="nav-comp-card">
+            <div class="nav-comp-header red">⚠ Sitio actual — 5 capas de nav</div>
+            <div class="nav-comp-body">
+              <div class="nav-layer bad">1 — Barra GOV.CO (obligatoria, institucional)</div>
+              <div class="nav-layer bad">2 — Barra de íconos de utilidades sin etiquetas</div>
+              <div class="nav-layer bad">3 — Header con logo + 4 badges de acreditación</div>
+              <div class="nav-layer bad">4 — Navegación principal (8 tabs)</div>
+              <div class="nav-layer bad">5 — Barra secundaria (ciudadano, transparencia…)</div>
+            </div>
+          </div>
+          <div class="nav-comp-card">
+            <div class="nav-comp-header blue">✓ Rediseño — 1 capa de nav</div>
+            <div class="nav-comp-body">
+              <div class="nav-layer good">1 — Nav única: logo + 4 categorías + buscador</div>
+              <div style="padding:10px 0;font-size:12px;color:var(--text-faint);text-align:center">GOV.CO se mantiene como requerimiento legal pero se integra limpiamente al header</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="audit-grid">
+          <div class="audit-card">
+            <div class="audit-header before">⚠ Estado actual — problemas encontrados</div>
+            <div class="audit-body">
+              <div class="audit-item">
+                <div class="audit-dot bad"></div>
+                <p>Menú con 11 ítems al mismo nivel de jerarquía — sin agrupación lógica</p>
+              </div>
+              <div class="audit-item">
+                <div class="audit-dot bad"></div>
+                <p>Hero con carrusel de imágenes institucionales que ocupa el 60% del fold sin valor funcional</p>
+              </div>
+              <div class="audit-item">
+                <div class="audit-dot bad"></div>
+                <p>Sección "Estudiantes" no está visible en la navegación principal — está enterrada</p>
+              </div>
+              <div class="audit-item">
+                <div class="audit-dot bad"></div>
+                <p>Múltiples calls-to-action compitiendo en la misma pantalla sin prioridad visual</p>
+              </div>
+              <div class="audit-item">
+                <div class="audit-dot bad"></div>
+                <p>Tipografía pequeña, contraste insuficiente, sin sistema de espaciado consistente</p>
+              </div>
+            </div>
+          </div>
+          <div class="audit-card">
+            <div class="audit-header after">✓ Rediseño — qué se corrige</div>
+            <div class="audit-body">
+              <div class="audit-item">
+                <div class="audit-dot good"></div>
+                <p>Navegación reducida a 5 categorías principales con submenu claro y predecible</p>
+              </div>
+              <div class="audit-item">
+                <div class="audit-dot good"></div>
+                <p>Hero reemplazado por buscador + accesos directos a las 6 tareas más frecuentes</p>
+              </div>
+              <div class="audit-item">
+                <div class="audit-dot good"></div>
+                <p>"Estudiantes" como entrada principal de navegación — visible desde el primer momento</p>
+              </div>
+              <div class="audit-item">
+                <div class="audit-dot good"></div>
+                <p>Una sola acción primaria por sección — todo lo demás es secundario</p>
+              </div>
+              <div class="audit-item">
+                <div class="audit-dot good"></div>
+                <p>Sistema tipográfico con escala definida, contraste AA mínimo garantizado</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual audit — Homepage findings -->
+        <div style="margin-top:48px">
+          <p class="section-label tradeoff" style="margin-bottom:8px">Hallazgos visuales — Homepage</p>
+          <p class="section-text" style="margin-bottom:24px">Problemas encontrados en la auditoría del homepage actual — la capa pública de entrada antes del portal estudiantil.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+
+            <!-- Card 1 -->
+            <div style="background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);padding:24px;display:flex;flex-direction:column;gap:12px">
+              <div style="font-size:1.5rem">📰</div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+                <div style="font-size:14px;font-weight:600;color:var(--text);line-height:1.3">Hero = noticia institucional</div>
+                <span style="flex-shrink:0;font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;background:var(--accent-soft);color:var(--accent);letter-spacing:.04em">Alta</span>
+              </div>
+              <p style="font-size:13px;color:var(--text-muted);line-height:1.6">El primer fold rota entre campañas. No hay CTA principal ni orientación al usuario nuevo.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div style="background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);padding:24px;display:flex;flex-direction:column;gap:12px">
+              <div style="font-size:1.5rem">🗂️</div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+                <div style="font-size:14px;font-weight:600;color:var(--text);line-height:1.3">Doble dropdown en la nav</div>
+                <span style="flex-shrink:0;font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;background:var(--accent-soft);color:var(--accent);letter-spacing:.04em">Alta</span>
+              </div>
+              <p style="font-size:13px;color:var(--text-muted);line-height:1.6">Dos menús desplegables apilados al entrar: categorías institucionales + 24 programas académicos.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div style="background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);padding:24px;display:flex;flex-direction:column;gap:12px">
+              <div style="font-size:1.5rem">🔄</div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+                <div style="font-size:14px;font-weight:600;color:var(--text);line-height:1.3">Contenido noticioso duplicado</div>
+                <span style="flex-shrink:0;font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;background:rgba(251,191,36,0.15);color:#fbbf24;letter-spacing:.04em">Media</span>
+              </div>
+              <p style="font-size:13px;color:var(--text-muted);line-height:1.6">El hero ya es una noticia. Las tres columnas debajo repiten "Más noticias", "Está pasando", "Enlaces" — sin valor para tareas reales.</p>
+            </div>
+
+            <!-- Card 4 -->
+            <div style="background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);padding:24px;display:flex;flex-direction:column;gap:12px">
+              <div style="font-size:1.5rem">🚪</div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+                <div style="font-size:14px;font-weight:600;color:var(--text);line-height:1.3">Estudiante sin entrada propia</div>
+                <span style="flex-shrink:0;font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;background:var(--accent-soft);color:var(--accent);letter-spacing:.04em">Alta</span>
+              </div>
+              <p style="font-size:13px;color:var(--text-muted);line-height:1.6">El tab activo por defecto es "Aspirantes". El estudiante activo no tiene punto de entrada visible desde el homepage.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 03 — USUARIO ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label persona">03 — Usuario principal</span>
+        <h2 class="section-title">No es el rector. Es el estudiante de quinto semestre.</h2>
+        <p class="section-text">
+          El portal de una universidad puede querer servir a múltiples audiencias — aspirantes, egresados,
+          docentes, comunidad. Pero si falla con el estudiante activo, falla en su misión principal.
+          Este rediseño se enfoca en <strong>el usuario recurrente con tareas específicas</strong>.
+        </p>
+
+        <div class="persona-card">
+          <div class="persona-avatar">S</div>
+          <div>
+            <div class="persona-name">Sebastián Rojas</div>
+            <div class="persona-role">Estudiante — 5to semestre · Ingeniería de Sistemas · 21 años</div>
+            <div class="persona-tags">
+              <span class="persona-tag">Usuario recurrente</span>
+              <span class="persona-tag">Mobile-first</span>
+              <span class="persona-tag">Poco tiempo</span>
+              <span class="persona-tag">Consulta notas semanalmente</span>
+              <span class="persona-tag">Hace trámites cada semestre</span>
+            </div>
+            <div class="persona-quote">
+              "Entro al portal, doy vueltas, no encuentro lo que necesito, le pregunto a alguien y al final
+              lo encuentro por accidente. No me da confianza."
+            </div>
+          </div>
+        </div>
+
+        <!-- Journey map -->
+        <div style="margin-top:40px">
+          <p class="section-label insight">Journey — consultar notas del semestre</p>
+          <div class="journey">
+            <div class="journey-stage">
+              <div class="stage-num">Paso 01</div>
+              <h4>Entra al portal</h4>
+              <p>Busca "unipamplona estudiantes" en Google. El primer resultado no es el sitio correcto.</p>
+              <div class="stage-feeling">
+                <span class="feeling-tag bad">Confundido</span>
+                <span class="feeling-tag bad">Desconfiado</span>
+              </div>
+            </div>
+            <div class="journey-stage">
+              <div class="stage-num">Paso 02</div>
+              <h4>Busca en el menú</h4>
+              <p>Ve 11 opciones en el menú. Ninguna dice "Notas" o "Calificaciones". Prueba varias.</p>
+              <div class="stage-feeling">
+                <span class="feeling-tag bad">Frustrado</span>
+                <span class="feeling-tag ok">Paciente</span>
+              </div>
+            </div>
+            <div class="journey-stage">
+              <div class="stage-num">Paso 03</div>
+              <h4>Encuentra el acceso</h4>
+              <p>Después de 4+ clics llega al sistema académico. Ahora tiene que hacer login de nuevo.</p>
+              <div class="stage-feeling">
+                <span class="feeling-tag bad">Resignado</span>
+              </div>
+            </div>
+            <div class="journey-stage">
+              <div class="stage-num">Paso 04</div>
+              <h4>Completa la tarea</h4>
+              <p>Finalmente consulta sus notas. La tarea tardó ~5 minutos. Debería tardar 30 segundos.</p>
+              <div class="stage-feeling">
+                <span class="feeling-tag ok">Aliviado</span>
+                <span class="feeling-tag bad">No volvería sin ayuda</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 04 — PRINCIPIOS ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label solution">04 — Principios de diseño</span>
+        <h2 class="section-title">Tres principios que gobiernan cada decisión</h2>
+        <p class="section-text">
+          En lugar de rediseñar "por instinto visual", cada decisión del rediseño responde a uno
+          de estos tres principios. Si una decisión no puede justificarse con alguno de ellos, no entra.
+        </p>
+        <div class="principles">
+          <div class="principle">
+            <div class="principle-icon">🎯</div>
+            <h4>Tarea primero</h4>
+            <p>El estudiante entra para hacer algo específico. El portal debe llevarle a esa tarea
+              en el menor número de pasos posible. La comunicación institucional es secundaria.</p>
+          </div>
+          <div class="principle">
+            <div class="principle-icon">🧹</div>
+            <h4>Reducción radical</h4>
+            <p>Cada elemento que no ayuda al usuario a completar una tarea ocupa espacio cognitivo
+              innecesario. Si está en duda, no está. Menos siempre gana.</p>
+          </div>
+          <div class="principle">
+            <div class="principle-icon">📐</div>
+            <h4>Jerarquía legible</h4>
+            <p>El usuario no debería tener que "leer" el portal para entenderlo. La jerarquía visual
+              debe hacer el trabajo — tamaño, contraste y espacio antes que etiquetas y explicaciones.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 05 — ARQUITECTURA ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label insight">05 — Arquitectura de información</span>
+        <h2 class="section-title">Organizar antes de diseñar</h2>
+        <p class="section-text">
+          Antes de tocar Figma, el trabajo fue de clasificación. ¿Qué contenido existe? ¿Qué buscan
+          realmente los estudiantes? ¿Qué puede vivir en un segundo nivel? El diagnóstico empezó por
+          entender la estructura actual — organizada por jerarquía institucional, no por usuario.
+        </p>
+
+        <!-- Sitemap actual -->
+        <div style="margin-top:36px">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#ef4444;margin-bottom:16px">⚠ Sitemap actual — organizado por estructura organizacional</p>
+          <div style="background:var(--bg-card);border:1px solid rgba(239,68,68,.2);border-radius:var(--rl);padding:24px;font-family:monospace;font-size:13px;line-height:2;color:var(--text-muted)">
+            <div><span style="color:var(--text-faint)">├──</span> <span style="color:var(--text)">Aspirantes</span> <span style="color:var(--text-faint);font-size:11px">(6 items)</span></div>
+            <div><span style="color:var(--text-faint)">├──</span> <span style="color:var(--text)">Universidad</span> <span style="color:var(--text-faint);font-size:11px">(8 items)</span></div>
+            <div><span style="color:var(--text-faint)">├──</span> <span style="color:var(--text)">Rectoría</span> <span style="color:var(--text-faint);font-size:11px">(2 items)</span></div>
+            <div><span style="color:var(--text-faint)">├──</span> <span style="color:var(--text)">Organismos</span> <span style="color:var(--text-faint);font-size:11px">(2 items)</span></div>
+            <div><span style="color:var(--text-faint)">├──</span> <span style="color:var(--text)">Dependencias</span></div>
+            <div style="padding-left:24px"><span style="color:var(--text-faint)">├──</span> <span>Facultades</span> <span style="color:var(--text-faint);font-size:11px">(7 items)</span></div>
+            <div style="padding-left:24px"><span style="color:var(--text-faint)">├──</span> <span>Vicerrectorías</span> <span style="color:var(--text-faint);font-size:11px">(3 items)</span></div>
+            <div style="padding-left:24px"><span style="color:var(--text-faint)">└──</span> <span>Oficinas Administrativas</span> <span style="color:var(--text-faint);font-size:11px">(16 items)</span></div>
+            <div><span style="color:var(--text-faint)">└──</span> <span style="color:#ef4444">Otros enlaces</span> <span style="color:var(--text-faint);font-size:11px">(16 items) ← cajón de sastre</span></div>
+          </div>
+          <div style="margin-top:12px;padding:14px 18px;background:rgba(251,191,36,.08);border-left:3px solid #fbbf24;border-radius:0 var(--r) var(--r) 0">
+            <p style="font-size:14px;font-style:italic;color:var(--text);line-height:1.6">Nadie busca "Oficina de Gestión de Pagaduría y Tesorería". Buscan "pagar matrícula".</p>
+          </div>
+        </div>
+
+        <!-- Sitemap rediseñado -->
+        <div style="margin-top:32px">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--success);margin-bottom:16px">✓ Rediseñado — organizado por usuario</p>
+          <div style="background:var(--bg-card);border:1px solid rgba(16,185,129,.2);border-radius:var(--rl);padding:24px;font-family:monospace;font-size:13px;line-height:2;color:var(--text-muted)">
+            <div><span style="color:var(--text-faint)">├──</span> <span style="color:var(--accent)">Aspirantes</span> <span style="color:var(--text-faint);font-size:11px">→ Programas, Inscripción, Costos y becas, Campus</span></div>
+            <div><span style="color:var(--text-faint)">├──</span> <span style="color:var(--accent)">Estudiantes</span> <span style="color:var(--text-faint);font-size:11px">→ Mi academia, Trámites, Pagos, Bienestar</span></div>
+            <div><span style="color:var(--text-faint)">├──</span> <span style="color:var(--accent)">Universidad</span> <span style="color:var(--text-faint);font-size:11px">→ Quiénes somos, Facultades, Normatividad</span></div>
+            <div><span style="color:var(--text-faint)">└──</span> <span style="color:var(--accent)">Egresados</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px">
+          <p style="font-size:13px;font-weight:500;color:var(--text-muted);margin-bottom:16px">Desglose de la arquitectura rediseñada:</p>
+        </div>
+
+        <div class="ia-grid">
+          <div class="ia-card">
+            <h4>🏠 Inicio</h4>
+            <ul>
+              <li>Buscador global</li>
+              <li>Accesos rápidos</li>
+              <li>Calendario académico</li>
+              <li>Noticias destacadas</li>
+            </ul>
+          </div>
+          <div class="ia-card">
+            <h4>🎓 Mi academia</h4>
+            <ul>
+              <li>Consultar notas</li>
+              <li>Horario de clases</li>
+              <li>Inscripción de materias</li>
+              <li>Historial académico</li>
+              <li>Certificados</li>
+            </ul>
+          </div>
+          <div class="ia-card">
+            <h4>📋 Trámites</h4>
+            <ul>
+              <li>Paz y salvo</li>
+              <li>Solicitud de documentos</li>
+              <li>Transferencias</li>
+              <li>Grados</li>
+              <li>Estado de solicitudes</li>
+            </ul>
+          </div>
+          <div class="ia-card">
+            <h4>📚 Servicios</h4>
+            <ul>
+              <li>Biblioteca</li>
+              <li>Bienestar universitario</li>
+              <li>Laboratorios</li>
+              <li>Deportes</li>
+              <li>Becas y financiación</li>
+            </ul>
+          </div>
+          <div class="ia-card">
+            <h4>📞 Contacto</h4>
+            <ul>
+              <li>Directorio de facultades</li>
+              <li>Mesa de ayuda</li>
+              <li>PQRS</li>
+              <li>Mapa del campus</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 06 — SOLUCIÓN ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label solution">06 — Solución</span>
+        <h2 class="section-title">Menos ruido, más claridad, misma información</h2>
+        <p class="section-text">
+          El rediseño no elimina contenido — lo organiza. La información que el portal tenía sigue estando,
+          pero ahora responde a una jerarquía clara: lo que el 80% de los estudiantes busca el 80% del tiempo
+          está a un clic de distancia.
+        </p>
+
+        <!-- Homepage bifurcation mockup -->
+        <div style="margin-top:40px;margin-bottom:40px">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:16px">Pantalla cero — Homepage · La bifurcación</p>
+          <p class="section-text" style="margin-bottom:24px">El homepage ya no intenta ser todo para todos. Su única responsabilidad: orientar al usuario hacia su camino en menos de dos segundos.</p>
+          <div style="background:#0a0a0f;border:1px solid rgba(59,130,246,.25);border-radius:var(--rl);overflow:hidden;font-family:var(--sans)">
+
+            <!-- Mock nav -->
+            <div style="background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.07);padding:14px 24px;display:flex;align-items:center;justify-content:space-between">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div style="width:8px;height:8px;border-radius:50%;background:#fff"></div>
+                <span style="font-size:13px;font-weight:700;color:#fff">Universidad de Pamplona</span>
+              </div>
+              <div style="display:flex;gap:24px">
+                <span style="font-size:12px;color:rgba(255,255,255,.55)">Aspirantes</span>
+                <span style="font-size:12px;color:rgba(255,255,255,.55)">Estudiantes</span>
+                <span style="font-size:12px;color:rgba(255,255,255,.55)">Universidad</span>
+                <span style="font-size:12px;color:rgba(255,255,255,.55)">Egresados</span>
+              </div>
+            </div>
+
+            <!-- Mock hero -->
+            <div style="padding:48px 24px 36px;text-align:center">
+              <div style="font-size:clamp(22px,3vw,32px);font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.01em">¿Qué buscas hoy?</div>
+              <div style="font-size:13px;color:rgba(255,255,255,.45);margin-bottom:36px">Universidad de Pamplona — portal de servicios</div>
+
+              <!-- Two CTA cards -->
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px;margin:0 auto 32px">
+                <div style="background:rgba(59,130,246,.12);border:1.5px solid rgba(59,130,246,.35);border-radius:var(--rl);padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s">
+                  <div style="font-size:2rem;margin-bottom:10px">🎓</div>
+                  <div style="font-size:15px;font-weight:600;color:#fff;margin-bottom:6px">Quiero estudiar aquí</div>
+                  <div style="font-size:12px;color:rgba(255,255,255,.45)">Programas, inscripciones, costos</div>
+                </div>
+                <div style="background:rgba(16,185,129,.1);border:1.5px solid rgba(16,185,129,.3);border-radius:var(--rl);padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s">
+                  <div style="font-size:2rem;margin-bottom:10px">📚</div>
+                  <div style="font-size:15px;font-weight:600;color:#fff;margin-bottom:6px">Soy estudiante</div>
+                  <div style="font-size:12px;color:rgba(255,255,255,.45)">Notas, trámites, horario</div>
+                </div>
+              </div>
+
+              <!-- Search bar -->
+              <div style="max-width:480px;margin:0 auto">
+                <div style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">O busca directamente…</div>
+                <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px 16px;font-size:13px;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:8px;text-align:left">
+                  <span style="color:rgba(255,255,255,.25)">🔍</span>
+                  Buscar en el portal…
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="solution-grid">
+          <!-- Pantalla 1: Home -->
+          <div class="screen-card featured">
+            <div style="background:var(--bg-elevated);border:1px solid rgba(59,130,246,.2);border-radius:var(--r);overflow:hidden;margin-bottom:12px;aspect-ratio:4/3;display:flex;flex-direction:column">
+              <div style="background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07);padding:6px 10px;display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:7px;font-weight:700;color:var(--text)">🏛 Unipamplona</span>
+                <div style="display:flex;gap:6px">
+                  <span style="font-size:6px;color:var(--text-muted)">Mi academia</span>
+                  <span style="font-size:6px;color:var(--text-muted)">Trámites</span>
+                  <span style="font-size:6px;color:var(--text-muted)">Servicios</span>
+                </div>
+              </div>
+              <div style="padding:10px;flex:1;display:flex;flex-direction:column;gap:6px">
+                <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:5px 8px;font-size:7px;color:rgba(255,255,255,.3);display:flex;gap:4px;align-items:center">🔍 Buscar en el portal…</div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;flex:1">
+                  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px"><span style="font-size:12px">📊</span><span style="font-size:5.5px;color:rgba(255,255,255,.4)">Notas</span></div>
+                  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px"><span style="font-size:12px">📅</span><span style="font-size:5.5px;color:rgba(255,255,255,.4)">Horario</span></div>
+                  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px"><span style="font-size:12px">📋</span><span style="font-size:5.5px;color:rgba(255,255,255,.4)">Trámites</span></div>
+                  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px"><span style="font-size:12px">📚</span><span style="font-size:5.5px;color:rgba(255,255,255,.4)">Biblioteca</span></div>
+                  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px"><span style="font-size:12px">📆</span><span style="font-size:5.5px;color:rgba(255,255,255,.4)">Calendario</span></div>
+                  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px"><span style="font-size:12px">💬</span><span style="font-size:5.5px;color:rgba(255,255,255,.4)">Soporte</span></div>
+                </div>
+              </div>
+            </div>
+            <h4>Inicio — buscador + accesos directos</h4>
+            <p>El carrusel desaparece. El fold es buscador + 6 accesos a las tareas más frecuentes.</p>
+          </div>
+
+          <!-- Pantalla 2: Notas -->
+          <div class="screen-card">
+            <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:var(--r);overflow:hidden;margin-bottom:12px;aspect-ratio:4/3;display:flex;flex-direction:column">
+              <div style="background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07);padding:6px 10px;font-size:7px;color:var(--text-muted)">← Mi academia</div>
+              <div style="padding:10px;flex:1;display:flex;flex-direction:column;gap:5px">
+                <div style="font-size:9px;font-weight:700;color:var(--text)">Notas — 2026-1</div>
+                <div style="display:flex;flex-direction:column;gap:3px">
+                  <div style="background:rgba(255,255,255,.04);border-radius:4px;padding:5px 8px;display:flex;justify-content:space-between;align-items:center">
+                    <span style="font-size:7px;color:var(--text-muted)">Cálculo II</span>
+                    <span style="font-size:8px;font-weight:700;color:#10b981">3.8</span>
+                  </div>
+                  <div style="background:rgba(255,255,255,.04);border-radius:4px;padding:5px 8px;display:flex;justify-content:space-between;align-items:center">
+                    <span style="font-size:7px;color:var(--text-muted)">Bases de Datos</span>
+                    <span style="font-size:8px;font-weight:700;color:#10b981">4.2</span>
+                  </div>
+                  <div style="background:rgba(255,255,255,.04);border-radius:4px;padding:5px 8px;display:flex;justify-content:space-between;align-items:center">
+                    <span style="font-size:7px;color:var(--text-muted)">Redes I</span>
+                    <span style="font-size:8px;font-weight:700;color:#fbbf24">3.1</span>
+                  </div>
+                  <div style="background:rgba(255,255,255,.04);border-radius:4px;padding:5px 8px;display:flex;justify-content:space-between;align-items:center">
+                    <span style="font-size:7px;color:var(--text-muted)">Inglés Técnico</span>
+                    <span style="font-size:8px;font-weight:700;color:#10b981">4.5</span>
+                  </div>
+                </div>
+                <div style="margin-top:auto;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.15);border-radius:4px;padding:4px 8px;font-size:6.5px;color:rgba(59,130,246,.8)">Promedio semestral: 3.9 / 5.0</div>
+              </div>
+            </div>
+            <h4>Mi academia — notas en 2 clics</h4>
+            <p>Notas, horario e historial accesibles desde el menú principal sin sub-submenús.</p>
+          </div>
+
+          <!-- Pantalla 3: Trámites -->
+          <div class="screen-card">
+            <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:var(--r);overflow:hidden;margin-bottom:12px;aspect-ratio:4/3;display:flex;flex-direction:column">
+              <div style="background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07);padding:6px 10px;font-size:7px;color:var(--text-muted)">← Trámites</div>
+              <div style="padding:10px;flex:1;display:flex;flex-direction:column;gap:5px">
+                <div style="font-size:8px;font-weight:700;color:var(--text);margin-bottom:2px">Mis solicitudes</div>
+                <div style="background:rgba(255,255,255,.04);border-radius:4px;padding:6px 8px">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
+                    <span style="font-size:7px;color:var(--text)">Certificado de notas</span>
+                    <span style="font-size:6px;padding:2px 6px;background:rgba(16,185,129,.15);color:#10b981;border-radius:100px">Listo</span>
+                  </div>
+                  <span style="font-size:6px;color:var(--text-faint)">Solicitado 12 mar · Listo para descargar</span>
+                </div>
+                <div style="background:rgba(255,255,255,.04);border-radius:4px;padding:6px 8px">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
+                    <span style="font-size:7px;color:var(--text)">Paz y salvo</span>
+                    <span style="font-size:6px;padding:2px 6px;background:rgba(251,191,36,.12);color:#fbbf24;border-radius:100px">En proceso</span>
+                  </div>
+                  <span style="font-size:6px;color:var(--text-faint)">Solicitado 15 mar · Estimado: 2 días hábiles</span>
+                </div>
+                <div style="margin-top:auto;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:4px;padding:5px 8px;font-size:7px;color:var(--accent);cursor:pointer;text-align:center">+ Nueva solicitud</div>
+              </div>
+            </div>
+            <h4>Trámites con estado visible</h4>
+            <p>El estudiante ve el estado de cada solicitud en tiempo real — sin llamar a ninguna oficina.</p>
+          </div>
+
+          <!-- Pantalla 4: Mobile -->
+          <div class="screen-card">
+            <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:var(--r);overflow:hidden;margin-bottom:12px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center">
+              <!-- Mobile frame -->
+              <div style="width:90px;background:#0a0a0f;border:2px solid rgba(255,255,255,.15);border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.4)">
+                <div style="height:6px;background:rgba(255,255,255,.06);border-radius:0;display:flex;align-items:center;justify-content:center"><div style="width:20px;height:2px;background:rgba(255,255,255,.2);border-radius:1px"></div></div>
+                <div style="padding:6px 5px;display:flex;flex-direction:column;gap:3px">
+                  <div style="background:rgba(255,255,255,.05);border-radius:3px;padding:3px 5px;font-size:5.5px;color:rgba(255,255,255,.3);display:flex;gap:2px;align-items:center">🔍 Buscar…</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+                    <div style="background:rgba(255,255,255,.04);border-radius:3px;padding:4px;text-align:center"><div style="font-size:10px">📊</div><div style="font-size:5px;color:rgba(255,255,255,.4)">Notas</div></div>
+                    <div style="background:rgba(255,255,255,.04);border-radius:3px;padding:4px;text-align:center"><div style="font-size:10px">📅</div><div style="font-size:5px;color:rgba(255,255,255,.4)">Horario</div></div>
+                    <div style="background:rgba(255,255,255,.04);border-radius:3px;padding:4px;text-align:center"><div style="font-size:10px">📋</div><div style="font-size:5px;color:rgba(255,255,255,.4)">Trámites</div></div>
+                    <div style="background:rgba(255,255,255,.04);border-radius:3px;padding:4px;text-align:center"><div style="font-size:10px">📆</div><div style="font-size:5px;color:rgba(255,255,255,.4)">Calendario</div></div>
+                  </div>
+                  <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:3px;padding:3px 5px">
+                    <div style="font-size:4.5px;color:rgba(59,130,246,.7);margin-bottom:1px">PRÓXIMO</div>
+                    <div style="font-size:5px;color:rgba(255,255,255,.5)">Mar 24 — Cierre inscripción</div>
+                  </div>
+                </div>
+                <div style="height:6px;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;gap:8px">
+                  <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15)"></div>
+                </div>
+              </div>
+            </div>
+            <h4>Mobile-first desde el inicio</h4>
+            <p>Diseñado para el teléfono — donde los estudiantes realmente consultan el portal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 07 — RESULTADOS ESPERADOS ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="two-col">
+          <div>
+            <span class="section-label solution">07 — Impacto esperado</span>
+            <h2 class="section-title">Métricas que importan cuando el usuario es un estudiante</h2>
+            <p class="section-text">
+              Sin datos de producción aún — esto es un proyecto de portafolio. Las métricas se definen
+              basadas en los benchmarks de rediseños similares de portales universitarios y en los
+              problemas identificados en la auditoría.
+            </p>
+          </div>
+          <div>
+            <div class="result-metric">
+              <div class="value">−70%</div>
+              <div class="label">Elementos en el fold principal vs. estado actual</div>
+              <div class="result-bar"><div class="result-bar-fill" style="width:70%"></div></div>
+            </div>
+            <div class="result-metric">
+              <div class="value">2</div>
+              <div class="label">Clics máximos para llegar a cualquier tarea frecuente (vs. 4+)</div>
+              <div class="result-bar"><div class="result-bar-fill" style="width:85%"></div></div>
+            </div>
+            <div class="result-metric">
+              <div class="value">AA</div>
+              <div class="label">Contraste mínimo garantizado en todo el sistema (WCAG 2.1)</div>
+              <div class="result-bar"><div class="result-bar-fill" style="width:100%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 08 — RETRO ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">08 — Retrospectiva</span>
+        <h2 class="section-title">Lo que este proyecto me enseñó</h2>
+        <div class="retro-grid">
+          <div class="retro-card">
+            <h3>✅ Lo que funcionó</h3>
+            <p>Empezar por la auditoría antes de abrir Figma fue la mejor decisión. Documentar los problemas
+              reales del sitio actual me dio criterio claro para justificar cada decisión de diseño.</p>
+            <p><strong>La arquitectura de información primero.</strong> Organizar antes de diseñar evita
+              el error común de hacer bonita una mala estructura.</p>
+          </div>
+          <div class="retro-card">
+            <h3>🔍 Lo que aprendí</h3>
+            <p>Rediseñar un producto público sin acceso a métricas reales obliga a ser más riguroso en la
+              investigación cualitativa. Las heurísticas de Nielsen y el journey map son más valiosos
+              cuando no tienes analytics.</p>
+            <p><strong>El usuario universitario tiene contexto y urgencia específicos.</strong>
+              Diseñar para "estudiante" es tan diferente a diseñar para "consumidor" como diseñar para "médico".</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-cta">
+        Hay más <span class="accent">trabajo por ver.</span>
+      </div>
+      <div class="footer-links">
+        <a href="./index.html" class="footer-btn primary">← Ver todos los proyectos</a>
+        <a href="./catalogo-saas.html" class="footer-btn secondary">Catálogo SaaS →</a>
+        <a href="mailto:josealvarezswork@gmail.com" class="footer-btn secondary">Escribirme</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

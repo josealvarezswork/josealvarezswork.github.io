@@ -3,25 +3,13 @@
     {
       "id": "ux-ai-generator",
       "title": "UX AI Generator",
-      "description": "Reduced UX documentation time significantly through systematic structure.",
+      "description": "Reduced UX documentation time by 60% through AI-powered structured generation.",
       "category": "Product",
       "year": "2026",
       "color": "orange",
       "link": "./project-1.html",
       "images": [
         "./img/portada-ux.jpg"
-      ]
-    },
-    {
-      "id": "duogit",
-      "title": "Duo Git",
-      "description": "A behavioral design system that transforms GitHub activity into visible, motivating progress.",
-      "category": "Product",
-      "year": "2026",
-      "color": "blue",
-      "link": "duogit.html",
-      "images": [
-        "./img/portada-duogit.jpg"
       ]
     },
     {
@@ -32,7 +20,21 @@
       "year": "2026",
       "color": "cyan",
       "link": "./bymakers.html",
-      "images": []
+      "images": [
+        "./img/portada-bymakers.jpg"
+      ]
+    },
+    {
+      "id": "duogit",
+      "title": "Duo Git",
+      "description": "A behavioral design system that transforms GitHub activity into visible, motivating progress.",
+      "category": "Design Concept",
+      "year": "2026",
+      "color": "blue",
+      "link": "duogit.html",
+      "images": [
+        "./img/portada-duogit.jpg"
+      ]
     }
   ]
 }

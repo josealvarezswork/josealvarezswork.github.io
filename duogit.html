@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DuoGit Widget Case Study — Jose Alvarez</title>
+  <meta name="description"
+    content="Case study: DuoGit Widget. A behavioral design system that transforms GitHub activity into visible, motivating progress with emotional feedback.">
+  <meta property="og:title" content="DuoGit Widget — Product Design Case Study">
+  <meta property="og:description" content="Filling the market gap between utilitarian coding tools and generic gamification apps.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070709;
+      --bg-elevated: #0d0d10;
+      --bg-card: #111114;
+      --text: #f2f2f2;
+      --text-muted: rgba(255, 255, 255, .62);
+      --text-faint: rgba(255, 255, 255, .36);
+      --stroke: rgba(255, 255, 255, .08);
+      --stroke-light: rgba(255, 255, 255, .12);
+      --accent: #10b981;
+      --accent-soft: rgba(16, 185, 129, .15);
+      --accent-glow: rgba(16, 185, 129, .08);
+      --success: #10b981;
+      --success-soft: rgba(16, 185, 129, .15);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Inter", system-ui, -apple-system, sans-serif;
+      --max: 1040px;
+      --r: 12px;
+      --rl: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .accent-bar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(16, 185, 129, .2) 100%);
+      z-index: 100
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 20px 24px;
+      background: rgba(7, 7, 9, .85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--stroke)
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .brand-mark {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .18);
+      position: relative
+    }
+
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .9)
+    }
+
+    .brand-text {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .02em
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-size: 12px;
+      letter-spacing: .04em;
+      color: var(--text-muted)
+    }
+
+    .nav-links a:hover {
+      color: var(--text)
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--stroke)
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(16, 185, 129, .25);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 20px;
+      max-width: 900px
+    }
+
+    .hero-title .accent {
+      color: var(--accent)
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 680px;
+      line-height: 1.7;
+      margin-bottom: 32px
+    }
+
+    .tldr {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 48px
+    }
+
+    .tldr-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--r);
+      font-size: 13px
+    }
+
+    .tldr-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--stroke);
+      border-radius: 8px;
+      font-size: 14px
+    }
+
+    .tldr-item.highlight {
+      background: var(--success-soft);
+      border-color: rgba(16, 185, 129, .3)
+    }
+
+    .tldr-item.highlight .tldr-icon {
+      background: rgba(16, 185, 129, .2)
+    }
+
+    .tldr-item.highlight span {
+      color: var(--success);
+      font-weight: 600
+    }
+
+    .hero-image {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl);
+      overflow: hidden
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .hero-image-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-faint);
+      font-size: 13px;
+      text-align: center;
+      padding: 24px
+    }
+
+    .live-badge {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      padding: 8px 16px;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: var(--r);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em
+    }
+
+    .section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--stroke)
+    }
+
+    .section:last-child {
+      border-bottom: none
+    }
+
+    .section-label {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--stroke);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px
+    }
+
+    .section-label.insight {
+      background: rgba(251, 191, 36, .15);
+      color: #fbbf24
+    }
+
+    .section-label.tradeoff {
+      background: rgba(239, 68, 68, .15);
+      color: #ef4444
+    }
+
+    .section-label.solution {
+      background: var(--accent-soft);
+      color: var(--accent)
+    }
+
+    .section-label.persona {
+      background: rgba(139, 92, 246, .15);
+      color: #8b5cf6
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -.01em
+    }
+
+    .section-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 700px
+    }
+
+    .section-text+.section-text {
+      margin-top: 16px
+    }
+
+    .section-text strong {
+      color: var(--text);
+      font-weight: 500
+    }
+
+    .pws-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 40px
+    }
+
+    @media(min-width:768px) {
+      .pws-grid {
+        grid-template-columns: 1fr 1.5fr
+      }
+    }
+
+    .pws-card {
+      padding: 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl)
+    }
+
+    .pws-card.featured {
+      background: var(--accent-glow);
+      border-color: rgba(16, 185, 129, .2)
+    }
+
+    .pws-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .pws-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 10px
+    }
+
+    .pws-card p:last-child {
+      margin-bottom: 0
+    }
+
+    .pws-card p strong {
+      color: var(--accent);
+      display: block;
+      margin-top: 12px
+    }
+
+    .quote {
+      margin-top: 20px;
+      padding: 20px 24px;
+      background: rgba(251, 191, 36, .08);
+      border-left: 3px solid #fbbf24;
+      border-radius: 0 var(--r) var(--r) 0
+    }
+
+    .quote p {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.7
+    }
+
+    .quote cite {
+      display: block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-style: normal;
+      color: var(--text-faint)
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 32px
+    }
+
+    .research-card {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--r);
+      text-align: center
+    }
+
+    .research-card .r-value {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1
+    }
+
+    .research-card .r-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.4
+    }
+
+    .persona-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      padding: 28px;
+      background: var(--bg-card);
+      border: 1px solid rgba(139, 92, 246, .25);
+      border-radius: var(--rl);
+      margin-top: 32px;
+      align-items: start
+    }
+
+    .persona-avatar {
+      width: 64px;
+      height: 64px;
+      background: rgba(139, 92, 246, .15);
+      border: 1px solid rgba(139, 92, 246, .3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      color: #8b5cf6;
+      flex-shrink: 0
+    }
+
+    .persona-name {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .persona-role {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-bottom: 16px;
+      letter-spacing: .04em
+    }
+
+    .persona-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px
+    }
+
+    .persona-tag {
+      padding: 4px 10px;
+      background: var(--stroke);
+      border-radius: 100px;
+      font-size: 11px;
+      color: var(--text-muted)
+    }
+
+    .persona-quote {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      border-left: 2px solid rgba(139, 92, 246, .4);
+      padding-left: 12px
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: center
+    }
+
+    @media(min-width:768px) {
+      .two-col {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .two-col.reverse>*:first-child {
+        order: 2
+      }
+    }
+
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--stroke);
+      border: 1px solid var(--stroke);
+      border-radius: var(--rl);
+      overflow: hidden;
+      margin-top: 32px
+    }
+
+    .journey-stage {
+      background: var(--bg-card);
+      padding: 24px 20px
+    }
+
+    .stage-num {
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 8px
+    }
+
+    .journey-stage h4 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px
+    }
+
+    .journey-stage p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px
+    }
+
+    .stage-feeling {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px
+    }
+
+    .feeling-tag {
+      padding: 3px 8px;
+      background: var(--stroke);
+      border-radius: 100px;
+      font-size: 10px;
+      color: var(--text-faint)
+    }
+
+    .feeling-tag.positive {
+      background: var(--success-soft);
+      color: var(--success)
+    }
+
+    .tradeoff-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl);
+      padding: 24px
+    }
+
+    .tradeoff-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: .05em
+    }
+
+    .tradeoff-bars {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+      height: 140px
+    }
+
+    .tradeoff-bar {
+      flex: 1;
+      border-radius: var(--r) var(--r) 0 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px 12px;
+      font-size: 11px;
+      text-align: center;
+      line-height: 1.4
+    }
+
+    .tradeoff-bar.option-a {
+      height: 100%;
+      background: rgba(239, 68, 68, .15);
+      border: 1px solid rgba(239, 68, 68, .3);
+      border-bottom: none;
+      color: var(--text-muted)
+    }
+
+    .tradeoff-bar.option-b {
+      height: 65%;
+      background: var(--success-soft);
+      border: 2px solid var(--success);
+      border-bottom: none;
+      color: var(--success);
+      font-weight: 600
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 32px
+    }
+
+    .principle {
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl)
+    }
+
+    .principle-icon {
+      font-size: 1.4rem;
+      margin-bottom: 12px
+    }
+
+    .principle h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent)
+    }
+
+    .principle p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6
+    }
+
+    .features-list {
+      display: grid;
+      gap: 1px;
+      background: var(--stroke);
+      border: 1px solid var(--stroke);
+      border-radius: var(--rl);
+      overflow: hidden;
+      margin-top: 24px
+    }
+
+    .feature-row {
+      background: var(--bg-card);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px
+    }
+
+    .feature-info h4 {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 2px
+    }
+
+    .feature-info p {
+      font-size: 12px;
+      color: var(--text-faint);
+      line-height: 1.4
+    }
+
+    .feature-badge {
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0
+    }
+
+    .feature-badge.shipped {
+      background: var(--success-soft);
+      color: var(--success)
+    }
+
+    .feature-badge.next {
+      background: var(--stroke);
+      color: var(--text-faint)
+    }
+
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 32px
+    }
+
+    .screen-card {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl);
+      padding: 16px;
+      transition: border-color .2s
+    }
+
+    .screen-card:hover {
+      border-color: var(--stroke)
+    }
+
+    .screen-card.featured {
+      border-color: var(--accent);
+      position: relative
+    }
+
+    .screen-card.featured::before {
+      content: "Key Flow";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 4px 10px;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: .03em
+    }
+
+    .screen-placeholder {
+      aspect-ratio: 4/3;
+      background: var(--bg-elevated);
+      border: 1px dashed var(--stroke-light);
+      border-radius: var(--r);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-bottom: 12px
+    }
+
+    .screen-card h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px
+    }
+
+    .screen-card.featured h4 {
+      color: var(--accent)
+    }
+
+    .screen-card p {
+      font-size: 12px;
+      color: var(--text-faint);
+      line-height: 1.5
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px
+    }
+
+    @media(min-width:768px) {
+      .results-grid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    .result-metric {
+      margin-bottom: 28px
+    }
+
+    .result-metric .value {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1
+    }
+
+    .result-metric .label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px
+    }
+
+    .result-bar {
+      height: 6px;
+      background: var(--stroke);
+      border-radius: 3px;
+      margin-top: 8px;
+      overflow: hidden
+    }
+
+    .result-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px
+    }
+
+    .retro-card {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      border-radius: var(--rl);
+      padding: 28px
+    }
+
+    .retro-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .retro-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7
+    }
+
+    .retro-card p+p {
+      margin-top: 12px
+    }
+
+    .retro-card strong {
+      color: var(--text)
+    }
+
+    .footer {
+      padding: 48px 0;
+      text-align: center;
+      border-top: 1px solid var(--stroke)
+    }
+
+    .footer-cta {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 600;
+      margin-bottom: 24px
+    }
+
+    .footer-cta .accent {
+      font-style: italic;
+      color: var(--accent)
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap
+    }
+
+    .footer-btn {
+      padding: 12px 24px;
+      border-radius: var(--r);
+      font-size: 14px;
+      font-weight: 500;
+      transition: all .2s
+    }
+
+    .footer-btn.primary {
+      background: var(--accent);
+      color: var(--bg)
+    }
+
+    .footer-btn.primary:hover {
+      filter: brightness(1.1)
+    }
+
+    .footer-btn.secondary {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke-light);
+      color: var(--text)
+    }
+
+    .footer-btn.secondary:hover {
+      border-color: var(--text-faint)
+    }
+
+    .figma-plugin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .ux-artifacts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .design-tokens-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .component-library-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    /* Hide scrollbar for sliders */
+    .design-tokens-grid::-webkit-scrollbar,
+    .component-library-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .design-tokens-grid,
+    .component-library-grid {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .webapp-mobile-mockup {
+      padding: 20px 0;
+    }
+
+    .mockup-desktop { display: block; }
+    .mockup-mobile { display: none; }
+
+    @media(max-width:640px) {
+      .mockup-desktop { display: none; }
+      .mockup-mobile { display: block; }
+
+      .hero {
+        padding: 48px 0 40px
+      }
+
+      .section {
+        padding: 48px 0
+      }
+
+      .tldr {
+        flex-direction: column
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .persona-card {
+        grid-template-columns: 1fr
+      }
+
+      .figma-plugin-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .ux-artifacts-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .design-tokens-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 12px;
+        padding-bottom: 12px;
+        margin: 0 -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .design-tokens-grid > * {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
+      }
+
+      .component-library-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 12px;
+        padding-bottom: 12px;
+        margin: 0 -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .component-library-grid > * {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
+      }
+    }
+
+    .btn-download {
+      padding: 6px 12px;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      border-radius: 999px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="accent-bar" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="./index.html" class="brand">
+        <span class="brand-mark"></span>
+        <span class="brand-text">Jose Alvarez</span>
+      </a>
+      <div class="nav-links">
+        <a href="./index.html">Work</a>
+        <a href="./resume.html">Resume</a>
+        <a href="./about.html">About</a>
+        <a href="./Jose_Alvarez_CV.pdf" download class="btn-download">Download CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-label">
+          <span>Design Concept</span><span>·</span>
+          <span>iOS · Behavioral Design · 2026</span>
+        </div>
+        <h1 class="hero-title">
+          The developer's <span class="accent">emotional companion</span>
+        </h1>
+        <p class="hero-subtitle">
+          DuoGit transforms GitHub activity into visible, motivating progress. An iOS widget that fills the gap between utilitarian productivity tools and generic gamification apps.
+        </p>
+        <div class="tldr">
+          <div class="tldr-item"><span class="tldr-icon">👤</span><span>UX / Product Design</span></div>
+          <div class="tldr-item"><span class="tldr-icon">🛠</span><span>Figma · iOS Design Systems</span>
+          </div>
+          <div class="tldr-item highlight"><span class="tldr-icon">📈</span><span>Aimed at 70%+ Day 30 Retention</span>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div style="position:absolute;inset:0;background:linear-gradient(140deg,#060810 0%,#0b1120 50%,#080e1a 100%);display:flex;align-items:center;justify-content:center;gap:20px;padding:32px;overflow:hidden">
+            <!-- ambient glow -->
+            <div style="position:absolute;width:700px;height:400px;background:radial-gradient(ellipse,rgba(16,185,129,0.07) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none"></div>
+            <!-- Small Widget -->
+            <div style="width:130px;height:130px;background:#1c1c1e;border-radius:20px;padding:13px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 36px rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.07);position:relative;overflow:hidden;flex-shrink:0">
+              <div style="position:absolute;top:-12px;right:-12px;width:70px;height:70px;background:radial-gradient(circle,rgba(16,185,129,0.18) 0%,transparent 70%)"></div>
+              <div>
+                <div style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.45);margin-bottom:5px;letter-spacing:.04em">DUOGIT</div>
+                <div style="font-size:28px;font-weight:700;color:#fff;line-height:1">7</div>
+                <div style="font-size:9px;font-weight:600;color:#10b981;margin-top:2px;letter-spacing:.04em">DÍAS</div>
+              </div>
+              <div style="align-self:flex-end;font-size:30px;line-height:1">🔥</div>
+            </div>
+            <!-- Medium Widget (featured) -->
+            <div style="width:270px;height:130px;background:#1c1c1e;border-radius:20px;padding:16px 20px;display:flex;justify-content:space-between;box-shadow:0 16px 48px rgba(0,0,0,0.55),0 0 0 1px rgba(16,185,129,0.22);border:1px solid rgba(255,255,255,0.07);position:relative;overflow:hidden;flex-shrink:0">
+              <div style="position:absolute;top:-25px;right:-10px;width:160px;height:160px;background:radial-gradient(circle,rgba(16,185,129,0.13) 0%,transparent 70%)"></div>
+              <div style="display:flex;flex-direction:column;justify-content:space-between;width:55%;z-index:2">
+                <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:.04em">DUOGIT</div>
+                <div>
+                  <div style="font-size:30px;font-weight:700;color:#fff;line-height:1">7</div>
+                  <div style="font-size:10px;font-weight:600;color:#10b981;margin-top:2px;letter-spacing:.04em">DÍAS SEGUIDOS</div>
+                  <div style="font-size:10px;color:rgba(255,255,255,0.38);margin-top:5px">Hace 2 horas</div>
+                </div>
+              </div>
+              <div style="width:40%;display:flex;align-items:center;justify-content:center;font-size:56px;z-index:2">🔥</div>
+            </div>
+            <!-- Large Widget -->
+            <div style="width:270px;height:270px;background:#1c1c1e;border-radius:20px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 40px rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.07);position:relative;overflow:hidden;flex-shrink:0">
+              <div style="position:absolute;top:-30px;right:-30px;width:180px;height:180px;background:radial-gradient(circle,rgba(16,185,129,0.1) 0%,transparent 70%)"></div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;z-index:2">
+                <div>
+                  <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);margin-bottom:6px;letter-spacing:.04em">DUOGIT</div>
+                  <div style="font-size:38px;font-weight:700;color:#fff;line-height:1">54</div>
+                  <div style="font-size:11px;font-weight:600;color:#10b981;margin-top:3px;letter-spacing:.04em">DÍAS SEGUIDOS</div>
+                </div>
+                <div style="font-size:60px;line-height:1">🏆</div>
+              </div>
+              <div style="background:rgba(0,0,0,0.22);border-radius:10px;padding:11px;z-index:2">
+                <div style="font-size:9px;color:rgba(255,255,255,0.38);margin-bottom:7px;font-weight:600;letter-spacing:.06em">ÚLTIMAS 4 SEMANAS</div>
+                <div style="display:grid;grid-template-columns:repeat(14,1fr);gap:3px">
+                  <div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.9"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.5"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.4"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.7"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.5"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.9"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div>
+                  <div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.4"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.9"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.3"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.4"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.9"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div>
+                  <div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.4"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.7"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.5"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.9"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.4"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:rgba(255,255,255,0.08);border-radius:2px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">01 — Problem</span>
+        <h2 class="section-title">GitHub lacks the <span class="accent">emotional dimension</span></h2>
+        <p class="section-text">The GitHub contribution graph is a powerful data visualization, but it offers purely passive, technical feedback. There are no proactive "nudges" or emotional reinforcements when a developer is at risk of breaking their streak.</p>
+        <p class="section-text section-text">Current solutions are either strictly utilitarian coding tools or generic gamification (habit-tracking) apps that don't differentiate meaningful code contributions from generic daily tasks.</p>
+        <div class="pws-grid">
+          <div class="pws-card">
+            <h3><span style="color:#ef4444">●</span> The Problem</h3>
+            <p>Users care deeply about their coding streaks, but the native GitHub experience lacks the "nudge" factor. Generic apps require manual input, adding friction and failing to connect directly with developer workflows.</p>
+          </div>
+          <div class="pws-card featured">
+            <h3><span style="color:var(--accent)">●</span> The Opportunity</h3>
+            <p>Define a new product category that addresses both technical tracking and emotional engagement. An interactive widget combining a familiar psychological trigger (a mascot) with direct GitHub API integration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label insight">02 — Competitive Insights</span>
+        <h2 class="section-title">The "worried mascot" is a powerful psychological trigger.</h2>
+        <p class="section-text">Inspiration came from evaluating adjacent markets. Duolingo proved that emotional mascots and streak mechanics drive retention. However, no competitor combined these elements specifically for software development integration.</p>
+        <div class="research-grid">
+          <div class="research-card">
+            <div class="r-value">70%</div>
+            <div class="r-label">Target Day 30 Retention</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">>50</div>
+            <div class="r-label">Target NPS Score</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">↓40%</div>
+            <div class="r-label">Expected Streak Anxiety</div>
+          </div>
+          <div class="research-card">
+            <div class="r-value">1+</div>
+            <div class="r-label">Target Commits/Day Avg.</div>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:40px;">
+          <p>"Generic habit trackers lack software development context... they require manual input and do not differentiate meaningful code from generic tasks."</p>
+          <cite>— UX Strategic Insight #4</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONA / METRICS -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label persona">03 — Measurement Strategy</span>
+        <h2 class="section-title">Defining Success for DuoGit</h2>
+        <p class="section-text">The goal is not just to build a widget, but to foster positive behavioral change among developers — moving from sporadic, high-stress commits to consistent, stress-free daily routines.</p>
+        
+        <div class="two-col" style="margin-top:40px;align-items:start">
+          <div>
+            <p style="font-size:13px;font-weight:600;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px">
+              Behavioral Metrics</p>
+            <div class="features-list">
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Daily Commit Rate</h4>
+                  <p>Increase baseline from ~1 commit/day to ≥3 commits/day</p>
+                </div>
+              </div>
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Weekly Streak Duration</h4>
+                  <p>Increase baseline from 2-3 days to 5+ consecutive days</p>
+                </div>
+              </div>
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Post-Streak Recovery</h4>
+                  <p>Improve rate of recovery within 3 days from <30% to >60%</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:13px;font-weight:600;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px">
+              Emotional Satisfaction</p>
+            <div class="features-list">
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Perceived Progress Clarity</h4>
+                  <p>Target a 50% increase in user-reported clarity (Survey 1-10)</p>
+                </div>
+              </div>
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Streak-related Anxiety</h4>
+                  <p>Target a 40% reduction in reported stress levels</p>
+                </div>
+              </div>
+              <div class="feature-row">
+                <div class="feature-info">
+                  <h4>Guilt-free Motivation</h4>
+                  <p>Ensure users feel motivated by the ghost mascot, not guilty</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">04 — User Journey</span>
+        <h2 class="section-title">The Streak Journey Flow</h2>
+        <p class="section-text">The widget introduces a simple but effective daily loop based on the GitHub commit status. It seamlessly maps the emotional state of the character to the user's progress.</p>
+        <div class="journey">
+          <div class="journey-stage">
+            <div class="stage-num">State 1 · Happy</div>
+            <h4>Active Streak</h4>
+            <p>User sees "HAPPY" status. Taps the widget, performs their daily commit, and the widget verifies the streak.</p>
+            <div class="stage-feeling">
+              <span class="feeling-tag positive">Motivated</span>
+              <span class="feeling-tag positive">Consistent</span>
+            </div>
+          </div>
+          <div class="journey-stage">
+            <div class="stage-num">State 2 · Worried</div>
+            <h4>At Risk</h4>
+            <p>Widget displays warning (e.g., "Quedan 5h"). User sees the alert, feels the urgency, and is driven to commit.</p>
+            <div class="stage-feeling">
+              <span class="feeling-tag">Alert</span>
+              <span class="feeling-tag">Urgent</span>
+            </div>
+          </div>
+          <div class="journey-stage">
+            <div class="stage-num">State 3 · Sad / Neutral</div>
+            <h4>Streak Lost</h4>
+            <p>Streak is broken ("0 DÍAS"). User acknowledges the loss and is prompted to start a new streak with a first commit.</p>
+            <div class="stage-feeling">
+              <span class="feeling-tag">Determined</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRADEOFF/ZONING -->
+    <section class="section">
+      <div class="container">
+        <div class="two-col reverse">
+          <div>
+            <span class="section-label tradeoff">05 — Information Architecture</span>
+            <h2 class="section-title">60% Text / 40% Visual</h2>
+            <p class="section-text">The widget real estate in iOS is extremely constrained. The space was divided into a clear zoning model: 60% Left Zone (Information) and 40% Right Zone (Visual/Avatar).</p>
+            <p class="section-text" style="margin-top:16px">The hierarchy mandates the <strong>Main Value Proposition</strong> (Streak Duration) at the top left, Context (Time since Last Commit) in the middle, and the <strong>Emotional Ghost Mascot</strong> occupying the entire right section.</p>
+          </div>
+          <div class="tradeoff-visual" style="padding:0;background:transparent;border:none;display:flex;align-items:center;justify-content:center">
+            <!-- Annotated Zoning Diagram -->
+            <div style="width:100%;max-width:420px">
+              <!-- Zone labels -->
+              <div style="display:flex;margin-bottom:8px;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--text-faint)">
+                <div style="width:60%;text-align:center">60% — INFORMACIÓN</div>
+                <div style="width:40%;text-align:center">40% — VISUAL</div>
+              </div>
+              <!-- Widget with zone overlay -->
+              <div style="position:relative;width:100%;height:160px;background:#1c1c1e;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 12px 40px rgba(0,0,0,0.4)">
+                <!-- Zone divider -->
+                <div style="position:absolute;left:60%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.12);z-index:3"></div>
+                <!-- Left zone highlight -->
+                <div style="position:absolute;left:0;top:0;width:60%;bottom:0;background:rgba(16,185,129,0.05);z-index:1"></div>
+                <!-- Right zone highlight -->
+                <div style="position:absolute;left:60%;top:0;right:0;bottom:0;background:rgba(59,130,246,0.05);z-index:1"></div>
+                <!-- Widget content -->
+                <div style="position:relative;z-index:2;height:100%;display:flex;justify-content:space-between;padding:20px 24px">
+                  <!-- Left: text hierarchy -->
+                  <div style="width:55%;display:flex;flex-direction:column;justify-content:space-between">
+                    <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:.04em">DUOGIT</div>
+                    <div>
+                      <!-- Primary -->
+                      <div style="display:flex;align-items:baseline;gap:8px">
+                        <div style="font-size:36px;font-weight:700;color:#fff;line-height:1">7</div>
+                        <div style="font-size:11px;font-weight:600;color:#10b981;letter-spacing:.04em">DÍAS</div>
+                      </div>
+                      <!-- Secondary -->
+                      <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px">Hace 3 horas</div>
+                      <!-- Tertiary -->
+                      <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:3px">Quedan 5 horas</div>
+                    </div>
+                  </div>
+                  <!-- Right: mascot -->
+                  <div style="width:40%;display:flex;align-items:center;justify-content:center;font-size:48px">🔥</div>
+                </div>
+              </div>
+              <!-- Hierarchy annotations -->
+              <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+                <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:8px;font-size:11px;color:#10b981;font-weight:600">
+                  <span>①</span> Streak — Primary
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:8px;font-size:11px;color:var(--text-muted)">
+                  <span>②</span> Último commit — Secondary
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:8px;font-size:11px;color:var(--text-faint)">
+                  <span>③</span> Tiempo restante — Tertiary
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTION -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label solution">06 — Solution</span>
+        <h2 class="section-title">Visualizing GitHub Progress</h2>
+        <p class="section-text" style="margin-bottom:32px">DuoGit provides real-time GitHub integration presented dynamically across multiple widget sizes natively within iOS, using states to drive behavior.</p>
+        <div class="features-list">
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Direct Integration</h4>
+              <p>Connects directly to GitHub via API. No manual tracking inside the app is necessary.</p>
+            </div><span class="feature-badge shipped">Built In</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Dynamic Mascot States</h4>
+              <p>A ghost companion that visually reacts: Happy (Green), Worried (Yellow), Sad (Gray), Neutral (Blue).</p>
+            </div><span class="feature-badge shipped">Built In</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Intelligent Zoning</h4>
+              <p>UX hierarchies clearly segment "data" from "emotion" allowing tracking at an instantaneous glance.</p>
+            </div><span class="feature-badge shipped">Built In</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Size Variability</h4>
+              <p>Supports Small, Medium, and Large widgets to match user preference and screen density priorities.</p>
+            </div><span class="feature-badge shipped">Built In</span>
+          </div>
+        </div>
+        <!-- Custom Visuals: Widget States & Sizes -->
+        <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:16px;margin-top:48px;">The iOS Widget Family</h3>
+        <p class="section-text" style="margin-bottom:32px">The system scales gracefully across screen densities. A unified 60/40 zoning model across all sizes ensures the user always finds their context (left) and emotional state (right) instantly.</p>
+
+        <!-- Widget Sandbox -->
+        <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:24px;padding:48px 24px;display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:flex-start">
+          
+          <!-- Small Widget -->
+          <div style="width:160px;height:160px;background:#1C1C1E;border-radius:22px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.2);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.05)">
+            <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(0,0,0,0) 70%)"></div>
+            <div>
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.6)">DuoGit</span>
+              </div>
+              <div style="font-size:28px;font-weight:700;color:#fff;line-height:1">12</div>
+              <div style="font-size:11px;font-weight:500;color:var(--accent);margin-top:2px">DÍAS SEGUIDOS</div>
+            </div>
+            <div style="align-self:flex-end;font-size:32px;line-height:1">🔥</div>
+          </div>
+
+          <!-- Medium Widget -->
+          <div style="width:338px;height:160px;background:#1C1C1E;border-radius:22px;padding:20px 24px;display:flex;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.2);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.05)">
+            <div style="position:absolute;top:-40px;right:-20px;width:200px;height:200px;background:radial-gradient(circle, rgba(245,158,11,0.15) 0%, rgba(0,0,0,0) 70%)"></div>
+            <div style="display:flex;flex-direction:column;justify-content:space-between;width:55%;z-index:2">
+              <div style="display:flex;align-items:center;gap:6px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6)">DuoGit</span>
+              </div>
+              <div>
+                <div style="font-size:32px;font-weight:700;color:#fff;line-height:1">12</div>
+                <div style="font-size:12px;font-weight:600;color:#f59e0b;margin-top:2px">DÍAS SEGUIDOS</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;line-height:1.4">Quedan 5 horas para mantener la racha.</div>
+              </div>
+            </div>
+            <div style="width:40%;display:flex;align-items:center;justify-content:center;font-size:48px;z-index:2">⚠️</div>
+          </div>
+
+          <!-- Large Widget -->
+          <div style="width:338px;height:338px;background:#1C1C1E;border-radius:22px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 32px rgba(0,0,0,0.25);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.05)">
+            <div style="position:absolute;top:-40px;right:-40px;width:250px;height:250px;background:radial-gradient(circle, rgba(16,185,129,0.1) 0%, rgba(0,0,0,0) 70%)"></div>
+            <!-- Top Half: Status -->
+            <div style="display:flex;justify-content:space-between;align-items:center;height:45%;z-index:2">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6)">DuoGit</span>
+                </div>
+                <div style="font-size:42px;font-weight:700;color:#fff;line-height:1">54</div>
+                <div style="font-size:13px;font-weight:600;color:var(--accent);margin-top:2px">DÍAS SEGUIDOS</div>
+              </div>
+              <div style="font-size:52px;line-height:1">🏆</div>
+            </div>
+            
+            <!-- Bottom Half: Graph -->
+            <div style="height:45%;background:rgba(0,0,0,0.2);border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:center;z-index:2">
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:8px;font-weight:600">ÚLTIMAS 4 SEMANAS</div>
+              <!-- Simulated Git Graph -->
+              <div style="display:grid;grid-template-columns:repeat(14, 1fr);gap:4px">
+                <!-- Row 1 -->
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <!-- Row 2 -->
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
+                <!-- Row 3 -->
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
+                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
+                <div style="aspect-ratio:1;background:rgba(255,255,255,0.1);border-radius:2px;opacity:1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emotion States & Competitive Analysis -->
+        <div style="margin-top: 64px">
+          <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:16px">Emotional System & Market Position</h3>
+          <p class="section-text" style="margin-bottom:32px">The widget maps directly to specific user feelings during their daily routine. This deliberate anthropomorphism creates an engagement hook that utilitarian tools lack.</p>
+          
+          <div class="two-col" style="align-items:start">
+            <!-- Emotive States -->
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;padding:16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r);gap:16px">
+                <div style="width:48px;height:48px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px">🔥</div>
+                <div>
+                  <div style="font-size:14px;font-weight:600;color:var(--text)">Happy / Motivated</div>
+                  <div style="font-size:12px;color:var(--text-faint);margin-top:2px">Streak is active. User feels consistent.</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;padding:16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r);gap:16px">
+                <div style="width:48px;height:48px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px">⚠️</div>
+                <div>
+                  <div style="font-size:14px;font-weight:600;color:var(--text)">Worried / Alert</div>
+                  <div style="font-size:12px;color:var(--text-faint);margin-top:2px">Streak at risk (< 12 hours left).</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;padding:16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r);gap:16px">
+                <div style="width:48px;height:48px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px">💔</div>
+                <div>
+                  <div style="font-size:14px;font-weight:600;color:var(--text)">Sad / Regretful</div>
+                  <div style="font-size:12px;color:var(--text-faint);margin-top:2px">Streak lost. Restart required.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Competitive Analysis Table -->
+            <div style="background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);overflow:hidden">
+              <div style="padding:16px 20px;border-bottom:1px solid var(--stroke-light);background:var(--bg-elevated)">
+                <h4 style="font-size:14px;font-weight:600">Competitive Landscape</h4>
+              </div>
+              <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left">
+                <thead>
+                  <tr style="border-bottom:1px solid var(--stroke-light);color:var(--text-muted)">
+                    <th style="padding:12px 20px;font-weight:500">Feature</th>
+                    <th style="padding:12px 20px;font-weight:600;color:var(--accent)">DuoGit</th>
+                    <th style="padding:12px 20px;font-weight:500">GitHub</th>
+                    <th style="padding:12px 20px;font-weight:500">Duolingo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--stroke-light)">
+                    <td style="padding:16px 20px;color:var(--text-muted)">GitHub API Sync</td>
+                    <td style="padding:16px 20px;color:var(--accent)">Yes</td>
+                    <td style="padding:16px 20px;color:var(--text)">Yes</td>
+                    <td style="padding:16px 20px;color:var(--text-faint)">No</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--stroke-light)">
+                    <td style="padding:16px 20px;color:var(--text-muted)">Emotional Avatar</td>
+                    <td style="padding:16px 20px;color:var(--accent)">Yes</td>
+                    <td style="padding:16px 20px;color:var(--text-faint)">No</td>
+                    <td style="padding:16px 20px;color:var(--text)">Yes</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--stroke-light)">
+                    <td style="padding:16px 20px;color:var(--text-muted)">iOS Live Widgets</td>
+                    <td style="padding:16px 20px;color:var(--accent)">Yes</td>
+                    <td style="padding:16px 20px;color:var(--text-faint)">Limited</td>
+                    <td style="padding:16px 20px;color:var(--text)">Yes</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 20px;color:var(--text-muted)">Developer Focus</td>
+                    <td style="padding:16px 20px;color:var(--accent)">Yes</td>
+                    <td style="padding:16px 20px;color:var(--text)">Yes</td>
+                    <td style="padding:16px 20px;color:var(--text-faint)">No</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS & RETRO -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">08 — Results</span>
+        <h2 class="section-title">Bringing it all together</h2>
+        <p class="section-text" style="margin-bottom:40px">DuoGit defines a clear interaction loop that is easily measurable against industry benchmarks through standard metrics (e.g. Day 30 Retention, NPS) and distinct behavioral indicators tailored for developer environments.</p>
+        <div class="results-grid">
+          <div class="result-card">
+            <div class="result-metric">
+              <div class="value">>70%</div>
+              <div class="label">Target Day 30 Retention (vs 40% benchmark)</div>
+              <div class="result-bar">
+                <div class="result-bar-fill" style="width:70%"></div>
+              </div>
+            </div>
+            <div class="result-metric">
+              <div class="value">↑50%</div>
+              <div class="label">Perceived Progress Clarity</div>
+              <div class="result-bar">
+                <div class="result-bar-fill" style="width:50%"></div>
+              </div>
+            </div>
+            <div class="result-metric">
+              <div class="value">↓40%</div>
+              <div class="label">Target reduction in streak-related stress levels</div>
+              <div class="result-bar">
+                <div class="result-bar-fill" style="width:40%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="retro-card">
+            <h3>↻ What I'd explore next</h3>
+            <p>I would investigate deeper <strong>monetization pathways</strong>, such as exclusive or team-branded ghost avatars. Tying premium cosmetics to the core mechanic could deepen emotional engagement and create a sustainable business model.</p>
+            <p>Additionally, <strong>Desktop Widgets</strong> (macOS/Windows) would keep the feedback loop natively inside the developer workspace context immediately beside their IDEs, reducing the need to look at a phone entirely.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER NAV -->
+    <nav class="footer-nav" style="padding:48px 0;border-top:1px solid var(--stroke);text-align:center;">
+      <div class="container" style="display:flex;justify-content:center;gap:24px;">
+        <a href="index.html" class="footer-btn secondary" style="padding:12px 24px;border:1px solid var(--stroke-light);border-radius:12px;font-size:14px;font-weight:600;display:inline-block;transition:border-color 0.2s;">← Back to Index</a>
+      </div>
+    </nav>
+  </main>
+
+  <footer style="padding:48px 0;text-align:center;border-top:1px solid var(--stroke);margin-top:24px">
+    <div class="container">
+      <p style="font-size:13px;color:var(--text-faint)">© 2026 Jose Alvarez</p>
+    </div>
+  </footer>
+
+</body>
+</html>
