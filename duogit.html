@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DuoGit Widget Case Study — Jose Alvarez</title>
+  <title>DuoGit — Mobile App Case Study · Jose Alvarez</title>
   <meta name="description"
-    content="Case study: DuoGit Widget. A behavioral design system that transforms GitHub activity into visible, motivating progress with emotional feedback.">
-  <meta property="og:title" content="DuoGit Widget — Product Design Case Study">
+    content="Case study: DuoGit — A cross-platform React Native app that transforms GitHub activity into visible, motivating progress through an emotional mascot system, SPACE metrics, and league ranking.">
+  <meta property="og:title" content="DuoGit — Product Design Case Study">
   <meta property="og:description" content="Filling the market gap between utilitarian coding tools and generic gamification apps.">
   <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +44,10 @@
     }
 
     body {
-      background: var(--bg);
+      background:
+        radial-gradient(800px 500px at 30% 20%, rgba(255,255,255,0.06), transparent 60%),
+        radial-gradient(900px 600px at 80% 40%, rgba(255,255,255,0.04), transparent 65%),
+        var(--bg);
       color: var(--text);
       font-family: var(--sans);
       line-height: 1.6;
@@ -60,66 +63,159 @@
       position: fixed;
       top: 0;
       right: 0;
+      width: 5px;
+      height: 100vh;
       background: linear-gradient(180deg, var(--accent) 0%, rgba(16, 185, 129, .2) 100%);
       z-index: 100
     }
 
-    .nav {
+    /* NAV */
+    .site-header {
       position: sticky;
       top: 0;
       z-index: 50;
       padding: 20px 24px;
       background: rgba(7, 7, 9, .85);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--stroke)
+      border-bottom: 1px solid var(--stroke);
     }
 
-    .nav-inner {
-      max-width: var(--max);
+    .nav {
+      width: min(1080px, calc(100% - 48px));
       margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: space-between
+      justify-content: space-between;
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 10px
+      gap: 10px;
     }
 
     .brand-mark {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, .18);
-      position: relative
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      position: relative;
     }
 
     .brand-mark::before {
       content: "";
       position: absolute;
-      inset: 4px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .9)
+      inset: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
     }
 
     .brand-text {
-      font-size: 12px;
+      line-height: 1.05;
+    }
+
+    .brand-name {
+      display: block;
       font-weight: 600;
-      letter-spacing: .02em
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-sub {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      opacity: 0.7;
     }
 
     .nav-links {
       display: flex;
-      gap: 32px;
+      align-items: center;
+      gap: 38px;
       font-size: 12px;
-      letter-spacing: .04em;
-      color: var(--text-muted)
+      letter-spacing: 0.04em;
+      opacity: 0.9;
     }
 
-    .nav-links a:hover {
-      color: var(--text)
+    .nav-links a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      align-self: center;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 160ms ease;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    /* HAMBURGER MENU */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    @media (max-width: 640px) {
+      .hamburger {
+        display: flex;
+      }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--bg);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        font-size: 18px;
+        transform: translateX(100%);
+        transition: transform 300ms ease;
+        z-index: 1000;
+      }
+      .nav-links.active {
+        transform: translateX(0);
+      }
     }
 
     .container {
@@ -137,6 +233,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      padding: 6px 12px;
       background: var(--accent-soft);
       border: 1px solid rgba(16, 185, 129, .25);
       border-radius: 100px;
@@ -411,11 +508,12 @@
     }
 
     .research-card .r-value {
-      font-family: var(--serif);
-      font-size: 2rem;
-      font-weight: 700;
+      font-family: var(--sans);
+      font-size: 1.75rem;
+      font-weight: 600;
       color: var(--accent);
-      line-height: 1
+      line-height: 1;
+      letter-spacing: -0.02em
     }
 
     .research-card .r-label {
@@ -570,6 +668,23 @@
       padding: 24px
     }
 
+    .tradeoff-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .tradeoff-grid-single {
+      margin-top: 12px;
+    }
+
+    .tradeoff-visual .screen-card img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--r);
+      display: block;
+    }
+
     .tradeoff-header {
       display: flex;
       justify-content: space-between;
@@ -696,8 +811,8 @@
     }
 
     .feature-badge.next {
-      background: var(--stroke);
-      color: var(--text-faint)
+      background: rgba(251, 191, 36, .12);
+      color: #fbbf24
     }
 
     .solution-grid {
@@ -1005,34 +1120,69 @@
         flex: 0 0 280px;
         scroll-snap-align: start;
       }
+
+      .cat-emotions-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
     }
 
     .btn-download {
       padding: 6px 12px;
-      border: 1px solid rgba(16, 185, 129, 0.5);
+      border: 1px solid rgba(255, 106, 45, 0.5);
       border-radius: 999px;
       font-weight: 500;
     }
+
+    .screens-slider { overflow:hidden; position:relative; }
+    .screens-slider::before,
+    .screens-slider::after {
+      content:''; position:absolute; top:0; bottom:0; width:120px; z-index:2; pointer-events:none;
+    }
+    .screens-slider::before { left:0; background:linear-gradient(to right, var(--bg-elevated), transparent); }
+    .screens-slider::after  { right:0; background:linear-gradient(to left, var(--bg-elevated), transparent); }
+    .screens-track {
+      display:flex; gap:20px;
+      animation: scroll-screens 28s linear infinite;
+      width:max-content;
+    }
+    .screens-track:hover { animation-play-state: paused; }
+    @keyframes scroll-screens {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .screen-slide { display:flex; flex-direction:column; align-items:center; gap:12px; flex-shrink:0; width:260px; }
+    .screen-slide img { width:100%; display:block; filter:drop-shadow(0 16px 32px rgba(0,0,0,0.6)); transition:transform .3s ease; border-radius:28px; }
+    .screen-slide:hover img { transform:translateY(-6px); }
+    .screen-slide span { font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,0.3); }
+    .screen-slide.featured span { color:var(--accent); }
   </style>
 </head>
 
 <body>
   <div class="accent-bar" aria-hidden="true"></div>
 
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="./index.html" class="brand">
-        <span class="brand-mark"></span>
-        <span class="brand-text">Jose Alvarez</span>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="./index.html" aria-label="Home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">
+          <span class="brand-name">Jose Alvarez</span>
+          <span class="brand-sub">Design</span>
+        </span>
       </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="nav-links">
-        <a href="./index.html">Work</a>
         <a href="./resume.html">Resume</a>
         <a href="./about.html">About</a>
         <a href="./Jose_Alvarez_CV.pdf" download class="btn-download">Download CV</a>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
   <main>
 
@@ -1040,70 +1190,23 @@
     <section class="hero">
       <div class="container">
         <div class="hero-label">
-          <span>Design Concept</span><span>·</span>
-          <span>iOS · Behavioral Design · 2026</span>
+          <span>UI Complete</span><span>·</span>
+          <span>iOS & Android · React Native · 2026</span>
         </div>
         <h1 class="hero-title">
           The developer's <span class="accent">emotional companion</span>
         </h1>
         <p class="hero-subtitle">
-          DuoGit transforms GitHub activity into visible, motivating progress. An iOS widget that fills the gap between utilitarian productivity tools and generic gamification apps.
+          DuoGit transforms GitHub activity into visible, motivating progress. A cross-platform mobile app with an emotional mascot system, SPACE metrics dashboard, and league ranking — filling the gap between utilitarian coding tools and generic gamification apps.
         </p>
         <div class="tldr">
           <div class="tldr-item"><span class="tldr-icon">👤</span><span>UX / Product Design</span></div>
-          <div class="tldr-item"><span class="tldr-icon">🛠</span><span>Figma · iOS Design Systems</span>
-          </div>
-          <div class="tldr-item highlight"><span class="tldr-icon">📈</span><span>Aimed at 70%+ Day 30 Retention</span>
-          </div>
+          <div class="tldr-item"><span class="tldr-icon">🛠</span><span>Figma · React Native · Expo</span></div>
+          <div class="tldr-item"><span class="tldr-icon">📱</span><span>9 Screens Built</span></div>
+          <div class="tldr-item highlight"><span class="tldr-icon">📈</span><span>Aimed at 70%+ Day 30 Retention</span></div>
         </div>
         <div class="hero-image">
-          <div style="position:absolute;inset:0;background:linear-gradient(140deg,#060810 0%,#0b1120 50%,#080e1a 100%);display:flex;align-items:center;justify-content:center;gap:20px;padding:32px;overflow:hidden">
-            <!-- ambient glow -->
-            <div style="position:absolute;width:700px;height:400px;background:radial-gradient(ellipse,rgba(16,185,129,0.07) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none"></div>
-            <!-- Small Widget -->
-            <div style="width:130px;height:130px;background:#1c1c1e;border-radius:20px;padding:13px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 36px rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.07);position:relative;overflow:hidden;flex-shrink:0">
-              <div style="position:absolute;top:-12px;right:-12px;width:70px;height:70px;background:radial-gradient(circle,rgba(16,185,129,0.18) 0%,transparent 70%)"></div>
-              <div>
-                <div style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.45);margin-bottom:5px;letter-spacing:.04em">DUOGIT</div>
-                <div style="font-size:28px;font-weight:700;color:#fff;line-height:1">7</div>
-                <div style="font-size:9px;font-weight:600;color:#10b981;margin-top:2px;letter-spacing:.04em">DÍAS</div>
-              </div>
-              <div style="align-self:flex-end;font-size:30px;line-height:1">🔥</div>
-            </div>
-            <!-- Medium Widget (featured) -->
-            <div style="width:270px;height:130px;background:#1c1c1e;border-radius:20px;padding:16px 20px;display:flex;justify-content:space-between;box-shadow:0 16px 48px rgba(0,0,0,0.55),0 0 0 1px rgba(16,185,129,0.22);border:1px solid rgba(255,255,255,0.07);position:relative;overflow:hidden;flex-shrink:0">
-              <div style="position:absolute;top:-25px;right:-10px;width:160px;height:160px;background:radial-gradient(circle,rgba(16,185,129,0.13) 0%,transparent 70%)"></div>
-              <div style="display:flex;flex-direction:column;justify-content:space-between;width:55%;z-index:2">
-                <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:.04em">DUOGIT</div>
-                <div>
-                  <div style="font-size:30px;font-weight:700;color:#fff;line-height:1">7</div>
-                  <div style="font-size:10px;font-weight:600;color:#10b981;margin-top:2px;letter-spacing:.04em">DÍAS SEGUIDOS</div>
-                  <div style="font-size:10px;color:rgba(255,255,255,0.38);margin-top:5px">Hace 2 horas</div>
-                </div>
-              </div>
-              <div style="width:40%;display:flex;align-items:center;justify-content:center;font-size:56px;z-index:2">🔥</div>
-            </div>
-            <!-- Large Widget -->
-            <div style="width:270px;height:270px;background:#1c1c1e;border-radius:20px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 40px rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.07);position:relative;overflow:hidden;flex-shrink:0">
-              <div style="position:absolute;top:-30px;right:-30px;width:180px;height:180px;background:radial-gradient(circle,rgba(16,185,129,0.1) 0%,transparent 70%)"></div>
-              <div style="display:flex;justify-content:space-between;align-items:flex-start;z-index:2">
-                <div>
-                  <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);margin-bottom:6px;letter-spacing:.04em">DUOGIT</div>
-                  <div style="font-size:38px;font-weight:700;color:#fff;line-height:1">54</div>
-                  <div style="font-size:11px;font-weight:600;color:#10b981;margin-top:3px;letter-spacing:.04em">DÍAS SEGUIDOS</div>
-                </div>
-                <div style="font-size:60px;line-height:1">🏆</div>
-              </div>
-              <div style="background:rgba(0,0,0,0.22);border-radius:10px;padding:11px;z-index:2">
-                <div style="font-size:9px;color:rgba(255,255,255,0.38);margin-bottom:7px;font-weight:600;letter-spacing:.06em">ÚLTIMAS 4 SEMANAS</div>
-                <div style="display:grid;grid-template-columns:repeat(14,1fr);gap:3px">
-                  <div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.9"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.5"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.4"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.7"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.5"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.9"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div>
-                  <div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.4"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.9"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.3"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.4"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.9"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div>
-                  <div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.4"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.7"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.5"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.6"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.2"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.9"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.4"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:1"></div><div style="aspect-ratio:1;background:#10b981;border-radius:2px;opacity:.8"></div><div style="aspect-ratio:1;background:rgba(255,255,255,0.08);border-radius:2px"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <img src="img/duogit/portada.png" alt="DuoGit — App Overview" />
         </div>
       </div>
     </section>
@@ -1114,7 +1217,7 @@
         <span class="section-label">01 — Problem</span>
         <h2 class="section-title">GitHub lacks the <span class="accent">emotional dimension</span></h2>
         <p class="section-text">The GitHub contribution graph is a powerful data visualization, but it offers purely passive, technical feedback. There are no proactive "nudges" or emotional reinforcements when a developer is at risk of breaking their streak.</p>
-        <p class="section-text section-text">Current solutions are either strictly utilitarian coding tools or generic gamification (habit-tracking) apps that don't differentiate meaningful code contributions from generic daily tasks.</p>
+        <p class="section-text">Current solutions are either strictly utilitarian coding tools or generic gamification (habit-tracking) apps that don't differentiate meaningful code contributions from generic daily tasks.</p>
         <div class="pws-grid">
           <div class="pws-card">
             <h3><span style="color:#ef4444">●</span> The Problem</h3>
@@ -1259,62 +1362,48 @@
     <!-- TRADEOFF/ZONING -->
     <section class="section">
       <div class="container">
-        <div class="two-col reverse">
-          <div>
-            <span class="section-label tradeoff">05 — Information Architecture</span>
-            <h2 class="section-title">60% Text / 40% Visual</h2>
-            <p class="section-text">The widget real estate in iOS is extremely constrained. The space was divided into a clear zoning model: 60% Left Zone (Information) and 40% Right Zone (Visual/Avatar).</p>
-            <p class="section-text" style="margin-top:16px">The hierarchy mandates the <strong>Main Value Proposition</strong> (Streak Duration) at the top left, Context (Time since Last Commit) in the middle, and the <strong>Emotional Ghost Mascot</strong> occupying the entire right section.</p>
+        <span class="section-label">05 — Widget Design</span>
+        <h2 class="section-title">Three widgets, one <span class="accent">behavioral loop</span></h2>
+        <p class="section-text">Designed as the next phase, the widget layer surfaces the most critical state — streak health — directly on the home screen. Three sizes, each with a distinct role: reinforce progress, broadcast rank, or trigger recovery before the streak breaks.</p>
+        <div class="screen-card" style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:24px;padding:48px 32px;display:flex;gap:48px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;max-width:1000px;">
+          <div style="display:grid;gap:12px;flex:0 0 42%;min-width:260px;">
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;">
+              <div style="border-radius:var(--r);overflow:hidden;">
+                <img src="img/duogit/widget-racha.png" alt="Widget Racha" style="width:100%;display:block;" />
+              </div>
+              <div style="border-radius:var(--r);overflow:hidden;">
+                <img src="img/duogit/widget-ranking.png" alt="Widget Ranking" style="width:100%;display:block;" />
+              </div>
+            </div>
+            <div style="border-radius:var(--r);overflow:hidden;">
+              <img src="img/duogit/widget-critico.png" alt="Widget Crítico" style="width:100%;display:block;" />
+            </div>
           </div>
-          <div class="tradeoff-visual" style="padding:0;background:transparent;border:none;display:flex;align-items:center;justify-content:center">
-            <!-- Annotated Zoning Diagram -->
-            <div style="width:100%;max-width:420px">
-              <!-- Zone labels -->
-              <div style="display:flex;margin-bottom:8px;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--text-faint)">
-                <div style="width:60%;text-align:center">60% — INFORMACIÓN</div>
-                <div style="width:40%;text-align:center">40% — VISUAL</div>
+          <div style="display:flex;flex-direction:column;gap:20px;flex:1 1 52%;min-width:280px;">
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <div style="width:44px;height:44px;flex-shrink:0;background:var(--accent-soft);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🔥</div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Small — Progress</div>
+                <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Reinforces streak momentum by rewarding daily commits with visible habit progress. One look = full context, no app open needed.</div>
               </div>
-              <!-- Widget with zone overlay -->
-              <div style="position:relative;width:100%;height:160px;background:#1c1c1e;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 12px 40px rgba(0,0,0,0.4)">
-                <!-- Zone divider -->
-                <div style="position:absolute;left:60%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.12);z-index:3"></div>
-                <!-- Left zone highlight -->
-                <div style="position:absolute;left:0;top:0;width:60%;bottom:0;background:rgba(16,185,129,0.05);z-index:1"></div>
-                <!-- Right zone highlight -->
-                <div style="position:absolute;left:60%;top:0;right:0;bottom:0;background:rgba(59,130,246,0.05);z-index:1"></div>
-                <!-- Widget content -->
-                <div style="position:relative;z-index:2;height:100%;display:flex;justify-content:space-between;padding:20px 24px">
-                  <!-- Left: text hierarchy -->
-                  <div style="width:55%;display:flex;flex-direction:column;justify-content:space-between">
-                    <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:.04em">DUOGIT</div>
-                    <div>
-                      <!-- Primary -->
-                      <div style="display:flex;align-items:baseline;gap:8px">
-                        <div style="font-size:36px;font-weight:700;color:#fff;line-height:1">7</div>
-                        <div style="font-size:11px;font-weight:600;color:#10b981;letter-spacing:.04em">DÍAS</div>
-                      </div>
-                      <!-- Secondary -->
-                      <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px">Hace 3 horas</div>
-                      <!-- Tertiary -->
-                      <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:3px">Quedan 5 horas</div>
-                    </div>
-                  </div>
-                  <!-- Right: mascot -->
-                  <div style="width:40%;display:flex;align-items:center;justify-content:center;font-size:48px">🔥</div>
-                </div>
+            </div>
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <div style="width:44px;height:44px;flex-shrink:0;background:rgba(59,130,246,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🏆</div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Small — Status</div>
+                <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Delivers instant competitive awareness with league placement and points context. Motivates without friction.</div>
               </div>
-              <!-- Hierarchy annotations -->
-              <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
-                <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:8px;font-size:11px;color:#10b981;font-weight:600">
-                  <span>①</span> Streak — Primary
-                </div>
-                <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:8px;font-size:11px;color:var(--text-muted)">
-                  <span>②</span> Último commit — Secondary
-                </div>
-                <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:8px;font-size:11px;color:var(--text-faint)">
-                  <span>③</span> Tiempo restante — Tertiary
-                </div>
+            </div>
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <div style="width:44px;height:44px;flex-shrink:0;background:rgba(245,158,11,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">⚠️</div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Wide — Risk</div>
+                <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Triggers intervention when streak health drops, using urgency and emotional cues to prompt recovery before the day ends.</div>
               </div>
+            </div>
+            <div style="padding:16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:12px;">
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);margin-bottom:8px;">Design Principle</div>
+              <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">A unified 60/40 zoning model across all sizes — data left, emotional state right — ensures instant scanning with zero cognitive load.</div>
             </div>
           </div>
         </div>
@@ -1326,214 +1415,344 @@
       <div class="container">
         <span class="section-label solution">06 — Solution</span>
         <h2 class="section-title">Visualizing GitHub Progress</h2>
-        <p class="section-text" style="margin-bottom:32px">DuoGit provides real-time GitHub integration presented dynamically across multiple widget sizes natively within iOS, using states to drive behavior.</p>
+        <p class="section-text" style="margin-bottom:32px">DuoGit provides GitHub integration presented dynamically across the app's screens and widget states natively on iOS & Android, using emotional feedback to drive behavior.</p>
         <div class="features-list">
           <div class="feature-row">
             <div class="feature-info">
-              <h4>Direct Integration</h4>
-              <p>Connects directly to GitHub via API. No manual tracking inside the app is necessary.</p>
-            </div><span class="feature-badge shipped">Built In</span>
-          </div>
-          <div class="feature-row">
-            <div class="feature-info">
               <h4>Dynamic Mascot States</h4>
-              <p>A ghost companion that visually reacts: Happy (Green), Worried (Yellow), Sad (Gray), Neutral (Blue).</p>
-            </div><span class="feature-badge shipped">Built In</span>
+              <p>4 illustrated avatar expressions — Happy, Worried, Sad, Neutral — each with a unique glow halo. The emotional state mirrors commit activity in real time.</p>
+            </div><span class="feature-badge shipped">Built</span>
           </div>
           <div class="feature-row">
             <div class="feature-info">
-              <h4>Intelligent Zoning</h4>
-              <p>UX hierarchies clearly segment "data" from "emotion" allowing tracking at an instantaneous glance.</p>
-            </div><span class="feature-badge shipped">Built In</span>
+              <h4>SPACE Metrics Dashboard</h4>
+              <p>Four performance dimensions — Efficiency, Satisfaction, Performance, Activity — each with SVG sparkline charts, AI insights, and trend indicators.</p>
+            </div><span class="feature-badge shipped">Built</span>
           </div>
           <div class="feature-row">
             <div class="feature-info">
-              <h4>Size Variability</h4>
-              <p>Supports Small, Medium, and Large widgets to match user preference and screen density priorities.</p>
-            </div><span class="feature-badge shipped">Built In</span>
+              <h4>Liga Ranking System</h4>
+              <p>8 creative developer ranks from Jr Dev 🌱 to 10x Dev 🚀, unlocked by streak consistency. Visualized as a progress arc on the mascot ring in Profile.</p>
+            </div><span class="feature-badge shipped">Built</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Profile Ring</h4>
+              <p>SVG circular progress arc colored by current rank, mascot clipped inside the circle, floating badges with levitation animation and percentage at the arc tip.</p>
+            </div><span class="feature-badge shipped">Built</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>GitHub OAuth</h4>
+              <p>Direct integration via expo-auth-session. Connects automatically to commits — no manual tracking required.</p>
+            </div><span class="feature-badge" style="background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.3);">Designed</span>
+          </div>
+          <div class="feature-row">
+            <div class="feature-info">
+              <h4>Home Screen Widget</h4>
+              <p>iOS & Android widget showing live streak, mascot state and daily commit status at a glance from the home screen.</p>
+            </div><span class="feature-badge next">Next</span>
           </div>
         </div>
-        <!-- Custom Visuals: Widget States & Sizes -->
-        <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:16px;margin-top:48px;">The iOS Widget Family</h3>
-        <p class="section-text" style="margin-bottom:32px">The system scales gracefully across screen densities. A unified 60/40 zoning model across all sizes ensures the user always finds their context (left) and emotional state (right) instantly.</p>
+        <!-- GitHub OAuth Screen Preview -->
+        <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:16px;margin-top:48px;">GitHub OAuth — What's Coming</h3>
+        <p class="section-text" style="margin-bottom:32px">The next screen to ship. A GitHub-native authorization flow via <code style="font-size:12px;background:var(--bg-card);border:1px solid var(--stroke-light);padding:2px 6px;border-radius:4px;">expo-auth-session</code> — no manual tracking, no CSV uploads. Connect once and every commit syncs automatically.</p>
 
-        <!-- Widget Sandbox -->
-        <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:24px;padding:48px 24px;display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:flex-start">
-          
-          <!-- Small Widget -->
-          <div style="width:160px;height:160px;background:#1C1C1E;border-radius:22px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.2);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.05)">
-            <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(0,0,0,0) 70%)"></div>
-            <div>
-              <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.6)">DuoGit</span>
-              </div>
-              <div style="font-size:28px;font-weight:700;color:#fff;line-height:1">12</div>
-              <div style="font-size:11px;font-weight:500;color:var(--accent);margin-top:2px">DÍAS SEGUIDOS</div>
-            </div>
-            <div style="align-self:flex-end;font-size:32px;line-height:1">🔥</div>
+        <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:24px;padding:48px 32px;display:flex;gap:48px;align-items:center;justify-content:center;flex-wrap:wrap;">
+
+          <!-- Phone frame — OAuth screen -->
+          <div style="flex-shrink:0;width:520px;display:flex;align-items:center;justify-content:center;">
+            <img src="img/duogit/mockup-github-oauth.png" alt="GitHub OAuth — What's Coming" style="width:100%;height:auto;display:block;object-fit:contain;border-radius:40px;box-shadow:0 32px 64px rgba(0,0,0,0.4);" />
           </div>
 
-          <!-- Medium Widget -->
-          <div style="width:338px;height:160px;background:#1C1C1E;border-radius:22px;padding:20px 24px;display:flex;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.2);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.05)">
-            <div style="position:absolute;top:-40px;right:-20px;width:200px;height:200px;background:radial-gradient(circle, rgba(245,158,11,0.15) 0%, rgba(0,0,0,0) 70%)"></div>
-            <div style="display:flex;flex-direction:column;justify-content:space-between;width:55%;z-index:2">
-              <div style="display:flex;align-items:center;gap:6px">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6)">DuoGit</span>
-              </div>
-              <div>
-                <div style="font-size:32px;font-weight:700;color:#fff;line-height:1">12</div>
-                <div style="font-size:12px;font-weight:600;color:#f59e0b;margin-top:2px">DÍAS SEGUIDOS</div>
-                <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;line-height:1.4">Quedan 5 horas para mantener la racha.</div>
-              </div>
-            </div>
-            <div style="width:40%;display:flex;align-items:center;justify-content:center;font-size:48px;z-index:2">⚠️</div>
-          </div>
-
-          <!-- Large Widget -->
-          <div style="width:338px;height:338px;background:#1C1C1E;border-radius:22px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 32px rgba(0,0,0,0.25);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.05)">
-            <div style="position:absolute;top:-40px;right:-40px;width:250px;height:250px;background:radial-gradient(circle, rgba(16,185,129,0.1) 0%, rgba(0,0,0,0) 70%)"></div>
-            <!-- Top Half: Status -->
-            <div style="display:flex;justify-content:space-between;align-items:center;height:45%;z-index:2">
-              <div style="display:flex;flex-direction:column;gap:4px">
-                <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                  <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6)">DuoGit</span>
+          <!-- Description -->
+          <div style="max-width:380px;flex:1;">
+            <div style="display:flex;flex-direction:column;gap:20px;">
+              <div style="display:flex;gap:16px;align-items:flex-start;">
+                <div style="width:44px;height:44px;flex-shrink:0;background:rgba(35,134,54,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                  <svg width="20" height="20" viewBox="0 0 16 16" style="fill:#3fb950;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
                 </div>
-                <div style="font-size:42px;font-weight:700;color:#fff;line-height:1">54</div>
-                <div style="font-size:13px;font-weight:600;color:var(--accent);margin-top:2px">DÍAS SEGUIDOS</div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Native GitHub Auth</div>
+                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Uses <code style="font-size:11px;background:var(--bg-card);border:1px solid var(--stroke-light);padding:1px 5px;border-radius:3px;">expo-auth-session</code> for a proper OAuth 2.0 flow — no password stored, no third-party keys, just GitHub's own consent screen.</div>
+                </div>
               </div>
-              <div style="font-size:52px;line-height:1">🏆</div>
-            </div>
-            
-            <!-- Bottom Half: Graph -->
-            <div style="height:45%;background:rgba(0,0,0,0.2);border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:center;z-index:2">
-              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:8px;font-weight:600">ÚLTIMAS 4 SEMANAS</div>
-              <!-- Simulated Git Graph -->
-              <div style="display:grid;grid-template-columns:repeat(14, 1fr);gap:4px">
-                <!-- Row 1 -->
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <!-- Row 2 -->
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
-                <!-- Row 3 -->
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.6"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.2"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.4"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:1"></div>
-                <div style="aspect-ratio:1;background:var(--accent);border-radius:2px;opacity:0.8"></div>
-                <div style="aspect-ratio:1;background:rgba(255,255,255,0.1);border-radius:2px;opacity:1"></div>
+              <div style="display:flex;gap:16px;align-items:flex-start;">
+                <div style="width:44px;height:44px;flex-shrink:0;background:var(--accent-soft);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">⚡</div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Automatic Sync</div>
+                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Once authorized, every commit syncs in real time. Streak tracking, SPACE metrics and Liga ranking all update without any manual input.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:16px;align-items:flex-start;">
+                <div style="width:44px;height:44px;flex-shrink:0;background:rgba(59,130,246,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🔒</div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Read-Only Scope</div>
+                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Minimal permissions — Duogit only reads activity. It never writes, creates, or modifies anything in your repositories.</div>
+                </div>
+              </div>
+              <div style="padding:16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:12px;">
+                <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);margin-bottom:8px;">Implementation</div>
+                <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">The OAuth screen follows GitHub's native visual language — dark background, GitHub green CTA, familiar consent pattern — so developers authorize without hesitation.</div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- iOS Widget Home Screen Mockup -->
+        <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:16px;margin-top:48px;">The iOS Widget Family</h3>
+        <p class="section-text" style="margin-bottom:32px">The widget scales gracefully across three sizes — all designed to live on the home screen, the first thing you see when you unlock your phone. A unified 60/40 zoning model keeps data left, emotional state right, every time.</p>
+
+        <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:24px;padding:48px 32px;display:flex;gap:48px;align-items:center;justify-content:center;flex-wrap:wrap;">
+
+          <!-- iOS Phone Frame — Widget Auto-Slider -->
+          <div style="flex-shrink:0;width:460px;position:relative;">
+            <div id="widget-slide-home" style="transition:opacity 0.6s ease;">
+              <img src="img/duogit/mockup-widget-home.png" alt="Widget — Home Screen" style="width:100%;height:auto;display:block;border-radius:40px;box-shadow:0 40px 80px rgba(0,0,0,0.55);" />
+            </div>
+            <div id="widget-slide-lock" style="position:absolute;inset:0;opacity:0;transition:opacity 0.6s ease;">
+              <img src="img/duogit/mockup-widget-lock.png" alt="Widget — Lock Screen" style="width:100%;height:auto;display:block;border-radius:40px;box-shadow:0 40px 80px rgba(0,0,0,0.55);" />
+            </div>
+            <div style="display:flex;justify-content:center;gap:6px;margin-top:16px;">
+              <span id="wdot-0" style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;transition:background .4s;"></span>
+              <span id="wdot-1" style="width:6px;height:6px;border-radius:50%;background:var(--stroke-light);display:inline-block;transition:background .4s;"></span>
+            </div>
+          </div>
+          <script>
+          (function(){
+            var cur = 0;
+            setInterval(function(){
+              document.getElementById('widget-slide-home').style.opacity = cur === 0 ? '0' : '1';
+              document.getElementById('widget-slide-lock').style.opacity = cur === 0 ? '1' : '0';
+              document.getElementById('wdot-0').style.background = cur === 0 ? 'var(--stroke-light)' : 'var(--accent)';
+              document.getElementById('wdot-1').style.background = cur === 0 ? 'var(--accent)' : 'var(--stroke-light)';
+              cur = (cur + 1) % 2;
+            }, 3500);
+          })();
+          </script>
+
+          <!-- Widget Descriptions -->
+          <div style="max-width:380px;flex:1;">
+            <div style="display:flex;flex-direction:column;gap:20px;">
+              <div style="display:flex;gap:16px;align-items:flex-start;">
+                <div style="width:44px;height:44px;flex-shrink:0;background:var(--accent-soft);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🔥</div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Small — Streak at a Glance</div>
+                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Current streak count + happy mascot in a compact 2×2 tile. One look = full context, no app open needed.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:16px;align-items:flex-start;">
+                <div style="width:44px;height:44px;flex-shrink:0;background:rgba(59,130,246,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🏆</div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Small — Liga Rank</div>
+                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Current league rank and title. Motivates without friction — no need to open the app to know where you stand.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:16px;align-items:flex-start;">
+                <div style="width:44px;height:44px;flex-shrink:0;background:rgba(245,158,11,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">⚠️</div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Wide — Streak Alert</div>
+                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Real-time countdown when your streak is at risk. The worried mascot creates urgency without being annoying — emotional design with intent.</div>
+                </div>
+              </div>
+              <div style="padding:16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:12px;">
+                <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);margin-bottom:8px;">Design Principle</div>
+                <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">A unified 60/40 zoning model across all sizes — data left, emotional state right — ensures instant scanning with zero cognitive load.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Screens — Infinite Slider -->
+        <div style="margin-top:64px">
+          <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:16px">The Mobile App — 9 Screens</h3>
+          <p class="section-text" style="margin-bottom:32px">Beyond the widget, DuoGit ships as a full React Native app. Each screen is purpose-built around a single behavioral goal: making the developer's progress impossible to ignore.</p>
+
+          <div class="screens-slider" style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:24px;padding:40px 0;">
+            <div class="screens-track">
+              <!-- set 1 -->
+              <div class="screen-slide"><img src="img/duogit/mockup-login.png" alt="Login"/><span>Login</span></div>
+              <div class="screen-slide featured"><img src="img/duogit/mockup-dashboard.png" alt="Dashboard"/><span>Dashboard</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-metrics.png" alt="Metrics"/><span>SPACE Metrics</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-league.png" alt="Liga"/><span>Liga</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-profile.png" alt="Profile"/><span>Profile</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-status.png" alt="Status"/><span>Status</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-streak.png" alt="Streak"/><span>Streak</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-github-oauth.png" alt="GitHub OAuth"/><span>GitHub OAuth</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-league-rank.png" alt="League Rank"/><span>League Rank</span></div>
+              <!-- set 2 — copia exacta para el loop infinito -->
+              <div class="screen-slide"><img src="img/duogit/mockup-login.png" alt="Login"/><span>Login</span></div>
+              <div class="screen-slide featured"><img src="img/duogit/mockup-dashboard.png" alt="Dashboard"/><span>Dashboard</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-metrics.png" alt="Metrics"/><span>SPACE Metrics</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-league.png" alt="Liga"/><span>Liga</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-profile.png" alt="Profile"/><span>Profile</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-status.png" alt="Status"/><span>Status</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-streak.png" alt="Streak"/><span>Streak</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-github-oauth.png" alt="GitHub OAuth"/><span>GitHub OAuth</span></div>
+              <div class="screen-slide"><img src="img/duogit/mockup-league-rank.png" alt="League Rank"/><span>League Rank</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Liga Ranking Deep Dive -->
+        <div style="margin-top:64px;">
+          <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:16px;">Liga — Competitive Ranking</h3>
+          <p class="section-text" style="margin-bottom:32px;">8 creative developer ranks from Jr Dev 🌱 to 10x Dev 🚀, unlocked by streak consistency. The league screen turns solo habit-building into a social game — without the toxicity.</p>
+
+          <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:24px;padding:48px 40px;display:flex;gap:40px;align-items:center;justify-content:center;flex-wrap:wrap;">
+
+            <!-- Phone mockup — Liga screen -->
+            <div style="flex-shrink:0;width:420px;">
+              <img src="img/duogit/mockup-league-rank.png" alt="Liga — League Rank screen" style="width:100%;height:auto;display:block;object-fit:contain;border-radius:40px;box-shadow:0 32px 64px rgba(0,0,0,0.55);" />
+            </div>
+
+            <!-- Text — Rank progression -->
+            <div style="flex:0 0 320px;min-width:320px;box-sizing:border-box;">
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-faint);margin-bottom:12px;text-align:center;">8 Ranks · Unlocked by Streak</div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:20px;width:100%;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;height:74px;justify-content:center;border-radius:10px;background:rgba(100,116,139,0.08);border:1px solid rgba(100,116,139,0.15);text-align:center;">
+                  <span style="font-size:18px;">🌱</span><span style="font-size:10px;font-weight:700;color:#94a3b8;">Jr Dev</span><span style="font-size:9px;color:var(--text-faint);">0d</span>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;height:74px;justify-content:center;border-radius:10px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);text-align:center;">
+                  <span style="font-size:18px;">⚡</span><span style="font-size:10px;font-weight:700;color:#60a5fa;">Mid Dev</span><span style="font-size:9px;color:var(--text-faint);">7d</span>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;height:74px;justify-content:center;border-radius:10px;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.15);text-align:center;">
+                  <span style="font-size:18px;">🔥</span><span style="font-size:10px;font-weight:700;color:#fb923c;">Sr Dev</span><span style="font-size:9px;color:var(--text-faint);">30d</span>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;height:74px;justify-content:center;border-radius:10px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.15);text-align:center;">
+                  <span style="font-size:18px;">🥷</span><span style="font-size:10px;font-weight:700;color:#a78bfa;">Ninja</span><span style="font-size:9px;color:var(--text-faint);">60d</span>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;height:74px;justify-content:center;border-radius:10px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.15);text-align:center;">
+                  <span style="font-size:18px;">🧙</span><span style="font-size:10px;font-weight:700;color:#c084fc;">Mago</span><span style="font-size:9px;color:var(--text-faint);">90d</span>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;height:74px;justify-content:center;border-radius:10px;background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.15);text-align:center;">
+                  <span style="font-size:18px;">🏗️</span><span style="font-size:10px;font-weight:700;color:#38bdf8;">Arq.</span><span style="font-size:9px;color:var(--text-faint);">150d</span>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;height:74px;justify-content:center;border-radius:10px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.15);text-align:center;">
+                  <span style="font-size:18px;">👻</span><span style="font-size:10px;font-weight:700;color:#4ade80;">Ghost</span><span style="font-size:9px;color:var(--text-faint);">250d</span>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;height:74px;justify-content:center;border-radius:10px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);text-align:center;">
+                  <span style="font-size:18px;">🚀</span><span style="font-size:10px;font-weight:700;color:#fbbf24;">10x Dev</span><span style="font-size:9px;color:var(--text-faint);">365d</span>
+                </div>
+              </div>
+              <div style="padding:16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:12px;text-align:center;width:100%;box-sizing:border-box;">
+                <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);margin-bottom:8px;">Design Insight</div>
+                <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Ranks reward <strong style="color:var(--text)">streak consistency</strong>, not raw commit count — sustainable habits over burnout sprints.</div>
+              </div>
+            </div>
+
           </div>
         </div>
 
         <!-- Emotion States & Competitive Analysis -->
         <div style="margin-top: 64px">
           <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:16px">Emotional System & Market Position</h3>
-          <p class="section-text" style="margin-bottom:32px">The widget maps directly to specific user feelings during their daily routine. This deliberate anthropomorphism creates an engagement hook that utilitarian tools lack.</p>
+          <p class="section-text" style="margin-bottom:32px">The app maps directly to specific user feelings during their daily routine. This deliberate anthropomorphism creates an engagement hook that utilitarian tools lack.</p>
           
-          <div class="two-col" style="align-items:start">
-            <!-- Emotive States -->
-            <div style="display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;padding:16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r);gap:16px">
-                <div style="width:48px;height:48px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px">🔥</div>
-                <div>
-                  <div style="font-size:14px;font-weight:600;color:var(--text)">Happy / Motivated</div>
-                  <div style="font-size:12px;color:var(--text-faint);margin-top:2px">Streak is active. User feels consistent.</div>
+          <!-- Emotive States — fila horizontal 4 gatos -->
+          <div style="margin-bottom:48px;">
+            <div class="cat-emotions-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+
+              <!-- Neutral -->
+              <div style="background:#0B0817;border-radius:20px;padding:24px 16px 20px;border:1px solid rgba(59,130,246,0.2);display:flex;flex-direction:column;align-items:center;gap:12px;">
+                <div style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);">
+                  <span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;">Ready</span>
+                </div>
+                <img src="img/duogit/cat-neutral.png" style="width:100%;max-width:120px;display:block;" alt="Neutral"/>
+                <div style="text-align:center;">
+                  <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Neutral</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.5;">Waiting for your first commit. The day is full of potential.</div>
                 </div>
               </div>
-              <div style="display:flex;align-items:center;padding:16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r);gap:16px">
-                <div style="width:48px;height:48px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px">⚠️</div>
-                <div>
-                  <div style="font-size:14px;font-weight:600;color:var(--text)">Worried / Alert</div>
-                  <div style="font-size:12px;color:var(--text-faint);margin-top:2px">Streak at risk (< 12 hours left).</div>
+
+              <!-- Happy -->
+              <div style="background:#0B0817;border-radius:20px;padding:24px 16px 20px;border:1px solid rgba(16,185,129,0.25);display:flex;flex-direction:column;align-items:center;gap:12px;">
+                <div style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.35);">
+                  <span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#10b981;">On Track</span>
+                </div>
+                <img src="img/duogit/cat-happy.png" style="width:100%;max-width:120px;display:block;" alt="Happy"/>
+                <div style="text-align:center;">
+                  <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Happy</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.5;">You're crushing it! Consistent commits over the last 3 days.</div>
                 </div>
               </div>
-              <div style="display:flex;align-items:center;padding:16px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r);gap:16px">
-                <div style="width:48px;height:48px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px">💔</div>
-                <div>
-                  <div style="font-size:14px;font-weight:600;color:var(--text)">Sad / Regretful</div>
-                  <div style="font-size:12px;color:var(--text-faint);margin-top:2px">Streak lost. Restart required.</div>
+
+              <!-- Worried -->
+              <div style="background:#0B0817;border-radius:20px;padding:24px 16px 20px;border:1px solid rgba(245,158,11,0.2);display:flex;flex-direction:column;align-items:center;gap:12px;">
+                <div style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);">
+                  <span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f59e0b;">At Risk</span>
                 </div>
+                <img src="img/duogit/cat-worried.png" style="width:100%;max-width:120px;display:block;" alt="Worried"/>
+                <div style="text-align:center;">
+                  <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Worried</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.5;">No activity for 20 hours. 4 hours left to save your streak.</div>
+                </div>
+              </div>
+
+              <!-- Sad -->
+              <div style="background:#0B0817;border-radius:20px;padding:24px 16px 20px;border:1px solid rgba(100,116,139,0.2);display:flex;flex-direction:column;align-items:center;gap:12px;">
+                <div style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;background:rgba(100,116,139,0.12);border:1px solid rgba(100,116,139,0.25);">
+                  <span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8;">Streak Broken</span>
+                </div>
+                <img src="img/duogit/cat-sad.png" style="width:100%;max-width:120px;display:block;filter:grayscale(0.35);" alt="Sad"/>
+                <div style="text-align:center;">
+                  <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Sad</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.5;">Oh no! You missed yesterday. Commit today to cheer them up.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Competitive Analysis Table -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;">
+            <div>
+              <span class="section-label insight">Competitive Landscape</span>
+              <div style="margin-top:12px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);overflow:hidden">
+                <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left">
+                  <thead>
+                    <tr style="border-bottom:1px solid var(--stroke-light);color:var(--text-muted)">
+                      <th style="padding:12px 20px;font-weight:500">Feature</th>
+                      <th style="padding:12px 20px;font-weight:600;color:var(--accent)">DuoGit</th>
+                      <th style="padding:12px 20px;font-weight:500">GitHub</th>
+                      <th style="padding:12px 20px;font-weight:500">Duolingo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid var(--stroke-light)">
+                      <td style="padding:16px 20px;color:var(--text-muted)">GitHub API Sync</td>
+                      <td style="padding:16px 20px;color:var(--accent)">Yes</td>
+                      <td style="padding:16px 20px;color:var(--text)">Yes</td>
+                      <td style="padding:16px 20px;color:var(--text-faint)">No</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--stroke-light)">
+                      <td style="padding:16px 20px;color:var(--text-muted)">Emotional Avatar</td>
+                      <td style="padding:16px 20px;color:var(--accent)">Yes</td>
+                      <td style="padding:16px 20px;color:var(--text-faint)">No</td>
+                      <td style="padding:16px 20px;color:var(--text)">Yes</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--stroke-light)">
+                      <td style="padding:16px 20px;color:var(--text-muted)">Home Screen Widget</td>
+                      <td style="padding:16px 20px;color:#fbbf24">Next</td>
+                      <td style="padding:16px 20px;color:var(--text-faint)">No</td>
+                      <td style="padding:16px 20px;color:var(--text)">Yes</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:16px 20px;color:var(--text-muted)">Developer Focus</td>
+                      <td style="padding:16px 20px;color:var(--accent)">Yes</td>
+                      <td style="padding:16px 20px;color:var(--text)">Yes</td>
+                      <td style="padding:16px 20px;color:var(--text-faint)">No</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-
-            <!-- Competitive Analysis Table -->
-            <div style="background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);overflow:hidden">
-              <div style="padding:16px 20px;border-bottom:1px solid var(--stroke-light);background:var(--bg-elevated)">
-                <h4 style="font-size:14px;font-weight:600">Competitive Landscape</h4>
+            <div>
+              <span class="section-label insight">Market Position</span>
+              <div style="margin-top:12px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);overflow:hidden;padding:28px;display:flex;flex-direction:column;justify-content:center;gap:16px;">
+                <p style="font-size:15px;line-height:1.8;color:var(--text-muted);">DuoGit owns the <strong style="color:var(--text);">developer behavior layer</strong> by pairing live commit sync with emotional streak coaching. It turns progress signals into motivating feedback, closing the gap between code tracking and sustained coding habits.</p>
+                <p style="font-size:15px;line-height:1.8;color:var(--text-muted);">Where GitHub tracks history and Duolingo gamifies generic habits, DuoGit is the only product built specifically for <strong style="color:var(--text);">developer consistency</strong> — not just activity.</p>
               </div>
-              <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left">
-                <thead>
-                  <tr style="border-bottom:1px solid var(--stroke-light);color:var(--text-muted)">
-                    <th style="padding:12px 20px;font-weight:500">Feature</th>
-                    <th style="padding:12px 20px;font-weight:600;color:var(--accent)">DuoGit</th>
-                    <th style="padding:12px 20px;font-weight:500">GitHub</th>
-                    <th style="padding:12px 20px;font-weight:500">Duolingo</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="border-bottom:1px solid var(--stroke-light)">
-                    <td style="padding:16px 20px;color:var(--text-muted)">GitHub API Sync</td>
-                    <td style="padding:16px 20px;color:var(--accent)">Yes</td>
-                    <td style="padding:16px 20px;color:var(--text)">Yes</td>
-                    <td style="padding:16px 20px;color:var(--text-faint)">No</td>
-                  </tr>
-                  <tr style="border-bottom:1px solid var(--stroke-light)">
-                    <td style="padding:16px 20px;color:var(--text-muted)">Emotional Avatar</td>
-                    <td style="padding:16px 20px;color:var(--accent)">Yes</td>
-                    <td style="padding:16px 20px;color:var(--text-faint)">No</td>
-                    <td style="padding:16px 20px;color:var(--text)">Yes</td>
-                  </tr>
-                  <tr style="border-bottom:1px solid var(--stroke-light)">
-                    <td style="padding:16px 20px;color:var(--text-muted)">iOS Live Widgets</td>
-                    <td style="padding:16px 20px;color:var(--accent)">Yes</td>
-                    <td style="padding:16px 20px;color:var(--text-faint)">Limited</td>
-                    <td style="padding:16px 20px;color:var(--text)">Yes</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:16px 20px;color:var(--text-muted)">Developer Focus</td>
-                    <td style="padding:16px 20px;color:var(--accent)">Yes</td>
-                    <td style="padding:16px 20px;color:var(--text)">Yes</td>
-                    <td style="padding:16px 20px;color:var(--text-faint)">No</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
         </div>
@@ -1543,7 +1762,7 @@
     <!-- RESULTS & RETRO -->
     <section class="section">
       <div class="container">
-        <span class="section-label">08 — Results</span>
+        <span class="section-label">07 — Results</span>
         <h2 class="section-title">Bringing it all together</h2>
         <p class="section-text" style="margin-bottom:40px">DuoGit defines a clear interaction loop that is easily measurable against industry benchmarks through standard metrics (e.g. Day 30 Retention, NPS) and distinct behavioral indicators tailored for developer environments.</p>
         <div class="results-grid">
@@ -1571,9 +1790,9 @@
             </div>
           </div>
           <div class="retro-card">
-            <h3>↻ What I'd explore next</h3>
-            <p>I would investigate deeper <strong>monetization pathways</strong>, such as exclusive or team-branded ghost avatars. Tying premium cosmetics to the core mechanic could deepen emotional engagement and create a sustainable business model.</p>
-            <p>Additionally, <strong>Desktop Widgets</strong> (macOS/Windows) would keep the feedback loop natively inside the developer workspace context immediately beside their IDEs, reducing the need to look at a phone entirely.</p>
+            <h3>↻ What's next</h3>
+            <p>The immediate path is <strong>GitHub OAuth</strong> via expo-auth-session to replace mock data with live commits, followed by the <strong>home screen widget</strong> — the original trigger for the product concept.</p>
+            <p>Longer term I'd explore <strong>team streaks</strong> (shared mascot between coworkers) and <strong>unlockable avatar skins</strong> per Liga rank — the 4 emotional states are already shipped, new skins per rank would deepen the reward loop without adding friction.</p>
           </div>
         </div>
       </div>

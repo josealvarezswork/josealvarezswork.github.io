@@ -28,12 +28,12 @@
       "id": "duogit",
       "title": "Duo Git",
       "description": "A behavioral design system that transforms GitHub activity into visible, motivating progress.",
-      "category": "Design Concept",
+      "category": "UI Complete",
       "year": "2026",
       "color": "blue",
-      "link": "duogit.html",
+      "link": "./duogit.html",
       "images": [
-        "./img/portada-duogit.jpg"
+        "./img/portada-duogit.png"
       ]
     }
   ]

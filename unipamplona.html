@@ -40,7 +40,10 @@
     * { box-sizing: border-box; margin: 0; padding: 0 }
 
     body {
-      background: var(--bg);
+      background:
+        radial-gradient(800px 500px at 30% 20%, rgba(255,255,255,0.06), transparent 60%),
+        radial-gradient(900px 600px at 80% 40%, rgba(255,255,255,0.04), transparent 65%),
+        var(--bg);
       color: var(--text);
       font-family: var(--sans);
       line-height: 1.6;
@@ -58,39 +61,160 @@
       z-index: 100
     }
 
-    /* ── Nav ── */
-    .nav {
-      position: sticky; top: 0; z-index: 50;
+    /* NAV */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
       padding: 20px 24px;
       background: rgba(7, 7, 9, .85);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--stroke)
+      border-bottom: 1px solid var(--stroke);
     }
-    .nav-inner {
-      max-width: var(--max); margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between
+
+    .nav {
+      width: min(1080px, calc(100% - 48px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .brand { display: flex; align-items: center; gap: 10px }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .brand-mark {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.18);
-      position: relative
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      position: relative;
     }
+
     .brand-mark::before {
       content: "";
-      position: absolute; inset: 4px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.9)
+      position: absolute;
+      inset: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
     }
-    .brand-text { font-size: 12px; font-weight: 600; letter-spacing: .02em }
-    .nav-links { display: flex; gap: 32px; font-size: 12px; letter-spacing: .04em; color: var(--text-muted) }
-    .nav-links a:hover { color: var(--text) }
+
+    .brand-text {
+      line-height: 1.05;
+    }
+
+    .brand-name {
+      display: block;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-sub {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      opacity: 0.7;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      opacity: 0.9;
+    }
+
+    .nav-links a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      align-self: center;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 160ms ease;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
     .btn-download {
       padding: 6px 12px;
-      border: 1px solid rgba(59, 130, 246, 0.5);
+      border: 1px solid rgba(255, 106, 45, 0.5);
       border-radius: 999px;
-      font-weight: 500
+      font-weight: 500;
+    }
+
+    /* HAMBURGER MENU */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    @media (max-width: 640px) {
+      .hamburger {
+        display: flex;
+      }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--bg);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        font-size: 18px;
+        transform: translateX(100%);
+        transition: transform 300ms ease;
+        z-index: 1000;
+      }
+      .nav-links.active {
+        transform: translateX(0);
+      }
     }
 
     /* ── Layout ── */
@@ -453,20 +577,27 @@
 <body>
   <div class="accent-bar" aria-hidden="true"></div>
 
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="./index.html" class="brand">
-        <span class="brand-mark"></span>
-        <span class="brand-text">Jose Alvarez</span>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="./index.html" aria-label="Home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">
+          <span class="brand-name">Jose Alvarez</span>
+          <span class="brand-sub">Design</span>
+        </span>
       </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="nav-links">
-        <a href="./index.html">Work</a>
         <a href="./resume.html">Resume</a>
         <a href="./about.html">About</a>
         <a href="./Jose_Alvarez_CV.pdf" download class="btn-download">Download CV</a>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
   <main>
 
