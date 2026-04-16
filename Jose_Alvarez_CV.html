@@ -7,31 +7,42 @@
   <style>
     @page {
       size: letter;
-      margin: 0.5in 0.6in;
+      margin: 0.28in 0.42in;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 10pt;
-      line-height: 1.5;
+      font-size: 8.9pt;
+      line-height: 1.3;
       color: #000;
       background: #fff;
       max-width: 8.5in;
       margin: 0 auto;
-      padding: 20px;
+      padding: 10px;
     }
-    h1 { font-size: 18pt; margin-bottom: 4px; }
-    h2 { font-size: 11pt; border-bottom: 1px solid #000; padding-bottom: 2px; margin: 16px 0 8px; text-transform: uppercase; }
-    h3 { font-size: 10pt; margin-bottom: 2px; }
-    p { margin-bottom: 8px; }
-    ul { margin-left: 18px; margin-bottom: 8px; }
-    li { margin-bottom: 4px; }
-    .header { margin-bottom: 12px; }
-    .contact { font-size: 9pt; color: #333; }
-    .job { margin-bottom: 12px; }
+    h1 { font-size: 16pt; margin-bottom: 1px; }
+    h2 { font-size: 9.6pt; border-bottom: 1px solid #000; padding-bottom: 1px; margin: 8px 0 4px; text-transform: uppercase; }
+    h3 { font-size: 9.5pt; margin-bottom: 1px; }
+    p { margin-bottom: 3px; }
+    ul { margin-left: 15px; margin-bottom: 3px; }
+    li { margin-bottom: 1px; }
+    .header { margin-bottom: 6px; }
+    .contact { font-size: 8.3pt; color: #333; }
+    .job { margin-bottom: 5px; }
     .job-title { display: flex; justify-content: space-between; }
     .job-title span { font-weight: normal; }
     .skills-list { columns: 2; column-gap: 40px; }
+    .skills-grid-print {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 18px;
+      row-gap: 1px;
+      font-size: 8.3pt;
+      line-height: 1.22;
+      margin-bottom: 3px;
+    }
+    .skills-grid-print p { margin-bottom: 1px; }
+    .skills-grid-print strong { display: block; font-size: 8.8pt; }
     a { color: #000; }
     @media print {
       body { padding: 0; }
@@ -42,34 +53,22 @@
 
 <header class="header">
   <h1>Jose Alvarez</h1>
-  <p><strong>Product Designer</strong></p>
+  <p><strong>UX/UI & Product Designer</strong></p>
   <p class="contact">
     Colombia, LATAM (Remote) | josealvarezswork@gmail.com | odejbyjose.com | linkedin.com/in/alvarezcja | github.com/josealvarezswork
   </p>
 </header>
 
 <h2>Professional Summary</h2>
-<p>Product Designer with 4+ years of experience building design systems, user-centered interfaces, and AI-powered tools. Proven ability to translate complex workflows into scalable product experiences — from competitive research and interaction modeling to implementation. Shipped a live AI-powered UX tool (60% reduction in documentation time) and a multi-tenant SaaS platform in production with real clients.</p>
+<p>UX/UI and Product Designer with 4+ years of experience designing user-centered interfaces, design systems, prototypes, and product workflows. Strong in turning ambiguous problems into clear user flows, high-fidelity UI, and scalable product experiences. Shipped a live AI-powered UX tool that reduced documentation time by 60% and a catalog SaaS in production with real clients.</p>
 
 <h2>Skills</h2>
-<ul class="skills-list">
-  <li>Product Design (End-to-end)</li>
-  <li>Design Systems</li>
-  <li>UI/UX Design</li>
-  <li>Wireframing</li>
-  <li>Prototyping</li>
-  <li>High-fidelity Design</li>
-  <li>User-Centered Design</li>
-  <li>Figma (4 years)</li>
-  <li>Components and Variants</li>
-  <li>Auto Layout</li>
-  <li>Design Tokens</li>
-  <li>AI Tools in Design</li>
-  <li>HTML/CSS/JavaScript</li>
-  <li>API Integration</li>
-  <li>Notion</li>
-  <li>Git</li>
-</ul>
+<div class="skills-grid-print">
+  <p><strong>Product & UX</strong>Product Design, UX/UI Design, User Flows, Information Architecture, Wireframing, Prototyping, Behavioral UX.</p>
+  <p><strong>Research & Strategy</strong>UX Research, Product Strategy, Usability Testing, Competitive Analysis, Journey Mapping, Metrics Definition.</p>
+  <p><strong>UI & Systems</strong>Figma, Design Systems, Auto Layout, Components and Variants, Design Tokens, High-fidelity UI, Responsive Design, Visual Design.</p>
+  <p><strong>Tools & Handoff</strong>Design Handoff, Notion, After Effects, Premiere Pro, HTML/CSS Basics, AI-assisted Workflows, Git.</p>
+</div>
 
 <h2>Professional Experience</h2>
 
@@ -80,11 +79,9 @@
   </div>
   <p><strong>Serudda</strong> - Digital Content Platform</p>
   <ul>
-    <li>Owned end-to-end product design for a growing digital content platform, defining visual language and interaction patterns across a multi-year catalog</li>
-    <li>Built a complete design system in Figma — tokens, reusable components, and auto-export workflows — enabling single-source updates across the full production pipeline</li>
-    <li>Made data-informed design decisions based on engagement metrics, iterating on layouts and visual hierarchy to optimize audience retention</li>
-    <li>Defined content strategy and design rationale with stakeholders, aligning product aesthetics with business and audience objectives</li>
-    <li>Produced motion graphics and micro-interactions in After Effects, adapting deliverables across formats for multi-platform distribution</li>
+    <li>Owned end-to-end UX/UI design for a growing digital content platform, defining visual language, layout systems, and interaction patterns across a multi-year catalog</li>
+    <li>Built a complete Figma design system with reusable components, variants, tokens, and auto-export workflows to keep visual output consistent at scale</li>
+    <li>Used engagement data to iterate on layout, visual hierarchy, and content structure, improving clarity and audience retention</li>
   </ul>
 </div>
 
@@ -97,10 +94,22 @@
   </div>
   <p><strong>UX AI Generator</strong> - odejbyjose.com/project-1.html</p>
   <ul>
-    <li>Reduced UX documentation time by 60% (from ~60 to ~24 minutes) by designing an AI-assisted generation workflow powered by LLM APIs</li>
-    <li>Automated 10+ structured UX deliverables per project (briefs, personas, user flows, problem statements) through reusable JSON-based pipelines</li>
-    <li>Built complete design system with tokens, components, and variants for both web app and Figma plugin surfaces</li>
-    <li>Implemented Notion export integration, enabling teams to receive structured documentation directly in their workspace</li>
+    <li>Reduced UX documentation time by 60% by designing a guided discovery flow that turns rough product ideas into structured UX artifacts</li>
+    <li>Designed 10+ UX deliverables per project, including briefs, personas, user flows, problem statements, metrics, assumptions, and journey maps</li>
+  </ul>
+</div>
+
+<div class="job">
+  <div class="job-title">
+    <h3>Product Designer & Builder</h3>
+    <span>2026</span>
+  </div>
+  <p><strong>ByMakers</strong> - odejbyjose.com/bymakers.html</p>
+  <ul>
+    <li>Designed a multi-tenant catalog platform for entrepreneurs, replacing WhatsApp photo dumps and outdated PDFs with a professional, shareable catalog</li>
+    <li>Mapped the admin-to-public-catalog experience: product upload, brand customization, public browsing, WhatsApp ordering, dual pricing, and PDF quote generation</li>
+    <li>Designed mobile-first flows, curated visual customization, clear empty states, and a catalog experience manageable without training</li>
+    <li>Launched with a real client: 83+ products loaded, &lt;5 minutes per product upload, zero technical knowledge required</li>
   </ul>
 </div>
 
@@ -111,28 +120,16 @@
   </div>
   <p><strong>Duo Git</strong> - odejbyjose.com/duogit.html</p>
   <ul>
-    <li>Designed a behavioral iOS & Android mobile app that transforms GitHub contribution data into streak-based emotional feedback, targeting 70%+ Day 30 retention</li>
-    <li>Conducted competitive analysis identifying an uncontested market position at the intersection of high emotional feedback + coding-specific tracking</li>
-    <li>Defined full measurement strategy with behavioral KPIs: streak recovery rate, Day 7 retention, time-to-first-commit, and NPS targets</li>
+    <li>Designed a behavioral mobile app and widget system that transforms GitHub contribution data into streak-based emotional feedback, targeting 70%+ Day 30 retention</li>
+    <li>Defined information architecture, onboarding logic, dashboard views, league ranking, mascot states, and a full widget family for iOS and Android</li>
   </ul>
 </div>
 
 <h2>Education</h2>
 
-<div class="job">
-  <h3>Technical Degree in Software Development (In Progress)</h3>
-  <p>Uniminuto TecMD | 2026 - 2027</p>
-</div>
-
-<div class="job">
-  <h3>UI/UX Design Specialization</h3>
-  <p>California Institute of the Arts (CalArts) | Coursera</p>
-</div>
-
-<div class="job">
-  <h3>Motion Graphics Certification</h3>
-  <p>Coderhouse | 2024</p>
-</div>
+<p><strong>Technical Degree in Software Development</strong> (In Progress) - Uniminuto TecMD | 2026 - 2027</p>
+<p><strong>UI/UX Design Specialization</strong> - California Institute of the Arts (CalArts) | Coursera</p>
+<p><strong>Motion Graphics Certification</strong> - Coderhouse | 2024</p>
 
 </body>
 </html>
