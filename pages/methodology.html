@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESA Framework — Emotional State Architecture · Jose Alvarez</title>
+  <meta name="description" content="Emotional State Architecture (ESA) — A behavioral design framework that uses emotional mascot systems to transform anxiety-driven products into ones people come back to.">
+  <meta property="og:title" content="ESA — Emotional State Architecture · Jose Alvarez">
+  <meta property="og:description" content="A repeatable design framework for products where user anxiety is the primary retention risk.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1E1A2E;
+      --bg-elevated: #252038;
+      --bg-card: #2D2845;
+      --text: #F2EFE8;
+      --text-muted: rgba(242,239,232,.62);
+      --text-faint: rgba(242,239,232,.36);
+      --stroke: rgba(155,143,212,.15);
+      --stroke-light: rgba(155,143,212,.22);
+      --accent: #9B8FD4;
+      --accent-soft: rgba(155,143,212,.15);
+      --accent-glow: rgba(155,143,212,.08);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Inter", system-ui, -apple-system, sans-serif;
+      --max: 1040px;
+      --r: 12px;
+      --rl: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+
+    body {
+      background:
+        radial-gradient(800px 500px at 30% 20%, rgba(167,139,250,0.05), transparent 60%),
+        radial-gradient(900px 600px at 80% 40%, rgba(255,255,255,0.03), transparent 65%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none }
+
+    .accent-bar {
+      position: fixed;
+      top: 0; right: 0;
+      width: 5px; height: 100vh;
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(167,139,250,.2) 100%);
+      z-index: 100;
+    }
+
+    /* NAV */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      padding: 20px 24px;
+      background: rgba(30,26,46,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--stroke);
+    }
+    .nav {
+      width: min(1080px, calc(100% - 48px));
+      margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; }
+    .brand-mark {
+      width: 22px; height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      position: relative;
+    }
+    .brand-mark::before {
+      content: "";
+      position: absolute; inset: 5px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+    }
+    .brand-text { line-height: 1.05; }
+    .brand-name { display: block; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
+    .brand-sub { display: block; font-size: 11px; letter-spacing: 0.06em; opacity: 0.7; }
+    .nav-links {
+      display: flex; align-items: center; gap: 38px;
+      font-size: 12px; letter-spacing: 0.04em; opacity: 0.9;
+    }
+    .nav-links a { position: relative; display: inline-flex; align-items: center; }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; bottom: -8px;
+      width: 100%; height: 1px;
+      background: rgba(255,255,255,0.2);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 160ms ease;
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; padding: 4px; cursor: pointer; z-index: 1001;
+    }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: transform 200ms ease, opacity 200ms ease; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+    @media (max-width: 640px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        position: fixed; top: 0; right: 0;
+        width: 100%; height: 100vh;
+        background: var(--bg);
+        flex-direction: column; align-items: center; justify-content: center;
+        gap: 32px; font-size: 18px;
+        transform: translateX(100%); transition: transform 300ms ease; z-index: 1000;
+      }
+      .nav-links.active { transform: translateX(0); }
+    }
+
+    /* LAYOUT */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* HERO */
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--stroke);
+    }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 24px;
+    }
+    .hero-label span { opacity: 0.5; }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .hero-title .accent { color: var(--accent); font-style: italic; }
+    .hero-acronym {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.12em;
+      color: var(--accent); opacity: 0.8; margin-bottom: 24px;
+    }
+    .hero-subtitle {
+      font-size: 17px; color: var(--text-muted);
+      max-width: 660px; line-height: 1.7; margin-bottom: 36px;
+    }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
+    .pill-tag {
+      font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(167,139,250,.25);
+      color: var(--accent);
+    }
+    .pill-tag.neutral { background: rgba(255,255,255,.04); border-color: var(--stroke-light); color: var(--text-muted); }
+
+    /* SECTION */
+    .section { padding: 72px 0; border-bottom: 1px solid var(--stroke); }
+    .section:last-of-type { border-bottom: none; }
+    .section-label {
+      display: inline-block;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.01em; margin-bottom: 20px;
+    }
+    .section-title .accent { color: var(--accent); }
+    .section-text {
+      font-size: 15px; color: var(--text-muted);
+      max-width: 680px; line-height: 1.8; margin-bottom: 16px;
+    }
+
+    /* CARDS */
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+    @media (max-width: 720px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--stroke-light);
+      border-radius: var(--rl); padding: 24px;
+    }
+    .card.featured { border-color: rgba(167,139,250,.3); background: var(--accent-soft); }
+    .card-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
+    .card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+    /* STATES TABLE */
+    .states-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px; margin-top: 32px;
+    }
+    @media (max-width: 860px) { .states-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .states-grid { grid-template-columns: 1fr; } }
+    .state-card {
+      border-radius: var(--rl);
+      border: 1px solid var(--stroke-light);
+      padding: 24px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .state-card.neutral-state { border-color: rgba(255,255,255,.1); background: rgba(255,255,255,.03); }
+    .state-card.happy-state   { border-color: rgba(16,185,129,.3); background: rgba(16,185,129,.06); }
+    .state-card.worried-state { border-color: rgba(251,191,36,.3); background: rgba(251,191,36,.06); }
+    .state-card.sad-state     { border-color: rgba(99,102,241,.3); background: rgba(99,102,241,.06); }
+    .state-emoji { font-size: 28px; }
+    .state-name { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
+    .state-trigger {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      opacity: 0.6; margin-bottom: 2px;
+    }
+    .state-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .state-action {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+      padding: 5px 10px; border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--stroke-light);
+      display: inline-block; margin-top: 4px;
+      color: var(--text-muted);
+    }
+
+    /* REFERENCES TABLE */
+    .ref-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px; margin-top: 28px;
+      border-radius: var(--rl); overflow: hidden;
+    }
+    .ref-table thead tr {
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--stroke-light);
+    }
+    .ref-table th {
+      padding: 14px 20px; text-align: left;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-faint);
+    }
+    .ref-table td { padding: 16px 20px; border-bottom: 1px solid var(--stroke); }
+    .ref-table tr:last-child td { border-bottom: none; }
+    .ref-table td:first-child { color: var(--accent); font-weight: 600; }
+    .ref-table td:nth-child(2) { color: var(--text-faint); font-size: 12px; }
+    .ref-table td:nth-child(3) { color: var(--text-muted); }
+    .ref-table tbody { background: var(--bg-card); border: 1px solid var(--stroke-light); border-radius: var(--rl); }
+
+    /* CASE STUDY CARDS */
+    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+    @media (max-width: 640px) { .case-grid { grid-template-columns: 1fr; } }
+    .case-card {
+      border-radius: var(--rl); overflow: hidden;
+      border: 1px solid var(--stroke-light);
+      display: flex; flex-direction: column;
+    }
+    .case-card-top {
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 12px;
+      flex: 1;
+    }
+    .case-card-top.duogit { background: linear-gradient(135deg, rgba(16,185,129,.1), rgba(16,185,129,.03)); }
+    .case-card-top.cuak   { background: linear-gradient(135deg, rgba(79,124,99,.15), rgba(79,124,99,.03)); }
+    .case-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 999px; display: inline-block;
+    }
+    .case-tag.duogit { color: #10b981; background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.25); }
+    .case-tag.cuak   { color: #6fba96; background: rgba(79,124,99,.15); border: 1px solid rgba(79,124,99,.3); }
+    .case-title { font-family: var(--serif); font-size: 22px; font-weight: 700; }
+    .case-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+    .case-metric {
+      font-size: 13px; font-weight: 600;
+      padding: 8px 14px; border-radius: 8px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--stroke-light);
+      display: inline-block; align-self: flex-start;
+    }
+    .case-card-footer {
+      padding: 14px 28px;
+      background: var(--bg-card);
+      border-top: 1px solid var(--stroke);
+      font-size: 12px; letter-spacing: 0.04em; color: var(--text-faint);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .case-card-footer a { color: var(--accent); }
+    .case-card-footer a:hover { opacity: 0.8; }
+
+    /* ZONING MODEL */
+    .zoning-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 28px; }
+    @media (max-width: 640px) { .zoning-grid { grid-template-columns: 1fr; } }
+    .zone-card {
+      border-radius: var(--rl); padding: 22px;
+      background: var(--bg-card); border: 1px solid var(--stroke-light);
+    }
+    .zone-size {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .zone-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .zone-split {
+      display: flex; gap: 6px; margin: 12px 0;
+    }
+    .zone-data { flex: 60; background: rgba(167,139,250,.15); border-radius: 4px; padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--accent); text-align: center; }
+    .zone-emotional { flex: 40; background: rgba(255,255,255,.05); border-radius: 4px; padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--text-faint); text-align: center; }
+    .zone-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+    /* PILLARS */
+    .pillars { display: flex; flex-direction: column; gap: 2px; margin-top: 28px; }
+    .pillar {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 22px 24px;
+      background: var(--bg-card); border: 1px solid var(--stroke-light);
+    }
+    .pillar:first-child { border-radius: var(--rl) var(--rl) 0 0; }
+    .pillar:last-child  { border-radius: 0 0 var(--rl) var(--rl); }
+    .pillar-num {
+      font-size: 32px; font-weight: 700; font-family: var(--serif);
+      color: var(--accent); opacity: 0.4; line-height: 1; flex-shrink: 0;
+      width: 40px;
+    }
+    .pillar-content h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .pillar-content p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+    /* CTA */
+    .cta-section {
+      padding: 80px 0;
+      text-align: center;
+    }
+    .cta-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 16px; line-height: 1.1;
+    }
+    .cta-sub { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 12px 28px; border-radius: 999px;
+      background: var(--accent); color: #070709;
+      font-weight: 700; font-size: 13px; letter-spacing: 0.04em;
+      transition: opacity 160ms ease;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost {
+      padding: 12px 28px; border-radius: 999px;
+      border: 1px solid var(--stroke-light);
+      color: var(--text-muted);
+      font-size: 13px; letter-spacing: 0.04em;
+      transition: border-color 160ms ease, color 160ms ease;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
+
+    /* FOOTER */
+    .site-footer {
+      padding: 32px 0 48px;
+      border-top: 1px solid var(--stroke);
+      background: rgba(0,0,0,.25);
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-copy { font-size: 12px; color: var(--text-faint); letter-spacing: 0.04em; }
+    .footer-nav { display: flex; gap: 24px; font-size: 12px; color: var(--text-faint); letter-spacing: 0.06em; }
+    .footer-nav a:hover { color: var(--text); }
+  </style>
+</head>
+
+<body>
+  <div class="accent-bar"></div>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="../index.html" aria-label="Home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">
+          <span class="brand-name">Jose Alvarez</span>
+          <span class="brand-sub">Design</span>
+        </span>
+      </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+        <a href="../index.html">Work</a>
+        <a href="./methodology.html" style="color:var(--accent)">ESA</a>
+        <a href="./resume.html">Resume</a>
+        <a href="./about.html">About</a>
+        <a href="../cv/Jose_Alvarez_CV.pdf" download class="btn-download" style="padding:6px 12px;border:1px solid rgba(167,139,250,.4);border-radius:999px;font-weight:500;">Download CV</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <p class="hero-eyebrow">Design Framework</p>
+        <h1 class="hero-title">
+          Emotional State<br><span class="accent">Architecture</span>
+        </h1>
+        <p class="hero-acronym">ESA — Jose Alvarez, 2026</p>
+        <p class="hero-subtitle">
+          A behavioral design framework that uses emotional mascot systems to transform anxiety-driven products into ones people actually come back to. Grounded in cognitive psychology, applied across two product verticals.
+        </p>
+        <div class="hero-pills">
+          <span class="pill-tag">Behavioral Design</span>
+          <span class="pill-tag">Emotional UX</span>
+          <span class="pill-tag">Retention Systems</span>
+          <span class="pill-tag neutral">Fintech</span>
+          <span class="pill-tag neutral">Developer Tools</span>
+          <span class="pill-tag neutral">Gamification</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 THE PROBLEM -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">01 — The Problem</span>
+        <h2 class="section-title">The <span class="accent">emotional deficit</span> in modern software</h2>
+        <p class="section-text">
+          Purely utilitarian software has reached its efficiency ceiling — but it keeps failing at long-term retention. Passive data visualizations are excellent historical records but poor behavioral engines. They lack the emotional dimension needed to transform a technical habit into a lasting connection.
+        </p>
+        <p class="section-text">
+          The friction in modern software isn't functional. It's psychological. Three persistent friction patterns emerge across anxiety-producing product categories:
+        </p>
+        <div class="card-grid three" style="margin-top:28px">
+          <div class="card">
+            <p class="card-label" style="color:var(--accent)">Friction 01</p>
+            <h3>No emotional reinforcement</h3>
+            <p>Systems don't celebrate consistency or warn about loss risk in a human way. Data is cold. The user feels nothing.</p>
+          </div>
+          <div class="card">
+            <p class="card-label" style="color:var(--accent)">Friction 02</p>
+            <h3>Retrospective data, no nudges</h3>
+            <p>Technical information is passive. It doesn't push the user toward action at the moment of highest vulnerability.</p>
+          </div>
+          <div class="card">
+            <p class="card-label" style="color:var(--accent)">Friction 03</p>
+            <h3>Disconnected from workflow</h3>
+            <p>Data lives inside the app. The user has to seek motivation — instead of motivation finding them.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 THE FRAMEWORK -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">02 — The Framework</span>
+        <h2 class="section-title">The <span class="accent">Four Emotional States</span></h2>
+        <p class="section-text">
+          For an interface to drive retention, it must map the user journey not through sessions, but through emotional states. ESA defines four states that cover the full behavioral arc — from readiness to recovery. Each state has a visual trigger, a psychological mechanism, and a desired action.
+        </p>
+
+        <div class="states-grid">
+          <div class="state-card neutral-state">
+            <span class="state-emoji">😐</span>
+            <p class="state-name">Neutral — Ready</p>
+            <p class="state-trigger">Trigger: Day start, no activity</p>
+            <p class="state-desc">Pure potential. The day begins without pressure. Expectant posture — the mascot waits, not judges.</p>
+            <span class="state-action">→ First action of the day</span>
+          </div>
+          <div class="state-card happy-state">
+            <span class="state-emoji">😄</span>
+            <p class="state-name" style="color:#10b981">Happy — On Track</p>
+            <p class="state-trigger">Trigger: 3+ day streak / healthy metric</p>
+            <p class="state-desc">Positive reinforcement after consistent behavior. Intense glow, lit eyes. The system celebrates, not just records.</p>
+            <span class="state-action">→ Sustain consistency</span>
+          </div>
+          <div class="state-card worried-state">
+            <span class="state-emoji">😟</span>
+            <p class="state-name" style="color:#fbbf24">Worried — At Risk</p>
+            <p class="state-trigger">Trigger: Inactivity / approaching threshold</p>
+            <p class="state-desc">Loss aversion activated. The mascot's distress makes the risk visible and empathetic — not punitive. The most powerful retention state.</p>
+            <span class="state-action">→ Immediate intervention</span>
+          </div>
+          <div class="state-card sad-state">
+            <span class="state-emoji">😢</span>
+            <p class="state-name" style="color:#818cf8">Sad — Reset</p>
+            <p class="state-trigger">Trigger: Streak broken / threshold crossed</p>
+            <p class="state-desc">Emotional cost of loss, followed by resilience. The system mourns with the user — then invites them back without shame.</p>
+            <span class="state-action">→ Guilt-free restart</span>
+          </div>
+        </div>
+
+        <div class="card featured" style="margin-top:16px;padding:24px 28px">
+          <p style="font-size:14px;color:var(--text-muted);line-height:1.8">
+            <strong style="color:var(--accent)">The Worried state is the most powerful retention driver.</strong> By integrating a real-time countdown when a streak or threshold is at risk, procrastination transforms into empathetic urgency. Unlike a red notification that generates rejection, the Worried mascot appeals to empathy — activating loss aversion without triggering shame paralysis.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 PSYCHOLOGICAL FOUNDATIONS -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">03 — Foundations</span>
+        <h2 class="section-title">Grounded in <span class="accent">established psychology</span></h2>
+        <p class="section-text">
+          ESA is an original synthesis — not a derivation. It draws on established principles from behavioral psychology and cognitive science, combined into a repeatable design pattern for products where user anxiety is the primary retention risk.
+        </p>
+
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>Principle</th>
+              <th>Source</th>
+              <th>How ESA applies it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Anthropomorphism</td>
+              <td>Epley, Waytz & Cacioppo — cognitive psychology</td>
+              <td>The mascot as emotional proxy for cold data. Users form social bonds with characters, not dashboards.</td>
+            </tr>
+            <tr>
+              <td>Loss Aversion</td>
+              <td>Kahneman & Tversky — Prospect Theory (Nobel, 2002)</td>
+              <td>The Worried state activates the fear of losing progress — more powerful than the desire to gain it.</td>
+            </tr>
+            <tr>
+              <td>Behavioral Nudges</td>
+              <td>Thaler & Sunstein — Nudge Theory (Nobel, 2017)</td>
+              <td>Empathetic notifications that guide action without coercion. The mascot nudges, never commands.</td>
+            </tr>
+            <tr>
+              <td>Habit Formation</td>
+              <td>BJ Fogg — Behavior Model · James Clear — Atomic Habits</td>
+              <td>Streak mechanics + positive reinforcement loop. Tiny wins → visible progress → intrinsic motivation.</td>
+            </tr>
+            <tr>
+              <td>Emotional Design</td>
+              <td>Don Norman — 3 levels: visceral, behavioral, reflective</td>
+              <td>Each mascot state operates across all 3 levels simultaneously — look (visceral), interaction (behavioral), meaning (reflective).</td>
+            </tr>
+            <tr>
+              <td>Gamification</td>
+              <td>Yu-kai Chou — Octalysis Framework</td>
+              <td>League systems, XP, ranks. Progress mechanics that reward consistency, not just volume or speed.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 04 CASE STUDIES -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">04 — Applied</span>
+        <h2 class="section-title">ESA in <span class="accent">two verticals</span></h2>
+        <p class="section-text">
+          The same framework applied across two entirely different product categories — proving it's a transferable methodology, not a visual preference.
+        </p>
+
+        <div class="case-grid">
+          <div class="case-card">
+            <div class="case-card-top duogit">
+              <span class="case-tag duogit">Developer Tools</span>
+              <h2 class="case-title">DuoGit</h2>
+              <p class="case-desc">GitHub activity is cold and judgmental by default. DuoGit applies the 4-state ESA system through Ghost — an emotional cat mascot that reacts to commit streaks in real time. League ranking, SPACE metrics, and home screen widgets keep the emotional layer visible outside the app.</p>
+              <span class="case-metric" style="color:#10b981">Users checked streak in first 30s unprompted</span>
+            </div>
+            <div class="case-card-footer">
+              <span>React Native · Expo · GitHub API</span>
+              <a href="./duogit.html">View case study →</a>
+            </div>
+          </div>
+
+          <div class="case-card">
+            <div class="case-card-top cuak">
+              <span class="case-tag cuak">Fintech</span>
+              <h2 class="case-title">Cuak</h2>
+              <p class="case-desc">Credit card data triggers anxiety, not clarity. Cuak applies ESA through a duck mascot that reacts to credit health in real time — replacing financial fear with actionable emotional signals. The mascot shields users from cold numbers while guiding their financial decisions.</p>
+              <span class="case-metric" style="color:#6fba96">5/5 prototype testers felt more in control</span>
+            </div>
+            <div class="case-card-footer">
+              <span>React Native · Belvo · Node.js</span>
+              <a href="./cuak.html">View case study →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px;border-left:3px solid var(--accent)">
+          <p style="font-size:14px;color:var(--text-muted);line-height:1.8;padding-left:4px">
+            <strong style="color:var(--text)">The pattern holds across verticals.</strong> GitHub commits and credit card usage are completely different data types — but both trigger the same psychological response: avoidance born from anxiety. ESA resolves both through the same mechanism: an emotional character that makes the data feel like an ally, not a judge.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 ZONING MODEL -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">05 — Visual Architecture</span>
+        <h2 class="section-title">The <span class="accent">60/40 Zoning Model</span></h2>
+        <p class="section-text">
+          Constant visibility is the pillar of retention. ESA defines a spatial model for every surface — from full screens to home screen widgets — where 60% carries critical data and 40% carries emotional state. This split enables cognitive processing in milliseconds.
+        </p>
+
+        <div class="zoning-grid">
+          <div class="zone-card">
+            <p class="zone-size">Small 2×2</p>
+            <p class="zone-title">Progress Focus</p>
+            <div class="zone-split">
+              <div class="zone-data">60% Data</div>
+              <div class="zone-emotional">40% State</div>
+            </div>
+            <p class="zone-desc">Streak count + current emotional state. Minimal surface, maximum signal. Neutral or Happy state.</p>
+          </div>
+          <div class="zone-card">
+            <p class="zone-size">Small 2×2</p>
+            <p class="zone-title">Status Focus</p>
+            <div class="zone-split">
+              <div class="zone-data">60% Data</div>
+              <div class="zone-emotional">40% State</div>
+            </div>
+            <p class="zone-desc">League rank + awareness metric. Contextual identity — who you are in the system right now.</p>
+          </div>
+          <div class="zone-card" style="border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.04)">
+            <p class="zone-size" style="color:#fbbf24">Wide 4×2 — Risk</p>
+            <p class="zone-title">Urgency Surface</p>
+            <div class="zone-split">
+              <div class="zone-data">60% Countdown</div>
+              <div class="zone-emotional" style="background:rgba(251,191,36,.15);color:#fbbf24">40% Worried</div>
+            </div>
+            <p class="zone-desc">Real-time countdown + Worried mascot. The most powerful retention surface — activates loss aversion passively.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 DESIGN PRINCIPLES -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">06 — Principles</span>
+        <h2 class="section-title">Three pillars of <span class="accent">ESA design</span></h2>
+        <p class="section-text">Every product built under the ESA framework is governed by three non-negotiable design decisions.</p>
+
+        <div class="pillars">
+          <div class="pillar">
+            <span class="pillar-num">1</span>
+            <div class="pillar-content">
+              <h3>Guide, don't dictate</h3>
+              <p>Provide a structure that eliminates the "blank page" friction without imposing rigid guardrails. The mascot suggests, nudges, and reacts — it never commands. The user is always the final curator of their own behavior.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-num">2</span>
+            <div class="pillar-content">
+              <h3>Integrate without friction</h3>
+              <p>The emotional system must live where the user already is — widgets, native APIs, automatic flows. If motivation requires effort to find, it won't be found. Visibility is retention.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-num">3</span>
+            <div class="pillar-content">
+              <h3>Amplify judgment, not guilt</h3>
+              <p>The mascot and the emotional layer are assistance vehicles — they make the user feel capable, not judged. Guilt-free motivation: the user acts because their companion needs them, not because the system punishes absence.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-title">Building a product where anxiety<br>is the retention problem?</h2>
+      <p class="cta-sub">Let's talk about how ESA can apply to your vertical.</p>
+      <div class="cta-buttons">
+        <a class="btn-primary" href="mailto:josealvarezswork@gmail.com">→ josealvarezswork@gmail.com</a>
+        <a class="btn-ghost" href="../index.html">← Back to work</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-copy">Jose Alvarez · ESA Framework · 2026</p>
+        <nav class="footer-nav">
+          <a href="./duogit.html">DuoGit</a>
+          <a href="./cuak.html">Cuak</a>
+          <a href="./about.html">About</a>
+          <a href="mailto:josealvarezswork@gmail.com">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

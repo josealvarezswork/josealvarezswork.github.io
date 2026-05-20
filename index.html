@@ -1,14 +1,14 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jose Alvarez — Product Designer</title>
-    <meta name="description" content="Product Designer building AI-powered tools.">
-    <meta property="og:title" content="Jose Alvarez — Product Designer">
-    <meta property="og:description" content="Product Designer building AI-powered tools.">
+    <title>Jose Alvarez — Emotional UX & Behavioral Design</title>
+    <meta name="description" content="Jose Alvarez — Emotional UX designer building AI and fintech products that people don't quit.">
+    <meta property="og:title" content="Jose Alvarez — Emotional UX & Behavioral Design">
+    <meta property="og:description" content="Jose Alvarez — Emotional UX designer building AI and fintech products that people don't quit.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Serif + Sans (muy parecido al mood de la referencia) -->
@@ -35,9 +35,10 @@
           <span></span>
         </button>
         <div class="nav-links">
-          <a href="./resume.html">Resume</a>
-          <a href="./about.html">About</a>
-          <a href="./Jose_Alvarez_CV.pdf" download class="btn-download">Download CV</a>
+          <a href="./pages/methodology.html">ESA</a>
+          <a href="./pages/resume.html">Resume</a>
+          <a href="./pages/about.html">About</a>
+          <a href="./cv/Jose_Alvarez_CV.pdf" download class="btn-download">Download CV</a>
         </div>
       </nav>
     </header>
@@ -46,13 +47,79 @@
       <section class="hero">
         <div class="container">
           <h1 class="hero-title">
-            <span class="hero-name">Jose Alvarez</span>, Product Designer
-            <span class="gradient-pink">building AI-powered tools.</span>
+            <span class="hero-name">Jose Alvarez</span><br>
+            <span class="gradient-pink">I design the engagement layer that turns<br>anxiety-driven products into ones people come back to.</span>
           </h1>
+          <p class="hero-tagline">Emotional UX · Fintech · Developer Tools</p>
         </div>
       </section>
 
 
+
+    <!-- FIELD NOTES SLIDER -->
+    <section class="field-notes">
+      <div class="container">
+        <p class="section-label">Field Notes</p>
+        <p class="field-notes-sub">The honest breakdown — what works, what doesn't, and why.</p>
+
+        <div class="slider">
+          <!-- Slide 1: Cuak -->
+          <div class="slide active" data-color="#4f7c63">
+            <div class="slide-header">
+              <div class="slide-header-text">
+                <span class="slide-name">Cuak</span>
+                <span class="slide-tag">Fintech · Mobile</span>
+              </div>
+              <img class="slide-mascot" src="./assets/img/cuak-saludo.png" alt="Cuak mascot">
+            </div>
+            <div class="slide-body">
+              <div class="slide-col">
+                <span class="slide-col-label works">✦ What works</span>
+                <p>The emotional hook is real. 5/5 prototype testers felt more in control immediately after seeing their credit usage with mascot feedback. Externalizing financial anxiety into a reactive character is validated behavioral design — the concept lands every time.</p>
+              </div>
+              <div class="slide-col">
+                <span class="slide-col-label blocker">◆ The blocker</span>
+                <p>Open Banking in Latin America isn't ready for solo builders yet. Belvo confirmed no credit card data coverage in Colombia. Pivoting to Mexico — where the API exists — means rebuilding market context, legal structure, and user trust from scratch. Hard to do alone.</p>
+              </div>
+            </div>
+            <a class="slide-link" href="./pages/cuak.html">Read case study →</a>
+          </div>
+
+          <!-- Slide 2: DuoGit -->
+          <div class="slide" data-color="#3b82f6">
+            <div class="slide-header">
+              <div class="slide-header-text">
+                <span class="slide-name">DuoGit</span>
+                <span class="slide-tag">Mobile App</span>
+              </div>
+              <img class="slide-mascot" src="./assets/img/duogit-mascot.png" alt="DuoGit mascot">
+            </div>
+            <div class="slide-body">
+              <div class="slide-col">
+                <span class="slide-col-label works">✦ What works</span>
+                <p>Developer activity data is cold and judgmental by default. DuoGit reframes it — same data, different emotional register. The behavioral design system makes progress visible without making absence shameful. The concept is solid and the emotional reframing works.</p>
+              </div>
+              <div class="slide-col">
+                <span class="slide-col-label blocker">◆ The blocker</span>
+                <p>The target user — a developer motivated enough by their GitHub activity to pay for an emotional overlay — is a narrow niche. Distribution without an existing developer audience is expensive. The product works. Getting it in front of the right people without paid acquisition is the unsolved problem.</p>
+              </div>
+            </div>
+            <a class="slide-link" href="./pages/duogit.html">Read case study →</a>
+          </div>
+
+        </div>
+
+        <!-- Controls -->
+        <div class="slider-controls">
+          <button class="slider-btn" id="prev" aria-label="Previous">←</button>
+          <div class="slider-dots">
+            <button class="dot active" data-index="0"></button>
+            <button class="dot" data-index="1"></button>
+          </div>
+          <button class="slider-btn" id="next" aria-label="Next">→</button>
+        </div>
+      </div>
+    </section>
 
       <section class="work">
         <div class="container">
@@ -68,19 +135,20 @@
     <footer class="site-footer">
       <div class="container">
         <div class="footer-top">
-          <span class="footer-item muted">colombia, latam</span>
+          <span class="footer-item muted">Available · UTC-5 · Async-friendly</span>
           <a class="footer-item muted" href="mailto:josealvarezswork@gmail.com">josealvarezswork@gmail.com</a>
-          <a class="footer-item muted" href="https://www.linkedin.com/in/alvarezcja/" target="_blank" rel="noreferrer">linkedin</a>
+          <a class="footer-item muted" href="https://www.linkedin.com/in/alvarezcja/" target="_blank" rel="noreferrer">writing on linkedin</a>
           <a class="footer-item muted" href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer">github</a>
         </div>
 
         <div class="footer-cta">
-          <span class="cta-text">Let's build </span>
-          <span class="cta-accent">something great.</span>
+          <p class="cta-text muted">Open to contracts and product collaborations.</p>
+          <a class="cta-accent cta-link" href="mailto:josealvarezswork@gmail.com">→ josealvarezswork@gmail.com</a>
         </div>
       </div>
     </footer>
 
-    <script src="./app.js"></script>
+    <script src="./scripts/app.js"></script>
   </body>
 </html>
+

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Portfolio Projects Loader
  * Carga proyectos desde projects.json y los renderiza dinámicamente
  */
@@ -17,7 +17,7 @@ async function loadProjects() {
   if (!container) return;
 
   try {
-    const response = await fetch('./projects.json');
+    const response = await fetch('./data/projects.json');
     if (!response.ok) throw new Error('Failed to load projects');
 
     const data = await response.json();
@@ -53,4 +53,29 @@ function renderProjects(projects, container) {
 }
 
 // Init
-document.addEventListener('DOMContentLoaded', loadProjects);
+document.addEventListener('DOMContentLoaded', () => {
+  loadProjects();
+  initSlider();
+});
+
+// Field Notes Slider
+function initSlider() {
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.dot');
+  if (!slides.length) return;
+
+  let current = 0;
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  document.getElementById('prev')?.addEventListener('click', () => goTo(current - 1));
+  document.getElementById('next')?.addEventListener('click', () => goTo(current + 1));
+  dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.index)));
+}
+
