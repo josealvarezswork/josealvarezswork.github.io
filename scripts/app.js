@@ -34,11 +34,10 @@ function renderProjects(projects, container) {
       <div class="card-image">
         <div class="card-mockup">
           ${project.images.length > 0
-      ? project.images.map(img => `<img src="${img}" alt="${project.title}">`).join('')
+      ? project.images.map(img => `<img src="${img}" alt="${project.title} — cover" loading="lazy" decoding="async">`).join('')
       : ''
     }
         </div>
-        ${project.inDevelopment ? '<div class="card-dev-overlay"><span>IN ACTIVE DEVELOPMENT</span></div>' : ''}
       </div>
       <div class="card-inner">
         <div class="card-meta">

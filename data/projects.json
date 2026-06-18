@@ -4,25 +4,24 @@
       "id": "duogit",
       "title": "Duo Git",
       "description": "A design system that makes developer activity feel meaningful instead of judgmental — turning raw GitHub data into motivation.",
-      "category": "Mobile App",
+      "category": "Gamification · Mobile",
       "year": "2026",
       "color": "blue",
       "link": "./pages/duogit.html",
       "images": [
-        "./assets/img/portada-duogit.png"
+        "./assets/img/portada-duogit.jpg"
       ]
     },
     {
       "id": "cuak",
       "title": "Cuak",
       "description": "A fintech mascot that reacts to your credit health in real time. Designed to replace financial anxiety with actionable clarity.",
-      "category": "Fintech · Mobile",
+      "category": "Mascot UX · Fintech",
       "year": "2026",
       "color": "green",
-      "inDevelopment": true,
       "link": "./pages/cuak.html",
       "images": [
-        "./assets/img/cuak/portada.png"
+        "./assets/img/cuak/portada.jpg"
       ]
     }
   ]

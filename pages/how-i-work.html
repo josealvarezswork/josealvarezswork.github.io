@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How I Work — Jose Alvarez</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <meta name="description" content="Two lenses into how Jose Alvarez designs: his mindset before touching Figma, and the framework behind every decision.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1E1A2E;
+      --text: #F2EFE8;
+      --muted: rgba(242,239,232,0.56);
+      --muted-2: rgba(242,239,232,0.32);
+      --stroke: rgba(155,143,212,0.15);
+      --accent: #9B8FD4;
+      --accent-pink: #E84C7D;
+      --accent-yellow: #F5C542;
+      --serif: "Bricolage Grotesque", sans-serif;
+      --sans: "Bricolage Grotesque", sans-serif;
+      --radius: 18px;
+      --max: 1080px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* NAV */
+    .site-header {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--stroke);
+    }
+    .nav {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-mark {
+      width: 22px; height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      position: relative;
+    }
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+    }
+    .brand-text { line-height: 1.05; }
+    .brand-name { display: block; font-weight: 600; font-size: 12px; letter-spacing: 0.02em; }
+    .brand-sub  { display: block; font-size: 11px; letter-spacing: 0.06em; opacity: 0.7; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      opacity: 0.9;
+    }
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -8px;
+      width: 100%; height: 1px;
+      background: rgba(255,255,255,0.2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 160ms ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { transform: scaleX(1); }
+
+    /* HERO */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-title .grad {
+      background: linear-gradient(90deg, #9B8FD4, #E84C7D, #F5C542);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 48ch;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* CARDS */
+    .cards-section {
+      padding: 20px 0 100px;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .work-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--stroke);
+      padding: 48px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 200ms ease, transform 200ms ease;
+    }
+    .work-card:hover {
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-4px);
+    }
+
+
+    .work-card--mindset {
+      background: rgba(155,143,212,0.06);
+    }
+    .work-card--mindset:hover {
+      background: rgba(155,143,212,0.09);
+    }
+
+    .work-card--framework {
+      background: rgba(232,76,125,0.06);
+    }
+    .work-card--framework:hover {
+      background: rgba(232,76,125,0.09);
+    }
+
+    .card-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .card-title {
+      font-size: clamp(28px, 3.2vw, 44px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .card-title .accent-purple { color: var(--accent); }
+    .card-title .accent-pink   { color: var(--accent-pink); }
+
+    .card-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card-desc {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .card-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card-bullets li {
+      font-size: 13px;
+      color: rgba(242,239,232,0.65);
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .card-bullets li::before {
+      content: "—";
+      color: var(--muted-2);
+      flex-shrink: 0;
+    }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: 1px solid;
+      transition: background 180ms ease, color 180ms ease;
+      align-self: flex-start;
+    }
+
+    .work-card--mindset .card-cta {
+      border-color: rgba(155,143,212,0.4);
+      color: var(--accent);
+    }
+    .work-card--mindset .card-cta:hover {
+      background: rgba(155,143,212,0.12);
+    }
+
+    .work-card--framework .card-cta {
+      border-color: rgba(232,76,125,0.4);
+      color: var(--accent-pink);
+    }
+    .work-card--framework .card-cta:hover {
+      background: rgba(232,76,125,0.1);
+    }
+
+    /* FOOTER */
+    .site-footer {
+      padding: 34px 0 52px;
+      background: rgba(0,0,0,0.28);
+      border-top: 1px solid var(--stroke);
+    }
+    .footer-top {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+    .footer-item {
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+    .footer-item:hover { color: var(--text); }
+
+    /* RESPONSIVE */
+    @media (max-width: 680px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .work-card { padding: 32px 24px 28px; }
+      .hero { padding: 60px 0 40px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="../index.html" aria-label="Home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">
+          <span class="brand-name">Jose Alvarez</span>
+          <span class="brand-sub">Design</span>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="./how-i-work.html" class="active">How I Work</a>
+        <a href="./resume.html">Resume</a>
+        <a href="./about.html">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="hero-label">How I Work</p>
+        <h1 class="hero-title">Two ways into<br><span class="grad">how I think and design</span></h1>
+        <p class="hero-sub">One is about mindset — how I frame problems before touching Figma. The other is the framework behind every design decision I make.</p>
+      </div>
+    </section>
+
+    <section class="cards-section">
+      <div class="container">
+        <div class="cards-grid">
+
+          <!-- CARD 1: Mindset -->
+          <div class="work-card work-card--mindset">
+            <span class="card-number">01</span>
+            <h2 class="card-title">Emotion First,<br><span class="accent-purple">Interface Later</span></h2>
+            <div class="card-body">
+              <p class="card-desc">How I think about a design problem before drawing a single frame. The questions I ask, the tensions I map, and why I almost always start with emotion — not interface.</p>
+              <ul class="card-bullets">
+                <li>What is the user feeling at the exact moment they open this product?</li>
+                <li>What's the emotional cost of friction here — anxiety, confusion, shame?</li>
+                <li>What would make this feel like it's on the user's side?</li>
+                <li>What should I deliberately not design?</li>
+              </ul>
+            </div>
+            <a class="card-cta" href="./mindset.html">See my mindset complete →</a>
+          </div>
+
+          <!-- CARD 2: Framework -->
+          <div class="work-card work-card--framework">
+            <span class="card-number">02</span>
+            <h2 class="card-title">Emotional State<br><span class="accent-pink">Architecture</span></h2>
+            <div class="card-body">
+              <p class="card-desc">A repeatable system I built to design products that retain users through clarity, not pressure. It maps emotional states to design zones and mascot behavior.</p>
+              <ul class="card-bullets">
+                <li>Why gamification without punishment is a retention strategy</li>
+                <li>How mascot UX externalizes the user's emotional tension</li>
+                <li>The 60/40 zoning model that drives every screen layout</li>
+                <li>How ESA moves DAU, churn, and perceived control</li>
+              </ul>
+            </div>
+            <a class="card-cta" href="./methodology.html">See the framework complete →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <span class="footer-item">Available · UTC-5 · Async-friendly</span>
+        <a class="footer-item" href="mailto:josealvarezswork@gmail.com">josealvarezswork@gmail.com</a>
+        <a class="footer-item" href="https://www.linkedin.com/in/alvarezcja/" target="_blank" rel="noreferrer">writing on linkedin</a>
+        <a class="footer-item" href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer">github</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -5,13 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ESA Framework — Emotional State Architecture · Jose Alvarez</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <meta name="description" content="Emotional State Architecture (ESA) — A behavioral design framework that uses emotional mascot systems to transform anxiety-driven products into ones people come back to.">
   <meta property="og:title" content="ESA — Emotional State Architecture · Jose Alvarez">
   <meta property="og:description" content="A repeatable design framework for products where user anxiety is the primary retention risk.">
   <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #1E1A2E;
@@ -25,8 +26,8 @@
       --accent: #9B8FD4;
       --accent-soft: rgba(155,143,212,.15);
       --accent-glow: rgba(155,143,212,.08);
-      --serif: "Playfair Display", Georgia, serif;
-      --sans: "Inter", system-ui, -apple-system, sans-serif;
+      --serif: "Bricolage Grotesque", sans-serif;
+      --sans: "Bricolage Grotesque", sans-serif;
       --max: 1040px;
       --r: 12px;
       --rl: 16px;
@@ -142,7 +143,7 @@
       font-weight: 700; line-height: 1.08;
       letter-spacing: -0.02em; margin-bottom: 12px;
     }
-    .hero-title .accent { color: var(--accent); font-style: italic; }
+    .hero-title .accent { color: var(--accent); }
     .hero-acronym {
       font-size: 13px; font-weight: 600; letter-spacing: 0.12em;
       color: var(--accent); opacity: 0.8; margin-bottom: 24px;
@@ -390,10 +391,9 @@
       </button>
       <div class="nav-links">
         <a href="../index.html">Work</a>
-        <a href="./methodology.html" style="color:var(--accent)">ESA</a>
+        <a href="./how-i-work.html">How I Work</a>
         <a href="./resume.html">Resume</a>
         <a href="./about.html">About</a>
-        <a href="../cv/Jose_Alvarez_CV.pdf" download class="btn-download" style="padding:6px 12px;border:1px solid rgba(167,139,250,.4);border-radius:999px;font-weight:500;">Download CV</a>
       </div>
     </nav>
   </header>
@@ -602,7 +602,7 @@
         <span class="section-label">05 — Visual Architecture</span>
         <h2 class="section-title">The <span class="accent">60/40 Zoning Model</span></h2>
         <p class="section-text">
-          Every surface — full screen or home widget — splits the same way: 60% data, 40% emotional state. Readable in milliseconds.
+          Every surface — full screen or home widget — splits the same way: 60% data, 40% emotional state. Each zone maps directly to Octalysis Core Drives that power long-term engagement.
         </p>
 
         <div class="zoning-grid">
@@ -613,7 +613,7 @@
               <div class="zone-data">60% Data</div>
               <div class="zone-emotional">40% State</div>
             </div>
-            <p class="zone-desc">Streak count + current emotional state. Minimal surface, maximum signal. Neutral or Happy state.</p>
+            <p class="zone-desc">Streak count + emotional state. Activates <strong>Core Drive 2: Accomplishment</strong> — visible progress creates intrinsic motivation to continue.</p>
           </div>
           <div class="zone-card">
             <p class="zone-size">Small 2×2</p>
@@ -622,7 +622,7 @@
               <div class="zone-data">60% Data</div>
               <div class="zone-emotional">40% State</div>
             </div>
-            <p class="zone-desc">League rank + awareness metric. Contextual identity — who you are in the system right now.</p>
+            <p class="zone-desc">League rank + awareness metric. Activates <strong>Core Drive 5: Social Influence</strong> — contextual identity anchors the user to their standing in the system.</p>
           </div>
           <div class="zone-card" style="border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.04)">
             <p class="zone-size" style="color:#fbbf24">Wide 4×2 — Risk</p>
@@ -631,7 +631,7 @@
               <div class="zone-data">60% Countdown</div>
               <div class="zone-emotional" style="background:rgba(251,191,36,.15);color:#fbbf24">40% Worried</div>
             </div>
-            <p class="zone-desc">Real-time countdown + Worried mascot. The most powerful retention surface — activates loss aversion passively.</p>
+            <p class="zone-desc">Real-time countdown + Worried mascot. Activates <strong>Core Drive 8: Loss Aversion</strong> — the most powerful retention surface. Urgency without punishment.</p>
           </div>
         </div>
       </div>
@@ -671,6 +671,40 @@
     </section>
 
   </main>
+
+  <!-- 07 METRICS -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">07 — Metrics</span>
+      <h2 class="section-title">How ESA <span class="accent">moves business metrics</span></h2>
+      <p class="section-text">These products aren't in production yet — but the framework is designed around specific, measurable outcomes. Here's what I'd track and why each one connects to revenue.</p>
+
+      <div class="card-grid three" style="margin-top:28px">
+        <div class="card">
+          <p class="card-label" style="color:var(--accent)">Retention</p>
+          <h3>Day 7 & Day 30 return rate</h3>
+          <p>The Worried state activates before a streak breaks — the highest-risk abandonment moment. Industry benchmark: gamification improves retention by up to <strong>30%</strong> (Deloitte). Target: 70%+ Day 30.</p>
+        </div>
+        <div class="card">
+          <p class="card-label" style="color:var(--accent)">Daily Active Use</p>
+          <h3>DAU via Core Drive 8</h3>
+          <p>Loss aversion (fear of losing a streak) drives immediate action. LiveOps found gamification mechanics increased daily engagement metrics by <strong>8–15%</strong> without changing core functionality.</p>
+        </div>
+        <div class="card">
+          <p class="card-label" style="color:var(--accent)">Early signal</p>
+          <h3>User-reported control — Cuak</h3>
+          <p><strong>5/5 prototype testers</strong> felt more in control after one session. Higher perceived control = lower churn. This is the earliest measurable proxy for long-term retention before launch.</p>
+        </div>
+      </div>
+
+      <div class="card featured" style="margin-top:16px;padding:24px 28px">
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.8">
+          <strong style="color:var(--accent)">The metrics I'd define before any launch:</strong>
+          Task success rate (completed actions / total users), interaction efficiency (tasks / time spent), and engagement depth (active time / session duration) — the 60/40 architecture is designed specifically to keep users in a flow state that improves all three simultaneously.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- CTA -->
   <section class="cta-section">

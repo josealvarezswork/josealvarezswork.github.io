@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DuoGit — Design System · Jose Alvarez</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1E1A2E;
+      --bg-card: #2D2845;
+      --bg-elevated: #252038;
+      --text: #F2EFE8;
+      --muted: rgba(242,239,232,.62);
+      --faint: rgba(242,239,232,.36);
+      --stroke: rgba(155,143,212,.15);
+      --stroke-light: rgba(155,143,212,.22);
+      --accent: #9B8FD4;
+      --accent-soft: rgba(155,143,212,.12);
+      --accent-green: #10b981;
+      --accent-warn: #fbbf24;
+      --serif: "Bricolage Grotesque", sans-serif;
+      --sans: "Bricolage Grotesque", sans-serif;
+      --max: 1040px;
+      --r: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background:
+        radial-gradient(ellipse 100% 50% at 20% 10%, rgba(155,143,212,.08), rgba(155,143,212,0) 65%),
+        radial-gradient(ellipse 80% 40% at 85% 30%, rgba(16,185,129,.04), rgba(16,185,129,0) 65%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .nav {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto; padding: 28px 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark {
+      width: 22px; height: 22px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18); position: relative;
+    }
+    .brand-mark::before {
+      content: ""; position: absolute; inset: 5px;
+      border-radius: 999px; background: rgba(255,255,255,.9);
+    }
+    .brand-name { font-weight: 600; font-size: 12px; display: block; }
+    .brand-sub { font-size: 11px; opacity: .7; display: block; }
+    .nav-back { font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+    .nav-back:hover { color: var(--text); }
+
+    .container { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .section { padding: 64px 0; border-top: 1px solid var(--stroke); }
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--faint); display: block; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--serif); font-size: clamp(26px, 3vw, 38px);
+      font-weight: 700; letter-spacing: -.01em; margin-bottom: 16px; line-height: 1.2;
+    }
+    .accent { color: var(--accent); }
+    .section-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 680px; }
+
+    .hero { padding: 80px 0 60px; }
+    .hero-eyebrow {
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
+    .hero-title {
+      font-family: var(--serif); font-size: clamp(36px, 5vw, 58px);
+      font-weight: 700; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero-sub { font-size: 16px; color: var(--muted); max-width: 600px; line-height: 1.7; }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .pill {
+      font-size: 11px; letter-spacing: .06em; padding: 6px 12px;
+      border-radius: 999px; border: 1px solid var(--stroke-light); color: var(--muted);
+    }
+    .pill.accent { border-color: rgba(155,143,212,.3); color: var(--accent); background: var(--accent-soft); }
+
+    .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-top: 32px; }
+    .color-swatch { border-radius: var(--r); overflow: hidden; border: 1px solid var(--stroke); }
+    .swatch-block { height: 80px; }
+    .swatch-info { padding: 12px; background: var(--bg-card); }
+    .swatch-name { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+    .swatch-token { font-size: 10px; color: var(--faint); font-family: monospace; }
+    .swatch-hex { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    .states-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; margin-top: 32px;
+    }
+    @media (max-width: 768px) { .states-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .states-grid { grid-template-columns: 1fr; } }
+    .state-card {
+      background: var(--bg-card); border: 1px solid var(--stroke-light);
+      border-radius: var(--r); padding: 24px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .state-img-placeholder {
+      width: 80px; height: 80px; background: var(--bg-elevated); border-radius: 12px;
+      border: 2px dashed var(--stroke-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; margin-bottom: 4px;
+    }
+    .state-name { font-size: 14px; font-weight: 600; }
+    .state-trigger { font-size: 11px; color: var(--faint); letter-spacing: .04em; }
+    .state-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .state-drive {
+      font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+      padding: 4px 8px; border-radius: 4px; background: var(--accent-soft);
+      color: var(--accent); align-self: flex-start; margin-top: 4px;
+    }
+
+    .zone-diagram { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 32px; }
+    @media (max-width: 700px) { .zone-diagram { grid-template-columns: 1fr; } }
+    .zone-card { border-radius: var(--r); border: 1px solid var(--stroke-light); overflow: hidden; }
+    .zone-header { padding: 14px 16px; background: var(--bg-elevated); border-bottom: 1px solid var(--stroke); }
+    .zone-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+    .zone-name { font-size: 14px; font-weight: 600; margin-top: 2px; }
+    .zone-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .zone-split-visual { display: flex; height: 48px; border-radius: 8px; overflow: hidden; gap: 2px; }
+    .zone-data-bar {
+      flex: 60; background: rgba(155,143,212,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600; color: var(--accent); border-radius: 6px 0 0 6px;
+    }
+    .zone-emotional-bar {
+      flex: 40; background: rgba(16,185,129,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600; color: var(--accent-green); border-radius: 0 6px 6px 0;
+    }
+    .zone-emotional-bar.warn { background: rgba(251,191,36,.12); color: var(--accent-warn); }
+    .zone-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .zone-drive { font-size: 10px; color: var(--faint); margin-top: 4px; letter-spacing: .04em; }
+
+    /* League system */
+    .league-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 28px; }
+    .league-card {
+      padding: 20px 16px; text-align: center;
+      background: var(--bg-card); border: 1px solid var(--stroke-light);
+      border-radius: var(--r);
+    }
+    .league-icon { font-size: 32px; margin-bottom: 8px; }
+    .league-name { font-size: 13px; font-weight: 600; }
+    .league-xp { font-size: 11px; color: var(--accent); margin-top: 2px; }
+
+    /* BA grid */
+    .ba-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; margin-top: 32px; }
+    @media (max-width: 640px) { .ba-grid { grid-template-columns: 1fr; } .ba-arrow { transform: rotate(90deg); } }
+    .ba-card { border-radius: var(--r); border: 1px solid var(--stroke-light); overflow: hidden; }
+    .ba-card-header { padding: 10px 16px; border-bottom: 1px solid var(--stroke); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+    .ba-card-body { padding: 20px; min-height: 180px; background: var(--bg-card); display: flex; align-items: center; justify-content: center; }
+    .ba-placeholder { width: 100%; min-height: 160px; border: 2px dashed var(--stroke-light); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--faint); font-size: 13px; }
+    .ba-arrow { font-size: 24px; color: var(--accent); text-align: center; }
+    .ba-annotation { font-size: 12px; color: var(--muted); padding: 12px 16px; border-top: 1px solid var(--stroke); line-height: 1.6; }
+
+    /* Annotations */
+    .annotated-placeholder { width: 100%; min-height: 400px; background: var(--bg-card); border-radius: var(--r); border: 2px dashed var(--stroke-light); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--faint); font-size: 14px; margin-top: 32px; }
+    .annotation-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .annotation-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--stroke); border-radius: 10px; }
+    .annotation-dot { width: 24px; height: 24px; border-radius: 999px; background: var(--accent-soft); border: 2px solid var(--accent); color: var(--accent); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .annotation-label { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .annotation-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    /* Components */
+    .component-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
+    @media (max-width: 600px) { .component-grid { grid-template-columns: 1fr; } }
+    .component-card { background: var(--bg-card); border: 1px solid var(--stroke-light); border-radius: var(--r); padding: 24px; }
+    .component-name { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); margin-bottom: 16px; }
+    .component-desc { font-size: 13px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
+
+    .progress-demo { margin: 12px 0; }
+    .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .progress-track { height: 8px; background: var(--bg-elevated); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 999px; }
+
+    .streak-counter { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--bg-elevated); border-radius: 10px; border: 1px solid var(--stroke-light); margin: 16px 0; }
+    .streak-num { font-size: 36px; font-weight: 700; color: var(--accent-green); letter-spacing: -.02em; }
+    .streak-label { font-size: 13px; color: var(--muted); }
+    .streak-sub { font-size: 11px; color: var(--faint); }
+
+    .type-grid { display: flex; flex-direction: column; gap: 20px; margin-top: 28px; }
+    .type-item { padding: 20px 24px; background: var(--bg-card); border: 1px solid var(--stroke); border-radius: var(--r); }
+    .type-meta { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+
+    .figma-cta { padding: 40px; background: var(--bg-card); border: 1px solid var(--stroke-light); border-radius: 16px; text-align: center; margin-top: 32px; }
+    .figma-cta h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+    .figma-cta p { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+    .btn-figma { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 999px; background: var(--accent-soft); border: 1px solid rgba(155,143,212,.3); color: var(--accent); font-size: 13px; font-weight: 500; transition: background 150ms ease; }
+    .btn-figma:hover { background: rgba(155,143,212,.2); }
+
+    .site-footer { margin-top: 80px; padding: 32px 0; border-top: 1px solid var(--stroke); background: rgba(0,0,0,.2); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 12px; color: var(--faint); }
+    .footer-nav { display: flex; gap: 24px; font-size: 12px; color: var(--faint); }
+    .footer-nav a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark"></span>
+      <span>
+        <span class="brand-name">Jose Alvarez</span>
+        <span class="brand-sub">Design</span>
+      </span>
+    </a>
+    <a class="nav-back" href="./duogit.html">← Back to case study</a>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <p class="hero-eyebrow">Design System</p>
+      <h1 class="hero-title">DuoGit<br><span class="accent">Visual System</span></h1>
+      <p class="hero-sub">
+        The behavioral design system behind DuoGit — color tokens, Ghost's emotional states,
+        60/40 zoning, league progression, and annotated UI components. Every element is wired to a psychological mechanism.
+      </p>
+      <div class="hero-pills">
+        <span class="pill accent">Gamification</span>
+        <span class="pill">Developer Tools</span>
+        <span class="pill">Streak Mechanics</span>
+        <span class="pill">ESA Framework</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 COLOR TOKENS -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">01 — Color Tokens</span>
+      <h2 class="section-title">Palette built for <span class="accent">developer context</span></h2>
+      <p class="section-text">Dark-first palette that respects developer visual habits. Each color encodes a behavioral state — streaks, progress, and risk.</p>
+
+      <div class="color-grid">
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#9B8FD4"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Accent — Ghost</p>
+            <p class="swatch-token">--accent</p>
+            <p class="swatch-hex">#9B8FD4</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#10b981"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Streak — Active</p>
+            <p class="swatch-token">--accent-green</p>
+            <p class="swatch-hex">#10b981</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#fbbf24"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Warning — At Risk</p>
+            <p class="swatch-token">--accent-warn</p>
+            <p class="swatch-hex">#fbbf24</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#1E1A2E"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Background</p>
+            <p class="swatch-token">--bg</p>
+            <p class="swatch-hex">#1E1A2E</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#2D2845"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Card Surface</p>
+            <p class="swatch-token">--bg-card</p>
+            <p class="swatch-hex">#2D2845</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#F2EFE8"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Text Primary</p>
+            <p class="swatch-token">--text</p>
+            <p class="swatch-hex">#F2EFE8</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 GHOST STATES -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">02 — Ghost States</span>
+      <h2 class="section-title">4 emotional states, <span class="accent">1 streak arc</span></h2>
+      <p class="section-text">Ghost reacts to commit activity in real time. Each state maps to a psychological moment in the developer's consistency journey.</p>
+
+      <div class="states-grid">
+        <div class="state-card" style="border-color:rgba(242,239,232,.08)">
+          <div class="state-img-placeholder">👻</div>
+          <p class="state-name">Neutral — Ready</p>
+          <p class="state-trigger">Trigger: app open, no commits today</p>
+          <p class="state-desc">Day begins. Ghost is calm and expectant — no pressure, pure potential.</p>
+          <span class="state-drive">Neutral state</span>
+        </div>
+        <div class="state-card" style="border-color:rgba(16,185,129,.2)">
+          <div class="state-img-placeholder">😸</div>
+          <p class="state-name" style="color:#10b981">Happy — On Streak</p>
+          <p class="state-trigger">Trigger: 3+ day streak / commits today</p>
+          <p class="state-desc">Positive reinforcement. Ghost celebrates — glowing eyes, energetic posture. The system rewards consistency, not just volume.</p>
+          <span class="state-drive" style="color:#10b981;background:rgba(16,185,129,.1)">Core Drive 2: Accomplishment</span>
+        </div>
+        <div class="state-card" style="border-color:rgba(251,191,36,.2)">
+          <div class="state-img-placeholder">😟</div>
+          <p class="state-name" style="color:#fbbf24">Worried — Streak at Risk</p>
+          <p class="state-trigger">Trigger: no commit by evening / streak about to break</p>
+          <p class="state-desc">Loss aversion activated. Ghost's distress makes the risk visible — empathetic urgency, not punishment.</p>
+          <span class="state-drive" style="color:#fbbf24;background:rgba(251,191,36,.1)">Core Drive 8: Loss Aversion</span>
+        </div>
+        <div class="state-card" style="border-color:rgba(155,143,212,.2)">
+          <div class="state-img-placeholder">😢</div>
+          <p class="state-name" style="color:#9B8FD4">Sad — Streak Broken</p>
+          <p class="state-trigger">Trigger: missed day, streak resets</p>
+          <p class="state-desc">Emotional cost acknowledged — then resilience. Ghost mourns with the developer, then invites a guilt-free restart.</p>
+          <span class="state-drive" style="color:#9B8FD4;background:rgba(155,143,212,.1)">Guilt-free restart</span>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--faint);margin-top:20px">↑ Replace placeholders with Ghost pose exports from Figma</p>
+    </div>
+  </section>
+
+  <!-- 03 LEAGUE SYSTEM -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">03 — Progression System</span>
+      <h2 class="section-title">League ranks & <span class="accent">XP mechanics</span></h2>
+      <p class="section-text">Social influence and status identity (Core Drive 5). The league system gives developers a place to belong — and a reason to keep their streak.</p>
+
+      <div class="league-grid">
+        <div class="league-card" style="border-color:rgba(180,140,90,.2);background:rgba(180,140,90,.04)">
+          <div class="league-icon">🥉</div>
+          <p class="league-name" style="color:#b48c5a">Bronze</p>
+          <p class="league-xp">0 — 499 XP</p>
+        </div>
+        <div class="league-card" style="border-color:rgba(180,180,180,.2);background:rgba(180,180,180,.04)">
+          <div class="league-icon">🥈</div>
+          <p class="league-name" style="color:#b0b0b0">Silver</p>
+          <p class="league-xp">500 — 1,499 XP</p>
+        </div>
+        <div class="league-card" style="border-color:rgba(212,175,55,.2);background:rgba(212,175,55,.04)">
+          <div class="league-icon">🥇</div>
+          <p class="league-name" style="color:#d4af37">Gold</p>
+          <p class="league-xp">1,500 — 3,999 XP</p>
+        </div>
+        <div class="league-card" style="border-color:rgba(155,143,212,.3);background:rgba(155,143,212,.06)">
+          <div class="league-icon">💎</div>
+          <p class="league-name" style="color:#9B8FD4">Diamond</p>
+          <p class="league-xp">4,000 — 9,999 XP</p>
+        </div>
+        <div class="league-card" style="border-color:rgba(255,80,120,.25);background:rgba(255,80,120,.05)">
+          <div class="league-icon">👑</div>
+          <p class="league-name" style="color:#e84c7d">Legend</p>
+          <p class="league-xp">10,000+ XP</p>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;padding:20px 24px;background:var(--bg-card);border-radius:var(--r);border:1px solid var(--stroke-light)">
+        <p style="font-size:13px;color:var(--muted);line-height:1.7">
+          <strong style="color:var(--text)">XP sources:</strong> Daily commit (+10 XP), streak milestone (+25 XP), 7-day streak (+50 XP), first commit of day (+5 XP bonus). XP decay on missed days activates loss aversion without permanent punishment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 60/40 ARCHITECTURE -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">04 — Visual Architecture</span>
+      <h2 class="section-title">The <span class="accent">60/40 Zoning Model</span></h2>
+      <p class="section-text">Every surface splits 60% commit data / 40% Ghost emotional state. Each zone is mapped to an Octalysis Core Drive.</p>
+
+      <div class="zone-diagram">
+        <div class="zone-card">
+          <div class="zone-header">
+            <p class="zone-label">Small 2×2</p>
+            <p class="zone-name">Progress Focus</p>
+          </div>
+          <div class="zone-body">
+            <div class="zone-split-visual">
+              <div class="zone-data-bar">60% Streak</div>
+              <div class="zone-emotional-bar">40% Ghost</div>
+            </div>
+            <p class="zone-desc">Current streak count + Ghost emotional state. Day-to-day habit engine.</p>
+            <p class="zone-drive">→ Core Drive 2: Accomplishment</p>
+          </div>
+        </div>
+        <div class="zone-card">
+          <div class="zone-header">
+            <p class="zone-label">Small 2×2</p>
+            <p class="zone-name">Status Focus</p>
+          </div>
+          <div class="zone-body">
+            <div class="zone-split-visual">
+              <div class="zone-data-bar">60% League</div>
+              <div class="zone-emotional-bar">40% Ghost</div>
+            </div>
+            <p class="zone-desc">League rank + XP meter. Social identity — who you are in the developer community.</p>
+            <p class="zone-drive">→ Core Drive 5: Social Influence</p>
+          </div>
+        </div>
+        <div class="zone-card" style="border-color:rgba(251,191,36,.25)">
+          <div class="zone-header" style="background:rgba(251,191,36,.04)">
+            <p class="zone-label" style="color:#fbbf24">Wide 4×2 — Risk</p>
+            <p class="zone-name">Urgency Surface</p>
+          </div>
+          <div class="zone-body">
+            <div class="zone-split-visual">
+              <div class="zone-data-bar" style="background:rgba(251,191,36,.12);color:#fbbf24">60% Countdown</div>
+              <div class="zone-emotional-bar warn">40% Worried</div>
+            </div>
+            <p class="zone-desc">Time until streak breaks + Worried Ghost. Most powerful retention surface — visible on home screen without opening the app.</p>
+            <p class="zone-drive">→ Core Drive 8: Loss & Avoidance</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 BEFORE / AFTER -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">05 — Data Storytelling</span>
+      <h2 class="section-title">GitHub raw → <span class="accent">Emotional signal</span></h2>
+      <p class="section-text">Same commit data. Completely different emotional experience. DuoGit doesn't change what you did — it changes how it feels.</p>
+
+      <div class="ba-grid">
+        <div class="ba-card">
+          <div class="ba-card-header">Before — GitHub contribution graph</div>
+          <div class="ba-card-body">
+            <div class="ba-placeholder">
+              <span style="font-size:32px">📊</span>
+              <span>GitHub profile screenshot</span>
+              <span style="font-size:11px;color:var(--faint)">Add from export</span>
+            </div>
+          </div>
+          <p class="ba-annotation">Cold grid. Empty squares feel like failure. No emotional context — user avoids looking.</p>
+        </div>
+        <div class="ba-arrow">→</div>
+        <div class="ba-card">
+          <div class="ba-card-header">After — DuoGit interface</div>
+          <div class="ba-card-body">
+            <div class="ba-placeholder" style="border-color:rgba(155,143,212,.3)">
+              <span style="font-size:32px">👻</span>
+              <span>DuoGit screen export</span>
+              <span style="font-size:11px;color:var(--faint)">Add from Figma export</span>
+            </div>
+          </div>
+          <p class="ba-annotation">Same data — streak framing, Ghost emotional state, league context. Absence feels <strong style="color:var(--accent)">recoverable, not shameful</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 ANNOTATED UI -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">06 — Annotated UI</span>
+      <h2 class="section-title">Every element <span class="accent">earns its place</span></h2>
+      <p class="section-text">Strategic annotations connecting UI decisions to behavioral mechanisms.</p>
+
+      <div class="annotated-placeholder">
+        <span style="font-size:40px">📱</span>
+        <span>DuoGit main screen — export from Figma</span>
+        <span style="font-size:12px;color:var(--faint)">Drop annotated screen here</span>
+      </div>
+
+      <div class="annotation-list">
+        <div class="annotation-item">
+          <div class="annotation-dot">1</div>
+          <div>
+            <p class="annotation-label">Ghost mascot proxy</p>
+            <p class="annotation-text">Ghost externalizes the developer's relationship with their code activity. Cold commit data becomes a social bond — users feel responsible to Ghost, not just to a number. (Epley & Waytz — Anthropomorphism)</p>
+          </div>
+        </div>
+        <div class="annotation-item">
+          <div class="annotation-dot">2</div>
+          <div>
+            <p class="annotation-label">Streak counter — 60% zone</p>
+            <p class="annotation-text">Streak count is the primary behavioral signal. Positioned dominant in the 60% data zone — users see their progress before Ghost's state. Streak = evidence of consistency, not judgment of absence.</p>
+          </div>
+        </div>
+        <div class="annotation-item">
+          <div class="annotation-dot">3</div>
+          <div>
+            <p class="annotation-label">Ghost emotional state — 40% zone</p>
+            <p class="annotation-text">Ghost's expression shifts with streak health. Happy = sustain, Worried = act now, Sad = come back. Visceral-level feedback (Don Norman) — no reading required. 40% visual weight keeps it supportive, not dominant.</p>
+          </div>
+        </div>
+        <div class="annotation-item">
+          <div class="annotation-dot">4</div>
+          <div>
+            <p class="annotation-label">League rank badge</p>
+            <p class="annotation-text">Social identity anchor. Developer knows where they stand relative to others — activates Core Drive 5 (Social Influence). Rank is shown but not weaponized — comparison is opt-in.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 CORE COMPONENTS -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">07 — Components</span>
+      <h2 class="section-title">Core <span class="accent">UI components</span></h2>
+
+      <div class="component-grid">
+
+        <div class="component-card">
+          <p class="component-name">Streak Counter</p>
+          <div class="streak-counter">
+            <div class="streak-num">14</div>
+            <div>
+              <p class="streak-label">Day streak 🔥</p>
+              <p class="streak-sub">Ghost is happy</p>
+            </div>
+          </div>
+          <p class="component-desc">Primary retention mechanism. Streak count + Ghost state + fire emoji = social proof of consistency. Resets with emotional recovery message, not harsh punishment.</p>
+        </div>
+
+        <div class="component-card">
+          <p class="component-name">XP Progress Bar</p>
+          <div class="progress-demo">
+            <div class="progress-label">
+              <span>Gold League</span>
+              <span style="color:var(--accent)">2,340 / 4,000 XP</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" style="width:58%;background:linear-gradient(90deg,#9B8FD4,#b8aee0)"></div>
+            </div>
+          </div>
+          <div class="progress-demo">
+            <div class="progress-label">
+              <span>Diamond League</span>
+              <span style="color:#d4af37">3,890 / 4,000 XP</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" style="width:97%;background:linear-gradient(90deg,#d4af37,#f0d060)"></div>
+            </div>
+          </div>
+          <p class="component-desc">Determinate progress toward next league. Near-completion state (97%) activates the Endowed Progress Effect — users close to a goal are more motivated to complete it.</p>
+        </div>
+
+        <div class="component-card">
+          <p class="component-name">Urgency Countdown Widget</p>
+          <div style="margin:16px 0;padding:16px;background:rgba(251,191,36,.06);border-radius:10px;border:1px solid rgba(251,191,36,.2)">
+            <p style="font-size:11px;color:#fbbf24;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">⚠ Streak at risk</p>
+            <p style="font-size:28px;font-weight:700;color:#fbbf24;letter-spacing:-.01em">4h 23m</p>
+            <p style="font-size:12px;color:var(--muted);margin-top:4px">Ghost is getting worried</p>
+          </div>
+          <p class="component-desc">Home screen widget. Passive loss aversion — visible without opening the app. The most powerful retention touchpoint in the system.</p>
+        </div>
+
+        <div class="component-card">
+          <p class="component-name">SPACE Metric Cards</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0">
+            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border:1px solid var(--stroke-light)">
+              <p style="font-size:10px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase">Satisfaction</p>
+              <p style="font-size:20px;font-weight:700;color:#10b981">87%</p>
+            </div>
+            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border:1px solid var(--stroke-light)">
+              <p style="font-size:10px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase">Activity</p>
+              <p style="font-size:20px;font-weight:700;color:var(--accent)">14d</p>
+            </div>
+          </div>
+          <p class="component-desc">SPACE framework metrics (Satisfaction, Performance, Activity, Communication, Efficiency) — translates GitHub data into developer wellbeing signals, not just productivity numbers.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 TYPOGRAPHY -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">08 — Typography</span>
+      <h2 class="section-title">Type <span class="accent">system</span></h2>
+
+      <div class="type-grid">
+        <div class="type-item">
+          <p class="type-meta">Display — Playfair Display / Serif</p>
+          <p style="font-family:var(--serif);font-size:38px;font-weight:700;letter-spacing:-.02em;line-height:1.1">Your streak<br><em style="color:var(--accent)">is still alive.</em></p>
+        </div>
+        <div class="type-item">
+          <p class="type-meta">Heading — Inter 600</p>
+          <p style="font-size:22px;font-weight:600;letter-spacing:-.01em">14 day streak 🔥</p>
+        </div>
+        <div class="type-item">
+          <p class="type-meta">Body — Inter 400 · 15px · 1.8 leading</p>
+          <p style="font-size:15px;color:var(--muted);line-height:1.8">Ghost is on your side. Every commit counts — even tiny ones. Missing a day doesn't erase your progress, it just gives Ghost something to worry about.</p>
+        </div>
+        <div class="type-item">
+          <p class="type-meta">Label / Caption — Inter 500 · 11px · 0.1em tracking</p>
+          <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Gold League · Updated just now</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIGMA LINK -->
+  <div class="container">
+    <div class="figma-cta">
+      <h3>Full system in Figma</h3>
+      <p>Components, Ghost pose variants, widget frames, and design tokens — organized for handoff.</p>
+      <a class="btn-figma" href="#" target="_blank" rel="noreferrer">
+        ⬡ View in Figma →
+      </a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-copy">Jose Alvarez · DuoGit Design System · 2026</p>
+        <nav class="footer-nav">
+          <a href="./duogit.html">Case Study</a>
+          <a href="../pages/methodology.html">ESA Framework</a>
+          <a href="../index.html">Portfolio</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
