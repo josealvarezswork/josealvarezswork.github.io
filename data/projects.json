@@ -3,26 +3,28 @@
     {
       "id": "duogit",
       "title": "Duo Git",
-      "description": "A design system that makes developer activity feel meaningful instead of judgmental — turning raw GitHub data into motivation.",
-      "category": "Gamification · Mobile",
-      "year": "2026",
-      "color": "blue",
+      "meta": "2026 · Behavioral design system",
+      "description": "GitHub shows contribution data with no emotional dimension, and most gamification fills that gap by punishing absence — a broken streak becomes a reason to quit rather than to return. DuoGit makes inactivity recoverable instead of shameful: a mascot moves through four states that acknowledge a gap without judging it, and streak recovery is built into the loop. Nine screens, a full widget family for iOS and Android, league ranking and XP mechanics, measured against behavioral KPIs — streak recovery rate, Day 7 retention, time-to-first-commit.",
+      "tags": ["Mobile App", "Design System", "Gamification", "UX Research"],
+      "image": "./assets/img/duogit/home-screens.jpg",
+      "imageAlt": "DuoGit screens — GitHub authorization, league ranking and SPACE metrics",
+      "tint": "duogit",
+      "fit": "bleed",
       "link": "./pages/duogit.html",
-      "images": [
-        "./assets/img/portada-duogit.jpg"
-      ]
+      "systemLink": "./pages/duogit-design-system.html"
     },
     {
       "id": "cuak",
       "title": "Cuak",
-      "description": "A fintech mascot that reacts to your credit health in real time. Designed to replace financial anxiety with actionable clarity.",
-      "category": "Mascot UX · Fintech",
-      "year": "2026",
-      "color": "green",
+      "meta": "2026 · Emotional fintech",
+      "description": "Banking apps show balance, limit and due date but never answer the question users actually have: am I okay? Cuak promotes the emotional state to primary interface — a 60/40 layout gives objective data the left side and the mascot the right, and a purchase simulator advises before the money is spent rather than reporting after. Validated in prototype testing: five of five testers reported feeling more in control with mascot feedback than with the same number shown alone.",
+      "tags": ["Mobile App", "Fintech", "Mascot UX", "Prototype Testing"],
+      "image": "./assets/img/cuak/home-screens.jpg",
+      "imageAlt": "Cuak screens — sign in, home with mascot state and credit cards, and onboarding",
+      "tint": "cuak",
+      "fit": "bleed",
       "link": "./pages/cuak.html",
-      "images": [
-        "./assets/img/cuak/portada.jpg"
-      ]
+      "systemLink": "./pages/cuak-design-system.html"
     }
   ]
 }

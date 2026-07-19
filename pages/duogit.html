@@ -45,10 +45,7 @@
     }
 
     body {
-      background:
-        radial-gradient(800px 500px at 30% 20%, rgba(255,255,255,0.06), transparent 60%),
-        radial-gradient(900px 600px at 80% 40%, rgba(255,255,255,0.04), transparent 65%),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
       line-height: 1.6;
@@ -1197,10 +1194,10 @@
           GitHub tracks what you did. DuoGit makes you want to do it again. A cross-platform mobile app that turns cold commit data into motivating emotional feedback — filling the gap between utilitarian dev tools and generic gamification.
         </p>
         <div class="tldr">
-          <div class="tldr-item"><span class="tldr-icon">👤</span><span>UX / Product Design</span></div>
-          <div class="tldr-item"><span class="tldr-icon">🛠</span><span>Figma · React Native · Expo</span></div>
-          <div class="tldr-item"><span class="tldr-icon">📱</span><span>9 Screens Built</span></div>
-          <div class="tldr-item highlight"><span class="tldr-icon">📈</span><span>Users checked streak in first 30s unprompted</span></div>
+          <div class="tldr-item"><span>UX / Product Design</span></div>
+          <div class="tldr-item"><span>Figma · React Native · Expo</span></div>
+          <div class="tldr-item"><span>9 Screens Built</span></div>
+          <div class="tldr-item highlight"><span>Users checked streak in first 30s unprompted</span></div>
         </div>
         <div class="hero-image">
           <img src="../assets/img/duogit/portada.png" alt="DuoGit — App Overview" />
@@ -1231,7 +1228,6 @@
     <!-- RESEARCH -->
     <section class="section">
       <div class="container">
-        <span class="section-label insight">02 — Competitive Insights</span>
         <h2 class="section-title">The "worried mascot" is a powerful psychological trigger.</h2>
         <p class="section-text">Inspiration came from evaluating adjacent markets. Duolingo proved that emotional mascots and streak mechanics drive retention. However, no competitor combined these elements specifically for software development integration.</p>
         <div class="research-grid">
@@ -1262,7 +1258,6 @@
     <!-- PERSONA / METRICS -->
     <section class="section">
       <div class="container">
-        <span class="section-label persona">03 — Measurement Strategy</span>
         <h2 class="section-title">Defining Success for DuoGit</h2>
         <p class="section-text">The goal is not just to build a widget, but to foster positive behavioral change among developers — moving from sporadic, high-stress commits to consistent, stress-free daily routines.</p>
         
@@ -1322,7 +1317,6 @@
     <!-- JOURNEY -->
     <section class="section">
       <div class="container">
-        <span class="section-label">04 — User Journey</span>
         <h2 class="section-title">The Streak Journey Flow</h2>
         <p class="section-text">The widget introduces a simple but effective daily loop based on the GitHub commit status. It seamlessly maps the emotional state of the character to the user's progress.</p>
         <div class="journey">
@@ -1359,7 +1353,6 @@
     <!-- TRADEOFF/ZONING -->
     <section class="section">
       <div class="container">
-        <span class="section-label">05 — Widget Design</span>
         <h2 class="section-title">Three widgets, one <span class="accent">behavioral loop</span></h2>
         <p class="section-text">Designed as the next phase, the widget layer surfaces the most critical state — streak health — directly on the home screen. Three sizes, each with a distinct role: reinforce progress, broadcast rank, or trigger recovery before the streak breaks.</p>
         <div class="screen-card" style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius:24px;padding:48px 32px;display:flex;gap:48px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;max-width:1000px;">
@@ -1704,7 +1697,6 @@
           <!-- Competitive Analysis Table -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;">
             <div>
-              <span class="section-label insight">Competitive Landscape</span>
               <div style="margin-top:12px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);overflow:hidden">
                 <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left">
                   <thead>
@@ -1745,7 +1737,6 @@
               </div>
             </div>
             <div>
-              <span class="section-label insight">Market Position</span>
               <div style="margin-top:12px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);overflow:hidden;padding:28px;display:flex;flex-direction:column;justify-content:center;gap:16px;">
                 <p style="font-size:15px;line-height:1.8;color:var(--text-muted);">DuoGit owns the <strong style="color:var(--text);">developer behavior layer</strong> by pairing live commit sync with emotional streak coaching. It turns progress signals into motivating feedback, closing the gap between code tracking and sustained coding habits.</p>
                 <p style="font-size:15px;line-height:1.8;color:var(--text-muted);">Where GitHub tracks history and Duolingo gamifies generic habits, DuoGit is the only product built specifically for <strong style="color:var(--text);">developer consistency</strong> — not just activity.</p>
@@ -1798,14 +1789,12 @@
     <!-- DESIGN SYSTEM -->
     <section class="section">
       <div class="container">
-        <span class="section-label solution">08 — Design System</span>
         <h2 class="section-title">UI Kit built for behavioral clarity</h2>
         <p class="section-text">Every visual decision is codified — colors map directly to emotional states, not aesthetics. The system ships as <strong>NativeWind tokens</strong> inside the React Native codebase.</p>
 
         <!-- Design Tokens -->
         <div style="margin-top:40px">
           <h3 style="font-size:14px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px">
-            <span style="width:24px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">🎨</span>
             Color Tokens
           </h3>
           <div class="design-tokens-grid">
@@ -1865,7 +1854,6 @@
         <!-- Core Components -->
         <div style="margin-top:40px">
           <h3 style="font-size:14px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px">
-            <span style="width:24px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">📦</span>
             Core Components
           </h3>
           <div class="features-list">
@@ -1895,6 +1883,14 @@
             </div>
           </div>
         </div>
+
+        <!-- Full design system -->
+        <a href="./duogit-design-system.html" style="margin-top:36px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 26px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:14px;transition:border-color .2s">
+          <span>
+            <strong style="display:block;font-size:15px;margin-bottom:4px;color:var(--text)">Explore the full DuoGit Design System →</strong>
+            <span style="font-size:13px;color:var(--text-muted)">Palette, 4 mascot states, league ranks &amp; XP mechanics, the 60/40 zoning model, core components and type system.</span>
+          </span>
+        </a>
 
       </div>
     </section>

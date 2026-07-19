@@ -3,15 +3,6 @@
  * Carga proyectos desde projects.json y los renderiza dinámicamente
  */
 
-const COLOR_MAP = {
-  green: '#4f7c63',
-  orange: '#ff6a2d',
-  blue: '#3b82f6',
-  purple: '#8b5cf6',
-  cyan: '#06b6d4',
-  pink: '#ec4899'
-};
-
 async function loadProjects() {
   const container = document.getElementById('projects-container');
   if (!container) return;
@@ -29,25 +20,27 @@ async function loadProjects() {
 }
 
 function renderProjects(projects, container) {
-  container.innerHTML = projects.map(project => `
-    <a class="card" href="${project.link}" style="background: ${COLOR_MAP[project.color] || project.color}">
-      <div class="card-image">
-        <div class="card-mockup">
-          ${project.images.length > 0
-      ? project.images.map(img => `<img src="${img}" alt="${project.title} — cover" loading="lazy" decoding="async">`).join('')
-      : ''
-    }
+  container.innerHTML = projects.map((project, i) => `
+    <article class="case">
+      <div class="case-body">
+        <p class="case-meta">${project.meta}</p>
+        <h3 class="case-title">${project.title}</h3>
+        <p class="case-desc">${project.description}</p>
+
+        <ul class="case-tags">
+          ${project.tags.map(t => `<li>${t}</li>`).join('')}
+        </ul>
+
+        <div class="case-links">
+          <a class="case-link primary" href="${project.link}">View case study ↗</a>
+          ${project.systemLink ? `<a class="case-link" href="${project.systemLink}">Design system ↗</a>` : ''}
         </div>
       </div>
-      <div class="card-inner">
-        <div class="card-meta">
-          <span class="pill">${project.category}</span>
-          <span class="pill pill--ghost">${project.year}</span>
-        </div>
-        <h3 class="card-title">${project.title}</h3>
-        <p class="card-desc">${project.description}</p>
-      </div>
-    </a>
+
+      <a class="case-visual case-visual--${project.tint} is-${project.fit}" href="${project.link}" tabindex="-1" aria-hidden="true">
+        <img src="${project.image}" alt="${project.imageAlt}" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async">
+      </a>
+    </article>
   `).join('');
 }
 
@@ -55,6 +48,7 @@ function renderProjects(projects, container) {
 document.addEventListener('DOMContentLoaded', () => {
   loadProjects();
   initSlider();
+  initReactiveMascots();
 });
 
 // Field Notes Slider
@@ -76,5 +70,30 @@ function initSlider() {
   document.getElementById('prev')?.addEventListener('click', () => goTo(current - 1));
   document.getElementById('next')?.addEventListener('click', () => goTo(current + 1));
   dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.index)));
+}
+
+// Mascots react to the column the reader is on — the thesis, demonstrated
+function initReactiveMascots() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(hover: hover)').matches) return;
+
+  document.querySelectorAll('.slide').forEach(slide => {
+    const mascot = slide.querySelector('.slide-mascot');
+    if (!mascot) return;
+
+    // Preload so the swap never flashes
+    Object.values(mascot.dataset).forEach(src => { new Image().src = src; });
+
+    const setMood = mood => {
+      const src = mascot.dataset[mood];
+      if (src && mascot.getAttribute('src') !== src) mascot.setAttribute('src', src);
+      mascot.classList.toggle('is-reacting', mood !== 'idle');
+    };
+
+    slide.querySelectorAll('[data-mood]').forEach(col => {
+      col.addEventListener('mouseenter', () => setMood(col.dataset.mood));
+      col.addEventListener('mouseleave', () => setMood('idle'));
+    });
+  });
 }
 

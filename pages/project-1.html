@@ -17,26 +17,7 @@
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
     rel="stylesheet">
   <style>
-    :root {
-      --bg: #070709;
-      --bg-elevated: #0d0d10;
-      --bg-card: #111114;
-      --text: #f2f2f2;
-      --text-muted: rgba(255, 255, 255, .62);
-      --text-faint: rgba(255, 255, 255, .36);
-      --stroke: rgba(255, 255, 255, .08);
-      --stroke-light: rgba(255, 255, 255, .12);
-      --accent: #ff6a2d;
-      --accent-soft: rgba(255, 106, 45, .15);
-      --accent-glow: rgba(255, 106, 45, .08);
-      --success: #10b981;
-      --success-soft: rgba(16, 185, 129, .15);
-      --serif: "Bricolage Grotesque", sans-serif;
-      --sans: "Bricolage Grotesque", sans-serif;
-      --max: 1040px;
-      --r: 12px;
-      --rl: 16px;
-    }
+    :root { --bg: #1E1A2E; --bg-elevated: #252038; --bg-card: #2D2845; --text: #F2EFE8; --text-muted: rgba(242, 239, 232, .62); --text-faint: rgba(242, 239, 232, .36); --stroke: rgba(155, 143, 212, .15); --stroke-light: rgba(155, 143, 212, .22); --accent: #9B8FD4; --accent-soft: rgba(155, 143, 212, .15); --accent-glow: rgba(155, 143, 212, .08); --success: #9B8FD4; --success-soft: rgba(155, 143, 212, .15); --serif: "Bricolage Grotesque", sans-serif; --sans: "Bricolage Grotesque", sans-serif; --max: 1040px; --r: 12px; --rl: 16px; }
 
     * {
       box-sizing: border-box;
@@ -45,10 +26,7 @@
     }
 
     body {
-      background:
-        radial-gradient(800px 500px at 30% 20%, rgba(255,255,255,0.06), transparent 60%),
-        radial-gradient(900px 600px at 80% 40%, rgba(255,255,255,0.04), transparent 65%),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
       line-height: 1.6;
@@ -66,7 +44,7 @@
       right: 0;
       width: 5px;
       height: 100vh;
-      background: linear-gradient(180deg, var(--accent) 0%, rgba(255, 106, 45, .2) 100%);
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(155, 143, 212, .2) 100%);
       z-index: 100
     }
 
@@ -236,7 +214,7 @@
       gap: 8px;
       padding: 6px 12px;
       background: var(--accent-soft);
-      border: 1px solid rgba(255, 106, 45, .25);
+      border: 1px solid rgba(155, 143, 212, .25);
       border-radius: 100px;
       font-size: 11px;
       font-weight: 600;
@@ -441,7 +419,7 @@
 
     .pws-card.featured {
       background: var(--accent-glow);
-      border-color: rgba(255, 106, 45, .2)
+      border-color: rgba(155, 143, 212, .2)
     }
 
     .pws-card h3 {
@@ -1107,7 +1085,7 @@
 
     .btn-download {
       padding: 6px 12px;
-      border: 1px solid rgba(255, 106, 45, 0.5);
+      border: 1px solid rgba(155, 143, 212, 0.5);
       border-radius: 999px;
       font-weight: 500;
     }
@@ -1157,11 +1135,11 @@
           friction for solo designers and small teams through guided input and AI-powered generation.
         </p>
         <div class="tldr">
-          <div class="tldr-item"><span class="tldr-icon">👤</span><span>Solo Designer & Builder</span></div>
-          <div class="tldr-item"><span class="tldr-icon">🛠</span><span>HTML · JS · OpenAI API · Figma Plugin API</span>
+          <div class="tldr-item"><span>Solo Designer & Builder</span></div>
+          <div class="tldr-item"><span>HTML · JS · OpenAI API · Figma Plugin API</span>
           </div>
-          <div class="tldr-item"><span class="tldr-icon">🔬</span><span>150+ community reactions · Validated by designers</span></div>
-          <div class="tldr-item highlight"><span class="tldr-icon">📈</span><span>60% reduction in discovery time</span>
+          <div class="tldr-item"><span>150+ community reactions · Validated by designers</span></div>
+          <div class="tldr-item highlight"><span>60% reduction in discovery time</span>
           </div>
         </div>
         <div class="hero-image">
@@ -1758,7 +1736,6 @@
         <!-- Design Tokens -->
         <div style="margin-top:40px">
           <h3 style="font-size:14px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px">
-            <span style="width:24px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">🎨</span>
             Design Tokens
           </h3>
           <div class="design-tokens-grid">
@@ -1813,7 +1790,6 @@
         <!-- Component Library -->
         <div style="margin-top:40px">
           <h3 style="font-size:14px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px">
-            <span style="width:24px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">📦</span>
             Component Library
           </h3>
           <div class="component-library-grid">
@@ -1866,7 +1842,6 @@
         <!-- Figma Structure -->
         <div style="margin-top:40px">
           <h3 style="font-size:14px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px">
-            <span style="width:24px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px">⚙️</span>
             Figma Implementation
           </h3>
           <div class="features-list">
@@ -1907,19 +1882,16 @@
         <h2 class="section-title">Three principles behind every decision</h2>
         <div class="principles">
           <div class="principle">
-            <div class="principle-icon">📐</div>
             <h4>Guide, Don't Dictate</h4>
             <p>Structured guidance without overwhelming users. Optional prompts at each section, not rigid mandatory
               fields that block progress.</p>
           </div>
           <div class="principle">
-            <div class="principle-icon">🔗</div>
             <h4>Integrate Seamlessly</h4>
             <p>Outputs fit naturally into existing workflows. Notion, JSON, download — the user chooses how and where
               they work.</p>
           </div>
           <div class="principle">
-            <div class="principle-icon">⚖️</div>
             <h4>Empower Judgment</h4>
             <p>AI assists, never replaces. Every generated output is fully editable. The designer stays in control of
               every decision.</p>

@@ -39,10 +39,7 @@
 
     body {
       margin: 0;
-      background:
-        radial-gradient(900px 500px at 28% 16%, rgba(155, 143, 212, 0.12), transparent 60%),
-        radial-gradient(900px 600px at 78% 44%, rgba(232, 76, 125, 0.06), transparent 65%),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
     }
@@ -503,12 +500,7 @@
       line-height: 1.05;
     }
 
-    .cta-accent {
-      background: linear-gradient(90deg, #9B8FD4, #E84C7D, #F5C542);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+    .cta-accent { color: var(--accent); }
 
     /* Responsive */
     @media (max-width: 900px) {
@@ -626,7 +618,7 @@
     <section class="resume-header">
       <div class="container">
         <h1 class="resume-title">Jose Alvarez</h1>
-        <p class="resume-role"><strong>UX/UI & Product Designer</strong> for digital products, design systems, and AI tools</p>
+        <p class="resume-role"><strong>Product Designer</strong> — UX/UI, design systems, and the behavioral layer that keeps people coming back</p>
 
         <div class="resume-links">
           <a href="../index.html">Portfolio</a>
@@ -637,6 +629,11 @@
           <span class="separator">·</span>
           <span class="location">Colombia, LATAM · Remote</span>
         </div>
+
+        <a href="../cv/Jose_Alvarez_CV.pdf" download
+          style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:12px 22px;border-radius:999px;background:var(--accent);color:#1E1A2E;font-size:13px;font-weight:600;letter-spacing:0.03em;transition:transform 160ms ease">
+          ↓ Download CV (PDF)
+        </a>
 
       </div>
     </section>
@@ -762,29 +759,28 @@
             <h3 class="exp-role">Product Designer & Builder</h3>
             <span class="exp-date">2026</span>
           </div>
-          <p class="exp-company">ByMakers · Multi-tenant SaaS · <a href="./bymakers.html">View Case Study →</a></p>
+          <p class="exp-company">Cuak · Emotional Fintech · <a href="./cuak.html">View Case Study →</a></p>
 
           <ul class="exp-list">
             <li>
-              Designed a <strong>multi-tenant catalog platform</strong> for entrepreneurs, replacing WhatsApp photo dumps and outdated PDFs with a professional, shareable catalog.
+              Designed a <strong>reactive fintech mascot system</strong> that translates invisible credit health into four clear emotional states — replacing financial anxiety with actionable clarity.
             </li>
             <li>
-              Mapped the admin-to-public-catalog experience: product upload, brand customization, public browsing, WhatsApp ordering, dual pricing, and PDF quote generation.
+              Defined the behavioral core: real-time mascot reactions to spending decisions, a credit-level progression system (Apprentice → Master), and advisory moments before risky purchases.
             </li>
             <li>
-              Designed for non-technical users with mobile-first flows, curated visual customization, clear empty states, and a catalog experience manageable without training.
+              Designed for anxiety-prone users who avoid raw numbers — externalizing financial state into a character instead of charts and scores.
             </li>
             <li>
-              Launched with a real client in production, reaching <strong>83+ products loaded</strong>, &lt;5 minutes to upload a product with photo, and zero technical knowledge required to manage the catalog.
+              Validated the concept in prototype testing: <strong>5/5 testers reported feeling more in control</strong> of their financial picture.
             </li>
           </ul>
 
           <div class="exp-tech">
-            <span>Next.js</span>
             <span>Figma</span>
-            <span>Supabase</span>
-            <span>Responsive UI</span>
-            <span>jsPDF</span>
+            <span>Behavioral Design</span>
+            <span>Character States</span>
+            <span>Gamification</span>
           </div>
         </div>
 
@@ -815,6 +811,33 @@
             <span>GitHub API</span>
             <span>Data Visualization</span>
             <span>Motion Design</span>
+          </div>
+        </div>
+
+        <div class="experience-item">
+          <div class="exp-header">
+            <h3 class="exp-role">Product Designer</h3>
+            <span class="exp-date">2025</span>
+          </div>
+          <p class="exp-company">UX AI Generator · AI Tool · <a href="./project-1.html">View Case Study →</a></p>
+
+          <ul class="exp-list">
+            <li>
+              Designed a <strong>guided discovery flow</strong> that turns a rough product idea into a structured UX brief — cutting documentation time by <strong>60%</strong>, from roughly an hour to 24 minutes.
+            </li>
+            <li>
+              Structured 10+ UX deliverables per project: briefs, personas, user flows, problem statements, metrics, assumptions and journey maps.
+            </li>
+            <li>
+              Resolved the core tension between flexibility and consistency by constraining inputs, so outputs stay predictable and shareable across a team.
+            </li>
+          </ul>
+
+          <div class="exp-tech">
+            <span>Figma</span>
+            <span>OpenAI API</span>
+            <span>HTML/CSS</span>
+            <span>Design Systems</span>
           </div>
         </div>
       </div>

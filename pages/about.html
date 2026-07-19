@@ -26,6 +26,7 @@
       --muted: rgba(242, 239, 232, 0.62);
       --muted2: rgba(242, 239, 232, 0.36);
       --stroke: rgba(155, 143, 212, 0.15);
+      --accent: #9B8FD4;
 
       --serif: "Bricolage Grotesque", sans-serif;
       --sans: "Bricolage Grotesque", sans-serif;
@@ -45,10 +46,7 @@
 
     body {
       margin: 0;
-      background:
-        radial-gradient(900px 500px at 28% 16%, rgba(155, 143, 212, 0.12), transparent 60%),
-        radial-gradient(900px 600px at 78% 44%, rgba(232, 76, 125, 0.06), transparent 65%),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
     }
@@ -187,12 +185,7 @@
       z-index: 1;
     }
 
-    .quote-text .highlight {
-      background: linear-gradient(90deg, #9B8FD4, #E84C7D, #F5C542);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+    .quote-text .highlight { color: var(--accent); }
 
     .quote-attribution {
       font-size: 13px;
@@ -340,12 +333,7 @@
       line-height: 1.05;
     }
 
-    .cta-accent {
-      background: linear-gradient(90deg, #9B8FD4, #E84C7D, #F5C542);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+    .cta-accent { color: var(--accent); }
 
     /* Responsive */
     @media (max-width: 700px) {
@@ -509,7 +497,7 @@
       <div class="container">
         <div class="lists-grid">
           <div class="list-column">
-            <h3><span class="icon">◆</span> What I Work On</h3>
+            <h3>What I Work On</h3>
             <ul>
               <li>Gamification systems and progression mechanics</li>
               <li>Mascot character design for behavioral feedback</li>
@@ -520,7 +508,7 @@
           </div>
 
           <div class="list-column">
-            <h3><span class="icon">★</span> Highlights</h3>
+            <h3>Highlights</h3>
             <ul>
               <li>Designed Cuak <em>(fintech mascot system)</em></li>
               <li>Designed DuoGit <em>(behavioral developer tool)</em></li>

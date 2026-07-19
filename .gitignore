@@ -1,1 +1,6 @@
 img/duogit_backup/
+
+# Local-only: Fiverr exports and job-search strategy notes.
+# The repo is served by GitHub Pages, so anything tracked here becomes public.
+exports/
+job-search-kit.md

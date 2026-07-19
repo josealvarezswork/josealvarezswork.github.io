@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jose Alvarez — Behavioral Design & Gamification UX</title>
+    <title>Jose Alvarez — Product Designer | Behavioral & Gamification UX</title>
     <meta name="description" content="Jose Alvarez — Emotional UX designer building AI and fintech products that people don't quit.">
-    <meta property="og:title" content="Jose Alvarez — Behavioral Design & Gamification UX">
+    <meta property="og:title" content="Jose Alvarez — Product Designer | Behavioral & Gamification UX">
     <meta property="og:description" content="Jose Alvarez — Emotional UX designer building AI and fintech products that people don't quit.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://odejbyjose.com/">
@@ -20,7 +20,7 @@
       "name": "Jose Alvarez",
       "url": "https://odejbyjose.com/",
       "email": "mailto:josealvarezswork@gmail.com",
-      "jobTitle": "Product Designer — Behavioral & Emotional UX",
+      "jobTitle": "Product Designer",
       "knowsAbout": ["UX Design", "Gamification", "Behavioral Design", "Design Systems", "Fintech", "AI Products"],
       "sameAs": [
         "https://www.linkedin.com/in/alvarezcja/",
@@ -65,10 +65,9 @@
     <main>
       <section class="hero">
         <div class="container">
-          <span class="hero-badge"><span class="badge-dot" aria-hidden="true"></span>Available for work · UTC-5 · Async-friendly</span>
           <h1 class="hero-title">
             <span class="hero-name">Jose Alvarez</span><br>
-            <span class="gradient-pink">Most designers make products look good.<br>I make them feel like they're on your side.</span>
+            Most designers make products look good.<br>I make them feel like they're <span class="hero-accent">on your side</span>.
           </h1>
           <p class="hero-tagline">Emotional UX · AI products · Fintech</p>
           <div class="hero-actions">
@@ -94,15 +93,19 @@
                 <span class="slide-name">Cuak</span>
                 <span class="slide-tag">Mascot UX · Behavioral Design</span>
               </div>
-              <img class="slide-mascot" src="./assets/img/cuak-saludo.png" alt="Cuak, the fintech mascot, waving" loading="lazy" decoding="async">
+              <img class="slide-mascot" src="./assets/img/cuak-saludo.png"
+                data-idle="./assets/img/cuak-saludo.png"
+                data-works="./assets/img/cuak/cuak-feliz.png"
+                data-blocker="./assets/img/cuak/cuak-preocupado.png"
+                alt="Cuak, the fintech mascot, waving" loading="lazy" decoding="async">
             </div>
             <div class="slide-body">
-              <div class="slide-col">
-                <span class="slide-col-label works">✦ What works</span>
+              <div class="slide-col" data-mood="works">
+                <span class="slide-col-label works">What works</span>
                 <p>5/5 prototype testers felt more in control. Externalizing financial anxiety into a character that reacts in real time — the concept lands.</p>
               </div>
-              <div class="slide-col">
-                <span class="slide-col-label blocker">◆ Design challenge</span>
+              <div class="slide-col" data-mood="blocker">
+                <span class="slide-col-label blocker">Design challenge</span>
                 <p>Designing for financial data users can't see. The mascot had to make invisible credit health feel tangible — without raw numbers triggering anxiety.</p>
               </div>
             </div>
@@ -116,15 +119,19 @@
                 <span class="slide-name">DuoGit</span>
                 <span class="slide-tag">Gamification · Dev Tools</span>
               </div>
-              <img class="slide-mascot" src="./assets/img/duogit-mascot.png" alt="DuoGit, the developer companion mascot" loading="lazy" decoding="async">
+              <img class="slide-mascot" src="./assets/img/duogit-mascot.png"
+                data-idle="./assets/img/duogit-mascot.png"
+                data-works="./assets/img/duogit/cat-happy.png"
+                data-blocker="./assets/img/duogit/cat-worried.png"
+                alt="DuoGit, the developer companion mascot" loading="lazy" decoding="async">
             </div>
             <div class="slide-body">
-              <div class="slide-col">
-                <span class="slide-col-label works">✦ What works</span>
+              <div class="slide-col" data-mood="works">
+                <span class="slide-col-label works">What works</span>
                 <p>Same GitHub data, different emotional register. DuoGit makes progress visible without making absence shameful. The reframing works.</p>
               </div>
-              <div class="slide-col">
-                <span class="slide-col-label blocker">◆ Design challenge</span>
+              <div class="slide-col" data-mood="blocker">
+                <span class="slide-col-label blocker">Design challenge</span>
                 <p>Most gamification punishes absence. The core design problem: how do you make inactivity feel recoverable, not shameful — without removing accountability?</p>
               </div>
             </div>
@@ -148,6 +155,7 @@
       <section class="work">
         <div class="container">
           <p class="section-label">Case Studies</p>
+          <p class="field-notes-sub">Two systems built on the same idea — that how a product makes you feel decides whether you come back.</p>
 
           <div class="cards" id="projects-container">
             <!-- Projects loaded dynamically from projects.json -->
@@ -167,7 +175,7 @@
 
         <div class="footer-cta">
           <p class="cta-text muted">Open to contracts and product collaborations.</p>
-          <a class="cta-accent cta-link" href="mailto:josealvarezswork@gmail.com">→ josealvarezswork@gmail.com</a>
+          <a class="cta-accent cta-link" href="mailto:josealvarezswork@gmail.com">Email me →</a>
         </div>
       </div>
     </footer>
