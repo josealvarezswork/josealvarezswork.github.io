@@ -47,53 +47,79 @@ function renderProjects(projects, container) {
 // Init
 document.addEventListener('DOMContentLoaded', () => {
   loadProjects();
-  initSlider();
-  initReactiveMascots();
+  initEsaStates();
 });
 
-// Field Notes Slider
-function initSlider() {
-  const slides = document.querySelectorAll('.slide');
-  const dots   = document.querySelectorAll('.dot');
-  if (!slides.length) return;
+/**
+ * ESA states — both mascots react to the selected state at once, so the
+ * framework is shown working across two products instead of described.
+ */
+const ESA_STATES = {
+  waiting: {
+    cuak: './assets/img/cuak/cuak-esperando.png',
+    duogit: './assets/img/duogit/cat-neutral.png',
+    trigger: 'Trigger — day start, no activity',
+    text: 'Pure potential. The day begins without pressure. An expectant posture: the mascot waits, it doesn’t judge.',
+    mech: 'Anthropomorphism · Epley, Waytz & Cacioppo'
+  },
+  happy: {
+    cuak: './assets/img/cuak/cuak-feliz.png',
+    duogit: './assets/img/duogit/cat-happy.png',
+    trigger: 'Trigger — 3+ day streak, or a healthy metric',
+    text: 'Positive reinforcement after consistent behaviour. Intense glow, lit eyes. The system celebrates the streak instead of just recording it.',
+    mech: 'Variable reward · operant conditioning'
+  },
+  worried: {
+    cuak: './assets/img/cuak/cuak-preocupado.png',
+    duogit: './assets/img/duogit/cat-worried.png',
+    trigger: 'Trigger — inactivity, or a threshold approaching',
+    text: 'Loss aversion, activated. The mascot’s distress makes the risk visible and empathetic rather than punitive. The strongest retention state of the four.',
+    mech: 'Prospect Theory · Kahneman & Tversky (Nobel, 2002)'
+  },
+  broken: {
+    cuak: './assets/img/cuak/cuak-alerta.png',
+    duogit: './assets/img/duogit/cat-sad.png',
+    trigger: 'Trigger — streak broken, or threshold crossed',
+    text: 'The emotional cost of loss, followed by resilience. The system mourns with the user, then invites them back without shame.',
+    mech: 'Nudge Theory · Thaler & Sunstein (Nobel, 2017)'
+  }
+};
 
-  let current = 0;
+function initEsaStates() {
+  const tabs = [...document.querySelectorAll('.esa-tab')];
+  if (!tabs.length) return;
 
-  function goTo(index) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = (index + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
+  const imgCuak = document.getElementById('esa-img-cuak');
+  const imgDuogit = document.getElementById('esa-img-duogit');
+  const trigger = document.getElementById('esa-trigger');
+  const text = document.getElementById('esa-text');
+  const mech = document.getElementById('esa-mech');
+
+  Object.values(ESA_STATES).forEach(s => {
+    new Image().src = s.cuak;
+    new Image().src = s.duogit;
+  });
+
+  function select(name) {
+    const s = ESA_STATES[name];
+    if (!s) return;
+
+    imgCuak.src = s.cuak;
+    imgDuogit.src = s.duogit;
+    trigger.textContent = s.trigger;
+    text.textContent = s.text;
+    mech.textContent = s.mech;
+
+    tabs.forEach(t => {
+      const on = t.dataset.state === name;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', String(on));
+    });
   }
 
-  document.getElementById('prev')?.addEventListener('click', () => goTo(current - 1));
-  document.getElementById('next')?.addEventListener('click', () => goTo(current + 1));
-  dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.index)));
-}
-
-// Mascots react to the column the reader is on — the thesis, demonstrated
-function initReactiveMascots() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!window.matchMedia('(hover: hover)').matches) return;
-
-  document.querySelectorAll('.slide').forEach(slide => {
-    const mascot = slide.querySelector('.slide-mascot');
-    if (!mascot) return;
-
-    // Preload so the swap never flashes
-    Object.values(mascot.dataset).forEach(src => { new Image().src = src; });
-
-    const setMood = mood => {
-      const src = mascot.dataset[mood];
-      if (src && mascot.getAttribute('src') !== src) mascot.setAttribute('src', src);
-      mascot.classList.toggle('is-reacting', mood !== 'idle');
-    };
-
-    slide.querySelectorAll('[data-mood]').forEach(col => {
-      col.addEventListener('mouseenter', () => setMood(col.dataset.mood));
-      col.addEventListener('mouseleave', () => setMood('idle'));
-    });
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => select(tab.dataset.state));
+    tab.addEventListener('mouseenter', () => select(tab.dataset.state));
   });
 }
 
