@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How I Work — Jose Alvarez</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
-  <meta name="description" content="Two lenses into how Jose Alvarez designs: his mindset before touching Figma, and the framework behind every decision.">
+  <meta name="description" content="Three lenses into how Jose Alvarez designs: his mindset before touching Figma, the framework behind every decision, and the craft habits that show up in the execution.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
@@ -132,9 +132,12 @@
     }
     .cards-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 24px;
       align-items: stretch;
+    }
+    @media (max-width: 980px) {
+      .cards-grid { grid-template-columns: 1fr 1fr; }
     }
 
     .work-card {
@@ -168,6 +171,13 @@
       background: rgba(232,76,125,0.09);
     }
 
+    .work-card--craft {
+      background: rgba(245,197,66,0.06);
+    }
+    .work-card--craft:hover {
+      background: rgba(245,197,66,0.09);
+    }
+
     .card-number {
       font-size: 11px;
       font-weight: 600;
@@ -185,6 +195,7 @@
 
     .card-title .accent-purple { color: var(--accent); }
     .card-title .accent-pink   { color: var(--accent-pink); }
+    .card-title .accent-yellow { color: var(--accent-yellow); }
 
     .card-body {
       flex: 1;
@@ -250,6 +261,14 @@
       background: rgba(232,76,125,0.1);
     }
 
+    .work-card--craft .card-cta {
+      border-color: rgba(245,197,66,0.4);
+      color: var(--accent-yellow);
+    }
+    .work-card--craft .card-cta:hover {
+      background: rgba(245,197,66,0.1);
+    }
+
     /* FOOTER */
     .site-footer {
       padding: 34px 0 52px;
@@ -301,8 +320,8 @@
     <section class="hero">
       <div class="container">
         <p class="hero-label">How I Work</p>
-        <h1 class="hero-title">Two ways into<br><span class="grad">how I think and design</span></h1>
-        <p class="hero-sub">One is about mindset — how I frame problems before touching Figma. The other is the framework behind every design decision I make.</p>
+        <h1 class="hero-title">Three ways into<br><span class="grad">how I think and design</span></h1>
+        <p class="hero-sub">Mindset is how I frame problems before touching Figma. The framework is behind every design decision. Craft is the habits that show up once execution starts.</p>
       </div>
     </section>
 
@@ -340,6 +359,22 @@
               </ul>
             </div>
             <a class="card-cta" href="./methodology.html">See the framework complete →</a>
+          </div>
+
+          <!-- CARD 3: Craft -->
+          <div class="work-card work-card--craft">
+            <span class="card-number">03</span>
+            <h2 class="card-title">How I <span class="accent-yellow">Build</span></h2>
+            <div class="card-body">
+              <p class="card-desc">The habits that show up once execution starts: how I design a character system, how I turn raw data into readable UI, and why presentation is part of the deliverable.</p>
+              <ul class="card-bullets">
+                <li>Why a mascot's state has to start from a data trigger, not a mood board</li>
+                <li>Turning a GitHub feed into something worth opening</li>
+                <li>Composing mockups so the panel disappears and the product reads</li>
+                <li>Never below 2× the real render size — pixelation kills credibility</li>
+              </ul>
+            </div>
+            <a class="card-cta" href="./craft.html">See how I build →</a>
           </div>
 
         </div>
