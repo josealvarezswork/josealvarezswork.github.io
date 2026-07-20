@@ -106,11 +106,10 @@
       border-radius: var(--r); padding: 24px 20px;
       display: flex; flex-direction: column; gap: 10px;
     }
-    .state-img-placeholder {
-      width: 80px; height: 80px; background: var(--bg-elevated); border-radius: 12px;
-      border: 2px dashed var(--stroke-light);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px; margin-bottom: 4px;
+    .state-img {
+      width: 80px; height: 80px; object-fit: contain;
+      background: var(--bg-elevated); border-radius: 12px;
+      margin-bottom: 4px;
     }
     .state-name { font-size: 14px; font-weight: 600; }
     .state-trigger { font-size: 11px; color: var(--faint); letter-spacing: .04em; }
@@ -305,35 +304,34 @@
 
       <div class="states-grid">
         <div class="state-card" style="border-color:rgba(242,239,232,.08)">
-          <div class="state-img-placeholder">👻</div>
+          <img class="state-img" src="../assets/img/duogit/state-neutral-crop.png" alt="Ghost neutral, ready state">
           <p class="state-name">Neutral — Ready</p>
           <p class="state-trigger">Trigger: app open, no commits today</p>
           <p class="state-desc">Day begins. Ghost is calm and expectant — no pressure, pure potential.</p>
           <span class="state-drive">Neutral state</span>
         </div>
         <div class="state-card" style="border-color:rgba(16,185,129,.2)">
-          <div class="state-img-placeholder">😸</div>
+          <img class="state-img" src="../assets/img/duogit/state-happy-crop.png" alt="Ghost happy, on-streak state">
           <p class="state-name" style="color:#10b981">Happy — On Streak</p>
           <p class="state-trigger">Trigger: 3+ day streak / commits today</p>
           <p class="state-desc">Positive reinforcement. Ghost celebrates — glowing eyes, energetic posture. The system rewards consistency, not just volume.</p>
           <span class="state-drive" style="color:#10b981;background:rgba(16,185,129,.1)">Core Drive 2: Accomplishment</span>
         </div>
         <div class="state-card" style="border-color:rgba(251,191,36,.2)">
-          <div class="state-img-placeholder">😟</div>
+          <img class="state-img" src="../assets/img/duogit/state-worried-crop.png" alt="Ghost worried, streak-at-risk state">
           <p class="state-name" style="color:#fbbf24">Worried — Streak at Risk</p>
           <p class="state-trigger">Trigger: no commit by evening / streak about to break</p>
           <p class="state-desc">Loss aversion activated. Ghost's distress makes the risk visible — empathetic urgency, not punishment.</p>
           <span class="state-drive" style="color:#fbbf24;background:rgba(251,191,36,.1)">Core Drive 8: Loss Aversion</span>
         </div>
         <div class="state-card" style="border-color:rgba(155,143,212,.2)">
-          <div class="state-img-placeholder">😢</div>
+          <img class="state-img" src="../assets/img/duogit/state-sad-crop.png" alt="Ghost sad, streak-broken state">
           <p class="state-name" style="color:#9B8FD4">Sad — Streak Broken</p>
           <p class="state-trigger">Trigger: missed day, streak resets</p>
           <p class="state-desc">Emotional cost acknowledged — then resilience. Ghost mourns with the developer, then invites a guilt-free restart.</p>
           <span class="state-drive" style="color:#9B8FD4;background:rgba(155,143,212,.1)">Guilt-free restart</span>
         </div>
       </div>
-      <p style="font-size:12px;color:var(--faint);margin-top:20px">↑ Replace placeholders with Ghost pose exports from Figma</p>
     </div>
   </section>
 
@@ -595,35 +593,24 @@
 
       <div class="type-grid">
         <div class="type-item">
-          <p class="type-meta">Display — Playfair Display / Serif</p>
+          <p class="type-meta">Display — Bricolage Grotesque 700</p>
           <p style="font-family:var(--serif);font-size:38px;font-weight:700;letter-spacing:-.02em;line-height:1.1">Your streak<br><em style="color:var(--accent)">is still alive.</em></p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Heading — Inter 600</p>
+          <p class="type-meta">Heading — Bricolage Grotesque 600</p>
           <p style="font-size:22px;font-weight:600;letter-spacing:-.01em">14 day streak 🔥</p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Body — Inter 400 · 15px · 1.8 leading</p>
+          <p class="type-meta">Body — Bricolage Grotesque 400 · 15px · 1.8 leading</p>
           <p style="font-size:15px;color:var(--muted);line-height:1.8">Ghost is on your side. Every commit counts — even tiny ones. Missing a day doesn't erase your progress, it just gives Ghost something to worry about.</p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Label / Caption — Inter 500 · 11px · 0.1em tracking</p>
+          <p class="type-meta">Label / Caption — Bricolage Grotesque 500 · 11px · 0.1em tracking</p>
           <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Gold League · Updated just now</p>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- FIGMA LINK -->
-  <div class="container">
-    <div class="figma-cta">
-      <h3>Full system in Figma</h3>
-      <p>Components, Ghost pose variants, widget frames, and design tokens — organized for handoff.</p>
-      <a class="btn-figma" href="#" target="_blank" rel="noreferrer">
-        ⬡ View in Figma →
-      </a>
-    </div>
-  </div>
 
   <footer class="site-footer">
     <div class="container">

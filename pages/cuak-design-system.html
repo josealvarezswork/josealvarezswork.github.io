@@ -182,6 +182,13 @@
     .zone-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
     .zone-drive { font-size: 10px; color: var(--faint); margin-top: 4px; letter-spacing: .04em; }
 
+    /* REFERENCE SHEET */
+    .ref-sheet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+    @media (max-width: 700px) { .ref-sheet-grid { grid-template-columns: 1fr; } }
+    .ref-sheet-card { border-radius: var(--r); border: 1px solid var(--stroke-light); overflow: hidden; background: var(--bg-card); }
+    .ref-sheet-card img { width: 100%; display: block; }
+    .ref-sheet-card p { padding: 10px 14px; font-size: 12px; color: var(--faint); letter-spacing: .04em; }
+
     /* BEFORE / AFTER */
     .ba-grid {
       display: grid;
@@ -426,43 +433,83 @@
 
       <div class="states-grid">
         <div class="state-card" style="border-color:rgba(242,239,232,.08)">
-          <div class="state-img-placeholder">😐</div>
+          <img class="state-img" src="../assets/img/cuak/cuak-esperando.png" alt="Cuak neutral, waiting state">
           <p class="state-name">Neutral — Ready</p>
           <p class="state-trigger">Trigger: app open, no recent activity</p>
           <p class="state-desc">Pure potential. No pressure. Cuak waits with expectation — not judgment.</p>
           <span class="state-drive">Neutral state</span>
         </div>
         <div class="state-card" style="border-color:rgba(111,186,150,.2)">
-          <div class="state-img-placeholder">🦆</div>
+          <img class="state-img" src="../assets/img/cuak/cuak-feliz.png" alt="Cuak happy, on track state">
           <p class="state-name" style="color:#6fba96">Happy — On Track</p>
           <p class="state-trigger">Trigger: credit usage healthy / improving</p>
           <p class="state-desc">Positive reinforcement. Cuak celebrates consistency — the system rewards, not just records.</p>
           <span class="state-drive" style="color:#6fba96;background:rgba(111,186,150,.1)">Core Drive 2: Accomplishment</span>
         </div>
         <div class="state-card" style="border-color:rgba(251,191,36,.2)">
-          <div class="state-img-placeholder">😟</div>
+          <img class="state-img" src="../assets/img/cuak/cuak-preocupado.png" alt="Cuak worried, at-risk state">
           <p class="state-name" style="color:#fbbf24">Worried — At Risk</p>
           <p class="state-trigger">Trigger: approaching credit threshold</p>
           <p class="state-desc">Loss aversion activated. Cuak's distress makes risk visible and empathetic — not punitive. Most powerful retention state.</p>
           <span class="state-drive" style="color:#fbbf24;background:rgba(251,191,36,.1)">Core Drive 8: Loss Aversion</span>
         </div>
         <div class="state-card" style="border-color:rgba(155,143,212,.2)">
-          <div class="state-img-placeholder">😢</div>
+          <img class="state-img" src="../assets/img/cuak/cuak-alerta.png" alt="Cuak alert, reset state">
           <p class="state-name" style="color:#9B8FD4">Sad — Reset</p>
           <p class="state-trigger">Trigger: threshold crossed</p>
           <p class="state-desc">Emotional cost of loss, followed by resilience. Cuak mourns with the user — then invites them back without shame.</p>
           <span class="state-drive" style="color:#9B8FD4;background:rgba(155,143,212,.1)">Guilt-free restart</span>
         </div>
       </div>
-
-      <p style="font-size:12px;color:var(--faint);margin-top:20px">↑ Placeholder states — replace with exported Figma mascot poses</p>
     </div>
   </section>
 
-  <!-- 03 60/40 ARCHITECTURE -->
+  <!-- 03 PROCESS & DISCARDED CONCEPTS -->
   <section class="section">
     <div class="container">
-      <span class="section-label">03 — Visual Architecture</span>
+      <span class="section-label">03 — Process</span>
+      <h2 class="section-title">Reference pass, and <span class="accent">what got cut</span></h2>
+      <p class="section-text">Before the states shown above shipped, the character went through a reference pass — front, back and a raised-arm gesture — to lock proportions before drafting expressions. Not every take made it in.</p>
+
+      <div class="ref-sheet-grid">
+        <div class="ref-sheet-card">
+          <img src="../assets/img/cuak/process-ref-frontal.png" alt="Cuak character reference — front view">
+          <p>Front — neutral</p>
+        </div>
+        <div class="ref-sheet-card">
+          <img src="../assets/img/cuak/process-ref-back.png" alt="Cuak character reference — back view">
+          <p>Back view</p>
+        </div>
+        <div class="ref-sheet-card">
+          <img src="../assets/img/cuak/process-ref-arms-up.png" alt="Cuak character reference — arms raised gesture">
+          <p>Gesture range</p>
+        </div>
+      </div>
+
+      <div class="ba-grid" style="margin-top:40px">
+        <div class="ba-card">
+          <div class="ba-card-header">Explored — raised-hand worried</div>
+          <div class="ba-card-body">
+            <img src="../assets/img/cuak/process-variant-worried-alt.png" alt="Discarded worried pose with raised hand" style="width:100%;border-radius:8px">
+          </div>
+          <p class="ba-annotation">Read as alarm, not concern — closer to a warning gesture than an emotional cue. Worked against the "empathetic, not punitive" principle the Worried state is built on (see Annotated UI, below).</p>
+        </div>
+        <div class="ba-arrow">→</div>
+        <div class="ba-card">
+          <div class="ba-card-header">Shipped — quiet worried</div>
+          <div class="ba-card-body">
+            <img src="../assets/img/cuak/cuak-preocupado.png" alt="Shipped worried state, calmer pose" style="width:100%;border-radius:8px">
+          </div>
+          <p class="ba-annotation">Same trigger, no gesture. The expression alone carries the state — arms stay down so it reads as concern, not alert.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 60/40 ARCHITECTURE -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">04 — Visual Architecture</span>
       <h2 class="section-title">The <span class="accent">60/40 Zoning Model</span></h2>
       <p class="section-text">Every surface — full screen or home widget — splits 60% data / 40% emotional state. Each zone activates a specific Octalysis Core Drive.</p>
 
@@ -516,7 +563,7 @@
   <!-- 04 BEFORE / AFTER -->
   <section class="section">
     <div class="container">
-      <span class="section-label">04 — Data Storytelling</span>
+      <span class="section-label">05 — Data Storytelling</span>
       <h2 class="section-title">Raw data → <span class="accent">Emotional signal</span></h2>
       <p class="section-text">Same financial information. Completely different emotional experience. This is the core design problem Cuak solves.</p>
 
@@ -551,7 +598,7 @@
   <!-- 05 ANNOTATED UI -->
   <section class="section">
     <div class="container">
-      <span class="section-label">05 — Annotated UI</span>
+      <span class="section-label">06 — Annotated UI</span>
       <h2 class="section-title">Every pixel has a <span class="accent">purpose</span></h2>
       <p class="section-text">Strategic annotations connecting each UI element to its psychological function.</p>
 
@@ -599,7 +646,7 @@
   <!-- 06 CORE COMPONENTS -->
   <section class="section">
     <div class="container">
-      <span class="section-label">06 — Components</span>
+      <span class="section-label">07 — Components</span>
       <h2 class="section-title">Core <span class="accent">UI components</span></h2>
       <p class="section-text">Reusable components built around the emotional states. Each one has a defined behavioral role.</p>
 
@@ -666,40 +713,29 @@
   <!-- 07 TYPOGRAPHY -->
   <section class="section">
     <div class="container">
-      <span class="section-label">07 — Typography</span>
+      <span class="section-label">08 — Typography</span>
       <h2 class="section-title">Type <span class="accent">system</span></h2>
 
       <div class="type-grid">
         <div class="type-item">
-          <p class="type-meta">Display — Playfair Display / Serif</p>
+          <p class="type-meta">Display — Bricolage Grotesque 700</p>
           <p style="font-family:var(--serif);font-size:38px;font-weight:700;letter-spacing:-.02em;line-height:1.1">Your credit<br><em style="color:var(--accent)">is doing well.</em></p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Heading — Inter 600</p>
+          <p class="type-meta">Heading — Bricolage Grotesque 600</p>
           <p style="font-size:22px;font-weight:600;letter-spacing:-.01em">Credit usage: 42%</p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Body — Inter 400 · 15px · 1.8 leading</p>
+          <p class="type-meta">Body — Bricolage Grotesque 400 · 15px · 1.8 leading</p>
           <p style="font-size:15px;color:var(--muted);line-height:1.8">You're using 42% of your available credit. Cuak recommends keeping this below 30% for the best credit score impact.</p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Label / Caption — Inter 500 · 11px · 0.1em tracking</p>
+          <p class="type-meta">Label / Caption — Bricolage Grotesque 500 · 11px · 0.1em tracking</p>
           <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Credit utilization · Updated now</p>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- FIGMA LINK -->
-  <div class="container">
-    <div class="figma-cta">
-      <h3>Full system in Figma</h3>
-      <p>Components, variants, auto-layout frames, and design tokens — all organized and ready for handoff.</p>
-      <a class="btn-figma" href="#" target="_blank" rel="noreferrer">
-        ⬡ View in Figma →
-      </a>
-    </div>
-  </div>
 
   <footer class="site-footer">
     <div class="container">
