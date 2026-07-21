@@ -400,6 +400,19 @@
           <strong style="color:var(--text)">XP sources:</strong> Daily commit (+10 XP), streak milestone (+25 XP), 7-day streak (+50 XP), first commit of day (+5 XP bonus). XP decay on missed days activates loss aversion without permanent punishment.
         </p>
       </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:20px;align-items:center;margin-top:24px">
+        <div style="border-radius:var(--r);overflow:hidden;background:#0a0a0d;border:1px solid var(--stroke-light);padding:16px">
+          <img src="../assets/img/duogit/annotated-league.png" alt="DuoGit League screen — leaderboard" style="width:100%;border-radius:8px;display:block">
+        </div>
+        <div class="annotation-item" style="margin:0">
+          <div class="annotation-dot">4</div>
+          <div>
+            <p class="annotation-label">League standing — own screen</p>
+            <p class="annotation-text">A full leaderboard, not a badge stapled to the dashboard. "You" is highlighted among peers by seniority tier — social identity anchor, Core Drive 5. It's opt-in: developers navigate here, it isn't pushed at them.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -491,15 +504,11 @@
       <h2 class="section-title">Every element <span class="accent">earns its place</span></h2>
       <p class="section-text">Strategic annotations connecting UI decisions to behavioral mechanisms.</p>
 
-      <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-top:32px">
-        <div style="border-radius:var(--r);overflow:hidden;background:#0a0a0d;border:1px solid var(--stroke-light);padding:16px;display:flex;align-items:center;justify-content:center">
+      <div class="annotated-wrap">
+        <div style="border-radius:var(--r);overflow:hidden;background:#0a0a0d;border:1px solid var(--stroke-light);padding:20px;max-width:420px">
           <img src="../assets/img/duogit/annotated-dashboard.png" alt="DuoGit Dashboard screen — annotated" style="width:100%;border-radius:8px;display:block">
         </div>
-        <div style="border-radius:var(--r);overflow:hidden;background:#0a0a0d;border:1px solid var(--stroke-light);padding:16px;display:flex;align-items:center;justify-content:center">
-          <img src="../assets/img/duogit/annotated-league.png" alt="DuoGit League screen — annotated" style="width:100%;border-radius:8px;display:block">
-        </div>
       </div>
-      <p style="font-size:12px;color:var(--faint);margin-top:12px">Dashboard (left) covers 1–3 below. League (right) covers 4 — rank lives on its own screen, not stapled onto the home dashboard.</p>
 
       <div class="annotation-list">
         <div class="annotation-item">
@@ -521,13 +530,6 @@
           <div>
             <p class="annotation-label">Ghost emotional state — 40% zone</p>
             <p class="annotation-text">Ghost's expression shifts with streak health. Happy = sustain, Worried = act now, Sad = come back. Visceral-level feedback (Don Norman) — no reading required. 40% visual weight keeps it supportive, not dominant.</p>
-          </div>
-        </div>
-        <div class="annotation-item">
-          <div class="annotation-dot">4</div>
-          <div>
-            <p class="annotation-label">League standing — own screen</p>
-            <p class="annotation-text">A full leaderboard, not a badge stapled to the dashboard. "You" is highlighted among peers by seniority tier — social identity anchor, Core Drive 5. It's opt-in: developers navigate here, it isn't pushed at them.</p>
           </div>
         </div>
       </div>
