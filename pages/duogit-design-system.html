@@ -154,6 +154,12 @@
     .league-xp { font-size: 11px; color: var(--accent); margin-top: 2px; }
 
     /* BA grid */
+    .ref-sheet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+    @media (max-width: 700px) { .ref-sheet-grid { grid-template-columns: 1fr; } }
+    .ref-sheet-card { border-radius: var(--r); border: 1px solid var(--stroke-light); overflow: hidden; background: var(--bg-card); }
+    .ref-sheet-card img { width: 100%; display: block; }
+    .ref-sheet-card p { padding: 10px 14px; font-size: 12px; color: var(--faint); letter-spacing: .04em; }
+
     .ba-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; margin-top: 32px; }
     @media (max-width: 640px) { .ba-grid { grid-template-columns: 1fr; } .ba-arrow { transform: rotate(90deg); } }
     .ba-card { border-radius: var(--r); border: 1px solid var(--stroke-light); overflow: hidden; }
@@ -330,10 +336,34 @@
     </div>
   </section>
 
-  <!-- 03 LEAGUE SYSTEM -->
+  <!-- 03 PROCESS & CHARACTER REFERENCE -->
   <section class="section">
     <div class="container">
-      <span class="section-label">03 — Progression System</span>
+      <span class="section-label">03 — Process</span>
+      <h2 class="section-title">Character reference pass</h2>
+      <p class="section-text">Same discipline as Cuak: front, back and gesture range locked before drafting expressions. Ghost's proportions had to hold up from every angle a widget or app screen might crop it to.</p>
+
+      <div class="ref-sheet-grid">
+        <div class="ref-sheet-card">
+          <img src="../assets/img/duogit/process-ref-front.png" alt="Ghost character reference — front view">
+          <p>Front — neutral</p>
+        </div>
+        <div class="ref-sheet-card">
+          <img src="../assets/img/duogit/process-ref-back.png" alt="Ghost character reference — back view">
+          <p>Back view</p>
+        </div>
+        <div class="ref-sheet-card">
+          <img src="../assets/img/duogit/process-ref-extra.png" alt="Ghost character reference — extra gesture pose">
+          <p>Gesture range</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 LEAGUE SYSTEM -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">04 — Progression System</span>
       <h2 class="section-title">League ranks & <span class="accent">XP mechanics</span></h2>
       <p class="section-text">Social influence and status identity (Core Drive 5). The league system gives developers a place to belong — and a reason to keep their streak.</p>
 
@@ -376,7 +406,7 @@
   <!-- 04 60/40 ARCHITECTURE -->
   <section class="section">
     <div class="container">
-      <span class="section-label">04 — Visual Architecture</span>
+      <span class="section-label">05 — Visual Architecture</span>
       <h2 class="section-title">The <span class="accent">60/40 Zoning Model</span></h2>
       <p class="section-text">Every surface splits 60% commit data / 40% Ghost emotional state. Each zone is mapped to an Octalysis Core Drive.</p>
 
@@ -430,7 +460,7 @@
   <!-- 05 BEFORE / AFTER -->
   <section class="section">
     <div class="container">
-      <span class="section-label">05 — Data Storytelling</span>
+      <span class="section-label">06 — Data Storytelling</span>
       <h2 class="section-title">GitHub raw → <span class="accent">Emotional signal</span></h2>
       <p class="section-text">Same commit data. Completely different emotional experience. DuoGit doesn't change what you did — it changes how it feels.</p>
 
@@ -465,7 +495,7 @@
   <!-- 06 ANNOTATED UI -->
   <section class="section">
     <div class="container">
-      <span class="section-label">06 — Annotated UI</span>
+      <span class="section-label">07 — Annotated UI</span>
       <h2 class="section-title">Every element <span class="accent">earns its place</span></h2>
       <p class="section-text">Strategic annotations connecting UI decisions to behavioral mechanisms.</p>
 
@@ -511,7 +541,7 @@
   <!-- 07 CORE COMPONENTS -->
   <section class="section">
     <div class="container">
-      <span class="section-label">07 — Components</span>
+      <span class="section-label">08 — Components</span>
       <h2 class="section-title">Core <span class="accent">UI components</span></h2>
 
       <div class="component-grid">
@@ -583,7 +613,7 @@
   <!-- 08 TYPOGRAPHY -->
   <section class="section">
     <div class="container">
-      <span class="section-label">08 — Typography</span>
+      <span class="section-label">09 — Typography</span>
       <h2 class="section-title">Type <span class="accent">system</span></h2>
 
       <div class="type-grid">
