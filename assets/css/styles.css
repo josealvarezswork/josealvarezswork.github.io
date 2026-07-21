@@ -317,6 +317,39 @@ a { color: inherit; text-decoration: none; }
   .case-visual.is-contain img { max-height: 480px; }
 }
 
+/* CURRENTLY BUILDING — single wide card, image on top instead of side-by-side */
+.now-case { grid-template-columns: 1fr; }
+.now-visual {
+  aspect-ratio: 1200 / 593;
+  background: #10151f;
+}
+.now-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wip-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  box-shadow: 0 0 0 3px rgba(155,143,212,0.18);
+}
+
+.case-link.is-disabled {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px dashed var(--stroke);
+  color: var(--muted);
+  cursor: default;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .case-visual img { transition: none; }
   .case:hover .case-visual.is-bleed img,
