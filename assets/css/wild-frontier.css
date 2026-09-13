@@ -1,0 +1,334 @@
+/* WILD FRONTIER — Game UI case study
+   Scoped to this page only. Extends the site's dark purple system with the
+   four accents from the Master Style doc (amber / cyan / olive / lavender)
+   instead of touching the shared palette other pages rely on. */
+
+:root {
+  --wf-amber: #E0A64B;
+  --wf-cyan: #6FC7D6;
+  --wf-olive: #8A9A5B;
+  --wf-red: #C25B4B;
+  --wf-lavender: #9B8FD4;
+  --wf-paper: #EDE7D8;
+  --wf-hud: "Teko", var(--sans);
+}
+
+.wf-hero {
+  padding: 64px 0 40px;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.wf-kicker {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--wf-olive);
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+
+.wf-title {
+  font-family: var(--wf-hud);
+  font-weight: 600;
+  font-size: clamp(56px, 11vw, 128px);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.wf-subtitle {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 40ch;
+  margin: 0 0 34px;
+}
+.wf-subtitle strong { color: var(--text); font-weight: 700; }
+
+/* Device stage — the two phones overlap slightly, sitting on a torn strip
+   of technical grid rather than a plain panel. */
+.wf-stage {
+  position: relative;
+  margin-top: 10px;
+  padding: 40px 0 70px;
+}
+
+.wf-device-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.wf-phone {
+  position: relative;
+  width: 240px;
+  border-radius: 26px;
+  border: 6px solid #14111c;
+  background: #05070a;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+.wf-phone.is-map { margin-right: -64px; transform: translateY(26px) rotate(-3deg); z-index: 1; }
+.wf-phone.is-hud { transform: translateY(-6px) rotate(2deg); z-index: 2; }
+
+.wf-screen {
+  aspect-ratio: 9 / 19.5;
+  position: relative;
+  overflow: hidden;
+  background: #0c1410;
+}
+
+/* Terrain — a hex grid over layered olive blobs standing in for canopy
+   clusters, plus a winding river. All drawn, no raster asset. */
+.wf-terrain {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120px 90px at 20% 24%, rgba(138, 154, 91, 0.55), transparent 70%),
+    radial-gradient(140px 110px at 78% 18%, rgba(138, 154, 91, 0.45), transparent 70%),
+    radial-gradient(160px 130px at 60% 55%, rgba(111, 199, 214, 0.12), transparent 70%),
+    radial-gradient(130px 120px at 30% 78%, rgba(138, 154, 91, 0.5), transparent 70%),
+    radial-gradient(150px 130px at 85% 82%, rgba(138, 154, 91, 0.4), transparent 70%),
+    linear-gradient(160deg, #10190f 0%, #0c1410 55%, #0a1113 100%);
+}
+.wf-terrain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cpolygon points='26,0 52,15 52,45 26,60 0,45 0,15' fill='none' stroke='rgba(224,166,75,0.18)' stroke-width='1'/%3E%3Cpolygon points='26,30 52,45 52,75 26,90 0,75 0,45' fill='none' stroke='rgba(224,166,75,0.18)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 52px 90px;
+}
+.wf-terrain .river {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* HUD chrome — sits on a translucent plate over the terrain so numbers stay
+   readable regardless of what's under them. */
+.wf-hud-top {
+  position: absolute;
+  top: 14px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.wf-resource {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(10, 10, 16, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 5px 7px;
+  backdrop-filter: blur(3px);
+}
+.wf-resource .dot { width: 7px; height: 7px; border-radius: 2px; flex: none; }
+.wf-resource.rations .dot { background: var(--wf-amber); }
+.wf-resource.timber .dot { background: var(--wf-olive); }
+.wf-resource.iron .dot { background: var(--wf-cyan); }
+.wf-resource.influence .dot { background: var(--wf-lavender); }
+.wf-resource .n {
+  font-family: var(--wf-hud);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--wf-paper);
+  line-height: 1;
+}
+
+.wf-hud-panel {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 66px;
+  background: rgba(10, 10, 16, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+  backdrop-filter: blur(3px);
+}
+.wf-hud-panel .settlement {
+  font-family: var(--wf-hud);
+  font-size: 24px;
+  letter-spacing: 0.02em;
+  color: var(--wf-paper);
+  line-height: 1;
+  margin: 0 0 6px;
+}
+.wf-hud-panel .settlement small {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+.wf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-right: 6px;
+}
+.wf-badge.ready { background: rgba(138,154,91,0.22); color: var(--wf-olive); }
+.wf-badge.moving { background: rgba(111,199,214,0.2); color: var(--wf-cyan); }
+.wf-badge.fortified { background: rgba(155,143,212,0.22); color: var(--wf-lavender); }
+.wf-badge.wounded { background: rgba(194,91,75,0.22); color: var(--wf-red); }
+
+.wf-hud-actions {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 14px;
+  display: flex;
+  gap: 8px;
+}
+.wf-hud-actions .btn-hud {
+  flex: 1;
+  text-align: center;
+  font-family: var(--wf-hud);
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  padding: 9px 4px;
+  border-radius: 8px;
+  color: #14110c;
+}
+.wf-hud-actions .btn-hud.primary { background: var(--wf-amber); }
+.wf-hud-actions .btn-hud.ghost { background: rgba(255,255,255,0.08); color: var(--wf-paper); border: 1px solid rgba(255,255,255,0.14); }
+
+/* Callouts + palette swatch around the phones */
+.wf-callout {
+  position: absolute;
+  font-family: var(--hand);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--wf-olive);
+  max-width: 130px;
+  line-height: 1.25;
+}
+.wf-callout.c1 { top: 6%; left: 2%; color: var(--wf-cyan); }
+.wf-callout.c2 { top: 2%; right: 4%; color: var(--wf-amber); }
+.wf-callout.c3 { bottom: 4%; left: 6%; color: var(--wf-lavender); }
+.wf-callout.c4 { bottom: 0; right: 8%; color: var(--wf-olive); }
+@media (max-width: 900px) { .wf-callout { display: none; } }
+
+.wf-palette {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 46px;
+}
+.wf-swatch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.wf-swatch .chip { width: 34px; height: 34px; border-radius: 8px; box-shadow: 0 6px 14px rgba(0,0,0,0.35); }
+.wf-swatch .label { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-2); }
+
+/* 01 / 02 / 03 sections reuse the site's .esa / .build-grid patterns for
+   consistency, with a couple of Wild-Frontier-only additions below. */
+.wf-approach-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  margin-top: 32px;
+}
+@media (min-width: 760px) { .wf-approach-grid { grid-template-columns: repeat(4, 1fr); } }
+.wf-approach-card {
+  border: 1px solid var(--stroke);
+  border-radius: 14px;
+  padding: 18px;
+  background: var(--bg-2);
+}
+.wf-approach-card .k { font-family: var(--wf-hud); font-size: 15px; color: var(--wf-amber); letter-spacing: 0.02em; margin: 0 0 8px; }
+.wf-approach-card p { font-size: 13px; line-height: 1.55; color: var(--muted); margin: 0; }
+
+/* Screen flow */
+.wf-flow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 34px 4px 10px;
+  margin-top: 12px;
+}
+.wf-flow-arrow { flex: none; color: var(--muted-2); font-size: 16px; }
+.wf-flow-card {
+  flex: none;
+  width: 132px;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  background: var(--bg-2);
+  overflow: hidden;
+}
+.wf-flow-card .thumb {
+  aspect-ratio: 9/16;
+  position: relative;
+  background: linear-gradient(160deg, #12160e, #0c1410);
+}
+.wf-flow-card .thumb .wire {
+  position: absolute; inset: 8px;
+  border: 1px dashed rgba(255,255,255,0.16);
+  border-radius: 6px;
+}
+.wf-flow-card .thumb .wire span {
+  position: absolute; left: 6px; right: 6px;
+  height: 5px; border-radius: 3px; background: rgba(255,255,255,0.1);
+}
+.wf-flow-card .label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-align: center;
+  padding: 8px 4px;
+}
+
+/* 03 Design system sheet */
+.wf-sheet {
+  margin-top: 34px;
+  border: 1px solid var(--stroke);
+  border-radius: 18px;
+  background: var(--bg-2);
+  padding: 30px;
+}
+.wf-sheet-row { display: grid; grid-template-columns: 1fr; gap: 26px; }
+@media (min-width: 760px) { .wf-sheet-row { grid-template-columns: repeat(3, 1fr); } }
+.wf-sheet-block .h { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-2); margin: 0 0 12px; }
+.wf-type-sample { font-family: var(--wf-hud); font-size: 40px; color: var(--text); line-height: 1; margin-bottom: 6px; }
+.wf-type-sample.body { font-family: var(--sans); font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+.wf-progress { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.08); overflow: hidden; margin-top: 10px; }
+.wf-progress .fill { height: 100%; width: 64%; background: var(--wf-amber); }
+
+/* Process strip */
+.wf-process-note {
+  font-family: var(--hand);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+  background: rgba(224, 166, 75, 0.06);
+  border: 1px dashed rgba(224, 166, 75, 0.3);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-top: 28px;
+  max-width: 62ch;
+}
+
+/* Takeaways */
+.wf-takeaways { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 28px; }
+@media (min-width: 760px) { .wf-takeaways { grid-template-columns: repeat(3, 1fr); } }
+.wf-takeaway { border-left: 2px solid var(--wf-amber); padding-left: 14px; font-size: 13.5px; line-height: 1.55; color: var(--muted); }

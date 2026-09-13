@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concept — One-Man Agency structure</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* CONCEPT-ONLY styles — structure/layout test, not final visual design.
+         Kept in-page so this never leaks into system.css/styles.css. */
+      .concept-banner {
+        background: var(--accent-yellow);
+        color: #1E1A2E;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .04em;
+        text-align: center;
+        padding: 8px 16px;
+      }
+
+      .concept-role {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 14px;
+      }
+
+      .concept-section {
+        padding: 96px 0;
+        border-bottom: 1px solid var(--stroke);
+      }
+      .concept-section:last-of-type { border-bottom: none; }
+
+      .concept-num {
+        font-size: 13px;
+        letter-spacing: .08em;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .concept-title {
+        font-size: clamp(28px, 4vw, 44px);
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .concept-title-alias {
+        font-size: 15px;
+        color: var(--muted-2);
+        margin-bottom: 36px;
+      }
+
+      .placeholder-block {
+        border: 1px dashed var(--stroke);
+        border-radius: var(--radius);
+        background: var(--bg-card);
+        color: var(--muted);
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 24px;
+      }
+
+      /* 01 — content checklist as a stacked list, no fake imagery */
+      .concept-checklist {
+        display: grid;
+        gap: 24px;
+        max-width: 640px;
+      }
+      .concept-checklist-item {
+        border: 1px solid var(--stroke);
+        border-radius: 12px;
+        padding: 16px 18px;
+        font-size: 14px;
+      }
+      .concept-checklist-item strong {
+        display: block;
+        font-size: 13px;
+        letter-spacing: .03em;
+        margin-bottom: 4px;
+        color: var(--text);
+      }
+      .concept-checklist-item span { color: var(--muted); }
+
+      /* 02 — two placeholder tiles */
+      .concept-duo {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+      .concept-duo .placeholder-block { aspect-ratio: 4 / 3; }
+      @media (max-width: 640px) {
+        .concept-duo { grid-template-columns: 1fr; }
+      }
+
+      /* 03 — the 3x3 micro-motion grid, the actual test */
+      .concept-grid-3x3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+      }
+      .concept-grid-3x3 .placeholder-block {
+        aspect-ratio: 1 / 1;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .concept-grid-3x3 .tile-num {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .concept-grid-3x3 .tile-label {
+        font-size: 11px;
+        letter-spacing: .02em;
+        max-width: 80%;
+      }
+      @media (max-width: 640px) {
+        .concept-grid-3x3 { grid-template-columns: repeat(2, 1fr); }
+      }
+
+      /* 04 — single wide placeholder */
+      .placeholder-block.wide { aspect-ratio: 16 / 7; }
+
+      /* NAV — dropdown replacing horizontal nav-links */
+      .nav-dropdown { position: relative; }
+      .nav-dropdown-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: none;
+        border: 1px solid var(--stroke);
+        border-radius: 999px;
+        padding: 8px 16px;
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 12px;
+        letter-spacing: .04em;
+        cursor: pointer;
+      }
+      .nav-dropdown-caret { transition: transform 160ms ease; }
+      .nav-dropdown-trigger[aria-expanded="true"] .nav-dropdown-caret { transform: rotate(180deg); }
+
+      .nav-dropdown-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        min-width: 260px;
+        background: var(--bg-card);
+        border: 1px solid var(--stroke);
+        border-radius: 12px;
+        padding: 6px;
+        box-shadow: 0 12px 32px rgba(0,0,0,.35);
+        z-index: 60;
+      }
+      .nav-dropdown-menu.active { display: flex; }
+      .nav-dropdown-menu a {
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+      .nav-dropdown-menu a:hover { background: var(--bg-2); }
+
+      /* Interactive dot-grid background — same intersection-grid language
+         as the uxgenerative infinite board, but reactive: dots near the
+         cursor brighten instead of being a flat static pattern. */
+      #bg-grid-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+      body > *:not(#bg-grid-canvas) { position: relative; z-index: 1; }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="bg-grid-canvas"></canvas>
+    <div class="concept-banner">CONCEPT PREVIEW — structure/layout only, no final assets. Not linked from the live site.</div>
+
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="./concept.html" aria-label="Home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">
+            <span class="brand-name">Jose Alvarez</span>
+            <span class="brand-sub">ODEJ</span>
+          </span>
+        </a>
+
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') !== 'true'); this.nextElementSibling.classList.toggle('active')">
+            Sections
+            <svg class="nav-dropdown-caret" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="#s01" onclick="document.querySelector('.nav-dropdown-menu').classList.remove('active'); document.querySelector('.nav-dropdown-trigger').setAttribute('aria-expanded','false')">01 / Product & Behavioral UX</a>
+            <a href="#s02" onclick="document.querySelector('.nav-dropdown-menu').classList.remove('active'); document.querySelector('.nav-dropdown-trigger').setAttribute('aria-expanded','false')">02 / Hardware & Spatial 3D</a>
+            <a href="#s03" onclick="document.querySelector('.nav-dropdown-menu').classList.remove('active'); document.querySelector('.nav-dropdown-trigger').setAttribute('aria-expanded','false')">03 / Micro-Motion & UI</a>
+            <a href="#s04" onclick="document.querySelector('.nav-dropdown-menu').classList.remove('active'); document.querySelector('.nav-dropdown-trigger').setAttribute('aria-expanded','false')">04 / Game UI & Diegetic Lab</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" style="padding-bottom: 40px;">
+        <div class="container">
+          <p class="concept-role">Creative Designer</p>
+          <h1 class="hero-title">
+            <span class="hero-name">Jose Alvarez</span><br>
+            Interfaces, objects, motion, worlds — whatever the medium, I design what you <span class="hero-accent">feel</span>.
+          </h1>
+          <p class="hero-tagline">Behavioral UX · Spatial 3D · Motion · Game UI</p>
+        </div>
+      </section>
+
+      <!-- 01 / PRODUCT & BEHAVIORAL UX (El Cerebro) -->
+      <section class="concept-section" id="s01">
+        <div class="container">
+          <p class="concept-num">01</p>
+          <h2 class="concept-title">Product & Behavioral UX</h2>
+          <p class="concept-title-alias">El Cerebro — DuoGit, Cuak</p>
+
+          <div class="concept-checklist">
+            <div class="concept-checklist-item">
+              <strong>The Framework</strong>
+              <span>Emotional state architecture (Waiting, Happy, Worried, Broken) — already exists as the ESA section on the live home.</span>
+            </div>
+            <div class="concept-checklist-item">
+              <strong>The System</strong>
+              <span>Full Figma design system — components, tokens, variants. Linked from each case study today.</span>
+            </div>
+            <div class="concept-checklist-item">
+              <strong>Behavioral KPIs</strong>
+              <span>Streak recovery rate, Day 7 retention, time-to-first-commit — already in the DuoGit/Cuak copy.</span>
+            </div>
+            <div class="concept-checklist-item">
+              <strong>The Logic</strong>
+              <span>Flow diagrams: cold data → mascot emotion. Not built yet.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 / HARDWARE & SPATIAL 3D (La Forma) -->
+      <section class="concept-section" id="s02">
+        <div class="container">
+          <p class="concept-num">02</p>
+          <h2 class="concept-title">Hardware & Spatial 3D</h2>
+          <p class="concept-title-alias">La Forma — no assets yet</p>
+
+          <div class="concept-duo">
+            <div class="placeholder-block">Tactile PBR<br>macro material close-ups</div>
+            <div class="placeholder-block">Concept Hardware<br>retro-futuristic gadgets</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 / MICRO-MOTION & UI PRESENTATIONS (La Energía) — the 3x3 grid -->
+      <section class="concept-section" id="s03">
+        <div class="container">
+          <p class="concept-num">03</p>
+          <h2 class="concept-title">Micro-Motion & UI Presentations</h2>
+          <p class="concept-title-alias">La Energía — 9 tiles, 3–5s loops</p>
+
+          <div class="concept-grid-3x3">
+            <div class="placeholder-block"><span class="tile-num">1</span><span class="tile-label">The Morph — button → card</span></div>
+            <div class="placeholder-block"><span class="tile-num">2</span><span class="tile-label">The Birth — UI sequencing in</span></div>
+            <div class="placeholder-block"><span class="tile-num">3</span><span class="tile-label">Mascot Reaction — overshoot bounce</span></div>
+            <div class="placeholder-block"><span class="tile-num">4</span><span class="tile-label">The Fly-Through — camera into card</span></div>
+            <div class="placeholder-block"><span class="tile-num">5</span><span class="tile-label">Tactile Input — knob press + glow</span></div>
+            <div class="placeholder-block"><span class="tile-num">6</span><span class="tile-label">Staggered Entry — fintech cards</span></div>
+            <div class="placeholder-block"><span class="tile-num">7</span><span class="tile-label">Depth Parallax — lateral camera</span></div>
+            <div class="placeholder-block"><span class="tile-num">8</span><span class="tile-label">The Glow — dark mode neon pulse</span></div>
+            <div class="placeholder-block"><span class="tile-num">9</span><span class="tile-label">Pipeline Showcase — Figma → AEUX</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 / GAME UI & DIEGETIC LAB (El Puente al Dinero) -->
+      <section class="concept-section" id="s04">
+        <div class="container">
+          <p class="concept-num">04</p>
+          <h2 class="concept-title">Game UI & Diegetic Lab</h2>
+          <p class="concept-title-alias">El Puente al Dinero — no assets yet</p>
+
+          <div class="placeholder-block wide">Diegetic HUDs · Holographic UI · The Breakdown (pipeline explainer)</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <span class="footer-item muted">Concept preview — not part of the live nav</span>
+          <a class="footer-item muted" href="./index.html">← back to live site</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("click", (e) => {
+        const dropdown = document.querySelector(".nav-dropdown");
+        if (!dropdown.contains(e.target)) {
+          document.querySelector(".nav-dropdown-menu").classList.remove("active");
+          document.querySelector(".nav-dropdown-trigger").setAttribute("aria-expanded", "false");
+        }
+      });
+    </script>
+
+    <script>
+      (function () {
+        const canvas = document.getElementById("bg-grid-canvas");
+        const ctx = canvas.getContext("2d");
+
+        const SPACING = 36;       // px between intersections
+        const MIN_RADIUS = 1;     // dot size at the edge of the reach radius
+        const MAX_RADIUS = 3.2;   // dot size at cursor center
+        const REACH = 160;        // px — only dots within this radius are drawn at all
+        const MIN_ALPHA = 0.12;   // dot opacity at the edge of the reach radius
+        const MAX_ALPHA = 0.9;    // dot opacity right under the cursor
+
+        // Ripple: concentric rings travel outward from the cursor
+        // continuously, like a wave — on top of the distance falloff above.
+        const WAVE_SPEED = 0.025;   // px/ms the ring front travels outward
+        const WAVE_LENGTH = 48;     // px between successive ring peaks
+        const WAVE_MIX = 0.55;      // how much the ring pulse affects brightness (0-1)
+
+        let dpr = Math.min(window.devicePixelRatio || 1, 2);
+        let width = 0, height = 0;
+        let mouseX = -9999, mouseY = -9999;
+        let targetX = -9999, targetY = -9999;
+        let waveTime = 0;
+        let lastFrameTime = performance.now();
+
+        function resize() {
+          // Canvas is position:fixed and viewport-sized — it does NOT scroll
+          // with the page, so the grid stays anchored to the screen, not
+          // page coordinates.
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+          canvas.style.width = width + "px";
+          canvas.style.height = height + "px";
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function draw() {
+          const now = performance.now();
+          waveTime += now - lastFrameTime;
+          lastFrameTime = now;
+
+          // Ease the cursor position so the glow trails smoothly instead of
+          // snapping frame-to-frame.
+          mouseX += (targetX - mouseX) * 0.18;
+          mouseY += (targetY - mouseY) * 0.18;
+
+          ctx.clearRect(0, 0, width, height);
+
+          // Only iterate grid intersections that could fall inside REACH of
+          // the cursor — nothing outside that radius is drawn at all.
+          if (mouseX > -REACH && mouseX < width + REACH && mouseY > -REACH && mouseY < height + REACH) {
+            const minCol = Math.max(0, Math.floor((mouseX - REACH) / SPACING));
+            const maxCol = Math.ceil((mouseX + REACH) / SPACING);
+            const minRow = Math.max(0, Math.floor((mouseY - REACH) / SPACING));
+            const maxRow = Math.ceil((mouseY + REACH) / SPACING);
+
+            for (let row = minRow; row <= maxRow; row++) {
+              const y = row * SPACING;
+              for (let col = minCol; col <= maxCol; col++) {
+                const x = col * SPACING;
+                const dist = Math.hypot(x - mouseX, y - mouseY);
+                if (dist > REACH) continue;
+
+                const proximity = 1 - dist / REACH;
+
+                // Ring front expanding outward from the cursor over time —
+                // 0..1 pulse, peaks where a ring currently passes through.
+                const ringPhase = (dist - waveTime * WAVE_SPEED) / WAVE_LENGTH * Math.PI * 2;
+                const ring = (Math.sin(ringPhase) + 1) / 2;
+                const pulse = (1 - WAVE_MIX) + WAVE_MIX * ring;
+
+                const radius = (MIN_RADIUS + (MAX_RADIUS - MIN_RADIUS) * proximity) * pulse;
+                const alpha = (MIN_ALPHA + (MAX_ALPHA - MIN_ALPHA) * proximity) * pulse;
+
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(242, 239, 232, ${alpha})`;
+                ctx.fill();
+              }
+            }
+          }
+
+          requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("mousemove", (e) => {
+          targetX = e.clientX;
+          targetY = e.clientY;
+        });
+        window.addEventListener("mouseleave", () => {
+          targetX = -9999;
+          targetY = -9999;
+        });
+        window.addEventListener("resize", resize);
+        window.addEventListener("load", resize);
+
+        resize();
+        requestAnimationFrame(draw);
+      })();
+    </script>
+  </body>
+</html>
