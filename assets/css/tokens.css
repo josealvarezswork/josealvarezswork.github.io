@@ -34,11 +34,20 @@
   --accent-glow: rgba(167, 139, 250, 0.08);
 
   --accent-green: #245445;                 /* material · surfaces          */
+  /* The mat's own surface. Kept separate from --accent-green because a page
+     may redefine that token for its own brand — duogit-design-system sets it
+     to #10b981, which turned the mat emerald. */
+  --mat-surface: #245445;
   --accent-green-lit: #3d8a70;
   --accent-green-soft: rgba(61, 138, 112, 0.16);
 
   --accent-amber: #f0b429;                 /* annotation · emphasis        */
   --accent-amber-soft: rgba(240, 180, 41, 0.16);
+
+  /* Project brand colours. Legitimate, but they belong in the system: 46
+     hardcoded copies of Cuak's green meant no way to change it once. */
+  --brand-cuak: #6fba96;
+  --brand-cuak-soft: rgba(111, 186, 150, 0.12);
 
   --accent-cyan: #7cc6ff;
   --accent-red: #e04a3f;

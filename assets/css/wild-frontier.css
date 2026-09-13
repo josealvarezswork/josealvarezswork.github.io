@@ -8,7 +8,7 @@
   --wf-cyan: #6FC7D6;
   --wf-olive: #8A9A5B;
   --wf-red: #C25B4B;
-  --wf-lavender: #9B8FD4;
+  --wf-lavender: var(--accent);
   --wf-paper: #EDE7D8;
   --wf-hud: "Teko", var(--sans);
 }

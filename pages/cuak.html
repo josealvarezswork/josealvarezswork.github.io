@@ -53,7 +53,7 @@
       font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: #6fba96;
+      color: var(--brand-cuak);
       margin-bottom: 24px
     }
 
@@ -67,7 +67,7 @@
       max-width: 900px
     }
 
-    .hero-title .accent { color: #6fba96 }
+    .hero-title .accent { color: var(--brand-cuak) }
 
     .hero-subtitle {
       font-size: 17px;
@@ -111,7 +111,7 @@
       border-color: rgba(79, 124, 99, .35)
     }
 
-    .tldr-item.highlight span { color: #6fba96; font-weight: 600 }
+    .tldr-item.highlight span { color: var(--brand-cuak); font-weight: 600 }
 
     /* SECTIONS */
     .section {
@@ -187,7 +187,7 @@
       background: var(--accent-soft)
     }
 
-    .info-card.featured h3 { color: #6fba96 }
+    .info-card.featured h3 { color: var(--brand-cuak) }
 
     /* STATES GRID */
     .states-grid {
@@ -249,7 +249,7 @@
     }
     .level-card-body { display:flex;flex-direction:column;gap:4px }
     .level-card-name { font-size:15px;font-weight:600;color:var(--text-primary) }
-    .level-card-xp { font-size:12px;font-weight:600;color:#6fba96;letter-spacing:.04em }
+    .level-card-xp { font-size:12px;font-weight:600;color:var(--brand-cuak);letter-spacing:.04em }
     .level-card-desc { font-size:13px;color:var(--text-muted);margin-top:2px }
 
     .state-name {
@@ -303,7 +303,7 @@
 
     .next-list li::before {
       content: "→";
-      color: #6fba96;
+      color: var(--brand-cuak);
       font-weight: 600;
       flex-shrink: 0
     }
@@ -448,7 +448,7 @@
       margin-bottom: 8px
     }
 
-    .rule-side.emotional .rule-label { color: #6fba96 }
+    .rule-side.emotional .rule-label { color: var(--brand-cuak) }
 
     .rule-value {
       font-family: var(--serif);
@@ -522,10 +522,12 @@
         <span></span>
       </button>
       <div class="nav-links">
-        <a href="./how-i-work.html">How I Work</a>
-        <a href="./resume.html">Resume</a>
-        <a href="./about.html">About</a>
-      </div>
+          <a href="./index.html#work">Work</a>
+          <a href="./methodology.html">Framework</a>
+          <a href="./craft.html">Craft</a>
+          <a href="./resume.html">Resume</a>
+          <a href="./about.html">About</a>
+        </div>
     </nav>
   </header>
 
@@ -570,7 +572,7 @@
     <section class="section">
       <div class="container">
         <span class="section-label">01 — The problem</span>
-        <h2 class="section-title">Most people feel their credit is fine — <span style="color:#6fba96">until suddenly it isn't</span></h2>
+        <h2 class="section-title">Most people feel their credit is fine — <span style="color:var(--brand-cuak)">until suddenly it isn't</span></h2>
         <p class="section-text">
           Bank dashboards show numbers — balance, limit, due date — but never answer the real question: <em>am I okay?</em> That uncertainty creates anxiety instead of action. Cuak makes the warning visible before it becomes a crisis.
         </p>
@@ -593,7 +595,7 @@
     <!-- 02 SOLUCIÓN -->
     <section class="section">
       <div class="container">
-        <h2 class="section-title">A mascot that <span style="color:#6fba96">reacts</span> to your financial behavior</h2>
+        <h2 class="section-title">A mascot that <span style="color:var(--brand-cuak)">reacts</span> to your financial behavior</h2>
         <p class="section-text">
           Cuak connects to credit card data via Open Banking (Belvo) and maps user behavior to one of four emotional states. The mascot's state is the primary interface: it occupies the top of the screen and drives everything below it.
         </p>
@@ -628,7 +630,7 @@
 
         <div class="info-card" style="margin-top:12px;background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.07)">
           <h3 style="color:var(--text-muted)">+ Card deck with gesture animations</h3>
-          <p style="color:var(--text-faint)">The card deck uses <code style="font-size:12px;color:#6fba96;background:rgba(79,124,99,.1);padding:1px 5px;border-radius:3px">react-native-gesture-handler</code> + Reanimated on the UI thread. The user swipes down to change the front card. Animations run off the JS thread — no frame drops during gestures.</p>
+          <p style="color:var(--text-faint)">The card deck uses <code style="font-size:12px;color:var(--brand-cuak);background:rgba(79,124,99,.1);padding:1px 5px;border-radius:3px">react-native-gesture-handler</code> + Reanimated on the UI thread. The user swipes down to change the front card. Animations run off the JS thread — no frame drops during gestures.</p>
         </div>
       </div>
     </section>
@@ -636,7 +638,7 @@
     <!-- 03 SISTEMA EMOCIONAL -->
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Four states. One <span style="color:#6fba96">clear signal</span>.</h2>
+        <h2 class="section-title">Four states. One <span style="color:var(--brand-cuak)">clear signal</span>.</h2>
         <p class="section-text">
           The system maps the user's financial behavior to four emotional states. Each state has a visual expression, a color and a suggested action — reducing the cognitive friction of interpreting financial data.
         </p>
@@ -686,11 +688,11 @@
           </div>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;color:var(--text-faint)">
             <img loading="lazy" decoding="async" src="../assets/img/cuak/cuak-feliz.png" alt="Happy" style="width:130px;height:130px;object-fit:contain">
-            <span style="color:#6fba96">Happy</span>
+            <span style="color:var(--brand-cuak)">Happy</span>
           </div>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;color:var(--text-faint)">
             <img loading="lazy" decoding="async" src="../assets/img/cuak/cuak-atento.png" alt="Watchful" style="width:130px;height:130px;object-fit:contain">
-            <span style="color:#fbbf24">Watchful</span>
+            <span style="color:var(--accent-amber)">Watchful</span>
           </div>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;color:var(--text-faint)">
             <img loading="lazy" decoding="async" src="../assets/img/cuak/cuak-preocupado.png" alt="Worried" style="width:130px;height:130px;object-fit:contain">
@@ -710,7 +712,7 @@
           </div>
           <div class="rule-side emotional">
             <div class="rule-label">Emotional state (right)</div>
-            <div class="rule-value" style="color:#6fba96">40%</div>
+            <div class="rule-value" style="color:var(--brand-cuak)">40%</div>
             <div class="rule-desc">The mascot and its state — the signal the user reads first</div>
           </div>
         </div>
@@ -720,17 +722,17 @@
     <!-- 04 CORE: SIMULADOR PREVENTIVO -->
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Cuak advises you <span style="color:#6fba96">before</span> you spend</h2>
+        <h2 class="section-title">Cuak advises you <span style="color:var(--brand-cuak)">before</span> you spend</h2>
         <p class="section-text">
           Banking apps tell you what you already spent. Cuak shows you what you <em>should</em> do before making the decision. The Purchase Simulator is the product's flagship feature.
         </p>
         <p class="section-text">
-          The user enters the amount of a future purchase — a TV, a trip. The backend engine (<code style="font-family:monospace;font-size:13px;color:#6fba96;background:rgba(79,124,99,.12);padding:2px 6px;border-radius:4px">cycle_service.py</code>) analyzes the billing cycle and responds with the optimal strategy.
+          The user enters the amount of a future purchase — a TV, a trip. The backend engine (<code style="font-family:monospace;font-size:13px;color:var(--brand-cuak);background:rgba(79,124,99,.12);padding:2px 6px;border-radius:4px">cycle_service.py</code>) analyzes the billing cycle and responds with the optimal strategy.
         </p>
         <div class="two-col" style="margin-top:32px">
           <div class="info-card featured">
             <h3>● If you buy today</h3>
-            <p style="font-size:22px;font-family:var(--serif);font-weight:700;color:#6fba96;margin:8px 0">21 interest-free days</p>
+            <p style="font-size:22px;font-family:var(--serif);font-weight:700;color:var(--brand-cuak);margin:8px 0">21 interest-free days</p>
             <p>Cuak is <strong>happy</strong>. The purchase lands inside the current cycle and you have enough time to pay at no cost.</p>
           </div>
           <div class="info-card" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.05)">
@@ -751,7 +753,7 @@
     <section class="section">
       <div class="container">
         <span class="section-label">05 — The Retention Engine</span>
-        <h2 class="section-title">From Apprentice to <span style="color:#6fba96">Credit Master</span></h2>
+        <h2 class="section-title">From Apprentice to <span style="color:var(--brand-cuak)">Credit Master</span></h2>
         <p class="section-text">
           Good financial decisions generate Experience Points (XP). This positive reinforcement turns debt payment from a stressful chore into a rewarding experience — the same mechanism that gives Duolingo 40M daily active users.
         </p>
@@ -766,7 +768,7 @@
             <span style="flex:1"><strong style="font-weight:600">On-time payment</strong> — paying before the due date, regardless of the amount.</span>
           </div>
           <div style="display:flex;align-items:baseline;gap:24px;padding:18px 0">
-            <span style="font-family:var(--serif);font-size:34px;font-weight:700;color:#6fba96;min-width:88px">+100 XP</span>
+            <span style="font-family:var(--serif);font-size:34px;font-weight:700;color:var(--brand-cuak);min-width:88px">+100 XP</span>
             <span style="flex:1"><strong style="font-weight:600;color:var(--text)">Optimal decision</strong> — using the Simulator and choosing the strategy Cuak recommends. The behavior the whole product exists to create.</span>
           </div>
         </div>
@@ -817,7 +819,7 @@
             <img loading="lazy" decoding="async" src="../assets/img/cuak/nivel-06-maestro.png" alt="Credit Master"
               style="filter:drop-shadow(0 8px 24px rgba(79,124,99,.45))">
             <div class="level-card-body">
-              <div class="level-card-name" style="color:#6fba96">Credit Master</div>
+              <div class="level-card-name" style="color:var(--brand-cuak)">Credit Master</div>
               <div class="level-card-xp">2000+ XP</div>
               <div class="level-card-desc">Zero-risk lead for banks</div>
             </div>
@@ -829,14 +831,14 @@
     <!-- 06 MODELO DE NEGOCIO -->
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Behavioral Scoring and <span style="color:#6fba96">B2B Lead Generation</span></h2>
+        <h2 class="section-title">Behavioral Scoring and <span style="color:var(--brand-cuak)">B2B Lead Generation</span></h2>
         <p class="section-text">
           Cuak flips the traditional banking model. Instead of charging users for their financial mistakes, Cuak charges banks for their best customers.
         </p>
         <div class="two-col" style="margin-top:32px">
           <div class="info-card">
             <h3>B2C — Freemium</h3>
-            <p style="color:#6fba96;font-size:20px;font-weight:700;font-family:var(--serif);margin:8px 0">$9.99 / month</p>
+            <p style="color:var(--brand-cuak);font-size:20px;font-weight:700;font-family:var(--serif);margin:8px 0">$9.99 / month</p>
             <p>Premium plan with unlimited simulations, multi-card analysis and advanced proactive alerts. The free plan includes 1 card and 3 simulations per month.</p>
           </div>
           <div class="info-card featured">
@@ -851,13 +853,13 @@
     <!-- 07 IMPACTO ESTIMADO -->
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Projections grounded in <span style="color:#6fba96">behavioral design</span></h2>
+        <h2 class="section-title">Projections grounded in <span style="color:var(--brand-cuak)">behavioral design</span></h2>
         <p class="section-text">
           A 0-to-1 project — no real users yet. No existing fintech product uses a mascot as the primary emotional signal for financial data: Nequi and Greenlight have friendly UX, but no reactive emotional layer. Duolingo proved that anthropomorphism drives retention — Cuak applies that mechanism to personal finance for the first time. The projections start from that gap.
         </p>
         <div style="display:flex;flex-direction:column;gap:16px;margin-top:32px">
           <div style="padding:24px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center">
-            <div style="font-family:var(--serif);font-size:42px;font-weight:700;color:#6fba96;min-width:100px">+70%</div>
+            <div style="font-family:var(--serif);font-size:42px;font-weight:700;color:var(--brand-cuak);min-width:100px">+70%</div>
             <div>
               <div style="font-weight:600;margin-bottom:4px">Estimated Day 30 retention</div>
               <div style="font-size:13px;color:var(--text-muted)">vs. the ~25% benchmark for generic finance apps. Mascot anthropomorphism and the fear of "breaking the streak" of XP build a daily open habit.</div>
@@ -871,7 +873,7 @@
             <div style="font-size:13px;color:var(--text-muted);line-height:1.7">The 60/40 rule (data left, emotion right) removes the cognitive load of interpreting financial information. Less confusion, less churn.</div>
           </div>
           <div>
-            <div style="font-weight:600;margin-bottom:6px;color:#6fba96">Pre-qualified B2B conversion</div>
+            <div style="font-weight:600;margin-bottom:6px;color:var(--brand-cuak)">Pre-qualified B2B conversion</div>
             <div style="font-size:13px;color:var(--text-muted);line-height:1.7">Leads reach banks only once the user hits verified behavioral maturity, so the bank buys a qualified lead rather than a slice of the whole base.</div>
           </div>
         </div>
@@ -881,21 +883,21 @@
     <!-- EARLY SIGNAL -->
     <section class="section">
       <div class="container">
-        <h2 class="section-title">What <span style="color:#6fba96">prototype testing</span> revealed</h2>
+        <h2 class="section-title">What <span style="color:var(--brand-cuak)">prototype testing</span> revealed</h2>
         <p class="section-text">
           5 testers. 1 clickable prototype. 1 session each. Before a single line of production code — the behavioral design was validated.
         </p>
         <div class="two-col" style="margin-top:32px">
           <div class="info-card featured">
-            <h3 style="font-size:32px;font-weight:700;color:#6fba96;margin-bottom:8px">5 / 5</h3>
+            <h3 style="font-size:32px;font-weight:700;color:var(--brand-cuak);margin-bottom:8px">5 / 5</h3>
             <p>Reported feeling <strong>"more in control"</strong> with mascot feedback vs. the same raw number shown without it. Higher perceived control = direct proxy for lower churn rate.</p>
           </div>
           <div class="info-card featured">
-            <h3 style="font-size:32px;font-weight:700;color:#6fba96;margin-bottom:8px">3 / 5</h3>
+            <h3 style="font-size:32px;font-weight:700;color:var(--brand-cuak);margin-bottom:8px">3 / 5</h3>
             <p>Said the mascot made them <strong>want to check back</strong> — vs. "I'd open it once and forget." This is the DAU signal: the emotional layer creates return intent before habit forms.</p>
           </div>
         </div>
-        <div class="info-card" style="margin-top:16px;border-left:3px solid #6fba96;padding-left:24px">
+        <div class="info-card" style="margin-top:16px;border-left:3px solid var(--brand-cuak);padding-left:24px">
           <p style="color:var(--text-muted);font-size:15px">"It feels like the app is on my side, not judging me."</p>
           <p style="font-size:12px;color:var(--text-faint);margin-top:8px">— Prototype tester, session 3</p>
         </div>
@@ -908,7 +910,7 @@
     <!-- 08 STACK -->
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Built to scale with <span style="color:#6fba96">Open Banking</span></h2>
+        <h2 class="section-title">Built to scale with <span style="color:var(--brand-cuak)">Open Banking</span></h2>
         <p class="section-text">
           The stack was chosen to support future integration with banking data. The MVP currently runs on a custom backend calculation engine and mock data to validate the user experience and the behavioral design. The architecture is ready to swap those mocks for the real connection in the next phase.
         </p>
@@ -919,7 +921,7 @@
           </div>
           <div style="display:flex;align-items:flex-start;gap:16px;padding:16px 20px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
             <span style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);min-width:120px;padding-top:2px">Gestures / Anim.</span>
-            <span style="font-size:14px;color:var(--text-muted)">React Native Gesture Handler · Reanimated (UI thread, <code style="font-size:12px;color:#6fba96;background:rgba(79,124,99,.1);padding:1px 5px;border-radius:3px">useSharedValue</code>, <code style="font-size:12px;color:#6fba96;background:rgba(79,124,99,.1);padding:1px 5px;border-radius:3px">withSpring</code>)</span>
+            <span style="font-size:14px;color:var(--text-muted)">React Native Gesture Handler · Reanimated (UI thread, <code style="font-size:12px;color:var(--brand-cuak);background:rgba(79,124,99,.1);padding:1px 5px;border-radius:3px">useSharedValue</code>, <code style="font-size:12px;color:var(--brand-cuak);background:rgba(79,124,99,.1);padding:1px 5px;border-radius:3px">withSpring</code>)</span>
           </div>
           <div style="display:flex;align-items:flex-start;gap:16px;padding:16px 20px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
             <span style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);min-width:120px;padding-top:2px">Backend</span>
@@ -930,10 +932,10 @@
             <span style="font-size:14px;color:var(--text-muted)">PostgreSQL · Redis · Docker Compose · pnpm workspaces (monorepo)</span>
           </div>
           <div style="display:flex;align-items:flex-start;gap:16px;padding:16px 20px;background:var(--accent-soft);border:1px solid rgba(79,124,99,.35);border-radius:var(--r)">
-            <span style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#6fba96;min-width:120px;padding-top:2px">Open Banking</span>
+            <span style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--brand-cuak);min-width:120px;padding-top:2px">Open Banking</span>
             <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-              <span style="font-size:14px">Belvo — endpoints implemented, <code style="font-size:12px;color:#6fba96;background:rgba(79,124,99,.15);padding:1px 5px;border-radius:3px">BelvoWidget</code> integrated in mobile</span>
-              <span style="font-size:11px;padding:2px 8px;background:rgba(79,124,99,.2);border:1px solid rgba(79,124,99,.4);border-radius:100px;color:#6fba96;font-weight:600;white-space:nowrap">Sandbox phase</span>
+              <span style="font-size:14px">Belvo — endpoints implemented, <code style="font-size:12px;color:var(--brand-cuak);background:rgba(79,124,99,.15);padding:1px 5px;border-radius:3px">BelvoWidget</code> integrated in mobile</span>
+              <span style="font-size:11px;padding:2px 8px;background:rgba(79,124,99,.2);border:1px solid rgba(79,124,99,.4);border-radius:100px;color:var(--brand-cuak);font-weight:600;white-space:nowrap">Sandbox phase</span>
             </div>
           </div>
           <div style="display:flex;align-items:flex-start;gap:16px;padding:16px 20px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r)">
@@ -948,7 +950,7 @@
     <section class="section">
       <div class="container">
         <span class="section-label">09 — What's next</span>
-        <h2 class="section-title">From MVP to <span style="color:#6fba96">Production Integration</span></h2>
+        <h2 class="section-title">From MVP to <span style="color:var(--brand-cuak)">Production Integration</span></h2>
         <p class="section-text">
           The emotional state system is designed and the simulator's core flow works in isolation. The next strategic steps are:
         </p>
@@ -973,7 +975,7 @@
           </li>
           <li>
             <span>
-              <strong style="color:#6fba96">Sponsored Rewards Marketplace (Loyalty Program)</strong><br>
+              <strong style="color:var(--brand-cuak)">Sponsored Rewards Marketplace (Loyalty Program)</strong><br>
               The internal XP economy will evolve into an ecosystem of tangible rewards. Through B2B partnerships with banks and merchants, Credit Master users can redeem their points for real-world perks — movies, restaurants, in-store discounts. The differentiator vs. traditional points programs: rewards are earned through <em>disciplined financial behavior</em>, not spending volume. For the partner brand, CAC is minimal — direct access to a user with verified credit health and real purchasing power.
             </span>
           </li>

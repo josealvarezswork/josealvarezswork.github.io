@@ -200,7 +200,7 @@
   padding: 56px 54px;
   border-radius: var(--r-xl);
   overflow: hidden;
-  background-color: var(--accent-green);
+  background-color: var(--mat-surface);
   box-shadow:
     0 40px 90px rgba(0, 0, 0, 0.5),
     inset 0 0 130px rgba(0, 0, 0, 0.4);

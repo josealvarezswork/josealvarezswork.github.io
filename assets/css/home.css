@@ -68,9 +68,9 @@ body.page-home .hero { padding: 34px 0 56px; }
 body.page-home .hero-mat {
   /* A real mat green. Darker than the reference, which is a full-bleed
      background — here the mat is an object sitting on the page's dark ground,
-     and a mid-tone green at that size would outshout the headline on it. */
+     and a mid-tone green at that size would outshout the headline on it.
+     The value itself lives in tokens.css. */
   --mat-ink: 208 236 224;
-  --mat-surface: #245445;
   --mat-cell: 20px;         /* one cell */
 
   position: relative;

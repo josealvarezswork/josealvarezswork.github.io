@@ -7,9 +7,10 @@
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/tokens.css" />
-  <link rel="stylesheet" href="../assets/css/system.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=3">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=3" />
   <style>
     :root {
       --muted: rgba(242,239,232,.62);
@@ -197,35 +198,61 @@
     .footer-copy { font-size: 12px; color: var(--faint); }
     .footer-nav { display: flex; gap: 24px; font-size: 12px; color: var(--faint); }
     .footer-nav a:hover { color: var(--text); }
+  
+    /* --- SHARED CARD LANGUAGE ---------------------------------------- */
+    .swatch-info, .state-card, .zone-header, .ref-sheet-card, .ba-card-body, .annotation-item, .component-card, .league-card {
+      border-radius: var(--r-lg);
+      border: 1px solid var(--stroke);
+      box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.32);
+    }
+    .state-img, .annotated-placeholder, .state-img-placeholder {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 70px rgba(0, 0, 0, 0.38);
+    }
   </style>
 </head>
 <body>
 
-  <nav class="nav">
-    <a class="brand" href="../index.html">
-      <span class="brand-mark"></span>
-      <span>
-        <span class="brand-name">Jose Alvarez</span>
-        <span class="brand-sub">Design</span>
-      </span>
-    </a>
-    <a class="nav-back" href="./duogit.html">← Back to case study</a>
-  </nav>
+  <header class="site-header is-shared">
+    <nav class="nav">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">
+          <span class="brand-name">Jose Alvarez</span>
+          <span class="brand-sub">Design</span>
+        </span>
+      </a>
+
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+          <a href="../index.html#work">Work</a>
+          <a href="./methodology.html">Framework</a>
+          <a href="./craft.html">Craft</a>
+          <a href="./resume.html">Resume</a>
+          <a href="./about.html">About</a>
+        </div>
+    </nav>
+  </header>
 
   <section class="hero">
     <div class="container">
-      <p class="hero-eyebrow">Design System</p>
-      <h1 class="hero-title">DuoGit<br><span class="accent">Visual System</span></h1>
-      <p class="hero-sub">
-        The behavioral design system behind DuoGit — color tokens, Ghost's emotional states,
-        60/40 zoning, league progression, and annotated UI components. Every element is wired to a psychological mechanism.
-      </p>
-      <div class="hero-pills">
-        <span class="pill accent">Gamification</span>
-        <span class="pill">Developer Tools</span>
-        <span class="pill">Streak Mechanics</span>
-        <span class="pill">ESA Framework</span>
-      </div>
+        <div class="mat">
+        <p class="hero-eyebrow">Design System</p>
+        <h1 class="hero-title">DuoGit<br><span class="accent">Visual System</span></h1>
+        <p class="hero-sub">
+          The behavioral design system behind DuoGit — color tokens, Ghost's emotional states,
+          60/40 zoning, league progression, and annotated UI components. Every element is wired to a psychological mechanism.
+        </p>
+        <div class="hero-pills">
+          <span class="pill accent">Gamification</span>
+          <span class="pill">Developer Tools</span>
+          <span class="pill">Streak Mechanics</span>
+          <span class="pill">ESA Framework</span>
+        </div>
+        </div>
     </div>
   </section>
 
@@ -238,11 +265,11 @@
 
       <div class="color-grid">
         <div class="color-swatch">
-          <div class="swatch-block" style="background:#9B8FD4"></div>
+          <div class="swatch-block" style="background:var(--accent)"></div>
           <div class="swatch-info">
             <p class="swatch-name">Accent — Ghost</p>
             <p class="swatch-token">--accent</p>
-            <p class="swatch-hex">#9B8FD4</p>
+            <p class="swatch-hex">var(--accent)</p>
           </div>
         </div>
         <div class="color-swatch">
@@ -254,11 +281,11 @@
           </div>
         </div>
         <div class="color-swatch">
-          <div class="swatch-block" style="background:#fbbf24"></div>
+          <div class="swatch-block" style="background:var(--accent-amber)"></div>
           <div class="swatch-info">
             <p class="swatch-name">Warning — At Risk</p>
             <p class="swatch-token">--accent-warn</p>
-            <p class="swatch-hex">#fbbf24</p>
+            <p class="swatch-hex">var(--accent-amber)</p>
           </div>
         </div>
         <div class="color-swatch">
@@ -313,17 +340,17 @@
         </div>
         <div class="state-card" style="border-color:rgba(251,191,36,.2)">
           <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-worried-crop.png" alt="Ghost worried, streak-at-risk state">
-          <p class="state-name" style="color:#fbbf24">Worried — Streak at Risk</p>
+          <p class="state-name" style="color:var(--accent-amber)">Worried — Streak at Risk</p>
           <p class="state-trigger">Trigger: no commit by evening / streak about to break</p>
           <p class="state-desc">Loss aversion activated. Ghost's distress makes the risk visible — empathetic urgency, not punishment.</p>
-          <span class="state-drive" style="color:#fbbf24;background:rgba(251,191,36,.1)">Core Drive 8: Loss Aversion</span>
+          <span class="state-drive" style="color:var(--accent-amber);background:rgba(251,191,36,.1)">Core Drive 8: Loss Aversion</span>
         </div>
         <div class="state-card" style="border-color:rgba(155,143,212,.2)">
           <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-sad-crop.png" alt="Ghost sad, streak-broken state">
-          <p class="state-name" style="color:#9B8FD4">Sad — Streak Broken</p>
+          <p class="state-name" style="color:var(--accent)">Sad — Streak Broken</p>
           <p class="state-trigger">Trigger: missed day, streak resets</p>
           <p class="state-desc">Emotional cost acknowledged — then resilience. Ghost mourns with the developer, then invites a guilt-free restart.</p>
-          <span class="state-drive" style="color:#9B8FD4;background:rgba(155,143,212,.1)">Guilt-free restart</span>
+          <span class="state-drive" style="color:var(--accent);background:rgba(155,143,212,.1)">Guilt-free restart</span>
         </div>
       </div>
     </div>
@@ -378,7 +405,7 @@
         </div>
         <div class="league-card" style="border-color:rgba(155,143,212,.3);background:rgba(155,143,212,.06)">
           <div class="league-icon">💎</div>
-          <p class="league-name" style="color:#9B8FD4">Diamond</p>
+          <p class="league-name" style="color:var(--accent)">Diamond</p>
           <p class="league-xp">4,000 — 9,999 XP</p>
         </div>
         <div class="league-card" style="border-color:rgba(255,80,120,.25);background:rgba(255,80,120,.05)">
@@ -447,12 +474,12 @@
         </div>
         <div class="zone-card" style="border-color:rgba(251,191,36,.25)">
           <div class="zone-header" style="background:rgba(251,191,36,.04)">
-            <p class="zone-label" style="color:#fbbf24">Wide 4×2 — Risk</p>
+            <p class="zone-label" style="color:var(--accent-amber)">Wide 4×2 — Risk</p>
             <p class="zone-name">Urgency Surface</p>
           </div>
           <div class="zone-body">
             <div class="zone-split-visual">
-              <div class="zone-data-bar" style="background:rgba(251,191,36,.12);color:#fbbf24">60% Countdown</div>
+              <div class="zone-data-bar" style="background:rgba(251,191,36,.12);color:var(--accent-amber)">60% Countdown</div>
               <div class="zone-emotional-bar warn">40% Worried</div>
             </div>
             <p class="zone-desc">Time until streak breaks + Worried Ghost. Most powerful retention surface — visible on home screen without opening the app.</p>
@@ -560,7 +587,7 @@
               <span style="color:var(--accent)">2,340 / 4,000 XP</span>
             </div>
             <div class="progress-track">
-              <div class="progress-fill" style="width:58%;background:linear-gradient(90deg,#9B8FD4,#b8aee0)"></div>
+              <div class="progress-fill" style="width:58%;background:linear-gradient(90deg,var(--accent),#b8aee0)"></div>
             </div>
           </div>
           <div class="progress-demo">
@@ -578,8 +605,8 @@
         <div class="component-card">
           <p class="component-name">Urgency Countdown Widget</p>
           <div style="margin:16px 0;padding:16px;background:rgba(251,191,36,.06);border-radius:10px;border:1px solid rgba(251,191,36,.2)">
-            <p style="font-size:11px;color:#fbbf24;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">⚠ Streak at risk</p>
-            <p style="font-size:28px;font-weight:700;color:#fbbf24;letter-spacing:-.01em">4h 23m</p>
+            <p style="font-size:11px;color:var(--accent-amber);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">⚠ Streak at risk</p>
+            <p style="font-size:28px;font-weight:700;color:var(--accent-amber);letter-spacing:-.01em">4h 23m</p>
             <p style="font-size:12px;color:var(--muted);margin-top:4px">Ghost is getting worried</p>
           </div>
           <p class="component-desc">Home screen widget. Passive loss aversion — visible without opening the app. The most powerful retention touchpoint in the system.</p>
