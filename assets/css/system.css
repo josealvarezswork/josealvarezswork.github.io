@@ -5,7 +5,10 @@
    each page's own <style> block — this file only owns structure that is
    identical everywhere. */
 
-html { overflow-x: hidden; }
+/* `clip`, not `hidden`: hidden turns html into a scroll container, which
+   stops <body>'s overflow propagating to the viewport and leaves every
+   sticky header anchored to a box that never scrolls. */
+html { overflow-x: clip; }
 
 * {
   box-sizing: border-box;
@@ -19,7 +22,20 @@ body {
   font-family: var(--sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+/* Subtle film-grain texture, matches styles.css so the whole site feels
+   consistent instead of the flat dark bg reading as a template default. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 a {
@@ -28,7 +44,10 @@ a {
 }
 
 /* HEADER / NAV */
-.site-header {
+/* The header is owned by paper.css now — sticky, frosted, masked at the
+   bottom edge. Pages that have not adopted paper.css yet still need these,
+   so they stay until the last one migrates. */
+.site-header:not(.is-shared) {
   position: sticky;
   top: 0;
   z-index: 50;

@@ -1,0 +1,106 @@
+/* =========================================================================
+   TOKENS — the single source for the whole site.
+
+   Before this file, thirteen pages each declared their own :root block, all
+   carrying the old palette while the home carried a new one, and with token
+   names that had drifted apart (--muted / --text-muted / --faint / --muted-2
+   all meant the same thing). Changing one colour meant thirteen edits.
+
+   Every page links this first. Pages override only what they genuinely mean
+   to differ on — the design-system pages' brand accent, a device-frame
+   radius — and nothing else.
+   ========================================================================= */
+
+:root {
+  /* --- ground ---------------------------------------------------------- */
+  --bg: #171130;
+  --bg-2: #1e1740;
+  --bg-elevated: #1e1740;
+  --bg-card: #241c4c;
+  --bg-sunk: #14102a;
+
+  /* --- ink ------------------------------------------------------------- */
+  --text: #f2efe8;
+  --muted: rgba(242, 239, 232, 0.62);
+  --faint: rgba(242, 239, 232, 0.36);
+
+  /* --- accents ---------------------------------------------------------
+     Three roles, deliberately balanced. Lavender drives interaction, green
+     is the material the work sits on, amber is annotation. A colour that
+     appears once anywhere is a mistake, not an accent.                    */
+  --accent: #a78bfa;                       /* primary · interactive        */
+  --accent-solid: #7c5cd6;
+  --accent-soft: rgba(167, 139, 250, 0.15);
+  --accent-glow: rgba(167, 139, 250, 0.08);
+
+  --accent-green: #245445;                 /* material · surfaces          */
+  --accent-green-lit: #3d8a70;
+  --accent-green-soft: rgba(61, 138, 112, 0.16);
+
+  --accent-amber: #f0b429;                 /* annotation · emphasis        */
+  --accent-amber-soft: rgba(240, 180, 41, 0.16);
+
+  --accent-cyan: #7cc6ff;
+  --accent-red: #e04a3f;
+  --accent-pink: #e84c7d;
+  --success: #5fd39a;
+  --success-soft: rgba(95, 211, 154, 0.15);
+
+  /* --- strokes --------------------------------------------------------- */
+  --stroke: rgba(167, 139, 250, 0.16);
+  --stroke-light: rgba(167, 139, 250, 0.22);
+  --stroke-strong: rgba(167, 139, 250, 0.32);
+
+  /* --- type ------------------------------------------------------------ */
+  --sans: "Bricolage Grotesque", system-ui, sans-serif;
+  --serif: "Bricolage Grotesque", system-ui, sans-serif;
+  --display: "Playfair Display", Georgia, serif;
+  --hand: "Caveat", cursive;
+  --mono: "Courier New", ui-monospace, monospace;
+
+  /* --- radii -----------------------------------------------------------
+     Rounded throughout, paper included.                                   */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 22px;
+  --r-pill: 999px;
+
+  /* --- paper ----------------------------------------------------------- */
+  --paper: #efeae1;
+  --paper-2: #e6e0d4;
+  --paper-3: #ddd6c8;
+  --paper-ink: #221d33;
+  --paper-mint: #b9dfcb;
+
+  /* --- texture ---------------------------------------------------------
+     Paper is three things at once: a directional fibre (long in x, tight in
+     y — that's the grain), sparse specks from the pulp, and a slow
+     unevenness across the sheet. --wear-grain is the finer, neutral grain
+     used on things that aren't paper.                                     */
+  --paper-fiber: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.085 0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  --paper-fleck: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='luminanceToAlpha'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 0 0 0 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  --wear-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --wear-blotch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.014' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E");
+
+  /* --- layout ---------------------------------------------------------- */
+  --max: 1080px;
+
+  /* --- aliases ---------------------------------------------------------
+     The old names, kept pointing at the new values so thirteen pages of
+     existing CSS keep working untouched. New work uses the names above;
+     these get retired page by page.                                       */
+  --text-muted: var(--muted);
+  --text-faint: var(--faint);
+  --muted-2: rgba(242, 239, 232, 0.32);
+  --muted2: var(--faint);
+
+  --r: var(--r-md);
+  --rl: var(--r-lg);
+  --radius: var(--r-lg);
+  --radius-lg: var(--r-lg);
+  --max-width: var(--max);
+
+  --accent-yellow: var(--accent-amber);
+  --accent-warn: var(--accent-amber);
+}

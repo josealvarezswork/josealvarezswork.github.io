@@ -1,0 +1,330 @@
+/* =========================================================================
+   PAPER — the shared design language.
+
+   Everything here was built on the home page and proven there first. It is
+   de-scoped from `body.page-home` on purpose: any page that links this file
+   gets the same nav, the same icons, the same paper and the same tape.
+
+   What stays out of this file: the cutting mat, the paper stack, the mat
+   accessories, the hero copy. Those are the home's own composition, not a
+   language other pages need.
+
+   Load order: tokens.css → paper.css → the page's own stylesheet.
+   ========================================================================= */
+
+/* --- NAV ----------------------------------------------------------------
+   Sticky rather than fixed: it stays in flow, so nothing needs a
+   compensating top offset.                                                */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 24px 0 34px;
+  background: none;
+  border-bottom: none;
+}
+
+/* The bar is a pseudo-element behind the nav so it can be masked without
+   fading the links with it: the fill, the blur and the mask all die off
+   together toward the bottom, so the header dissolves into the page instead
+   of ending on a rule. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgb(from var(--bg) r g b / 0.88) 0%,
+    rgb(from var(--bg) r g b / 0.7) 52%,
+    rgb(from var(--bg) r g b / 0) 100%
+  );
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  /* Solid until past the baseline of the brand lockup — the fade has to start
+     below the type, not through it. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 64%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 64%, transparent 100%);
+}
+
+/* The nav lines up with whatever the page's content box is — 1080 on the
+   sub-pages, the mat's 1280 on the home, which overrides --nav-max. A fixed
+   width here put the lockup 100px outside the content on every sub-page. */
+.nav {
+  width: 100%;
+  max-width: var(--nav-max, var(--max));
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.brand-mark { border-color: rgba(167, 139, 250, 0.4); }
+.brand-mark::before { background: var(--accent); }
+.nav-links { font-size: 12.5px; opacity: 0.78; }
+.nav-links a:hover { opacity: 1; }
+
+/* --- ICONS --------------------------------------------------------------
+   Streamline Freehand, inlined as a <symbol> sprite. The set has no
+   directional arrows and no brand marks, so icons only go where they carry
+   meaning — never as a decorative arrow after a label. Filled outlines, not
+   strokes, so they hold their weight when they scale down and follow
+   currentColor like the rest of the ink.                                   */
+
+.ico {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: currentColor;
+}
+.btn .ico { width: 19px; height: 19px; }
+.cta-link .ico { width: 20px; height: 20px; }
+
+/* Brand marks are solid silhouettes from a different set — they need less
+   box than the freehand icons to read at the same optical weight. */
+.ico--brand { width: 15px; height: 15px; }
+
+/* Anything holding an icon next to a label has to be a flex row, or the icon
+   rides the baseline. `with-ico` is the utility; the rest are the site's
+   existing link classes, kept so their markup needs no edit. */
+.with-ico,
+.case-link,
+.esa-link,
+.footer-item,
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.case-links { align-items: center; }
+
+/* CC BY 4.0 asks for visible credit. */
+.footer-credit {
+  margin: 18px 0 0;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: rgba(242, 239, 232, 0.3);
+  text-align: center;
+}
+.footer-credit a { text-decoration: underline; text-underline-offset: 2px; }
+.footer-credit a:hover { color: rgba(242, 239, 232, 0.6); }
+
+/* --- PAPER --------------------------------------------------------------
+   Add `paper-surface` to anything that should read as stock: a note, a
+   sheet, a pinned card. Paper is three things at once and one noise layer
+   can't be all of them — fibre, specks and a slow unevenness, all three
+   multiplied over the fill rather than laid on top of it.                  */
+.paper-surface {
+  position: relative;
+  background: var(--paper);
+  color: var(--paper-ink);
+  border: 1px solid rgba(34, 29, 51, 0.14);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  /* Stock is never flat right to the cut: the edge catches more. */
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42), inset 0 0 22px rgba(90, 78, 58, 0.12);
+}
+.paper-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--paper-fleck), var(--paper-fiber), var(--wear-blotch);
+  background-size: 200px 200px, 155px 155px, 360px 360px;
+  filter: grayscale(1);
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+
+/* Two sheets cut from one roll would otherwise show the identical fleck
+   pattern. Offset siblings into different parts of the same noise. */
+.paper-surface:nth-of-type(2)::after { background-position: 63px 21px, 40px 90px, 120px 60px; }
+.paper-surface:nth-of-type(3)::after { background-position: 17px 88px, 130px 35px, 40px 190px; }
+.paper-surface:nth-of-type(4)::after { background-position: 104px 52px, 75px 160px, 220px 20px; }
+
+/* Ink on paper. */
+.paper-surface .mono-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(34, 29, 51, 0.45);
+}
+
+/* --- TAPE ---------------------------------------------------------------
+   Add `taped` to stick a panel down at two opposite corners. Grain only and
+   desaturated: over a nearly transparent fill the raw fractal noise keeps
+   its colour and the strips read as glitter instead of matte tape.         */
+.taped { position: relative; }
+.taped::before,
+.taped::after {
+  content: "";
+  position: absolute;
+  width: 96px;
+  height: 26px;
+  z-index: 3;
+  background-color: rgba(233, 228, 214, 0.16);
+  background-image: var(--wear-grain);
+  background-size: 90px 90px;
+  background-blend-mode: soft-light;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  filter: grayscale(1);
+}
+.taped::before { top: -13px; left: -24px; transform: rotate(-24deg); }
+.taped::after { bottom: -13px; right: -24px; transform: rotate(-24deg); }
+
+@media (max-width: 900px) {
+  .taped::before,
+  .taped::after { display: none; }
+}
+
+/* --- WELL ---------------------------------------------------------------
+   Imagery mounted inside a card instead of running to its edge.           */
+.well {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 0 70px rgba(0, 0, 0, 0.38);
+}
+
+/* --- THE MAT ------------------------------------------------------------
+   The cutting mat, as a class any page can drop a hero onto. Drawn in CSS
+   rather than shipped as artwork: a mat is a measuring instrument, and a
+   bitmap of one stops measuring the moment it scales — the same cell would
+   be 20px on a desktop and 6px on a phone. Fixed in px, it gains and loses
+   squares the way a real one does when you trim it.                       */
+.mat {
+  --mat-ink: 208 236 224;
+  --mat-cell: 20px;
+  position: relative;
+  padding: 56px 54px;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background-color: var(--accent-green);
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.5),
+    inset 0 0 130px rgba(0, 0, 0, 0.4);
+}
+
+/* The printed frame, and the ruling inside it. The margin between the cut
+   edge and the border stays bare: on a real mat the grid starts at the
+   frame, it doesn't run off the side. Centred, so the offcut splits evenly
+   instead of dumping one cut row at the bottom. */
+.mat::before {
+  content: "";
+  position: absolute;
+  inset: 20px;
+  pointer-events: none;
+  border: 1px solid rgb(var(--mat-ink) / 0.32);
+  border-radius: 2px;
+  background-clip: padding-box;
+  background-position: center center;
+  background-image:
+    repeating-linear-gradient(to right, rgb(var(--mat-ink) / 0.13) 0 1px, transparent 1px var(--mat-cell)),
+    repeating-linear-gradient(to bottom, rgb(var(--mat-ink) / 0.13) 0 1px, transparent 1px var(--mat-cell));
+}
+
+/* Painted after the ruling so it actually knocks it back under the type. */
+.mat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    rgba(18, 42, 35, 0.82) 0%,
+    rgba(18, 42, 35, 0.48) 34%,
+    transparent 62%
+  );
+}
+
+.mat > * { position: relative; z-index: 1; }
+
+@media (max-width: 900px) {
+  .mat { padding: 40px 26px; border-radius: var(--r-lg); }
+  .mat::before { inset: 12px; }
+}
+
+/* --- TYPE ---------------------------------------------------------------
+   Three voices, and each one has a job. Amber is annotation, the display
+   serif is for statements, mono is for anything that measures or labels.  */
+.hero-eyebrow,
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-amber);
+}
+
+.display { font-family: var(--display); font-weight: 800; letter-spacing: -0.01em; }
+
+.mono-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Section heads: a dot, then the label. */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.section-label::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+
+/* --- ON THE MAT ---------------------------------------------------------
+   Lavender is the interactive accent on the page's own dark ground. On the
+   green it buzzes: the two sit almost opposite on the wheel at a similar
+   value. Anything accented on the mat moves to amber or cream, which is
+   what a green surface actually supports.
+
+   Specificity is deliberate — these have to beat each page's own `.hero-*`
+   rules, which live in an inline <style> that loads after this file.      */
+.mat .hero-eyebrow,
+.mat .eyebrow,
+.mat .hero-acronym,
+.mat .section-label { color: var(--accent-amber); }
+.mat .section-label::before { background: var(--accent-amber); }
+
+.mat .hero-title .accent,
+.mat h1 .accent,
+.mat h2 .accent { color: var(--paper); }
+
+/* Chips read as pressed into the surface rather than drawn on it. */
+.mat .pill-tag,
+.mat .tag {
+  border-color: rgba(232, 240, 235, 0.28);
+  background: rgba(15, 44, 36, 0.5);
+  color: rgba(238, 243, 239, 0.86);
+}
+
+/* Cream on green is the strongest pairing available, and it echoes the paper
+   elsewhere on the page. */
+.mat .btn-primary,
+.mat .btn.primary {
+  background: var(--paper);
+  color: #17362d;
+  border-color: var(--paper);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.34);
+}
+.mat .btn-ghost,
+.mat .btn.secondary {
+  background: rgba(15, 44, 36, 0.78);
+  border-color: rgba(232, 240, 235, 0.34);
+  color: #eef3ef;
+}
