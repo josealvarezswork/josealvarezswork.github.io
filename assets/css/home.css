@@ -1,0 +1,838 @@
+/* =========================================================================
+   HOME — "designer's wall" visual direction
+   Loaded after styles.css and scoped to body.page-home, so the rest of the
+   site keeps the old look until this direction is propagated.
+   ========================================================================= */
+
+body.page-home {
+  /* the nav tracks the mat, not the text column */
+  --nav-max: 1280px;
+
+
+  /* Wear layers, reused by every physical object on the wall. Two scales:
+     fine grain for paper fibre, coarse blotch for uneven ageing. Kept as
+     variables so a sheet, a sticky note and a strip of tape all wear with
+     the same material. */
+  /* Paper is three things at once, and one noise layer can't be all of them:
+     a directional fibre (long in x, tight in y — that's the grain), sparse
+     specks from the pulp, and a slow unevenness across the sheet. */
+
+  background:
+    radial-gradient(900px 520px at 22% -6%, rgba(124, 92, 214, 0.18), transparent 62%),
+    radial-gradient(760px 460px at 88% 6%, rgba(80, 60, 160, 0.16), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+/* html/body were locked to height:100%, which turned <body> into the scroll
+   container — it breaks anchor scrolling and full-page capture. */
+body.page-home,
+html:has(body.page-home) { height: auto; }
+
+/* Faint blueprint grid over the flat ground, faded out below the fold. */
+body.page-home::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+  background-image:
+    linear-gradient(rgba(167, 139, 250, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.045) 1px, transparent 1px);
+  background-size: 96px 96px;
+  -webkit-mask-image: radial-gradient(circle at 50% 22%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 22%, #000 0%, transparent 72%);
+}
+/* Was `> *`, which at (0,1,1) out-specified every de-scoped rule in
+   paper.css — it had already dragged the icon sprite back into flow once,
+   and then took sticky off the header. It only ever needed to lift the two
+   content blocks above the fixed grid layer. */
+body.page-home > main,
+body.page-home > footer { position: relative; z-index: 1; }
+
+/* The old hero used two large blurred colour blobs; the direction calls for a
+   flat, uniform canvas instead. */
+body.page-home .hero-blob { display: none; }
+
+/* --- HERO — THE CUTTING MAT -------------------------------------------- */
+/* The whole introduction sits on a cutting mat: one physical surface the
+   notes, the drawing and the type are laid out on. */
+body.page-home .hero { padding: 34px 0 56px; }
+
+/* Drawn in CSS, not shipped as artwork. A cutting mat is a measuring
+   instrument, and a bitmap of one stops measuring the moment it scales: the
+   same 1cm square would be 20px on a desktop and 6px on a phone. With the
+   cell fixed in px the mat gains and loses squares the way a real one does
+   when you trim it, and the rulers can never be cropped mid-number. */
+body.page-home .hero-mat {
+  /* A real mat green. Darker than the reference, which is a full-bleed
+     background — here the mat is an object sitting on the page's dark ground,
+     and a mid-tone green at that size would outshout the headline on it. */
+  --mat-ink: 208 236 224;
+  --mat-surface: #245445;
+  --mat-cell: 20px;         /* one cell */
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: min(1280px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 58px 60px;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background-color: var(--mat-surface);
+  border: 1px solid rgb(var(--mat-ink) / 0.1);
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.5),
+    inset 0 0 130px rgba(0, 0, 0, 0.4);
+}
+
+/* The frame, and the ruling inside it. The margin between the cut edge and
+   the printed border stays bare — on a real mat the grid starts at the frame,
+   it doesn't run off the side. */
+body.page-home .hero-mat::before {
+  content: "";
+  position: absolute;
+  inset: 20px;
+  pointer-events: none;
+  border: 1px solid rgb(var(--mat-ink) / 0.32);
+  border-radius: 2px;
+  background-clip: padding-box;
+  /* Centred, not anchored top-left: the frame is never a whole number of
+     cells, and starting at the corner dumped the entire remainder into one
+     cut row at the bottom and one at the right. Centred, the offcut splits
+     evenly on both sides — which is what a mat trimmed out of a larger ruled
+     sheet actually looks like. */
+  background-position: center center;
+  background-image:
+    repeating-linear-gradient(to right, rgb(var(--mat-ink) / 0.13) 0 1px, transparent 1px var(--mat-cell)),
+    repeating-linear-gradient(to bottom, rgb(var(--mat-ink) / 0.13) 0 1px, transparent 1px var(--mat-cell));
+}
+
+/* Painted after the ruling, so it actually knocks it back under the headline.
+   Lighter than the artwork needed, because the line alpha is tunable now. */
+body.page-home .hero-mat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    rgba(18, 42, 35, 0.82) 0%,
+    rgba(18, 42, 35, 0.48) 34%,
+    transparent 62%
+  );
+}
+
+
+body.page-home .hero-grid {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+@media (max-width: 1099px) {
+  body.page-home .hero-mat { padding: 46px 34px; }
+}
+@media (max-width: 640px) {
+}
+
+/* The board is absolutely positioned art: between 900 and 1100px its notes
+   overlap the portrait and each other, so the split hero only starts once
+   there's room for it. */
+@media (max-width: 1099px) {
+  body.page-home .hero-board { display: none; }
+  body.page-home .hero-grid { grid-template-columns: 1fr; }
+}
+@media (min-width: 1100px) {
+  body.page-home .hero-grid {
+    grid-template-columns: 0.92fr 1.08fr;
+    gap: 26px;
+    align-items: start;
+  }
+}
+
+body.page-home .hero-copy { position: relative; padding-top: 18px; }
+
+/* Who this is, before what he thinks — the role used to be the least visible
+   text in the hero, under a headline that opened on a thesis. */
+body.page-home .hero-eyebrow {
+  margin: 0 0 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+body.page-home .hero-title {
+  font-size: clamp(32px, 4.4vw, 52px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+body.page-home .hero-name { display: none; }
+
+/* One supporting line carrying domain and proof, so the claim above isn't
+   the only thing a cold visitor gets. */
+body.page-home .hero-lead {
+  margin: 30px 0 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: rgba(242, 239, 232, 0.58);
+  max-width: 44ch;
+}
+
+body.page-home .hero-actions { margin-top: 26px; }
+body.page-home .btn-primary {
+  background: var(--accent-solid);
+  color: #fff;
+  /* A lift, not a halo — the old 26px spread bloomed across the ruling. */
+  box-shadow: 0 3px 12px rgba(124, 92, 214, 0.22);
+}
+body.page-home .btn-primary:hover { background: #8b6ae4; }
+
+/* Opaque: the ghost button sat on the mat and the grid ran straight through
+   it, so the outline read as one more rule rather than a control. */
+body.page-home .btn-ghost {
+  background: #221b3d;
+  border-color: rgba(242, 239, 232, 0.26);
+  color: var(--text);
+}
+body.page-home .btn-ghost:hover {
+  background: #2b2249;
+  border-color: rgba(242, 239, 232, 0.45);
+}
+
+/* --- HERO BOARD — THE PAPER STACK -------------------------------------- */
+body.page-home .hero-board {
+  height: 430px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- SECTION HEADS ----------------------------------------------------- */
+body.page-home .section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+body.page-home .section-label::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+body.page-home .section-sub {
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(242, 239, 232, 0.6);
+  max-width: 72ch;
+}
+body.page-home .section-sub em {
+  font-style: normal;
+  color: var(--accent-amber);
+}
+
+/* --- CASE STUDIES AS PINNED ARTIFACTS ---------------------------------- */
+body.page-home .cards { gap: 56px; }
+
+/* Each case study is a sheet taped onto the wall, not a UI card. */
+body.page-home .case-wrap {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid rgba(167, 139, 250, 0.12);
+  border-radius: var(--r-lg);
+}
+
+body.page-home .case {
+  position: relative;
+  background: var(--bg-sunk);
+  border: 1px solid rgba(167, 139, 250, 0.1);
+  border-radius: 12px;
+  /* Light falls off toward the edges of a sheet lying on a wall. */
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.55);
+}
+body.page-home .case:hover { border-color: rgba(167, 139, 250, 0.26); }
+
+/* Ageing pass over the whole sheet, screenshots included — in the reference
+   the wear sits on top of the artifact, not beside it. */
+body.page-home .case::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: var(--wear-grain), var(--wear-blotch);
+  background-size: 180px 180px, 520px 520px;
+  /* Grayscale first: raw fractal noise is coloured, and blending it over the
+     product screenshots tinted them green in the corners. */
+  filter: grayscale(1);
+  mix-blend-mode: overlay;
+  opacity: 0.22;
+}
+body.page-home .case-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  opacity: 0.75;
+}
+
+/* Titles get a hand-drawn mark — ellipse or underline, alternating — the way
+   you'd circle the name of the thing you're presenting. */
+body.page-home .case-title {
+  position: relative;
+  display: inline-block;
+  /* inline-block inside the flex column would still stretch to the full
+     column width, and the drawn ellipse would stretch with it */
+  align-self: flex-start;
+  font-size: clamp(34px, 4.4vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 22px;
+  padding: 6px 18px 8px 6px;
+}
+body.page-home .case-wrap:nth-child(odd) .case-title::before {
+  content: "";
+  position: absolute;
+  inset: -10px -14px -12px -14px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80' preserveAspectRatio='none'%3E%3Cpath d='M110 5 C 40 5 6 20 6 40 C 6 62 48 76 112 75 C 176 74 214 60 213 39 C 212 19 172 6 106 6' fill='none' stroke='%23a78bfa' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+  pointer-events: none;
+}
+body.page-home .case-wrap:nth-child(even) .case-title::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 14px;
+  bottom: -2px;
+  height: 10px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='10' viewBox='0 0 140 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6 C 40 2 96 2 138 5' fill='none' stroke='%23f0b429' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+  pointer-events: none;
+}
+
+body.page-home .case-desc { font-size: 14px; line-height: 1.8; }
+body.page-home .case-tags li {
+  border-radius: var(--r-pill);
+  border-color: rgba(167, 139, 250, 0.18);
+  font-size: 11.5px;
+}
+body.page-home .case-link.primary {
+  background: var(--accent-solid);
+  border-color: var(--accent-solid);
+  color: #fff;
+}
+body.page-home .case-link.primary:hover { background: #8b6ae4; border-color: #8b6ae4; }
+
+body.page-home .case-visual--duogit { background: #0d1620; }
+body.page-home .case-visual--cuak { background: #4f5459; }
+body.page-home .case-visual--wildfrontier { background: #0d130f; }
+
+/* --- ESA --------------------------------------------------------------- */
+body.page-home .esa { border-top: 1px solid rgba(167, 139, 250, 0.12); }
+/* The title ran three lines because it was clamped to 9ch to fit the old
+   two-column split; the lead was clamped to match. Both run wide now. */
+body.page-home .esa-title {
+  font-size: clamp(34px, 4.6vw, 54px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+/* Wide, but still a readable measure — the full container would run past 90
+   characters a line. */
+body.page-home .esa-lead { font-size: 15px; max-width: 78ch; margin-bottom: 34px; }
+
+/* Each state owns a colour, and the card wears it. The framework's whole
+   claim is that an interface should show you what state you're in — so the
+   component demonstrates it instead of describing it. */
+body.page-home [data-state="waiting"] { --state: 167 139 250; }
+body.page-home [data-state="happy"]   { --state: 95 211 154; }
+body.page-home [data-state="worried"] { --state: 240 180 41; }
+body.page-home [data-state="broken"]  { --state: 224 74 63; }
+
+/* Four notes, same stock as the sheets on the mat. With the pill strip gone
+   the notes are the control, so the selected one has to say so: it lifts, and
+   the panel behind its character takes the state colour flat. */
+body.page-home .esa-card {
+  position: relative;
+  background: var(--paper);
+  color: var(--paper-ink);
+  border: 1px solid rgba(34, 29, 51, 0.14);
+  border-radius: var(--r-lg);
+  padding: 16px 15px 18px;
+  gap: 10px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+/* Each note sits slightly off square, like four sheets laid down by hand. */
+body.page-home .esa-card:nth-of-type(1) { transform: rotate(-1.4deg); }
+body.page-home .esa-card:nth-of-type(2) { transform: rotate(0.9deg); }
+body.page-home .esa-card:nth-of-type(3) { transform: rotate(-0.7deg); }
+body.page-home .esa-card:nth-of-type(4) { transform: rotate(1.3deg); }
+
+/* Paper fibre. Multiply, because overlay blows out on light stock. */
+
+body.page-home .esa-card { box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42), inset 0 0 22px rgba(90, 78, 58, 0.12); }
+
+body.page-home .esa-card:hover,
+body.page-home .esa-card.is-active {
+  /* keeps the edge shading — box-shadow replaces wholesale, it doesn't merge */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 22px rgba(90, 78, 58, 0.12);
+}
+body.page-home .esa-card.is-active:nth-of-type(1) { transform: rotate(-1.4deg) translateY(-6px); }
+body.page-home .esa-card.is-active:nth-of-type(2) { transform: rotate(0.9deg) translateY(-6px); }
+body.page-home .esa-card.is-active:nth-of-type(3) { transform: rotate(-0.7deg) translateY(-6px); }
+body.page-home .esa-card.is-active:nth-of-type(4) { transform: rotate(1.3deg) translateY(-6px); }
+
+body.page-home .esa-card-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: rgba(34, 29, 51, 0.45);
+}
+body.page-home .esa-card.is-active .esa-card-label { color: rgba(34, 29, 51, 0.85); }
+
+
+/* The character sits in a well, like a specimen mounted on the card rather
+   than an image dropped on the background. */
+/* The character is mounted on a printed panel, the way the hero sheet blocks
+   a word in mint. Flat colour, no gradient. */
+body.page-home .esa-card img {
+  width: 100%;
+  height: 104px;
+  padding: 10px;
+  border-radius: 3px;
+  background: rgba(34, 29, 51, 0.05);
+  box-shadow: none;
+  transition: background 180ms ease;
+}
+body.page-home .esa-card:hover img { background: rgb(var(--state) / 0.22); }
+body.page-home .esa-card.is-active img { background: rgb(var(--state) / 0.34); }
+
+
+body.page-home .esa-card-trigger { font-size: 11px; color: rgba(34, 29, 51, 0.82); }
+body.page-home .esa-card-sub { font-size: 11.5px; line-height: 1.5; color: rgba(34, 29, 51, 0.55); }
+
+/* The dashed return loop used to carry the space between the state row and
+   the detail panel; without it they sat 10px apart. */
+body.page-home .esa-cycle { margin-bottom: 30px; }
+
+body.page-home .esa-panel {
+  background: rgba(255, 255, 255, 0.028);
+  border: 1px solid rgba(167, 139, 250, 0.14);
+  border-radius: var(--r-lg);
+}
+
+/* --- HOW I BUILD ------------------------------------------------------- */
+body.page-home .build-head {
+  font-family: var(--hand);
+  font-size: clamp(26px, 3.4vw, 40px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0;
+  max-width: 22ch;
+  margin: 0 0 8px;
+  color: rgba(242, 239, 232, 0.92);
+}
+body.page-home .build-circled {
+  position: relative;
+  display: inline-block;
+  padding: 0 10px;
+}
+body.page-home .build-circled::before {
+  content: "";
+  position: absolute;
+  inset: -8px -6px -10px -6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 60' preserveAspectRatio='none'%3E%3Cpath d='M112 3 C 44 3 5 15 5 30 C 5 47 52 57 114 56 C 178 55 215 44 214 29 C 213 14 168 4 100 4' fill='none' stroke='%23a78bfa' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+}
+
+body.page-home .build-grid { border-top: none; }
+@media (min-width: 1000px) {
+  body.page-home .build-layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 44px;
+    align-items: start;
+  }
+  body.page-home .build-grid { margin-top: 0; padding-top: 0; }
+}
+/* The sketch floats behind the top-right of each column instead of taking a
+   grid track — three columns plus a 74px illustration each left the copy
+   wrapping one word per line. */
+body.page-home .build-col {
+  position: relative;
+  padding-right: 18px;
+}
+body.page-home .build-num {
+  font-family: var(--mono);
+  color: rgba(242, 239, 232, 0.42);
+  font-size: 13px;
+}
+body.page-home .build-col h3 { font-size: 16px; margin-bottom: 6px; }
+body.page-home .build-col p {
+  font-size: 12.5px;
+  color: rgba(242, 239, 232, 0.5);
+  max-width: 22ch;
+}
+body.page-home .build-sketch {
+  position: absolute;
+  top: 10px;
+  right: -10px;
+  /* square now: these come from a 24x24 set, and the old 68x60 slot was cut
+     for the bespoke sketches it replaced */
+  width: 54px;
+  height: 54px;
+  color: rgba(242, 239, 232, 0.32);
+  fill: currentColor;
+  pointer-events: none;
+}
+
+/* --- FOOTER ------------------------------------------------------------ */
+body.page-home .site-footer {
+  background: none;
+  border-top: none;
+  padding: 20px 0 40px;
+}
+
+/* The closing statement is itself a taped sheet, closing the wall metaphor. */
+body.page-home .footer-cta {
+  position: relative;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(167, 139, 250, 0.12);
+  border-radius: var(--r-lg);
+  padding: 40px 44px;
+  margin-bottom: 30px;
+  font-size: inherit;
+  letter-spacing: normal;
+  line-height: inherit;
+}
+
+body.page-home .footer-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+body.page-home .cta-text {
+  flex: 1 1 340px;
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-weight: 700;
+  line-height: 1.22;
+  color: rgba(242, 239, 232, 0.9);
+  margin: 0;
+  max-width: 22ch;
+}
+body.page-home .cta-text .accent { color: var(--accent); }
+body.page-home .cta-link {
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 13px 26px;
+  margin: 0;
+  word-break: normal;
+  transition: background 160ms ease, color 160ms ease;
+}
+body.page-home .cta-link:hover { background: var(--accent); color: #1b1436; }
+body.page-home .footer-top {
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(167, 139, 250, 0.1);
+}
+body.page-home .footer-mark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+body.page-home .footer-item {
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+@media (max-width: 900px) {
+  body.page-home .hero-title { font-size: clamp(28px, 7vw, 40px); }
+  body.page-home .case-wrap::before,
+  body.page-home .case-wrap::after,
+  body.page-home .footer-cta::before,
+  body.page-home .footer-cta::after { display: none; }
+  body.page-home .footer-cta { padding: 28px 22px; }
+  body.page-home .cards { gap: 34px; }
+  body.page-home .footer-top { justify-content: center; }
+}
+
+/* --- WEAR, LAST PASS ---------------------------------------------------
+   These land at the end of the file on purpose: the rules they build on
+   (.tape, the taped-corner pseudo-elements, .footer-cta) all set `background`
+   with the shorthand, which resets background-image. Anything earlier would
+   be wiped out.                                                          */
+
+/* The closing sheet gets the light falloff of the case-study sheets, but not
+   their grain. The sheets carry it on an overlay pseudo-element at 22% with
+   the noise desaturated; here both pseudo-elements are already the tape, so
+   the wear had to ride as background layers instead — and over a fill that is
+   only 3.5% opaque there was nothing to blend into, so the raw fractal noise
+   rendered at full strength and turned the panel into rainbow static. */
+body.page-home .footer-cta {
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.4);
+}
+
+/* --- THE PAPER STACK ---------------------------------------------------
+   Light stock on the dark ruled mat, the way the reference puts cream paper
+   on a green cutting mat. Three sheets: two peek out behind, the front one
+   carries the content. Everything that used to float loose on the board —
+   the framework list, the ESA title, the aside — now lives on paper.      */
+body.page-home .paper-stack {
+  position: relative;
+  width: 352px;
+  height: 404px;
+  cursor: pointer;
+}
+
+/* Turning the top sheet. The two behind ease outward at the same time, so the
+   stack looks handled rather than cross-faded. */
+body.page-home .sheet--front,
+body.page-home .sheet--back,
+body.page-home .sheet--mid {
+  transition: transform 220ms cubic-bezier(0.3, 0.7, 0.3, 1), opacity 180ms ease;
+}
+body.page-home .paper-stack:hover .sheet--back { transform: rotate(-7deg) translate(-20px, 9px); }
+body.page-home .paper-stack:hover .sheet--mid { transform: rotate(4.5deg) translate(17px, -7px); }
+body.page-home .sheet--front.is-turning {
+  transform: rotate(-7deg) translate(-26px, -16px);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.page-home .sheet--front,
+  body.page-home .sheet--back,
+  body.page-home .sheet--mid { transition: none; }
+  body.page-home .sheet--front.is-turning { transform: rotate(-1deg); opacity: 1; }
+}
+
+body.page-home .sheet {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-lg);
+  background: var(--paper);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
+}
+/* The two behind are pure edge: they exist to give the stack thickness. */
+body.page-home .sheet--back {
+  background: var(--paper-3);
+  transform: rotate(-5deg) translate(-14px, 6px);
+}
+body.page-home .sheet--mid {
+  background: var(--paper-2);
+  transform: rotate(3deg) translate(12px, -4px);
+}
+
+body.page-home .sheet--front {
+  display: flex;
+  flex-direction: column;
+  padding: 46px 34px 34px;
+  color: var(--paper-ink);
+  transform: rotate(-1deg);
+  overflow: hidden;
+}
+/* Paper fibre. Multiply, not overlay: on light stock overlay blows out. */
+/* Stock is never flat right to the cut: the edge catches more. */
+body.page-home .sheet--front {
+  box-shadow: inset 0 0 26px rgba(90, 78, 58, 0.14);
+}
+
+body.page-home .sheet-kicker {
+  margin: 0 0 14px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(34, 29, 51, 0.5);
+}
+
+/* The reference carries its weight on a display serif. */
+body.page-home .sheet-title {
+  margin: 0 0 22px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+/* A word left selected in the design tool — the detail that says this page
+   was made by someone who works in one. */
+body.page-home .sel {
+  position: relative;
+  display: inline-block;
+  outline: 1.5px solid #7c5cd6;
+  outline-offset: 3px;
+}
+body.page-home .sel::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  background:
+    radial-gradient(circle at 0 0, #7c5cd6 3.2px, transparent 3.4px),
+    radial-gradient(circle at 100% 0, #7c5cd6 3.2px, transparent 3.4px),
+    radial-gradient(circle at 0 100%, #7c5cd6 3.2px, transparent 3.4px),
+    radial-gradient(circle at 100% 100%, #7c5cd6 3.2px, transparent 3.4px);
+}
+body.page-home .hl {
+  background: var(--paper-mint);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 0.1em;
+}
+
+body.page-home .sheet-list {
+  margin: 0;
+  padding: 16px 0 0;
+  border-top: 1px solid rgba(34, 29, 51, 0.18);
+  list-style: none;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 2.05;
+  color: rgba(34, 29, 51, 0.78);
+}
+body.page-home .sheet-list b {
+  font-weight: 400;
+  margin-right: 9px;
+  color: rgba(34, 29, 51, 0.38);
+}
+
+/* Masking tape across the foot, carrying the aside that used to float. */
+body.page-home .sheet-tape {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 7px 18px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(34, 29, 51, 0.72);
+  background: rgba(203, 190, 166, 0.78);
+  background-image: var(--wear-grain);
+  background-size: 90px 90px;
+  background-blend-mode: soft-light;
+  border-left: 1px solid rgba(255, 255, 255, 0.28);
+  border-right: 1px solid rgba(255, 255, 255, 0.28);
+  transform: rotate(-1.5deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+/* --- THE HERO ON GREEN -------------------------------------------------
+   The mat carries the whole introduction, so every accent standing on it has
+   to move with the surface. Lavender on green was the one that broke: the two
+   sit at opposite ends of the wheel at similar value and buzz against each
+   other. Amber and cream are what a green mat actually supports.          */
+body.page-home .hero-eyebrow { color: var(--accent-amber); }
+
+/* Cream on green is the strongest pairing available here, and it echoes the
+   paper stack on the other side of the mat. */
+body.page-home .btn-primary {
+  background: #efeae1;
+  color: #17362d;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.34);
+}
+body.page-home .btn-primary:hover { background: #fff; }
+
+body.page-home .btn-ghost {
+  background: rgba(15, 44, 36, 0.78);
+  border-color: rgba(232, 240, 235, 0.34);
+  color: #eef3ef;
+}
+body.page-home .btn-ghost:hover {
+  background: rgba(20, 58, 47, 0.92);
+  border-color: rgba(232, 240, 235, 0.62);
+}
+
+/* The paper keeps its violet selection handles on purpose: in the reference
+   they sit on cream over green exactly like this, and they're the one mark
+   that has to read as a tool UI rather than as part of the print. */
+
+/* --- MAT ACCESSORIES ---------------------------------------------------
+   Four, and no more: the mat already has a protagonist (the paper stack) and
+   a 52px headline. These are the third layer — tools that explain how the
+   work gets made, not props. They live in the band under the copy and in the
+   gap between the copy and the stack, which is the only space the hero has
+   left.                                                                    */
+body.page-home .acc { position: absolute; pointer-events: none; }
+
+/* Scuffs cut into the surface itself, so they take the scrim like the ruling
+   does rather than floating over it. */
+body.page-home .mat-cuts {
+  position: absolute;
+  inset: 20px;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  pointer-events: none;
+}
+
+/* Vinyl decal, one corner lifted. The tool, stated without a sentence. */
+body.page-home .acc-figma {
+  left: 47%;
+  bottom: 118px;
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  background: #f2eee6;
+  border-radius: 4px;
+  transform: rotate(-9deg);
+  clip-path: polygon(0 0, 100% 0, 100% 74%, 74% 100%, 0 100%);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+}
+body.page-home .acc-figma svg { width: 20px; height: 30px; }
+/* The lifted flap, catching light off the mat. */
+body.page-home .acc-figma::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 17px;
+  height: 17px;
+  background: linear-gradient(315deg, #cfc8ba 0%, #e8e2d6 60%, #fbf8f2 100%);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  border-radius: 0 0 3px 0;
+}
+
+/* The hero drops to a single column here and the copy takes the whole mat —
+   there is no free band left for tools to sit in. */
+@media (max-width: 1099px) {
+  body.page-home .acc { display: none; }
+  body.page-home .mat-cuts { opacity: 0.6; }
+}
+
+@media (min-width: 900px) {
+  /* The body already carries 42px of its own padding on that side. */
+  body.page-home .case-visual { margin-left: 0; }
+}
+
+/* The arrow columns went with the arrows: four equal notes, real gutters. */
+@media (min-width: 760px) {
+  body.page-home .esa-cycle {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+
+body.page-home .nav { padding: 0; width: min(1280px, calc(100% - 40px)); }

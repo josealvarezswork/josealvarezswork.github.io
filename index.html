@@ -1,12 +1,12 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jose Alvarez — Product Designer | Behavioral & Gamification UX</title>
-    <meta name="description" content="Jose Alvarez — Emotional UX designer building AI and fintech products that people don't quit.">
-    <meta property="og:title" content="Jose Alvarez — Product Designer | Behavioral & Gamification UX">
-    <meta property="og:description" content="Jose Alvarez — Emotional UX designer building AI and fintech products that people don't quit.">
+    <title>Jose Alvarez — UI Artist | Game UI & State Systems</title>
+    <meta name="description" content="Jose Alvarez — UI Artist. I design progression systems, character states and the interfaces that make a system's state readable at a glance.">
+    <meta property="og:title" content="Jose Alvarez — UI Artist | Game UI & State Systems">
+    <meta property="og:description" content="Jose Alvarez — UI Artist. I design progression systems, character states and the interfaces that make a system's state readable at a glance.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://odejbyjose.com/">
     <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cover.jpg">
@@ -22,25 +22,28 @@
       "name": "Jose Alvarez",
       "url": "https://odejbyjose.com/",
       "email": "mailto:josealvarezswork@gmail.com",
-      "jobTitle": "Product Designer",
-      "knowsAbout": ["UX Design", "Gamification", "Behavioral Design", "Design Systems", "Fintech", "AI Products"],
+      "jobTitle": "UI Artist",
+      "knowsAbout": ["Game UI", "UI Art", "Progression Systems", "Character Design", "Design Systems", "Interaction Design", "Motion Design"],
       "sameAs": [
         "https://www.linkedin.com/in/alvarezcja/",
         "https://github.com/josealvarezswork"
       ]
     }
     </script>
-    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="./assets/css/tokens.css?v=3" />
+    <link rel="stylesheet" href="./assets/css/paper.css?v=3" />
+    <link rel="stylesheet" href="./assets/css/styles.css?v=3" />
+    <link rel="stylesheet" href="./assets/css/home.css?v=3" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Serif + Sans (muy parecido al mood de la referencia) -->
+    <!-- Display sans + handwriting for the annotation layer -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
       rel="stylesheet"
     />
   </head>
 
-  <body>
+  <body class="page-home">
     <header class="site-header">
       <nav class="nav">
         <a class="brand" href="./" aria-label="Home">
@@ -57,7 +60,8 @@
           <span></span>
         </button>
         <div class="nav-links">
-          <a href="./pages/how-i-work.html">How I Work</a>
+          <a href="./pages/methodology.html">Framework</a>
+          <a href="./pages/craft.html">Craft</a>
           <a href="./pages/resume.html">Resume</a>
           <a href="./pages/about.html">About</a>
         </div>
@@ -66,52 +70,102 @@
 
     <main>
       <section class="hero">
-        <div class="container">
-          <h1 class="hero-title">
-            <span class="hero-name">Jose Alvarez</span><br>
-            Most designers make products look good.<br>I make them feel like they're <span class="hero-accent">on your side</span>.
-          </h1>
-          <p class="hero-tagline">Emotional UX · AI products · Fintech</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="./pages/resume.html">View resume</a>
-            <a class="btn btn-ghost" href="mailto:josealvarezswork@gmail.com">Email me →</a>
+        <div class="hero-mat" id="hero-mat">
+          <!-- Mat accessories. Order matters: they sit above the ruling and below
+               the scrim, so the same light falloff that dims the surface under
+               the headline dims them too. -->
+          <svg class="mat-cuts" viewBox="0 0 1280 547" preserveAspectRatio="none" aria-hidden="true">
+                <g fill="none" stroke="#dff3e7" stroke-linecap="round">
+                  <path d="M502 148 q18 3 36 6" stroke-opacity="0.081" stroke-width="1.4"/>
+                  <path d="M729 405 q-33 8 -66 8" stroke-opacity="0.129" stroke-width="1.6"/>
+                  <path d="M430 160 q34 3 67 2" stroke-opacity="0.053" stroke-width="1.5"/>
+                  <path d="M1036 141 q35 3 70 6" stroke-opacity="0.051" stroke-width="0.9"/>
+                  <path d="M227 461 q18 -1 37 -3" stroke-opacity="0.099" stroke-width="0.9"/>
+                  <path d="M1090 435 q22 -4 44 -6" stroke-opacity="0.103" stroke-width="1.2"/>
+                  <path d="M518 50 q-17 -1 -34 -1" stroke-opacity="0.11" stroke-width="1.2"/>
+                  <path d="M1081 346 q23 -1 45 -6" stroke-opacity="0.108" stroke-width="1.3"/>
+                  <path d="M1048 432 q-43 5 -85 7" stroke-opacity="0.11" stroke-width="1.3"/>
+                  <path d="M545 436 q-42 -5 -84 -8" stroke-opacity="0.087" stroke-width="1.4"/>
+                  <path d="M975 79 q33 -1 66 1" stroke-opacity="0.122" stroke-width="1.1"/>
+                  <path d="M1133 217 q40 1 79 7" stroke-opacity="0.063" stroke-width="0.8"/>
+                  <path d="M270 351 q15 -2 30 -3" stroke-opacity="0.06" stroke-width="1.1"/>
+                  <path d="M897 424 q26 3 53 5" stroke-opacity="0.09" stroke-width="1.6"/>
+                  <path d="M1097 424 q14 2 28 1" stroke-opacity="0.091" stroke-width="1.3"/>
+                  <path d="M265 380 q37 -8 73 -12" stroke-opacity="0.082" stroke-width="1.5"/>
+                </g>
+              </svg>
+
+          <span class="acc acc-figma" aria-hidden="true">
+            <svg viewBox="0 0 38 57" aria-hidden="true">
+              <path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/>
+              <path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/>
+              <path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/>
+              <path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/>
+              <path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/>
+            </svg>
+          </span>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">Jose Alvarez — UI Artist</p>
+
+            <h1 class="hero-title">
+              I design interfaces<br>that show you<br>
+              what state you're in.
+            </h1>
+
+            <p class="hero-lead">Progression systems, character states and HUDs. Two case studies below, both running on the same four-state framework.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="./pages/resume.html"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-resume"/></svg>View resume</a>
+              <a class="btn btn-ghost" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-mail"/></svg>Email me</a>
+            </div>
+          </div>
+
+          <div class="hero-board" id="hero-board" aria-hidden="true">
+            <div class="paper-stack">
+              <span class="sheet paper-surface sheet--back" aria-hidden="true"></span>
+              <span class="sheet paper-surface sheet--mid" aria-hidden="true"></span>
+
+              <div class="sheet paper-surface sheet--front">
+
+
+                <p class="sheet-kicker">The framework behind both projects</p>
+
+                <p class="sheet-title">
+                  <span class="sel">Emotional</span>
+                  <span class="hl">State</span>
+                  Architecture
+                </p>
+
+                <ol class="sheet-list">
+                  <li><b>01</b> Trigger</li>
+                  <li><b>02</b> State Machine</li>
+                  <li><b>03</b> Feedback</li>
+                  <li><b>04</b> Progression</li>
+                  <li><b>05</b> Presentation</li>
+                </ol>
+
+                <span class="sheet-tape">State changes everything →</span>
+              </div>
+
+            </div>
           </div>
         </div>
+        </div>
       </section>
-
-
 
       <section class="work">
         <div class="container">
           <p class="section-label">Case Studies</p>
-          <p class="section-sub">Two systems built on the same idea — that how a product makes you feel decides whether you come back.</p>
-
-          <div class="cards" id="projects-container">
-            <!-- Projects loaded dynamically from projects.json -->
-          </div>
+          <p class="section-sub">Two systems built on the same idea: a progression loop only works if the player can read, at any moment, what state they're in and what the system is asking of them. Characters, XP economies, streaks and <em>fail states</em> — designed as systems, not decorations.</p>
         </div>
       </section>
 
-      <!-- CURRENTLY BUILDING -->
       <section class="work" style="padding-top: 0;">
         <div class="container">
-          <p class="section-label">Currently building</p>
-          <p class="section-sub">The case studies above are finished systems. This one's still in the workshop.</p>
-
-          <article class="case now-case">
-            <div class="case-visual now-visual">
-              <img src="./assets/img/flare/portada.jpg" alt="Flare — Synapse engine preview" loading="lazy" decoding="async">
-            </div>
-            <div class="case-body">
-              <p class="case-meta"><span class="wip-dot" aria-hidden="true"></span>2026 · In progress</p>
-              <h3 class="case-title">Flare</h3>
-              <p class="case-desc">The second proactive brain for content creators. A React Native + Skia app that surfaces micro-trends before they go viral and adapts them to each creator's niche through vector search — built around Synapse, an infinite physics canvas where sources, signals and predictions live as connected nodes.</p>
-
-              <div class="case-links">
-                <span class="case-link is-disabled">Case study coming soon</span>
-              </div>
-            </div>
-          </article>
+          <div class="cards" id="projects-container">
+            <!-- Projects loaded dynamically from projects.json -->
+          </div>
         </div>
       </section>
 
@@ -119,40 +173,48 @@
       <section class="esa">
         <div class="container">
           <p class="section-label">The framework behind both</p>
+
           <h2 class="esa-title">Emotional State Architecture</h2>
           <p class="esa-lead">
-            Cold data doesn't retain users — it records them. ESA maps the journey through four emotional
-            states instead of sessions. Each state has a trigger, a psychological mechanism, and an action
-            it invites. Same framework, two very different products.
+          ESA is my own framework: a four-state machine where every state has a trigger,
+          a psychological mechanism and an action it invites. It drives the characters,
+          the reward tiers and the fail states in both case studies.
           </p>
 
-          <div class="esa-tabs" role="tablist" aria-label="Emotional states">
-            <button class="esa-tab is-active" role="tab" aria-selected="true" data-state="waiting">Waiting</button>
-            <button class="esa-tab" role="tab" aria-selected="false" data-state="happy">Happy</button>
-            <button class="esa-tab" role="tab" aria-selected="false" data-state="worried">Worried</button>
-            <button class="esa-tab" role="tab" aria-selected="false" data-state="broken">Broken</button>
+          <div class="esa-cycle">
+          <button class="esa-card paper-surface is-active" data-state="waiting" aria-label="Waiting state">
+          <span class="esa-card-label">Waiting</span>
+          <img src="./assets/img/cuak/cuak-esperando.png" alt="Cuak in a waiting pose" decoding="async">
+          <span class="esa-card-trigger">Trigger: No activity</span>
+          <span class="esa-card-sub">The day begins without pressure.<br>An expectant posture.</span>
+          </button>
+          <button class="esa-card paper-surface" data-state="happy" aria-label="Happy state">
+          <span class="esa-card-label">Happy</span>
+          <img src="./assets/img/cuak/cuak-feliz.png" alt="Cuak in a happy pose" decoding="async">
+          <span class="esa-card-trigger">Trigger: Positive action</span>
+          <span class="esa-card-sub">A small win.<br>The system reinforces the loop.</span>
+          </button>
+          <button class="esa-card paper-surface" data-state="worried" aria-label="Worried state">
+          <span class="esa-card-label">Worried</span>
+          <img src="./assets/img/cuak/cuak-preocupado.png" alt="Cuak in a worried pose" decoding="async">
+          <span class="esa-card-trigger">Trigger: Missed goal</span>
+          <span class="esa-card-sub">Tension appears.<br>The system warns without punishing.</span>
+          </button>
+          <button class="esa-card paper-surface" data-state="broken" aria-label="Broken state">
+          <span class="esa-card-label">Broken</span>
+          <img src="./assets/img/cuak/cuak-alerta.png" alt="Cuak in an alert pose" decoding="async">
+          <span class="esa-card-trigger">Trigger: Abandon</span>
+          <span class="esa-card-sub">The loop breaks.<br>The system offers a way back.</span>
+          </button>
           </div>
 
-          <div class="esa-panel">
-            <div class="esa-mascots">
-              <figure class="esa-mascot">
-                <img id="esa-img-cuak" src="./assets/img/cuak/cuak-esperando.png" alt="" decoding="async">
-                <figcaption>Cuak · Fintech</figcaption>
-              </figure>
-              <figure class="esa-mascot">
-                <img id="esa-img-duogit" src="./assets/img/duogit/cat-neutral.png" alt="" decoding="async">
-                <figcaption>DuoGit · Dev tools</figcaption>
-              </figure>
-            </div>
-
-            <div class="esa-copy" aria-live="polite">
-              <p class="esa-trigger" id="esa-trigger">Trigger — day start, no activity</p>
-              <p class="esa-text" id="esa-text">Pure potential. The day begins without pressure. An expectant posture: the mascot waits, it doesn't judge.</p>
-              <p class="esa-mech" id="esa-mech">Anthropomorphism · Epley, Waytz &amp; Cacioppo</p>
-            </div>
+          <div class="esa-panel" aria-live="polite">
+          <p class="esa-trigger" id="esa-trigger">Trigger — day start, no activity</p>
+          <p class="esa-text" id="esa-text">Pure potential. The day begins without pressure. An expectant posture: the character waits, it doesn't judge.</p>
+          <p class="esa-mech" id="esa-mech">Anthropomorphism · Epley, Waytz &amp; Cacioppo</p>
           </div>
 
-          <a class="esa-link" href="./pages/methodology.html">Read the full framework →</a>
+          <a class="esa-link" href="./pages/methodology.html"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-read"/></svg>Read the full framework</a>
         </div>
       </section>
 
@@ -160,30 +222,59 @@
       <section class="esa" style="padding: 64px 0;">
         <div class="container">
           <p class="section-label">How I build</p>
-          <h2 class="esa-title" style="font-size: clamp(24px, 3vw, 34px); margin-bottom: 10px;">Character systems, data made readable, and why presentation is part of the work</h2>
-          <p class="esa-lead" style="margin-bottom: 0;">Three habits that show up in every project — from designing a mascot's states to composing the screens above.</p>
-          <a class="esa-link" href="./pages/craft.html">See how I build →</a>
+
+          <div class="build-layout">
+            <div>
+              <h2 class="build-head">Character systems, data made readable, and why <span class="build-circled">presentation</span> is part of the work.</h2>
+              <a class="esa-link" href="./pages/craft.html"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-build"/></svg>See how I build</a>
+            </div>
+
+            <div class="build-grid">
+              <div class="build-col">
+                <span class="build-num">01</span>
+                <h3>Character<br>Systems</h3>
+                <p>State machines, behavior, feedback loops, progression.</p>
+                <svg class="build-sketch" aria-hidden="true"><use href="./assets/img/icons.svg#i-character"/></svg>
+              </div>
+              <div class="build-col">
+                <span class="build-num">02</span>
+                <h3>Data<br>Made Readable</h3>
+                <p>Information hierarchy, visual language, clarity over noise.</p>
+                <svg class="build-sketch" aria-hidden="true"><use href="./assets/img/icons.svg#i-data"/></svg>
+              </div>
+              <div class="build-col">
+                <span class="build-num">03</span>
+                <h3>Presentation<br>as Action</h3>
+                <p>The interface is the product doing the talking.</p>
+                <svg class="build-sketch" aria-hidden="true"><use href="./assets/img/icons.svg#i-present"/></svg>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="container">
-        <div class="footer-top">
-          <span class="footer-item muted">Available · UTC-5 · Async-friendly</span>
-          <a class="footer-item muted" href="mailto:josealvarezswork@gmail.com">josealvarezswork@gmail.com</a>
-          <a class="footer-item muted" href="https://www.linkedin.com/in/alvarezcja/" target="_blank" rel="noreferrer">writing on linkedin</a>
-          <a class="footer-item muted" href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer">github</a>
+        <div class="footer-cta taped">
+          <div class="footer-cta-row">
+            <p class="cta-text">Open to contracts and product <span class="accent">collaborations</span>.</p>
+            <a class="cta-accent cta-link" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-mail"/></svg>Email me</a>
+          </div>
         </div>
 
-        <div class="footer-cta">
-          <p class="cta-text muted">Open to contracts and product collaborations.</p>
-          <a class="cta-accent cta-link" href="mailto:josealvarezswork@gmail.com">Email me →</a>
+        <div class="footer-top">
+          <span class="footer-mark" aria-hidden="true"></span>
+          <span class="footer-item muted">Available · UTC-5 · Async-friendly</span>
+          <a class="footer-item muted" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-mail"/></svg>josealvarezswork@gmail.com</a>
+          <a class="footer-item muted" href="https://www.linkedin.com/in/alvarezcja/" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="./assets/img/icons.svg#i-linkedin"/></svg>LinkedIn</a>
+          <a class="footer-item muted" href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="./assets/img/icons.svg#i-github"/></svg>GitHub</a>
         </div>
+
+        <p class="footer-credit">Icons by <a href="https://streamlinehq.com" target="_blank" rel="noreferrer">Streamline</a> (CC BY 4.0) · brand marks by <a href="https://simpleicons.org" target="_blank" rel="noreferrer">Simple Icons</a></p>
       </div>
     </footer>
 
-    <script src="./scripts/app.js"></script>
+    <script src="./scripts/app.js?v=3"></script>
   </body>
 </html>
-
