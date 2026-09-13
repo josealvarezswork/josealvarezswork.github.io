@@ -70,7 +70,7 @@
     }
     .state-img {
       width: 80px; height: 80px; object-fit: contain;
-      background: var(--bg-elevated); border-radius: 12px;
+      background: var(--bg-elevated); border-radius: var(--r-md);
       margin-bottom: 4px;
     }
     .state-name { font-size: 14px; font-weight: 600; }
@@ -89,7 +89,7 @@
     .zone-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
     .zone-name { font-size: 14px; font-weight: 600; margin-top: 2px; }
     .zone-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
-    .zone-split-visual { display: flex; height: 48px; border-radius: 8px; overflow: hidden; gap: 2px; }
+    .zone-split-visual { display: flex; height: 48px; border-radius: var(--r-sm); overflow: hidden; gap: 2px; }
     .zone-data-bar {
       flex: 60; background: rgba(155,143,212,.12);
       display: flex; align-items: center; justify-content: center;
@@ -127,7 +127,7 @@
     .ba-card { border-radius: var(--r); border: 1px solid var(--stroke-light); overflow: hidden; display: flex; flex-direction: column; }
     .ba-card-header { padding: 10px 16px; border-bottom: 1px solid var(--stroke); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
     .ba-card-body { padding: 20px; min-height: 180px; height: 340px; background: var(--bg-card); display: flex; align-items: center; justify-content: center; }
-    .ba-card-body img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 8px; display: block; }
+    .ba-card-body img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: var(--r-sm); display: block; }
 
     .cmp-slider { overflow: hidden; position: relative; }
     .cmp-slider::before, .cmp-slider::after {
@@ -149,7 +149,7 @@
       max-height: 100%;
       width: auto;
       flex-shrink: 0;
-      border-radius: 8px;
+      border-radius: var(--r-sm);
       filter: drop-shadow(0 10px 24px rgba(0,0,0,.4));
     }
     @keyframes cmp-scroll {
@@ -159,14 +159,14 @@
     @media (prefers-reduced-motion: reduce) {
       .cmp-track { animation: none; }
     }
-    .ba-placeholder { width: 100%; min-height: 160px; border: 2px dashed var(--stroke-light); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--faint); font-size: 13px; }
+    .ba-placeholder { width: 100%; min-height: 160px; border: 2px dashed var(--stroke-light); border-radius: var(--r-sm); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--faint); font-size: 13px; }
     .ba-arrow { font-size: 24px; color: var(--accent); text-align: center; }
     .ba-annotation { font-size: 12px; color: var(--muted); padding: 12px 16px; border-top: 1px solid var(--stroke); line-height: 1.6; }
 
     /* Annotations */
     .annotated-placeholder { width: 100%; min-height: 400px; background: var(--bg-card); border-radius: var(--r); border: 2px dashed var(--stroke-light); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--faint); font-size: 14px; margin-top: 32px; }
     .annotation-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-    .annotation-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--stroke); border-radius: 10px; }
+    .annotation-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--stroke); border-radius: var(--r-sm); }
     .annotation-dot { width: 24px; height: 24px; border-radius: 999px; background: var(--accent-soft); border: 2px solid var(--accent); color: var(--accent); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .annotation-label { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
     .annotation-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
@@ -183,7 +183,7 @@
     .progress-track { height: 8px; background: var(--bg-elevated); border-radius: 999px; overflow: hidden; }
     .progress-fill { height: 100%; border-radius: 999px; }
 
-    .streak-counter { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--bg-elevated); border-radius: 10px; border: 1px solid var(--stroke-light); margin: 16px 0; }
+    .streak-counter { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--bg-elevated); border-radius: var(--r-sm); border: 1px solid var(--stroke-light); margin: 16px 0; }
     .streak-num { font-size: 36px; font-weight: 700; color: var(--accent-green); letter-spacing: -.02em; }
     .streak-label { font-size: 13px; color: var(--muted); }
     .streak-sub { font-size: 11px; color: var(--faint); }
@@ -325,28 +325,28 @@
 
       <div class="states-grid">
         <div class="state-card" style="border-color:rgba(242,239,232,.08)">
-          <img class="state-img" src="../assets/img/duogit/state-neutral-crop.png" alt="Ghost neutral, ready state">
+          <img class="state-img" src="../assets/img/duogit/state-neutral-crop.webp" alt="Ghost neutral, ready state">
           <p class="state-name">Neutral — Ready</p>
           <p class="state-trigger">Trigger: app open, no commits today</p>
           <p class="state-desc">Day begins. Ghost is calm and expectant — no pressure, pure potential.</p>
           <span class="state-drive">Neutral state</span>
         </div>
         <div class="state-card" style="border-color:rgba(16,185,129,.2)">
-          <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-happy-crop.png" alt="Ghost happy, on-streak state">
+          <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-happy-crop.webp" alt="Ghost happy, on-streak state">
           <p class="state-name" style="color:#10b981">Happy — On Streak</p>
           <p class="state-trigger">Trigger: 3+ day streak / commits today</p>
           <p class="state-desc">Positive reinforcement. Ghost celebrates — glowing eyes, energetic posture. The system rewards consistency, not just volume.</p>
           <span class="state-drive" style="color:#10b981;background:rgba(16,185,129,.1)">Core Drive 2: Accomplishment</span>
         </div>
         <div class="state-card" style="border-color:rgba(251,191,36,.2)">
-          <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-worried-crop.png" alt="Ghost worried, streak-at-risk state">
+          <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-worried-crop.webp" alt="Ghost worried, streak-at-risk state">
           <p class="state-name" style="color:var(--accent-amber)">Worried — Streak at Risk</p>
           <p class="state-trigger">Trigger: no commit by evening / streak about to break</p>
           <p class="state-desc">Loss aversion activated. Ghost's distress makes the risk visible — empathetic urgency, not punishment.</p>
           <span class="state-drive" style="color:var(--accent-amber);background:rgba(251,191,36,.1)">Core Drive 8: Loss Aversion</span>
         </div>
         <div class="state-card" style="border-color:rgba(155,143,212,.2)">
-          <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-sad-crop.png" alt="Ghost sad, streak-broken state">
+          <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-sad-crop.webp" alt="Ghost sad, streak-broken state">
           <p class="state-name" style="color:var(--accent)">Sad — Streak Broken</p>
           <p class="state-trigger">Trigger: missed day, streak resets</p>
           <p class="state-desc">Emotional cost acknowledged — then resilience. Ghost mourns with the developer, then invites a guilt-free restart.</p>
@@ -365,15 +365,15 @@
 
       <div class="ref-sheet-grid">
         <div class="ref-sheet-card">
-          <img loading="lazy" decoding="async" src="../assets/img/duogit/process-ref-front.png" alt="Ghost character reference — front view">
+          <img loading="lazy" decoding="async" src="../assets/img/duogit/process-ref-front.webp" alt="Ghost character reference — front view">
           <p>Front — neutral</p>
         </div>
         <div class="ref-sheet-card">
-          <img loading="lazy" decoding="async" src="../assets/img/duogit/process-ref-back.png" alt="Ghost character reference — back view">
+          <img loading="lazy" decoding="async" src="../assets/img/duogit/process-ref-back.webp" alt="Ghost character reference — back view">
           <p>Back view</p>
         </div>
         <div class="ref-sheet-card">
-          <img loading="lazy" decoding="async" src="../assets/img/duogit/process-ref-extra.png" alt="Ghost character reference — extra gesture pose">
+          <img loading="lazy" decoding="async" src="../assets/img/duogit/process-ref-extra.webp" alt="Ghost character reference — extra gesture pose">
           <p>Gesture range</p>
         </div>
       </div>
@@ -423,7 +423,7 @@
 
       <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:20px;align-items:center;margin-top:24px">
         <div style="border-radius:var(--r);overflow:hidden;background:#0a0a0d;border:1px solid var(--stroke-light);padding:16px">
-          <img loading="lazy" decoding="async" src="../assets/img/duogit/annotated-league.png" alt="DuoGit League screen — leaderboard" style="width:100%;border-radius:8px;display:block">
+          <img loading="lazy" decoding="async" src="../assets/img/duogit/annotated-league.webp" alt="DuoGit League screen — leaderboard" style="width:100%;border-radius: var(--r-sm);display:block">
         </div>
         <div class="annotation-item" style="margin:0">
           <div class="annotation-dot">4</div>
@@ -510,14 +510,14 @@
           <div class="ba-card-header">After — DuoGit interface</div>
           <div class="ba-card-body cmp-slider" style="padding:0;background:#0a0a0d">
             <div class="cmp-track">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-dashboard.png" alt="DuoGit dashboard — same activity, framed as streak and emotional state">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-metrics.png" alt="DuoGit SPACE metrics screen">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-league.png" alt="DuoGit league rank screen">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-profile.png" alt="DuoGit profile screen">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-dashboard.png" alt="" aria-hidden="true">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-metrics.png" alt="" aria-hidden="true">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-league.png" alt="" aria-hidden="true">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-profile.png" alt="" aria-hidden="true">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-dashboard.webp" alt="DuoGit dashboard — same activity, framed as streak and emotional state">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-metrics.webp" alt="DuoGit SPACE metrics screen">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-league.webp" alt="DuoGit league rank screen">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-profile.webp" alt="DuoGit profile screen">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-dashboard.webp" alt="" aria-hidden="true">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-metrics.webp" alt="" aria-hidden="true">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-league.webp" alt="" aria-hidden="true">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-profile.webp" alt="" aria-hidden="true">
             </div>
           </div>
           <p class="ba-annotation">Same underlying data — streak framing, Ghost's emotional state, SPACE metrics. Absence feels <strong style="color:var(--accent)">recoverable, not shameful</strong>.</p>
@@ -604,7 +604,7 @@
 
         <div class="component-card">
           <p class="component-name">Urgency Countdown Widget</p>
-          <div style="margin:16px 0;padding:16px;background:rgba(251,191,36,.06);border-radius:10px;border:1px solid rgba(251,191,36,.2)">
+          <div style="margin:16px 0;padding:16px;background:rgba(251,191,36,.06);border-radius: var(--r-sm);border:1px solid rgba(251,191,36,.2)">
             <p style="font-size:11px;color:var(--accent-amber);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">⚠ Streak at risk</p>
             <p style="font-size:28px;font-weight:700;color:var(--accent-amber);letter-spacing:-.01em">4h 23m</p>
             <p style="font-size:12px;color:var(--muted);margin-top:4px">Ghost is getting worried</p>
@@ -615,11 +615,11 @@
         <div class="component-card">
           <p class="component-name">SPACE Metric Cards</p>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0">
-            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border:1px solid var(--stroke-light)">
+            <div style="padding:12px;background:var(--bg-elevated);border-radius: var(--r-sm);border:1px solid var(--stroke-light)">
               <p style="font-size:10px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase">Satisfaction</p>
               <p style="font-size:20px;font-weight:700;color:#10b981">87%</p>
             </div>
-            <div style="padding:12px;background:var(--bg-elevated);border-radius:8px;border:1px solid var(--stroke-light)">
+            <div style="padding:12px;background:var(--bg-elevated);border-radius: var(--r-sm);border:1px solid var(--stroke-light)">
               <p style="font-size:10px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase">Activity</p>
               <p style="font-size:20px;font-weight:700;color:var(--accent)">14d</p>
             </div>

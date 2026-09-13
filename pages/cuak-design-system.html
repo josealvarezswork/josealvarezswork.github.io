@@ -81,13 +81,13 @@
     }
     .state-img {
       width: 80px; height: 80px; object-fit: contain;
-      background: var(--bg-elevated); border-radius: 12px;
+      background: var(--bg-elevated); border-radius: var(--r-md);
       display: flex; align-items: center; justify-content: center;
       font-size: 36px; margin-bottom: 4px;
     }
     .state-img-placeholder {
       width: 80px; height: 80px;
-      background: var(--bg-elevated); border-radius: 12px;
+      background: var(--bg-elevated); border-radius: var(--r-md);
       border: 2px dashed var(--stroke-light);
       display: flex; align-items: center; justify-content: center;
       font-size: 28px; margin-bottom: 4px;
@@ -123,7 +123,7 @@
     .zone-name { font-size: 14px; font-weight: 600; margin-top: 2px; }
     .zone-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
     .zone-split-visual {
-      display: flex; height: 48px; border-radius: 8px; overflow: hidden; gap: 2px;
+      display: flex; height: 48px; border-radius: var(--r-sm); overflow: hidden; gap: 2px;
     }
     .zone-data-bar {
       flex: 60; background: rgba(111,186,150,.15);
@@ -179,7 +179,7 @@
     .ba-placeholder {
       width: 100%; min-height: 160px;
       border: 2px dashed var(--stroke-light);
-      border-radius: 8px;
+      border-radius: var(--r-sm);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 8px; color: var(--faint); font-size: 13px;
     }
@@ -217,7 +217,7 @@
     .annotation-item {
       display: flex; gap: 14px; align-items: flex-start;
       padding: 14px 16px; background: var(--bg-card);
-      border: 1px solid var(--stroke); border-radius: 10px;
+      border: 1px solid var(--stroke); border-radius: var(--r-sm);
     }
     .annotation-dot {
       width: 24px; height: 24px; border-radius: 999px;
@@ -441,15 +441,15 @@
 
       <div class="ref-sheet-grid">
         <div class="ref-sheet-card">
-          <img loading="lazy" decoding="async" src="../assets/img/cuak/process-ref-frontal.png" alt="Cuak character reference — front view">
+          <img loading="lazy" decoding="async" src="../assets/img/cuak/process-ref-frontal.webp" alt="Cuak character reference — front view">
           <p>Front — neutral</p>
         </div>
         <div class="ref-sheet-card">
-          <img loading="lazy" decoding="async" src="../assets/img/cuak/process-ref-back.png" alt="Cuak character reference — back view">
+          <img loading="lazy" decoding="async" src="../assets/img/cuak/process-ref-back.webp" alt="Cuak character reference — back view">
           <p>Back view</p>
         </div>
         <div class="ref-sheet-card">
-          <img loading="lazy" decoding="async" src="../assets/img/cuak/process-ref-arms-up.png" alt="Cuak character reference — arms raised gesture">
+          <img loading="lazy" decoding="async" src="../assets/img/cuak/process-ref-arms-up.webp" alt="Cuak character reference — arms raised gesture">
           <p>Gesture range</p>
         </div>
       </div>
@@ -458,7 +458,7 @@
         <div class="ba-card">
           <div class="ba-card-header">Explored — raised-hand worried</div>
           <div class="ba-card-body">
-            <img loading="lazy" decoding="async" src="../assets/img/cuak/process-variant-worried-alt.png" alt="Discarded worried pose with raised hand" style="width:100%;border-radius:8px">
+            <img loading="lazy" decoding="async" src="../assets/img/cuak/process-variant-worried-alt.png" alt="Discarded worried pose with raised hand" style="width:100%;border-radius: var(--r-sm)">
           </div>
           <p class="ba-annotation">Read as alarm, not concern — closer to a warning gesture than an emotional cue. Worked against the "empathetic, not punitive" principle the Worried state is built on (see Annotated UI, below).</p>
         </div>
@@ -466,7 +466,7 @@
         <div class="ba-card">
           <div class="ba-card-header">Shipped — quiet worried</div>
           <div class="ba-card-body">
-            <img loading="lazy" decoding="async" src="../assets/img/cuak/cuak-preocupado.png" alt="Shipped worried state, calmer pose" style="width:100%;border-radius:8px">
+            <img loading="lazy" decoding="async" src="../assets/img/cuak/cuak-preocupado.png" alt="Shipped worried state, calmer pose" style="width:100%;border-radius: var(--r-sm)">
           </div>
           <p class="ba-annotation">Same trigger, no gesture. The expression alone carries the state — arms stay down so it reads as concern, not alert.</p>
         </div>
@@ -656,7 +656,7 @@
 
         <div class="component-card">
           <p class="component-name">Action Card</p>
-          <div style="margin:16px 0;padding:16px;background:var(--bg-elevated);border-radius:10px;border:1px solid var(--stroke-light)">
+          <div style="margin:16px 0;padding:16px;background:var(--bg-elevated);border-radius: var(--r-sm);border:1px solid var(--stroke-light)">
             <p style="font-size:12px;color:var(--faint);margin-bottom:6px">Cuak suggests</p>
             <p style="font-size:14px;font-weight:500">Pay $80 to drop below 30%</p>
             <p style="font-size:12px;color:var(--brand-cuak);margin-top:4px">→ This keeps me happy 🦆</p>
@@ -666,7 +666,7 @@
 
         <div class="component-card">
           <p class="component-name">Countdown Widget (Urgency)</p>
-          <div style="margin:16px 0;padding:16px;background:rgba(251,191,36,.06);border-radius:10px;border:1px solid rgba(251,191,36,.2)">
+          <div style="margin:16px 0;padding:16px;background:rgba(251,191,36,.06);border-radius: var(--r-sm);border:1px solid rgba(251,191,36,.2)">
             <p style="font-size:11px;color:var(--accent-amber);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">⚠ Payment due</p>
             <p style="font-size:28px;font-weight:700;color:var(--accent-amber);letter-spacing:-.01em">3d 14h</p>
             <p style="font-size:12px;color:var(--muted);margin-top:4px">Before Cuak gets worried</p>

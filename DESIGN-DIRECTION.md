@@ -56,27 +56,8 @@ Close with How I Build: Character Systems / Data Made Readable / Presentation as
 
 Story arc: designer → projects → framework → methodology → collaboration.
 
-## 02 — Wild Frontier (Game UI case study)
 
-The third case study — the one built specifically for the Game UI candidacy. Category: Game UI/UX.
-
-Feels like opening a tactical field notebook documenting the full development of a mobile game interface.
-
-Hero: large title "WILD FRONTIER", subtitle "TACTICAL JUNGLE UI FOR A 4X STRATEGY GAME." Two or three large mobile devices with the game interface, overlapping slightly. Handwritten annotations around them: "Home HUD," "Store," "Information hierarchy," "Fast decision-making," "Resource visibility." Small technical color palette.
-
-01 Design Approach — clarity first, tactical feel, immersive world, built for mobile. Small diagrams and interface fragments.
-
-02 Screen Flow — Home HUD → Map → Build → Units → Store, connected with hand-drawn arrows.
-
-03 Design System — Teko + Inter, buttons, resource bars, status badges, progress bars, cards, icons, tooltips. Presented as a physical technical sheet over the dark canvas.
-
-04 Process — rough wireframes, sketches, iterations, taped onto the workspace like working documents.
-
-05 Key Takeaways — concise handwritten notes combined with precise typography.
-
-The interface itself stays the visual hero throughout.
-
-## 03 — DuoGit
+## 02 — DuoGit
 
 Theme: progression + feedback system. Present as an experimental interface system, not a screen collection.
 
@@ -86,7 +67,7 @@ Problem: most gamification punishes absence; DuoGit turns absence into a reason 
 
 Tone: game design documentation + interface case study + visual experiment.
 
-## 04 — Cuak
+## 03 — Cuak
 
 Theme: character-driven fintech UI. Visual language turns slightly warmer while staying inside the dark system. The character is part of the interface architecture, not an illustration added on top.
 
@@ -96,18 +77,18 @@ Relationship diagram: User State → Character State → Visual Feedback → Use
 
 The page proves the character is a feedback mechanism, not decoration.
 
-## 05 — Emotional State Architecture
+## 04 — Emotional State Architecture
 
 The most conceptual page in the portfolio. Large editorial title: "EMOTIONAL STATE ARCHITECTURE." Centerpiece is the state machine itself: Waiting → Happy → Worried → Broken, each state carrying Trigger / State / Behavior / Feedback / Action. Character illustrations represent the states; imperfect hand-drawn arrows connect them; technical notes surround the system.
 
 Hybrid of UX documentation + game design system + technical blueprint + editorial poster. Goal: the viewer understands the designer thinks in systems, not isolated screens.
 
-## 06 — About
+## 05 — About
 
 Quieter version of the visual system — pull tactile density well below the site-wide 20%, closer to a token amount. Large statement: "I design interfaces that behave, not just interfaces that look good." Introduce José across UI, Game UI, 3D, Motion, Interactive Systems. Large portrait or abstract 3D representation. Small timeline of skills and evolution. Annotations used sparingly.
 
 Feel: personal, human, reflective. Less technical, less visual noise, more personality.
 
-## 07 — Contact
+## 06 — Contact
 
 Final collaboration note. Large statement: "Open to contracts and product collaborations." Feels like the last note left on the desk. Include email, LinkedIn, GitHub, availability. One handwritten annotation: "Let's build something meaningful." Visually simple — the feeling of having walked through the workspace and now being invited to work together.
