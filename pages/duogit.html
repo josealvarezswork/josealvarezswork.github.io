@@ -17,27 +17,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/system.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=3">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=3" />
   <style>
     :root {
-      --bg: #1E1A2E;
-      --bg-elevated: #252038;
-      --bg-card: #2D2845;
-      --text: #F2EFE8;
-      --text-muted: rgba(242, 239, 232, .62);
-      --text-faint: rgba(242, 239, 232, .36);
-      --stroke: rgba(155, 143, 212, .15);
-      --stroke-light: rgba(155, 143, 212, .22);
-      --accent: #9B8FD4;
-      --accent-soft: rgba(155, 143, 212, .15);
-      --accent-glow: rgba(155, 143, 212, .08);
-      --success: #9B8FD4;
       --success-soft: rgba(155, 143, 212, .15);
-      --serif: "Bricolage Grotesque", sans-serif;
-      --sans: "Bricolage Grotesque", sans-serif;
-      --max: 1040px;
       --r: 27.6px;
       --rl: 27.6px;
     }
@@ -297,7 +284,7 @@
       margin-top: 12px
     }
 
-    .quote {
+    .principle {
       margin-top: 20px;
       padding: 20px 24px;
       background: rgba(251, 191, 36, .08);
@@ -564,7 +551,7 @@
       margin-top: 32px
     }
 
-    .principle {
+    .quote {
       padding: 24px;
       background: var(--bg-card);
       border: 1px solid var(--stroke-light);
@@ -981,13 +968,52 @@
     .screen-slide:hover img { transform:translateY(-6px); }
     .screen-slide span { font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,0.3); }
     .screen-slide.featured span { color:var(--accent); }
+  
+    /* --- SHARED CARD LANGUAGE -------------------------------------
+       Matches the home: panels are sunken and rounded, statements sit
+       on paper, and imagery is mounted in a well instead of running to
+       the card edge. Last in this page's own stylesheet on purpose —
+       these have to beat the rules above without a specificity war. */
+    .tldr-item, .pws-card, .research-card, .persona-card, .journey-stage, .tradeoff-visual, .feature-row, .screen-card {
+      border-radius: var(--r-lg);
+      border: 1px solid var(--stroke);
+      box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.32);
+    }
+    .quote {
+      position: relative;
+      background: var(--paper);
+      color: var(--paper-ink);
+      border: 1px solid rgba(34, 29, 51, 0.14);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42), inset 0 0 22px rgba(90, 78, 58, 0.12);
+    }
+    .quote::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: var(--paper-fleck), var(--paper-fiber), var(--wear-blotch);
+      background-size: 200px 200px, 155px 155px, 360px 360px;
+      filter: grayscale(1);
+      mix-blend-mode: multiply;
+      opacity: 0.2;
+    }
+    .quote h3, .quote h4, .quote strong { color: var(--paper-ink); }
+    .quote p, .quote li, .quote cite { color: rgba(34, 29, 51, 0.66); }
+    .hero-image {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 70px rgba(0, 0, 0, 0.38);
+    }
+      .quote::before { color: rgba(34, 29, 51, 0.18); }
   </style>
 </head>
 
 <body>
   <div class="accent-bar" aria-hidden="true"></div>
 
-  <header class="site-header">
+  <header class="site-header is-shared">
     <nav class="nav">
       <a class="brand" href="../index.html" aria-label="Home">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -1014,14 +1040,16 @@
     <!-- HERO -->
     <section class="hero">
       <div class="container">
-        <h1 class="hero-title">
-          The developer's <span class="accent">emotional companion</span>
-        </h1>
-        <p class="hero-subtitle">
-          GitHub tracks what you did. DuoGit makes you want to do it again. A cross-platform mobile app that turns cold commit data into motivating emotional feedback — filling the gap between utilitarian dev tools and generic gamification.
-        </p>
-        <div class="hero-image">
-          <img src="../assets/img/duogit/portada.jpg" alt="DuoGit — App Overview" />
+        <div class="mat">
+          <h1 class="hero-title">
+            The developer's <span class="accent">emotional companion</span>
+          </h1>
+          <p class="hero-subtitle">
+            GitHub tracks what you did. DuoGit makes you want to do it again. A cross-platform mobile app that turns cold commit data into motivating emotional feedback — filling the gap between utilitarian dev tools and generic gamification.
+          </p>
+          <div class="hero-image">
+            <img src="../assets/img/duogit/portada.jpg" alt="DuoGit — App Overview" />
+          </div>
         </div>
       </div>
     </section>

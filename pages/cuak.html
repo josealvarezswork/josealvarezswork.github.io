@@ -17,28 +17,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/system.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=3">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=3" />
   <style>
-    :root {
-      --bg: #1E1A2E;
-      --bg-elevated: #252038;
-      --bg-card: #2D2845;
-      --text: #F2EFE8;
-      --text-muted: rgba(242, 239, 232, .62);
-      --text-faint: rgba(242, 239, 232, .36);
-      --stroke: rgba(155, 143, 212, .15);
-      --stroke-light: rgba(155, 143, 212, .22);
-      --accent: #9B8FD4;
-      --accent-soft: rgba(155, 143, 212, .15);
-      --accent-glow: rgba(155, 143, 212, .08);
-      --serif: "Bricolage Grotesque", sans-serif;
-      --sans: "Bricolage Grotesque", sans-serif;
-      --max: 1040px;
-      --r: 12px;
-      --rl: 16px;
-    }
+    
 
     .accent-bar {
       position: fixed;
@@ -476,13 +461,53 @@
       color: var(--text-muted);
       margin-top: 6px
     }
+  
+    /* --- SHARED CARD LANGUAGE -------------------------------------
+       Matches the home: panels are sunken and rounded, statements sit
+       on paper, and imagery is mounted in a well instead of running to
+       the card edge. Last in this page's own stylesheet on purpose —
+       these have to beat the rules above without a specificity war. */
+    .tldr-item, .info-card, .state-card {
+      border-radius: var(--r-lg);
+      border: 1px solid var(--stroke);
+      box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.32);
+    }
+    .rule-card {
+      position: relative;
+      background: var(--paper);
+      color: var(--paper-ink);
+      border: 1px solid rgba(34, 29, 51, 0.14);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42), inset 0 0 22px rgba(90, 78, 58, 0.12);
+    }
+    .rule-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: var(--paper-fleck), var(--paper-fiber), var(--wear-blotch);
+      background-size: 200px 200px, 155px 155px, 360px 360px;
+      filter: grayscale(1);
+      mix-blend-mode: multiply;
+      opacity: 0.2;
+    }
+    .rule-card h3, .rule-card h4, .rule-card strong { color: var(--paper-ink); }
+    .rule-card p, .rule-card li { color: rgba(34, 29, 51, 0.66); }
+    .mockup-frame {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 70px rgba(0, 0, 0, 0.38);
+    }
+      .rule-label { color: rgba(34, 29, 51, 0.45); }
+    .rule-value { color: var(--paper-ink); }
   </style>
 </head>
 
 <body>
   <div class="accent-bar" aria-hidden="true"></div>
 
-  <header class="site-header">
+  <header class="site-header is-shared">
     <nav class="nav">
       <a class="brand" href="../index.html" aria-label="Home">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -509,32 +534,34 @@
     <!-- HERO -->
     <section class="hero">
       <div class="container">
-        <div class="hero-label">
-          <span>Mascot UX · Fintech</span><span>·</span><span>2026</span>
-        </div>
-        <h1 class="hero-title">
-          Cuak — Your emotional <span class="accent">financial companion</span>
-        </h1>
-        <p class="hero-subtitle">
-          Most people feel their credit is fine — until suddenly it isn't. Cuak is a fintech mascot that reacts to credit health in real time, replacing financial anxiety with actionable clarity before the crisis happens.
-        </p>
-        <div class="tldr">
-          <div class="tldr-item"><span>UX / Product Design</span></div>
-          <div class="tldr-item"><span>React Native · Belvo · Node.js</span></div>
-          <div class="tldr-item"><span>3 Core Screens</span></div>
-          <div class="tldr-item highlight"><span>Testers felt more in control</span></div>
-        </div>
-
-        <!-- PORTADA -->
-        <div style="margin-top:40px;border-radius:27.6px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.4)">
-          <img src="../assets/img/cuak/portada.jpg" alt="Cuak — cover" style="width:100%;height:auto;display:block;">
-        </div>
-
-        <!-- SCREENS NOTICE -->
-        <div style="margin-top:16px;padding:14px 20px;border-radius:12px;border:1px dashed rgba(155,143,212,0.35);background:rgba(155,143,212,0.06);display:flex;align-items:center;gap:12px">
-          <p style="font-size:13px;color:rgba(242,239,232,0.55);margin:0;line-height:1.6">
-            App screens currently in final iteration — will be updated here as they're completed.
+        <div class="mat">
+          <div class="hero-label">
+            <span>Mascot UX · Fintech</span><span>·</span><span>2026</span>
+          </div>
+          <h1 class="hero-title">
+            Cuak — Your emotional <span class="accent">financial companion</span>
+          </h1>
+          <p class="hero-subtitle">
+            Most people feel their credit is fine — until suddenly it isn't. Cuak is a fintech mascot that reacts to credit health in real time, replacing financial anxiety with actionable clarity before the crisis happens.
           </p>
+          <div class="tldr">
+            <div class="tldr-item"><span>UX / Product Design</span></div>
+            <div class="tldr-item"><span>React Native · Belvo · Node.js</span></div>
+            <div class="tldr-item"><span>3 Core Screens</span></div>
+            <div class="tldr-item highlight"><span>Testers felt more in control</span></div>
+          </div>
+
+          <!-- PORTADA -->
+          <div style="margin-top:40px;border-radius:27.6px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.4)">
+            <img src="../assets/img/cuak/portada.jpg" alt="Cuak — cover" style="width:100%;height:auto;display:block;">
+          </div>
+
+          <!-- SCREENS NOTICE -->
+          <div style="margin-top:16px;padding:14px 20px;border-radius:12px;border:1px dashed rgba(155,143,212,0.35);background:rgba(155,143,212,0.06);display:flex;align-items:center;gap:12px">
+            <p style="font-size:13px;color:rgba(242,239,232,0.55);margin:0;line-height:1.6">
+              App screens currently in final iteration — will be updated here as they're completed.
+            </p>
+          </div>
         </div>
       </div>
     </section>

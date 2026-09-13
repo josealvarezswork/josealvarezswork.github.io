@@ -4,35 +4,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resume — Jose Alvarez | Product Designer</title>
+  <title>Resume — Jose Alvarez | UI Artist</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/system.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=3">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=3" />
 
   <style>
-    :root {
-      --bg: #1E1A2E;
-      --text: #F2EFE8;
-      --muted: rgba(242, 239, 232, 0.62);
-      --muted2: rgba(242, 239, 232, 0.36);
-      --stroke: rgba(155, 143, 212, 0.15);
-      --accent: #9B8FD4;
+    
 
-      --serif: "Bricolage Grotesque", sans-serif;
-      --sans: "Bricolage Grotesque", sans-serif;
-
-      --max: 1040px;
-    }
-
-    html,
-    body {
-      height: 100%;
-    }
+    /* `height: 100%` here made <body> only as tall as the viewport while the
+       page runs far longer, so the sticky header could only travel inside
+       that first screen and then scrolled away. */
 
     body {
       margin: 0;
@@ -48,20 +37,21 @@
       border-color: rgba(255, 255, 255, 0.5);
     }
 
-    /* This page's header isn't sticky/blurred like the case-study pages,
-       so it explicitly resets the parts of system.css's .site-header that
-       don't apply here instead of relying on them being absent. */
-    .site-header {
-      position: static;
-      padding: 28px 0;
-      background: none;
-      backdrop-filter: none;
-      border-bottom: none;
-    }
+    /* The sticky frosted header now comes from paper.css, the same one the
+       home uses. This page used to opt out of it deliberately; with one
+       shared nav there is nothing left to opt out of. */
 
     .container {
       width: min(var(--max), calc(100% - 48px));
       margin: 0 auto;
+      padding: 0;
+    }
+
+    /* paper.css pads the nav by 24px to match the shared .container; this
+       page's container has none, so the nav has to drop it to line up. */
+    .nav {
+      width: min(var(--max), calc(100% - 48px));
+      max-width: none;
       padding: 0;
     }
 
@@ -112,6 +102,14 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.15);
       padding-bottom: 2px;
       transition: border-color 150ms ease, color 150ms ease;
+    }
+
+    /* paper.css turns the footer links into flex rows so an icon can sit
+       beside the label; this row needs the same treatment. */
+    .resume-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .resume-links a:hover {
@@ -210,7 +208,7 @@
       padding: 6px 12px;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 6px;
+      border-radius: var(--r-md);
       transition: border-color 150ms ease;
     }
 
@@ -254,7 +252,7 @@
       flex-shrink: 0;
       padding: 4px 10px;
       background: rgba(255, 255, 255, 0.04);
-      border-radius: 4px;
+      border-radius: var(--r-sm);
     }
 
     .exp-company {
@@ -327,7 +325,7 @@
       padding: 4px 8px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 4px;
+      border-radius: var(--r-sm);
     }
 
     /* EDUCATION */
@@ -341,7 +339,7 @@
       padding: 20px;
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
+      border-radius: var(--r-lg);
     }
 
     .edu-title {
@@ -369,7 +367,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 3px 6px;
-      border-radius: 4px;
+      border-radius: var(--r-sm);
       background: rgba(255, 106, 45, 0.15);
       color: #ff8c5a;
       margin-left: 8px;
@@ -450,7 +448,7 @@
 </head>
 
 <body>
-  <header class="site-header">
+  <header class="site-header is-shared">
     <nav class="nav">
       <a class="brand" href="../index.html" aria-label="Home">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -465,8 +463,10 @@
           <span></span>
           <span></span>
         </button>
-        <div class="nav-links">
-        <a href="./how-i-work.html">How I Work</a>
+      <div class="nav-links">
+        <a href="../index.html">Work</a>
+        <a href="./methodology.html">Framework</a>
+        <a href="./craft.html">Craft</a>
         <a href="./resume.html" class="active">Resume</a>
         <a href="./about.html">About</a>
       </div>
@@ -477,23 +477,25 @@
     <!-- HEADER -->
     <section class="resume-header">
       <div class="container">
-        <h1 class="resume-title">Jose Alvarez</h1>
-        <p class="resume-role"><strong>Product Designer</strong> — UX/UI, design systems, and the behavioral layer that keeps people coming back</p>
+        <div class="mat">
+          <h1 class="resume-title">Jose Alvarez</h1>
+          <p class="resume-role"><strong>UI Artist</strong> — Game UI, progression systems, and the character states that carry them</p>
 
-        <div class="resume-links">
-          <a href="../index.html">Portfolio</a>
-          <span class="separator">·</span>
-          <a href="https://www.linkedin.com/in/alvarezcja/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <span class="separator">·</span>
-          <a href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer">GitHub</a>
-          <span class="separator">·</span>
-          <span class="location">Colombia, LATAM · Remote</span>
+          <div class="resume-links">
+            <a href="../index.html">Portfolio</a>
+            <span class="separator">·</span>
+            <a href="https://www.linkedin.com/in/alvarezcja/" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-linkedin"/></svg>LinkedIn</a>
+            <span class="separator">·</span>
+            <a href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-github"/></svg>GitHub</a>
+            <span class="separator">·</span>
+            <span class="location">Colombia, LATAM · Remote</span>
+          </div>
+
+          <a href="../cv/Jose_Alvarez_CV.pdf" download
+            style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:12px 22px;border-radius:999px;background:var(--accent);color:#1E1A2E;font-size:13px;font-weight:600;letter-spacing:0.03em;transition:transform 160ms ease">
+            ↓ Download CV (PDF)
+          </a>
         </div>
-
-        <a href="../cv/Jose_Alvarez_CV.pdf" download
-          style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:12px 22px;border-radius:999px;background:var(--accent);color:#1E1A2E;font-size:13px;font-weight:600;letter-spacing:0.03em;transition:transform 160ms ease">
-          ↓ Download CV (PDF)
-        </a>
 
       </div>
     </section>
@@ -502,9 +504,9 @@
     <section class="profile-section">
       <div class="container">
         <p class="profile-text">
-          Behavioral designer specializing in <strong>gamification systems and mascot UX</strong> — the emotional layer that makes users feel rewarded, not judged.
-          Creator of ESA (Emotional State Architecture), a framework for retention design applied across fintech and developer tools.
-          Background in visual systems and motion design. Open to contracts in gamification, game UX, and behavioral product design.
+          UI Artist working on <strong>progression systems, character states and the interfaces that make them readable</strong> — XP economies, reward tiers, streaks, fail states, and the visual language that carries all of it.
+          Built ESA (Emotional State Architecture), a four-state machine applied across a fintech app, a developer tool, and a physical object with its own diegetic interface.
+          Background in visual systems and motion design; also ship what I design. Open to roles and contracts in game UI, UI art and interactive systems.
         </p>
       </div>
     </section>
@@ -516,55 +518,54 @@
 
         <div class="skills-grid">
           <div class="skill-category">
-            <h4>Product & UX</h4>
+            <h4>Game UI</h4>
             <div class="skill-tags">
-              <span class="skill-tag">Product Design</span>
-              <span class="skill-tag">UX/UI Design</span>
-              <span class="skill-tag">User Flows</span>
-              <span class="skill-tag">Information Architecture</span>
-              <span class="skill-tag">Wireframing</span>
-              <span class="skill-tag">Prototyping</span>
-              <span class="skill-tag">Behavioral UX</span>
+              <span class="skill-tag">HUD Design</span>
+              <span class="skill-tag">Menus & Navigation</span>
+              <span class="skill-tag highlight">Diegetic Interfaces</span>
+              <span class="skill-tag">Screen States</span>
+              <span class="skill-tag">Information Hierarchy</span>
+              <span class="skill-tag">Readability at a Glance</span>
             </div>
           </div>
 
           <div class="skill-category">
-            <h4>Research & Strategy</h4>
+            <h4>Systems & Progression</h4>
             <div class="skill-tags">
-              <span class="skill-tag">UX Research</span>
-              <span class="skill-tag">Product Strategy</span>
-              <span class="skill-tag">Usability Testing</span>
-              <span class="skill-tag">Competitive Analysis</span>
-              <span class="skill-tag">Journey Mapping</span>
-              <span class="skill-tag">Metrics Definition</span>
+              <span class="skill-tag">Progression Systems</span>
+              <span class="skill-tag">XP Economies</span>
+              <span class="skill-tag">Reward Tiers</span>
+              <span class="skill-tag">Leaderboards</span>
+              <span class="skill-tag">Streaks & Fail States</span>
+              <span class="skill-tag highlight">Character State Machines</span>
+              <span class="skill-tag">Retention Metrics</span>
             </div>
           </div>
 
           <div class="skill-category">
-            <h4>UI & Systems</h4>
+            <h4>UI Art & Craft</h4>
             <div class="skill-tags">
               <span class="skill-tag">Figma</span>
-              <span class="skill-tag">Design Systems</span>
-              <span class="skill-tag">Auto Layout</span>
+              <span class="skill-tag">UI Style Guides</span>
               <span class="skill-tag">Components & Variants</span>
               <span class="skill-tag">Design Tokens</span>
-              <span class="skill-tag">High-fidelity UI</span>
-              <span class="skill-tag">Responsive Design</span>
-              <span class="skill-tag">Visual Design</span>
-              <span class="skill-tag highlight">AI Tools</span>
+              <span class="skill-tag">Type Scales</span>
+              <span class="skill-tag highlight">Iconography</span>
+              <span class="skill-tag">Color & Signaling</span>
+              <span class="skill-tag">Motion & Feedback</span>
             </div>
           </div>
 
           <div class="skill-category">
-            <h4>Tools & Handoff</h4>
+            <h4>Tools</h4>
             <div class="skill-tags">
-              <span class="skill-tag">Design Handoff</span>
-              <span class="skill-tag">Notion</span>
               <span class="skill-tag">After Effects</span>
+              <span class="skill-tag highlight">Blender</span>
               <span class="skill-tag">Premiere Pro</span>
-              <span class="skill-tag">HTML/CSS Basics</span>
-              <span class="skill-tag">AI-assisted Workflows</span>
+              <span class="skill-tag">Notion</span>
               <span class="skill-tag">Git</span>
+              <span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">AI-assisted Workflows</span>
             </div>
           </div>
         </div>
@@ -616,17 +617,17 @@
 
         <div class="experience-item">
           <div class="exp-header">
-            <h3 class="exp-role">Product Designer & Builder</h3>
+            <h3 class="exp-role">UI Artist &amp; Builder</h3>
             <span class="exp-date">2026</span>
           </div>
           <p class="exp-company">Cuak · Emotional Fintech · <a href="./cuak.html">View Case Study →</a></p>
 
           <ul class="exp-list">
             <li>
-              Designed a <strong>reactive fintech mascot system</strong> that translates invisible credit health into four clear emotional states — replacing financial anxiety with actionable clarity.
+              Designed a <strong>reactive fintech character system</strong> that translates invisible credit health into four clear emotional states — replacing financial anxiety with actionable clarity.
             </li>
             <li>
-              Defined the behavioral core: real-time mascot reactions to spending decisions, a credit-level progression system (Apprentice → Master), and advisory moments before risky purchases.
+              Defined the behavioral core: real-time character reactions to spending decisions, a credit-level progression system (Apprentice → Master), and advisory moments before risky purchases.
             </li>
             <li>
               Designed for anxiety-prone users who avoid raw numbers — externalizing financial state into a character instead of charts and scores.
@@ -646,7 +647,7 @@
 
         <div class="experience-item">
           <div class="exp-header">
-            <h3 class="exp-role">Product Designer</h3>
+            <h3 class="exp-role">UI Artist</h3>
             <span class="exp-date">2026</span>
           </div>
           <p class="exp-company">Duo Git · UI Complete · iOS & Android · <a href="./duogit.html">View Case Study →</a></p>
@@ -659,7 +660,7 @@
               Conducted competitive analysis across Duolingo, GitHub, and Streaks — identifying an uncontested position at the intersection of <strong>high emotional feedback + coding-specific</strong> tracking.
             </li>
             <li>
-              Defined the information architecture, onboarding logic, dashboard views, league ranking, mascot states, and full widget family for iOS and Android.
+              Defined the information architecture, onboarding logic, dashboard views, league ranking, character states, and full widget family for iOS and Android.
             </li>
             <li>
               Created a measurement strategy with behavioral KPIs: streak recovery rate, Day 7 retention, time-to-first-commit, and NPS targets.
@@ -676,10 +677,10 @@
 
         <div class="experience-item">
           <div class="exp-header">
-            <h3 class="exp-role">Product Designer</h3>
+            <h3 class="exp-role">UI Artist</h3>
             <span class="exp-date">2025</span>
           </div>
-          <p class="exp-company">UX AI Generator · AI Tool · <a href="./project-1.html">View Case Study →</a></p>
+          <p class="exp-company">UX Lab OS · Agentic AI Tool · <a href="https://uxlab.odejbyjose.com/" target="_blank" rel="noreferrer">Live →</a></p>
 
           <ul class="exp-list">
             <li>
@@ -741,10 +742,10 @@
     <div class="container">
       <div class="footer-top">
         <span class="footer-item">Colombia, LATAM</span>
-        <a class="footer-item" href="mailto:josealvarezswork@gmail.com">josealvarezswork@gmail.com</a>
+        <a class="footer-item" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>josealvarezswork@gmail.com</a>
         <a class="footer-item" href="https://www.linkedin.com/in/alvarezcja/" target="_blank"
-          rel="noreferrer">LinkedIn</a>
-        <a class="footer-item" href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer">GitHub</a>
+          rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-linkedin"/></svg>LinkedIn</a>
+        <a class="footer-item" href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-github"/></svg>GitHub</a>
       </div>
 
       <div class="footer-cta">

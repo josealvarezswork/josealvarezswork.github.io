@@ -4,56 +4,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — Jose Alvarez</title>
+  <title>About — Jose Alvarez | UI Artist</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <meta name="description"
-    content="Jose Alvarez — Emotional UX designer building AI and fintech products that people don't quit. Behavioral design, gamification, and design systems.">
-  <meta property="og:title" content="About Jose Alvarez — Behavioral Design & Gamification UX">
+    content="Jose Alvarez — UI Artist. Progression systems, character states and the interfaces that make a system readable at a glance.">
+  <meta property="og:title" content="About Jose Alvarez — UI Artist | Game UI & State Systems">
   <meta property="og:description"
-    content="Jose Alvarez — Emotional UX designer building AI and fintech products that people don't quit. Behavioral design, gamification, and design systems.">
+    content="Jose Alvarez — UI Artist. Progression systems, character states and the interfaces that make a system readable at a glance.">
   <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/system.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=3">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=3" />
 
   <style>
-    :root {
-      --bg: #1E1A2E;
-      --text: #F2EFE8;
-      --muted: rgba(242, 239, 232, 0.62);
-      --muted2: rgba(242, 239, 232, 0.36);
-      --stroke: rgba(155, 143, 212, 0.15);
-      --accent: #9B8FD4;
+    
 
-      --serif: "Bricolage Grotesque", sans-serif;
-      --sans: "Bricolage Grotesque", sans-serif;
-
-      --max: 1040px;
-      --radius: 18px;
-    }
-
-    html,
-    body {
-      height: 100%;
-    }
+    /* No `height: 100%`: it caps <body> at the viewport while the page runs
+       much longer, and the sticky header then has one screen of travel
+       before it scrolls away. */
 
     body {
       margin: 0;
     }
 
-    /* This page's header isn't sticky/blurred like the case-study pages,
-       so it explicitly resets the parts of system.css's .site-header that
-       don't apply here instead of relying on them being absent. */
-    .site-header {
-      position: static;
-      padding: 28px 0;
-      background: none;
-      backdrop-filter: none;
-      border-bottom: none;
+    /* The sticky frosted header comes from paper.css now; there is nothing
+       left for this page to opt out of. Its container carries no padding, so
+       the nav drops paper.css's 24px to line up with it. */
+    .nav {
+      width: min(var(--max), calc(100% - 48px));
+      max-width: none;
+      padding: 0;
     }
 
     .container {
@@ -143,20 +129,42 @@
       max-width: 52ch;
     }
 
+    /* Polaroid-style frame instead of a plain rectangle — cream card,
+       slight tilt, a "pin" tab, straightens a bit on hover. */
     .intro-photo {
-      width: 140px;
-      height: 175px;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.05);
+      width: 164px;
+      padding: 10px 10px 30px;
+      border-radius: var(--r-sm);
+      background: #F2EFE8;
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.35);
+      transform: rotate(-4deg);
+      transition: transform 220ms ease;
       flex-shrink: 0;
+      position: relative;
+    }
+
+    .intro-photo:hover {
+      transform: rotate(-1deg) scale(1.02);
+    }
+
+    .intro-photo::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 34px;
+      height: 14px;
+      transform: translateX(-50%) rotate(-6deg);
+      background: rgba(232, 76, 125, 0.55);
+      border: 1px solid rgba(232, 76, 125, 0.75);
     }
 
     .intro-photo img {
+      display: block;
       width: 100%;
-      height: 100%;
+      height: 190px;
       object-fit: cover;
+      border-radius: var(--r-sm);
     }
 
     /* LISTS SECTION */
@@ -254,8 +262,11 @@
 
       .intro-photo {
         order: -1;
-        width: 120px;
-        height: 150px;
+        width: 130px;
+      }
+
+      .intro-photo img {
+        height: 160px;
       }
 
       .lists-grid {
@@ -285,7 +296,7 @@
 </head>
 
 <body>
-  <header class="site-header">
+  <header class="site-header is-shared">
     <nav class="nav">
       <a class="brand" href="../index.html" aria-label="Home">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -301,7 +312,8 @@
           <span></span>
         </button>
         <div class="nav-links">
-        <a href="./how-i-work.html">How I Work</a>
+        <a href="./methodology.html">Framework</a>
+        <a href="./craft.html">Craft</a>
         <a href="./resume.html">Resume</a>
         <a href="./about.html" class="active">About</a>
       </div>
@@ -312,13 +324,15 @@
     <!-- QUOTE -->
     <section class="quote-section">
       <div class="container">
-        <blockquote class="quote-block">
-          <p class="quote-text">
-            Good design
-            <span class="highlight">reduces friction</span> Great product design removes
-            <span class="highlight">unnecessary work.</span>
-          </p>
-        </blockquote>
+        <div class="mat">
+          <blockquote class="quote-block">
+            <p class="quote-text">
+              A system is only as good as
+              <span class="highlight">what it lets you read</span> in the half-second before you
+              <span class="highlight">decide what to do.</span>
+            </p>
+          </blockquote>
+        </div>
       </div>
     </section>
 
@@ -330,16 +344,24 @@
             <h2>Hi, I'm Jose Alvarez</h2>
 
             <p>
-              I'm a behavioral designer specializing in gamification systems and mascot UX — the emotional
-              layer that makes users feel rewarded, not judged, for their behavior inside a product.
+              I'm a UI Artist. I design progression systems, character states and the interfaces
+              that make a system readable at a glance — XP economies, reward tiers, streaks,
+              fail states, and the visual language that carries all of it.
             </p>
             <p>
-              I created ESA (Emotional State Architecture) — a framework that maps user psychology to
-              four emotional states and uses reactive mascot characters to drive retention without guilt.
-              Cuak and DuoGit are two applied case studies across fintech and developer tools.
+              I built ESA (Emotional State Architecture) — a four-state machine where every state has a
+              trigger, a psychological mechanism and an action it invites. It's the logic behind the
+              characters, tiers and fail states in DuoGit and Cuak, and it's what I'm currently applying
+              to a physical device with its own diegetic interface.
             </p>
             <p>
-              Based in Colombia. UTC-5. Open to contracts in gamification, game UX, and behavioral product design.
+              I also build what I design — <a href="https://uxlab.odejbyjose.com/" target="_blank"
+              rel="noreferrer">UX Lab OS</a> is an agentic tool I shipped to production, and I'm finishing
+              a software development degree. It's not a separate career: it's why my prototypes behave
+              instead of just animating.
+            </p>
+            <p>
+              Based in Colombia. UTC-5. Open to roles and contracts in game UI, UI art and interactive systems.
             </p>
 
           </div>
@@ -358,20 +380,21 @@
           <div class="list-column">
             <h3>What I Work On</h3>
             <ul>
-              <li>Gamification systems and progression mechanics</li>
-              <li>Mascot character design for behavioral feedback</li>
-              <li>Retention UX — streaks, states, loss aversion design</li>
-              <li>Behavioral design for anxiety-prone products</li>
-              <li>Game UX — engagement loops, player psychology</li>
+              <li>Game UI — HUDs, menus, states and diegetic interfaces</li>
+              <li>Progression systems — XP economies, reward tiers, leaderboards</li>
+              <li>Character design as a feedback system</li>
+              <li>Fail states and comeback loops</li>
+              <li>UI style guides, iconography and motion</li>
             </ul>
           </div>
 
           <div class="list-column">
             <h3>Highlights</h3>
             <ul>
-              <li>Designed Cuak <em>(fintech mascot system)</em></li>
-              <li>Designed DuoGit <em>(behavioral developer tool)</em></li>
+              <li>DuoGit <em>(progression system + HUD widget family)</em></li>
+              <li>Cuak <em>(character-driven interface, playtested)</em></li>
               <li>Created ESA — Emotional State Architecture</li>
+              <li>Shipped UX Lab OS <em>(agentic tool, in production)</em></li>
               <li>CalArts UI/UX Specialization</li>
               <li>Software Dev degree in progress <em>(TecMD)</em></li>
             </ul>
@@ -385,15 +408,16 @@
     <div class="container">
       <div class="footer-top">
         <span class="footer-item">Colombia, LATAM</span>
-        <a class="footer-item" href="mailto:josealvarezswork@gmail.com">josealvarezswork@gmail.com</a>
+        <a class="footer-item" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>josealvarezswork@gmail.com</a>
         <a class="footer-item" href="https://www.linkedin.com/in/alvarezcja/" target="_blank"
-          rel="noreferrer">LinkedIn</a>
-        <a class="footer-item" href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer">GitHub</a>
+          rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-linkedin"/></svg>LinkedIn</a>
+        <a class="footer-item" href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-github"/></svg>GitHub</a>
       </div>
 
       <div class="footer-cta">
         <span>Let's build </span><span class="cta-accent">something great.</span>
       </div>
+      <p class="footer-credit">Icons by <a href="https://streamlinehq.com" target="_blank" rel="noreferrer">Streamline</a> (CC BY 4.0) &middot; brand marks by <a href="https://simpleicons.org" target="_blank" rel="noreferrer">Simple Icons</a></p>
     </div>
   </footer>
 </body>

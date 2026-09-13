@@ -4,35 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESA Framework — Emotional State Architecture · Jose Alvarez</title>
+  <title>ESA — Emotional State Architecture · Jose Alvarez | UI Artist</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
-  <meta name="description" content="Emotional State Architecture (ESA) — A behavioral design framework that uses emotional mascot systems to transform anxiety-driven products into ones people come back to.">
-  <meta property="og:title" content="ESA — Emotional State Architecture · Jose Alvarez">
-  <meta property="og:description" content="A repeatable design framework for products where user anxiety is the primary retention risk.">
+  <meta name="description" content="Emotional State Architecture (ESA) — my own four-state machine for designing how a system waits, responds, warns and fails. Applied to a fintech app, a developer tool, and a physical object.">
+  <meta property="og:title" content="ESA — Emotional State Architecture · Jose Alvarez | UI Artist">
+  <meta property="og:description" content="A four-state machine for character states, progression and fail states. The logic behind everything I design.">
   <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/system.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=3">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=3" />
   <style>
-    :root {
-      --bg: #1E1A2E;
-      --bg-elevated: #252038;
-      --bg-card: #2D2845;
-      --text: #F2EFE8;
-      --text-muted: rgba(242,239,232,.62);
-      --text-faint: rgba(242,239,232,.36);
-      --stroke: rgba(155,143,212,.15);
-      --stroke-light: rgba(155,143,212,.22);
-      --accent: #9B8FD4;
-      --accent-soft: rgba(155,143,212,.15);
-      --accent-glow: rgba(155,143,212,.08);
-      --serif: "Bricolage Grotesque", sans-serif;
-      --sans: "Bricolage Grotesque", sans-serif;
-      --max: 1040px;
-      --r: 12px;
-      --rl: 16px;
-    }
+    
 
     .accent-bar {
       position: fixed;
@@ -199,7 +184,7 @@
     .case-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
     .case-metric {
       font-size: 13px; font-weight: 600;
-      padding: 8px 14px; border-radius: 8px;
+      padding: 8px 14px; border-radius: var(--r-md);
       background: rgba(255,255,255,.05);
       border: 1px solid var(--stroke-light);
       display: inline-block; align-self: flex-start;
@@ -229,8 +214,8 @@
     .zone-split {
       display: flex; gap: 6px; margin: 12px 0;
     }
-    .zone-data { flex: 60; background: rgba(167,139,250,.15); border-radius: 4px; padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--accent); text-align: center; }
-    .zone-emotional { flex: 40; background: rgba(255,255,255,.05); border-radius: 4px; padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--text-faint); text-align: center; }
+    .zone-data { flex: 60; background: rgba(167,139,250,.15); border-radius: var(--r-sm); padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--accent); text-align: center; }
+    .zone-emotional { flex: 40; background: rgba(255,255,255,.05); border-radius: var(--r-sm); padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--text-faint); text-align: center; }
     .zone-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
 
     /* PILLARS */
@@ -291,13 +276,47 @@
     .footer-copy { font-size: 12px; color: var(--text-faint); letter-spacing: 0.04em; }
     .footer-nav { display: flex; gap: 24px; font-size: 12px; color: var(--text-faint); letter-spacing: 0.06em; }
     .footer-nav a:hover { color: var(--text); }
+  
+    /* --- SHARED CARD LANGUAGE -------------------------------------
+       Matches the home: panels are sunken and rounded, statements sit
+       on paper, and imagery is mounted in a well instead of running to
+       the card edge. Last in this page's own stylesheet on purpose —
+       these have to beat the rules above without a specificity war. */
+    .card, .zone-card, .case-card-footer {
+      border-radius: var(--r-lg);
+      border: 1px solid var(--stroke);
+      box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.32);
+    }
+    .pillar {
+      position: relative;
+      background: var(--paper);
+      color: var(--paper-ink);
+      border: 1px solid rgba(34, 29, 51, 0.14);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42), inset 0 0 22px rgba(90, 78, 58, 0.12);
+    }
+    .pillar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: var(--paper-fleck), var(--paper-fiber), var(--wear-blotch);
+      background-size: 200px 200px, 155px 155px, 360px 360px;
+      filter: grayscale(1);
+      mix-blend-mode: multiply;
+      opacity: 0.2;
+    }
+    .pillar h3, .pillar h4, .pillar strong { color: var(--paper-ink); }
+    .pillar p, .pillar li { color: rgba(34, 29, 51, 0.66); }
+      .pillar-num { color: rgba(34, 29, 51, 0.22); }
   </style>
 </head>
 
 <body>
   <div class="accent-bar"></div>
 
-  <header class="site-header">
+  <header class="site-header is-shared">
     <nav class="nav">
       <a class="brand" href="../index.html" aria-label="Home">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -311,7 +330,8 @@
       </button>
       <div class="nav-links">
         <a href="../index.html">Work</a>
-        <a href="./how-i-work.html">How I Work</a>
+        <a href="./methodology.html" class="active">Framework</a>
+        <a href="./craft.html">Craft</a>
         <a href="./resume.html">Resume</a>
         <a href="./about.html">About</a>
       </div>
@@ -323,21 +343,23 @@
     <!-- HERO -->
     <section class="hero">
       <div class="container">
-        <p class="hero-eyebrow">Design Framework</p>
-        <h1 class="hero-title">
-          Emotional State<br><span class="accent">Architecture</span>
-        </h1>
-        <p class="hero-acronym">ESA — Jose Alvarez, 2026</p>
-        <p class="hero-subtitle">
-          A design framework for products where user anxiety is the retention problem. Uses emotional mascot systems grounded in behavioral psychology — applied across fintech and developer tools.
-        </p>
-        <div class="hero-pills">
-          <span class="pill-tag">Behavioral Design</span>
-          <span class="pill-tag">Emotional UX</span>
-          <span class="pill-tag">Retention Systems</span>
-          <span class="pill-tag neutral">Fintech</span>
-          <span class="pill-tag neutral">Developer Tools</span>
-          <span class="pill-tag neutral">Gamification</span>
+        <div class="mat">
+          <p class="hero-eyebrow">The framework behind everything</p>
+          <h1 class="hero-title">
+            Emotional State<br><span class="accent">Architecture</span>
+          </h1>
+          <p class="hero-acronym">ESA — Jose Alvarez, 2026</p>
+          <p class="hero-subtitle">
+            My own four-state machine for designing how a system waits, responds, warns and fails — grounded in behavioral psychology. It's the logic behind the character states, the reward tiers and the fail states in everything I design.
+          </p>
+          <div class="hero-pills">
+            <span class="pill-tag">Character States</span>
+            <span class="pill-tag">Progression Systems</span>
+            <span class="pill-tag">Fail State Design</span>
+            <span class="pill-tag neutral">Fintech</span>
+            <span class="pill-tag neutral">Developer Tools</span>
+            <span class="pill-tag neutral">Physical Object</span>
+          </div>
         </div>
       </div>
     </section>
@@ -383,7 +405,7 @@
             <span class="state-emoji">😐</span>
             <p class="state-name">Neutral — Ready</p>
             <p class="state-trigger">Trigger: Day start, no activity</p>
-            <p class="state-desc">Pure potential. The day begins without pressure. Expectant posture — the mascot waits, not judges.</p>
+            <p class="state-desc">Pure potential. The day begins without pressure. Expectant posture — the character waits, not judges.</p>
             <span class="state-action">→ First action of the day</span>
           </div>
           <div class="state-card happy-state">
@@ -397,7 +419,7 @@
             <span class="state-emoji">😟</span>
             <p class="state-name" style="color:#fbbf24">Worried — At Risk</p>
             <p class="state-trigger">Trigger: Inactivity / approaching threshold</p>
-            <p class="state-desc">Loss aversion activated. The mascot's distress makes the risk visible and empathetic — not punitive. The most powerful retention state.</p>
+            <p class="state-desc">Loss aversion activated. The character's distress makes the risk visible and empathetic — not punitive. The most powerful retention state.</p>
             <span class="state-action">→ Immediate intervention</span>
           </div>
           <div class="state-card sad-state">
@@ -411,7 +433,7 @@
 
         <div class="card featured" style="margin-top:16px;padding:24px 28px">
           <p style="font-size:14px;color:var(--text-muted);line-height:1.8">
-            <strong style="color:var(--accent)">The Worried state is the most powerful retention driver.</strong> By integrating a real-time countdown when a streak or threshold is at risk, procrastination transforms into empathetic urgency. Unlike a red notification that generates rejection, the Worried mascot appeals to empathy — activating loss aversion without triggering shame paralysis.
+            <strong style="color:var(--accent)">The Worried state is the most powerful retention driver.</strong> By integrating a real-time countdown when a streak or threshold is at risk, procrastination transforms into empathetic urgency. Unlike a red notification that generates rejection, the Worried character appeals to empathy — activating loss aversion without triggering shame paralysis.
           </p>
         </div>
       </div>
@@ -437,7 +459,7 @@
             <tr>
               <td>Anthropomorphism</td>
               <td>Epley, Waytz & Cacioppo — cognitive psychology</td>
-              <td>The mascot as emotional proxy for cold data. Users form social bonds with characters, not dashboards.</td>
+              <td>The character as emotional proxy for cold data. Users form social bonds with characters, not dashboards.</td>
             </tr>
             <tr>
               <td>Loss Aversion</td>
@@ -447,7 +469,7 @@
             <tr>
               <td>Behavioral Nudges</td>
               <td>Thaler & Sunstein — Nudge Theory (Nobel, 2017)</td>
-              <td>Empathetic notifications that guide action without coercion. The mascot nudges, never commands.</td>
+              <td>Empathetic notifications that guide action without coercion. The character nudges, never commands.</td>
             </tr>
             <tr>
               <td>Habit Formation</td>
@@ -457,7 +479,7 @@
             <tr>
               <td>Emotional Design</td>
               <td>Don Norman — 3 levels: visceral, behavioral, reflective</td>
-              <td>Each mascot state operates across all 3 levels simultaneously — look (visceral), interaction (behavioral), meaning (reflective).</td>
+              <td>Each character state operates across all 3 levels simultaneously — look (visceral), interaction (behavioral), meaning (reflective).</td>
             </tr>
             <tr>
               <td>Gamification</td>
@@ -483,7 +505,7 @@
             <div class="case-card-top duogit">
               <span class="case-tag duogit">Developer Tools</span>
               <h2 class="case-title">DuoGit</h2>
-              <p class="case-desc">GitHub activity is cold and judgmental by default. DuoGit applies the 4-state ESA system through Ghost — an emotional cat mascot that reacts to commit streaks in real time. League ranking, SPACE metrics, and home screen widgets keep the emotional layer visible outside the app.</p>
+              <p class="case-desc">GitHub activity is cold and judgmental by default. DuoGit applies the 4-state ESA system through Ghost — an emotional cat character that reacts to commit streaks in real time. League ranking, SPACE metrics, and home screen widgets keep the emotional layer visible outside the app.</p>
               <span class="case-metric" style="color:#10b981">Users checked streak in first 30s unprompted</span>
             </div>
             <div class="case-card-footer">
@@ -496,7 +518,7 @@
             <div class="case-card-top cuak">
               <span class="case-tag cuak">Fintech</span>
               <h2 class="case-title">Cuak</h2>
-              <p class="case-desc">Credit card data triggers anxiety, not clarity. Cuak applies ESA through a duck mascot that reacts to credit health in real time — replacing financial fear with actionable emotional signals. The mascot shields users from cold numbers while guiding their financial decisions.</p>
+              <p class="case-desc">Credit card data triggers anxiety, not clarity. Cuak applies ESA through a duck character that reacts to credit health in real time — replacing financial fear with actionable emotional signals. The character shields users from cold numbers while guiding their financial decisions.</p>
               <span class="case-metric" style="color:#6fba96">5/5 prototype testers felt more in control</span>
             </div>
             <div class="case-card-footer">
@@ -506,8 +528,8 @@
           </div>
         </div>
 
-        <div class="card" style="margin-top:16px;border-left:3px solid var(--accent)">
-          <p style="font-size:14px;color:var(--text-muted);line-height:1.8;padding-left:4px">
+        <div class="card featured" style="margin-top:16px">
+          <p style="font-size:14px;color:var(--text-muted);line-height:1.8">
             <strong style="color:var(--text)">The pattern holds across verticals.</strong> GitHub commits and credit card usage are completely different data types — but both trigger the same psychological response: avoidance born from anxiety. ESA resolves both through the same mechanism: an emotional character that makes the data feel like an ally, not a judge.
           </p>
         </div>
@@ -548,7 +570,7 @@
               <div class="zone-data">60% Countdown</div>
               <div class="zone-emotional" style="background:rgba(251,191,36,.15);color:#fbbf24">40% Worried</div>
             </div>
-            <p class="zone-desc">Real-time countdown + Worried mascot. Activates <strong>Core Drive 8: Loss Aversion</strong> — the most powerful retention surface. Urgency without punishment.</p>
+            <p class="zone-desc">Real-time countdown + Worried character. Activates <strong>Core Drive 8: Loss Aversion</strong> — the most powerful retention surface. Urgency without punishment.</p>
           </div>
         </div>
       </div>
@@ -565,7 +587,7 @@
             <span class="pillar-num">1</span>
             <div class="pillar-content">
               <h3>Guide, don't dictate</h3>
-              <p>Provide a structure that eliminates the "blank page" friction without imposing rigid guardrails. The mascot suggests, nudges, and reacts — it never commands. The user is always the final curator of their own behavior.</p>
+              <p>Provide a structure that eliminates the "blank page" friction without imposing rigid guardrails. The character suggests, nudges, and reacts — it never commands. The user is always the final curator of their own behavior.</p>
             </div>
           </div>
           <div class="pillar">
@@ -579,7 +601,7 @@
             <span class="pillar-num">3</span>
             <div class="pillar-content">
               <h3>Amplify judgment, not guilt</h3>
-              <p>The mascot and the emotional layer are assistance vehicles — they make the user feel capable, not judged. Guilt-free motivation: the user acts because their companion needs them, not because the system punishes absence.</p>
+              <p>The character and the emotional layer are assistance vehicles — they make the user feel capable, not judged. Guilt-free motivation: the user acts because their companion needs them, not because the system punishes absence.</p>
             </div>
           </div>
         </div>
@@ -642,9 +664,10 @@
           <a href="./duogit.html">DuoGit</a>
           <a href="./cuak.html">Cuak</a>
           <a href="./about.html">About</a>
-          <a href="mailto:josealvarezswork@gmail.com">Contact</a>
+          <a class="with-ico" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>Contact</a>
         </nav>
       </div>
+      <p class="footer-credit">Icons by <a href="https://streamlinehq.com" target="_blank" rel="noreferrer">Streamline</a> (CC BY 4.0) &middot; brand marks by <a href="https://simpleicons.org" target="_blank" rel="noreferrer">Simple Icons</a></p>
     </div>
   </footer>
 
