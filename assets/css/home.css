@@ -358,19 +358,13 @@ body.page-home [data-state="happy"]   { --state: 95 211 154; }
 body.page-home [data-state="worried"] { --state: 240 180 41; }
 body.page-home [data-state="broken"]  { --state: 224 74 63; }
 
-/* Four notes, same stock as the sheets on the mat. With the pill strip gone
-   the notes are the control, so the selected one has to say so: it lifts, and
-   the panel behind its character takes the state colour flat. */
+/* Four cut-outs. The material — flat fill, thick outline, hard offset shadow
+   — comes from .sticker in paper.css; this rule only sets geometry. With the
+   pill strip gone the notes are the control, so the selected one lifts. */
 body.page-home .esa-card {
-  position: relative;
-  background: var(--paper);
-  color: var(--paper-ink);
-  border: 1px solid rgba(34, 29, 51, 0.14);
-  border-radius: var(--r-lg);
   padding: 16px 15px 18px;
   gap: 10px;
   overflow: hidden;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 /* Each note sits slightly off square, like four sheets laid down by hand. */
@@ -379,15 +373,6 @@ body.page-home .esa-card:nth-of-type(2) { transform: rotate(0.9deg); }
 body.page-home .esa-card:nth-of-type(3) { transform: rotate(-0.7deg); }
 body.page-home .esa-card:nth-of-type(4) { transform: rotate(1.3deg); }
 
-/* Paper fibre. Multiply, because overlay blows out on light stock. */
-
-body.page-home .esa-card { box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42), inset 0 0 22px rgba(90, 78, 58, 0.12); }
-
-body.page-home .esa-card:hover,
-body.page-home .esa-card.is-active {
-  /* keeps the edge shading — box-shadow replaces wholesale, it doesn't merge */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 22px rgba(90, 78, 58, 0.12);
-}
 body.page-home .esa-card.is-active:nth-of-type(1) { transform: rotate(-1.4deg) translateY(-6px); }
 body.page-home .esa-card.is-active:nth-of-type(2) { transform: rotate(0.9deg) translateY(-6px); }
 body.page-home .esa-card.is-active:nth-of-type(3) { transform: rotate(-0.7deg) translateY(-6px); }
@@ -406,12 +391,15 @@ body.page-home .esa-card.is-active .esa-card-label { color: rgba(34, 29, 51, 0.8
    than an image dropped on the background. */
 /* The character is mounted on a printed panel, the way the hero sheet blocks
    a word in mint. Flat colour, no gradient. */
+/* A drawn block, same outline weight as the cut-out it sits on — not a
+   sunken well, which belongs to the other paper language. */
 body.page-home .esa-card img {
   width: 100%;
   height: 104px;
   padding: 10px;
-  border-radius: 3px;
-  background: rgba(34, 29, 51, 0.05);
+  border-radius: var(--r-sm);
+  background: rgba(34, 29, 51, 0.1);
+  border: 2px solid var(--paper-ink);
   box-shadow: none;
   transition: background 180ms ease;
 }

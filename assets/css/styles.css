@@ -639,23 +639,18 @@ a { color: inherit; text-decoration: none; }
 }
 @media (min-width: 760px) { .esa-arrow { display: flex; } }
 
+/* Layout only. The material — fill, outline, shadow, active state — belongs
+   to .sticker in paper.css and to home.css. This file loads between them, so
+   every visual declaration left here silently beat the shared recipe: the
+   notes rendered as the old dark cards with a lavender active border. */
 .esa-card {
   font-family: inherit;
   text-align: left;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: var(--bg-2);
-  border: 1px solid var(--stroke);
-  border-radius: 18px;
   padding: 18px 18px 20px;
   cursor: pointer;
-  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
-}
-.esa-card:hover { border-color: rgba(255,255,255,0.28); transform: translateY(-2px); }
-.esa-card.is-active {
-  border-color: var(--accent);
-  background: rgba(155, 143, 212, 0.1);
 }
 
 .esa-card-label {
@@ -663,16 +658,11 @@ a { color: inherit; text-decoration: none; }
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted-2);
 }
-.esa-card.is-active .esa-card-label { color: var(--accent); }
 
 .esa-card img {
-  width: 76px;
-  height: 76px;
   object-fit: contain;
   align-self: center;
-  filter: drop-shadow(0 10px 22px rgba(0,0,0,0.35));
 }
 
 .esa-card-trigger {
@@ -771,7 +761,6 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 640px) {
   .esa { padding: 64px 0; }
   .esa-panel { padding: 24px 20px; }
-  .esa-card img { width: 64px; height: 64px; }
   .esa-return { text-align: left; }
   .esa-text { font-size: 14.5px; }
 

@@ -328,3 +328,33 @@
   border-color: rgba(232, 240, 235, 0.34);
   color: #eef3ef;
 }
+
+/* --- STICKER ------------------------------------------------------------
+   The other paper language: cut out and drawn, rather than photographed.
+   Where `paper-surface` imitates stock — fibre, specks, a soft shadow —
+   `sticker` draws it: flat fill, a thick dark outline, and a hard offset
+   shadow with no blur at all. That last one is what does the work; a blurred
+   shadow reads as a UI card lifting off a page, a solid one reads as a
+   cut-out lying on top of it.                                             */
+.sticker {
+  position: relative;
+  background: var(--paper);
+  color: var(--paper-ink);
+  border: 3px solid var(--paper-ink);
+  border-radius: var(--r-lg);
+  box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.5);
+  /* No texture overlay: the fill is flat on purpose. */
+}
+
+.sticker:hover,
+.sticker.is-active {
+  box-shadow: 9px 9px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* Blocks inside a sticker are drawn the same way — a flat panel with the
+   same outline weight, not a sunken well. */
+.sticker .sticker-block {
+  background: rgba(34, 29, 51, 0.1);
+  border: 2px solid var(--paper-ink);
+  border-radius: var(--r-sm);
+}
