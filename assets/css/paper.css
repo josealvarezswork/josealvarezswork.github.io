@@ -358,3 +358,29 @@
   border: 2px solid var(--paper-ink);
   border-radius: var(--r-sm);
 }
+
+/* --- PINNED -------------------------------------------------------------
+   A pin is what says "board". Without it a card with a hard shadow is just
+   a cut-out floating on a colour; with it, the surface behind is implied
+   even before it is drawn.
+
+   The head sits inside the card's top edge rather than straddling it, so it
+   survives `overflow: hidden` and never collides with a rotated neighbour. */
+.pinned { position: relative; }
+.pinned::after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  z-index: 3;
+  border-radius: 50%;
+  background: var(--accent-red);
+  /* Offset ring, not a blur: the pin has to belong to the same flat-shadow
+     world as the card it holds down. */
+  box-shadow:
+    inset -2px -2px 0 rgba(0, 0, 0, 0.22),
+    2px 3px 0 rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%);
+}

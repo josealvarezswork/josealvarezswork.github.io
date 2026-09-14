@@ -362,7 +362,8 @@ body.page-home [data-state="broken"]  { --state: 224 74 63; }
    — comes from .sticker in paper.css; this rule only sets geometry. With the
    pill strip gone the notes are the control, so the selected one lifts. */
 body.page-home .esa-card {
-  padding: 16px 15px 18px;
+  /* room for the pin head above the label */
+  padding: 30px 15px 18px;
   gap: 10px;
   overflow: hidden;
   transition: transform 180ms ease, box-shadow 180ms ease;
