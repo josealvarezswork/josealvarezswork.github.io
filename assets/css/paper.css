@@ -169,6 +169,11 @@
      come from the element's own opacity, which takes the grain with it and
      lets the card edge underneath actually show through. */
   opacity: 0.42;
+  /* Translucent tape lifts whatever is under it: light goes through the strip,
+     hits the surface and comes back. `screen` is what makes the covered corner
+     read as being beneath the tape instead of merely behind it — without it
+     the strip just sits there, overlapping nothing in particular. */
+  mix-blend-mode: screen;
   border-left: 1px solid rgba(255, 255, 255, 0.14);
   border-right: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
