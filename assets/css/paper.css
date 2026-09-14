@@ -457,7 +457,7 @@
   overflow: visible;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2.4;
+  stroke-width: 1.8;
   stroke-linecap: round;
   flex: none;
 }
@@ -467,10 +467,10 @@
 .brand-ring {
   fill: currentColor;
   fill-opacity: 0.12;
-  stroke-width: 2;
+  stroke-width: 1.5;
 }
 
-.brand-slash { stroke-width: 2.8; }
+.brand-slash { stroke-width: 2.1; }
 
 /* --- the three beats, only while .is-drawing is on ---------------------- */
 .brand-logo.is-drawing .brand-ring {
