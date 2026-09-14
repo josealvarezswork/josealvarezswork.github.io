@@ -359,29 +359,28 @@
   border-radius: var(--r-sm);
 }
 
-/* --- TAPE ---------------------------------------------------------------
-   A strip straddling the top edge — half on the card, half on the board
-   behind it. That overlap is the whole trick: a mark that stays inside the
-   card reads as printed on it, while one that crosses the edge reads as
-   holding it down, and implies the surface underneath before that surface is
-   even drawn.
+/* --- PINNED -------------------------------------------------------------
+   A pin is what says "board". Without it a card with a hard shadow is just
+   a cut-out floating on a colour; with it, the surface behind is implied
+   even before it is drawn.
 
-   Needs `overflow: visible` on the taped element, or the half that matters
-   gets clipped away. */
-.tape-top { position: relative; overflow: visible; }
-.tape-top::after {
+   The head sits inside the card's top edge rather than straddling it, so it
+   survives `overflow: hidden` and never collides with a rotated neighbour. */
+.pinned { position: relative; }
+.pinned::after {
   content: "";
   position: absolute;
-  top: -10px;
+  top: 11px;
   left: 50%;
-  width: 56px;
-  height: 21px;
+  width: 13px;
+  height: 13px;
   z-index: 3;
-  background: var(--accent-pink);
-  /* A lit top lip and a shaded bottom one: flat colour alone reads as a
-     painted rectangle rather than something lying on top. */
+  border-radius: 50%;
+  background: var(--accent-red);
+  /* Offset ring, not a blur: the pin has to belong to the same flat-shadow
+     world as the card it holds down. */
   box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -3px 0 rgba(0, 0, 0, 0.14);
-  transform: translateX(-50%) rotate(-2.5deg);
+    inset -2px -2px 0 rgba(0, 0, 0, 0.22),
+    2px 3px 0 rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%);
 }

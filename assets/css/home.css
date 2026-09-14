@@ -362,10 +362,10 @@ body.page-home [data-state="broken"]  { --state: 224 74 63; }
    — comes from .sticker in paper.css; this rule only sets geometry. With the
    pill strip gone the notes are the control, so the selected one lifts. */
 body.page-home .esa-card {
-  padding: 26px 15px 18px;
+  /* room for the pin head above the label */
+  padding: 30px 15px 18px;
   gap: 10px;
-  /* visible, or the half of the tape that sits on the board gets clipped */
-  overflow: visible;
+  overflow: hidden;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 /* Each note sits slightly off square, like four sheets laid down by hand. */
@@ -391,14 +391,15 @@ body.page-home .esa-card:nth-of-type(2).is-active,
 body.page-home .esa-card:nth-of-type(4):hover,
 body.page-home .esa-card:nth-of-type(4).is-active { box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.36); }
 
+/* The pin head is lit from the same side as its note. */
+body.page-home .esa-card:nth-of-type(1)::after,
+body.page-home .esa-card:nth-of-type(3)::after {
+  box-shadow: inset 2px -2px 0 rgba(0, 0, 0, 0.22), -2px 3px 0 rgba(0, 0, 0, 0.4);
+}
 
-body.page-home .esa-card:nth-of-type(1):hover,
 body.page-home .esa-card.is-active:nth-of-type(1) { transform: rotate(-1.4deg) translateY(-6px); }
-body.page-home .esa-card:nth-of-type(2):hover,
 body.page-home .esa-card.is-active:nth-of-type(2) { transform: rotate(0.9deg) translateY(-6px); }
-body.page-home .esa-card:nth-of-type(3):hover,
 body.page-home .esa-card.is-active:nth-of-type(3) { transform: rotate(-0.7deg) translateY(-6px); }
-body.page-home .esa-card:nth-of-type(4):hover,
 body.page-home .esa-card.is-active:nth-of-type(4) { transform: rotate(1.3deg) translateY(-6px); }
 
 body.page-home .esa-card-label {
