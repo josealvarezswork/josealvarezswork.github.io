@@ -256,6 +256,21 @@
 /* --- TYPE ---------------------------------------------------------------
    Three voices, and each one has a job. Amber is annotation, the display
    serif is for statements, mono is for anything that measures or labels.  */
+/* A page that is a child of another page gets a way back, above the title
+   and out of the nav. The icon sprite has no directional arrows on purpose,
+   so this is a literal arrow character, matching `.section-link`. */
+.hero-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--muted-2);
+  transition: color 160ms ease;
+}
+.hero-back:hover { color: var(--text-muted); }
+
 .hero-eyebrow,
 .eyebrow {
   font-size: 12px;

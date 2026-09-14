@@ -171,11 +171,3 @@ a {
 
 /* Minimal sub-page header (design system pages): brand + a single
    "back to case study" link instead of the full nav-links/hamburger. */
-.nav-back {
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: .04em;
-}
-.nav-back:hover {
-  color: var(--text);
-}
