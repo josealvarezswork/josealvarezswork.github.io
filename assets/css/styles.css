@@ -728,7 +728,9 @@ a { color: inherit; text-decoration: none; }
 }
 
 .esa-link {
-  display: inline-block;
+  /* No display here: paper.css makes this a flex row so an icon can sit next
+     to the label. styles.css loads after it, so an inline-block declaration
+     here silently won and left the hammer glued to the text. */
   margin-top: 30px;
   font-size: 13px;
   font-weight: 600;
