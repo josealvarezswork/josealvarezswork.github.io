@@ -293,7 +293,19 @@
   <header class="site-header">
     <nav class="nav">
       <a class="brand" href="../index.html" aria-label="Home">
-        <svg class="brand-logo" viewBox="0 0 28 34" aria-hidden="true"><ellipse class="brand-o" cx="14" cy="18" rx="10" ry="13.6"/><line class="brand-slash" x1="19.5" y1="2.5" x2="8.5" y2="33.5"/></svg>
+        <svg class="brand-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <defs>
+              <filter id="brand-rough" x="-14%" y="-14%" width="128%" height="128%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="5" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="1.7" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+            <g filter="url(#brand-rough)">
+              <circle class="brand-ring" cx="20" cy="20" r="17"/>
+              <ellipse class="brand-o" cx="20" cy="20" rx="7.6" ry="10.2"/>
+              <line class="brand-slash" x1="26" y1="8.5" x2="14" y2="31.5"/>
+            </g>
+          </svg>
         <span class="brand-text">
           <span class="brand-name">Jose Alvarez</span>
           <span class="brand-sub">Design</span>
@@ -385,5 +397,6 @@
       </div>
     </div>
   </footer>
-</body>
+    <script src="../scripts/brand.js?v=1" defer></script>
+  </body>
 </html>

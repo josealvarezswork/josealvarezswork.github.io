@@ -433,51 +433,77 @@
 }
 
 /* --- BRAND MARK ---------------------------------------------------------
-   Ø, drawn in two beats: the oval strokes itself, then the slash drops in
-   from above and overshoots slightly as it lands — the bounce is what makes
-   it read as a stroke being placed rather than a shape fading in.
+   Ø in a ring, drawn in three beats: the ring circles, the oval strokes
+   itself inside it, then the slash enters along its own axis and overshoots
+   slightly as it lands — the bounce is what makes it read as a stroke being
+   placed rather than a shape fading in.
 
-   The oval uses stroke-dashoffset, which repaints rather than compositing.
-   That is fine here and only here: it is a 24px element and it runs once on
-   load, not in a loop. The slash moves on transform, which is free.        */
+   The drawn mark is the DEFAULT state and .is-drawing is what animates. CSS
+   cannot replay an animation that has already finished, so scripts/brand.js
+   toggles that class: once on load, again on hover. Without this inversion a
+   visitor with JS off would get a logo stuck mid-draw.
+
+   The dash offsets repaint rather than composite. Fine here and only here:
+   a 26px element that runs on load and on hover, never in a loop. The slash
+   moves on transform, which is free.
+
+   Geometry is derived, not eyeballed. Ring r=17 -> 2*pi*r = 106.8. Oval
+   7.6x10.2 -> 56.2 by Ramanujan. Slash (26,8.5)->(14,31.5) is length 25.9,
+   so its entry offset is that vector reversed and overshot by 2 units.
+   Change the SVG and these numbers have to be recomputed.               */
 .brand-logo {
-  width: 23px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   overflow: visible;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2.1;
+  stroke-width: 2.4;
   stroke-linecap: round;
   flex: none;
 }
 
-.brand-o {
-  /* ~79 user units around this ellipse; 82 leaves the join clean */
-  stroke-dasharray: 82;
-  stroke-dashoffset: 82;
-  animation: brand-draw 620ms cubic-bezier(0.3, 0.7, 0.3, 1) 120ms forwards;
+/* The ring carries a wash of the ink so the mark reads as a disc, the way
+   the sprite icons sit on a tint rather than floating as bare line work. */
+.brand-ring {
+  fill: currentColor;
+  fill-opacity: 0.12;
+  stroke-width: 2;
 }
 
-.brand-slash {
-  opacity: 0;
-  /* Enters along its own axis, not straight down. The offset is the slash's
-     own direction vector reversed: it slides in from upper right, the way the
-     stroke would actually be drawn. */
-  transform: translate(11.7px, -32.9px);
-  animation: brand-drop 560ms cubic-bezier(0.34, 1.8, 0.5, 1) 700ms forwards;
+.brand-slash { stroke-width: 2.8; }
+
+/* --- the three beats, only while .is-drawing is on ---------------------- */
+.brand-logo.is-drawing .brand-ring {
+  stroke-dasharray: 108;
+  animation: brand-ring 520ms cubic-bezier(0.3, 0.7, 0.3, 1) 60ms backwards;
+}
+.brand-logo.is-drawing .brand-o {
+  stroke-dasharray: 58;
+  animation: brand-o 420ms cubic-bezier(0.3, 0.7, 0.3, 1) 440ms backwards;
+}
+.brand-logo.is-drawing .brand-slash {
+  animation: brand-slash 520ms cubic-bezier(0.34, 1.8, 0.5, 1) 800ms backwards;
 }
 
-@keyframes brand-draw {
-  to { stroke-dashoffset: 0; }
+@keyframes brand-ring {
+  from { stroke-dashoffset: 108; fill-opacity: 0; }
+  60%  { fill-opacity: 0; }
+  to   { stroke-dashoffset: 0; fill-opacity: 0.12; }
 }
-@keyframes brand-drop {
-  0%   { opacity: 0; transform: translate(11.7px, -32.9px); }
+@keyframes brand-o {
+  from { stroke-dashoffset: 58; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes brand-slash {
+  0%   { opacity: 0; transform: translate(12.9px, -24.8px); }
   30%  { opacity: 1; }
   100% { opacity: 1; transform: translate(0, 0); }
 }
 
-/* Reduced motion gets the mark, not the performance. */
+/* Reduced motion gets the mark, not the performance. brand.js checks the
+   same query and never adds the class, but the guard is cheap. */
 @media (prefers-reduced-motion: reduce) {
-  .brand-o { animation: none; stroke-dashoffset: 0; }
-  .brand-slash { animation: none; opacity: 1; transform: none; }
+  .brand-logo.is-drawing .brand-ring,
+  .brand-logo.is-drawing .brand-o,
+  .brand-logo.is-drawing .brand-slash { animation: none; }
 }
