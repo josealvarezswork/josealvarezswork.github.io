@@ -474,11 +474,6 @@ body.page-home .build-col {
   position: relative;
   padding-right: 18px;
 }
-body.page-home .build-num {
-  font-family: var(--mono);
-  color: rgba(242, 239, 232, 0.42);
-  font-size: 13px;
-}
 body.page-home .build-col h3 { font-size: 16px; margin-bottom: 6px; }
 body.page-home .build-col p {
   font-size: 12.5px;
