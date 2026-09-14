@@ -408,23 +408,25 @@
   bottom: 100%;
   width: 18px;
   height: 18px;
-  margin-bottom: -14px;
+  /* bottom:100% already puts it above the label; a negative margin here was
+     dragging it back down onto the word. 6px of air instead. */
+  margin-bottom: 6px;
   fill: currentColor;
   opacity: 0;
   pointer-events: none;
-  transform: translate(-50%, 8px) scale(0.7);
+  transform: translate(-50%, 10px) scale(0.7);
   transition: transform 220ms cubic-bezier(0.2, 0.8, 0.3, 1), opacity 160ms ease;
 }
 
 .nav-links a:hover .nav-ico,
 .nav-links a:focus-visible .nav-ico {
   opacity: 1;
-  transform: translate(-50%, -2px) scale(1);
+  transform: translate(-50%, 0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .nav-ico { transition: opacity 160ms ease; }
-  .nav-links a:hover .nav-ico { transform: translate(-50%, -2px) scale(1); }
+  .nav-links a:hover .nav-ico { transform: translate(-50%, 0) scale(1); }
 }
 
 /* The mobile menu is a full-screen overlay with no hover to speak of. */
