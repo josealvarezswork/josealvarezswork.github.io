@@ -44,20 +44,6 @@
   </head>
 
   <body class="page-home">
-    <!-- Roughen filter for drawn outlines. Must be inline: url(#id) only
-         resolves inside the current document, so it cannot live in a
-         stylesheet or in the icon sprite. -->
-    <svg id="ink-filters" width="0" height="0" aria-hidden="true" focusable="false"
-         style="position:absolute">
-      <filter id="ink-rough" x="-10%" y="-10%" width="120%" height="120%"
-              filterUnits="objectBoundingBox">
-        <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3"
-                      seed="7" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2"
-                           xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-    </svg>
-
     <header class="site-header">
       <nav class="nav">
         <a class="brand" href="./" aria-label="Home">

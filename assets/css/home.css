@@ -384,40 +384,31 @@ body.page-home .esa-card-label {
   letter-spacing: 0.14em;
   color: rgba(34, 29, 51, 0.45);
 }
-body.page-home .esa-card.is-active .esa-card-label { color: var(--ink); }
+body.page-home .esa-card.is-active .esa-card-label { color: rgba(34, 29, 51, 0.85); }
 
 
 /* The character sits in a well, like a specimen mounted on the card rather
    than an image dropped on the background. */
 /* The character is mounted on a printed panel, the way the hero sheet blocks
    a word in mint. Flat colour, no gradient. */
-/* The character sits on a drawn block: ink outline, a halftone field for
-   shading, and the state colour laid flat over it. No gradients — this
-   language shades with a denser or sparser grid of dots. */
+/* A drawn block, same outline weight as the cut-out it sits on — not a
+   sunken well, which belongs to the other paper language. */
 body.page-home .esa-card img {
   width: 100%;
   height: 104px;
   padding: 10px;
   border-radius: var(--r-sm);
-  border: 2px solid var(--ink);
-  background-color: rgba(20, 20, 15, 0.05);
-  /* A halftone is a gradient made of dots: dense at one corner, gone at the
-     other. The paper-coloured wash on top is what thins it out — masking the
-     layer would have taken the block's fill with it, and an <img> has no
-     pseudo-element to put the dots on instead. */
-  background-image:
-    linear-gradient(155deg, rgba(239, 234, 225, 0) 18%, var(--paper) 72%),
-    radial-gradient(circle, var(--ink-soft) 1px, transparent 1.15px);
-  background-size: 100% 100%, 4.5px 4.5px;
+  background: rgba(34, 29, 51, 0.1);
+  border: 2px solid var(--paper-ink);
   box-shadow: none;
-  transition: background-color 180ms ease;
+  transition: background 180ms ease;
 }
-body.page-home .esa-card:hover img { background-color: rgb(var(--state) / 0.3); }
-body.page-home .esa-card.is-active img { background-color: rgb(var(--state) / 0.45); }
+body.page-home .esa-card:hover img { background: rgb(var(--state) / 0.22); }
+body.page-home .esa-card.is-active img { background: rgb(var(--state) / 0.34); }
 
 
-body.page-home .esa-card-trigger { font-size: 11px; color: var(--ink); }
-body.page-home .esa-card-sub { font-size: 11.5px; line-height: 1.5; color: var(--ink-soft); }
+body.page-home .esa-card-trigger { font-size: 11px; color: rgba(34, 29, 51, 0.82); }
+body.page-home .esa-card-sub { font-size: 11.5px; line-height: 1.5; color: rgba(34, 29, 51, 0.55); }
 
 /* The dashed return loop used to carry the space between the state row and
    the detail panel; without it they sat 10px apart. */

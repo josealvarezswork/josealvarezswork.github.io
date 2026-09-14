@@ -75,14 +75,6 @@
   --r-xl: 22px;
   --r-pill: 999px;
 
-  /* --- drawn ink -------------------------------------------------------
-     The illustration language: near-black ink, one acid accent, and halftone
-     dots for shading. Ink is not pure black — pure black on paper reads as a
-     print error rather than as a drawn line. */
-  --ink: #14140f;
-  --ink-soft: rgba(20, 20, 15, 0.55);
-  --acid: #d8e44b;
-
   /* --- paper ----------------------------------------------------------- */
   --paper: #efeae1;
   --paper-2: #e6e0d4;
