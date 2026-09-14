@@ -378,18 +378,18 @@ body.page-home .esa-card:nth-of-type(4) { transform: rotate(1.3deg); }
    light read as one gesture instead of two. Notes 1 and 3 lean left, 2 and 4
    lean right — the sign of the x offset tracks the sign of the rotation. */
 body.page-home .esa-card:nth-of-type(1),
-body.page-home .esa-card:nth-of-type(3) { box-shadow: -7px 7px 0 rgba(0, 0, 0, 0.5); }
+body.page-home .esa-card:nth-of-type(3) { box-shadow: -4px 4px 0 rgba(0, 0, 0, 0.3); }
 body.page-home .esa-card:nth-of-type(2),
-body.page-home .esa-card:nth-of-type(4) { box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.5); }
+body.page-home .esa-card:nth-of-type(4) { box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3); }
 
 body.page-home .esa-card:nth-of-type(1):hover,
 body.page-home .esa-card:nth-of-type(1).is-active,
 body.page-home .esa-card:nth-of-type(3):hover,
-body.page-home .esa-card:nth-of-type(3).is-active { box-shadow: -9px 9px 0 rgba(0, 0, 0, 0.55); }
+body.page-home .esa-card:nth-of-type(3).is-active { box-shadow: -6px 6px 0 rgba(0, 0, 0, 0.36); }
 body.page-home .esa-card:nth-of-type(2):hover,
 body.page-home .esa-card:nth-of-type(2).is-active,
 body.page-home .esa-card:nth-of-type(4):hover,
-body.page-home .esa-card:nth-of-type(4).is-active { box-shadow: 9px 9px 0 rgba(0, 0, 0, 0.55); }
+body.page-home .esa-card:nth-of-type(4).is-active { box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.36); }
 
 /* The pin head is lit from the same side as its note. */
 body.page-home .esa-card:nth-of-type(1)::after,
@@ -423,7 +423,7 @@ body.page-home .esa-card img {
   padding: 10px;
   border-radius: var(--r-sm);
   background: rgba(34, 29, 51, 0.1);
-  border: 2px solid var(--paper-ink);
+  border: 1.5px solid var(--paper-ink);
   box-shadow: none;
   transition: background 180ms ease;
 }

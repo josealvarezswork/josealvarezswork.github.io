@@ -340,15 +340,15 @@
   position: relative;
   background: var(--paper);
   color: var(--paper-ink);
-  border: 3px solid var(--paper-ink);
+  border: 1.5px solid var(--paper-ink);
   border-radius: var(--r-lg);
-  box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
   /* No texture overlay: the fill is flat on purpose. */
 }
 
 .sticker:hover,
 .sticker.is-active {
-  box-shadow: 9px 9px 0 rgba(0, 0, 0, 0.55);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.36);
 }
 
 /* Blocks inside a sticker are drawn the same way — a flat panel with the
