@@ -710,11 +710,6 @@ body.page-home .sheet-list {
   line-height: 2.05;
   color: rgba(34, 29, 51, 0.78);
 }
-body.page-home .sheet-list b {
-  font-weight: 400;
-  margin-right: 9px;
-  color: rgba(34, 29, 51, 0.38);
-}
 
 /* Masking tape across the foot, carrying the aside that used to float. */
 body.page-home .sheet-tape {

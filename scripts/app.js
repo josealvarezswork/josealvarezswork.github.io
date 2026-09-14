@@ -209,7 +209,7 @@ function initPaperStack() {
     kicker.textContent = s.kicker;
     title.innerHTML = s.title;
     list.innerHTML = s.list
-      .map((item, k) => `<li><b>0${k + 1}</b> ${item}</li>`)
+      .map(item => `<li>${item}</li>`)
       .join('');
     tape.textContent = s.tape;
   }
