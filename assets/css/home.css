@@ -637,13 +637,18 @@ body.page-home .sheet--front.is-turning {
   body.page-home .sheet--front.is-turning { transform: rotate(-1deg); opacity: 1; }
 }
 
+/* Geometry only — the material is .sticker. The shadow is set per sheet so
+   it falls on the side that sheet leans toward, the same rule the state
+   notes follow. */
 body.page-home .sheet {
   position: absolute;
   inset: 0;
   border-radius: var(--r-lg);
-  background: var(--paper);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
 }
+/* front leans left, mid leans right, back leans left */
+body.page-home .sheet--front { box-shadow: -8px 8px 0 rgba(0, 0, 0, 0.5); }
+body.page-home .sheet--mid { box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.45); }
+body.page-home .sheet--back { box-shadow: -8px 8px 0 rgba(0, 0, 0, 0.45); }
 /* The two behind are pure edge: they exist to give the stack thickness. */
 body.page-home .sheet--back {
   background: var(--paper-3);
@@ -657,16 +662,13 @@ body.page-home .sheet--mid {
 body.page-home .sheet--front {
   display: flex;
   flex-direction: column;
-  padding: 46px 34px 34px;
+  padding: 54px 34px 34px;
   color: var(--paper-ink);
   transform: rotate(-1deg);
   overflow: hidden;
 }
 /* Paper fibre. Multiply, not overlay: on light stock overlay blows out. */
 /* Stock is never flat right to the cut: the edge catches more. */
-body.page-home .sheet--front {
-  box-shadow: inset 0 0 26px rgba(90, 78, 58, 0.14);
-}
 
 body.page-home .sheet-kicker {
   margin: 0 0 14px;
