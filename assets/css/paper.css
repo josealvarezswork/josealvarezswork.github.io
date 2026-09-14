@@ -56,8 +56,6 @@
   margin: 0 auto;
   padding: 0 24px;
 }
-.brand-mark { border-color: rgba(167, 139, 250, 0.4); }
-.brand-mark::before { background: var(--accent); }
 .nav-links { font-size: 12.5px; opacity: 0.78; }
 .nav-links a:hover { opacity: 1; }
 
@@ -432,4 +430,52 @@
 /* The mobile menu is a full-screen overlay with no hover to speak of. */
 @media (max-width: 640px) {
   .nav-ico { display: none; }
+}
+
+/* --- BRAND MARK ---------------------------------------------------------
+   Ø, drawn in two beats: the oval strokes itself, then the slash drops in
+   from above and overshoots slightly as it lands — the bounce is what makes
+   it read as a stroke being placed rather than a shape fading in.
+
+   The oval uses stroke-dashoffset, which repaints rather than compositing.
+   That is fine here and only here: it is a 24px element and it runs once on
+   load, not in a loop. The slash moves on transform, which is free.        */
+.brand-logo {
+  width: 23px;
+  height: 28px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.1;
+  stroke-linecap: round;
+  flex: none;
+}
+
+.brand-o {
+  /* ~79 user units around this ellipse; 82 leaves the join clean */
+  stroke-dasharray: 82;
+  stroke-dashoffset: 82;
+  animation: brand-draw 620ms cubic-bezier(0.3, 0.7, 0.3, 1) 120ms forwards;
+}
+
+.brand-slash {
+  opacity: 0;
+  transform: translateY(-30px);
+  /* starts after the oval is closed, and overshoots on the way in */
+  animation: brand-drop 560ms cubic-bezier(0.34, 1.8, 0.5, 1) 700ms forwards;
+}
+
+@keyframes brand-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes brand-drop {
+  0%   { opacity: 0; transform: translateY(-30px); }
+  30%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion gets the mark, not the performance. */
+@media (prefers-reduced-motion: reduce) {
+  .brand-o { animation: none; stroke-dashoffset: 0; }
+  .brand-slash { animation: none; opacity: 1; transform: none; }
 }
