@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ØDEJ — Guía Visual & Plantillas de Contenido Semanal (Social Media Kit)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/paper.css">
+  <link rel="stylesheet" href="./slides.css">
+  <style>
+    .deck-header {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--text);
+    }
+    .deck-header h1 {
+      font-family: var(--serif);
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+    .deck-header p {
+      font-size: 14px;
+      color: rgba(242, 239, 232, 0.6);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .deck-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+    }
+    .card-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card-meta {
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .badge-talk { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: #f59e0b; }
+    .badge-build { background: rgba(167, 139, 250, 0.15); border: 1px solid rgba(167, 139, 250, 0.35); color: #a78bfa; }
+    .badge-visual { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #10b981; }
+
+    /* Custom layout details for social cards */
+    .timeline-steps {
+      display: flex;
+      gap: 16px;
+      margin-top: auto;
+      padding-bottom: 40px;
+    }
+    .t-step {
+      flex: 1;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+    }
+    .t-step .t-num { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+    .t-step .t-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .t-step .t-desc { font-size: 16px; color: rgba(255, 255, 255, 0.55); line-height: 1.4; }
+  </style>
+</head>
+<body>
+
+  <div class="deck-header">
+    <h1>ØDEJ — Sistema Visual de Redes Sociales</h1>
+    <p>Plantillas 4:5 (1080×1350) alineadas con la dirección editorial del portafolio.</p>
+  </div>
+
+  <div class="deck-grid">
+
+    <!-- LUNES: TALK / THINK -->
+    <div class="card-wrap">
+      <div class="slide s-paper">
+        <div class="pad">
+          <div class="eyebrow">
+            <span class="badge-pill badge-talk">LUNES — TALK / THINK</span>
+          </div>
+          <h2 class="head sm">INICIAR <em>antes</em> de estar listo.</h2>
+          <p class="sub">
+            "No esperamos tener el portafolio perfecto o el código sin errores para mostrar lo que hacemos. En ØDEJ documentamos la práctica viva mientras ocurre."
+          </p>
+          <div class="note" style="margin-top: auto; margin-bottom: 40px;">
+            <b>REGLA ØDEJ #01</b>
+            Documentar > Fabricar.<br>El estado importa antes que la perfección.
+          </div>
+          <div class="foot">
+            <span>ØDEJ / Jose Alvarez</span>
+            <span>01 / 03</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span>Lunes — Reel / Video corto / Post Editorial</span>
+      </div>
+    </div>
+
+    <!-- MIÉRCOLES: BUILD / MOTION -->
+    <div class="card-wrap">
+      <div class="slide s-mat">
+        <div class="pad">
+          <div class="eyebrow">
+            <span class="badge-pill badge-build">MIÉRCOLES — BUILD / MOTION</span>
+          </div>
+          <h2 class="head xs">Figma ➔ AEUX ➔ <em>After Effects</em></h2>
+          <p class="sub" style="opacity: 0.85;">
+            Animación de Mascot Reaction: ajustando curvas de velocidad (Overshoot) en el Graph Editor para dar vida al gato de DuoGit.
+          </p>
+          
+          <div class="timeline-steps">
+            <div class="t-step">
+              <div class="t-num">01. FIGMA</div>
+              <div class="t-title">Export AEUX</div>
+              <div class="t-desc">Handoff limpio de capas vectoriales en 1 clic.</div>
+            </div>
+            <div class="t-step">
+              <div class="t-num">02. AFTER EFFECTS</div>
+              <div class="t-title">Graph Editor</div>
+              <div class="t-desc">Curva de rebote elástico (overshoot 12%).</div>
+            </div>
+            <div class="t-step">
+              <div class="t-num">03. STATE FEEDBACK</div>
+              <div class="t-title">Neutral ➔ Happy</div>
+              <div class="t-desc">La mascota reacciona al streak del usuario.</div>
+            </div>
+          </div>
+
+          <div class="foot">
+            <span>Pipeline &amp; Craft</span>
+            <span>02 / 03</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span>Miércoles — Screen Recording / Process Reel</span>
+      </div>
+    </div>
+
+    <!-- VIERNES: VISUAL / WORK -->
+    <div class="card-wrap">
+      <div class="slide s-ground">
+        <div class="pad">
+          <div class="eyebrow">
+            <span class="badge-pill badge-visual">VIERNES — VISUAL / WORK</span>
+          </div>
+          <h2 class="head sm">DuoGit <em>App Preview</em></h2>
+          <p class="sub">
+            "Transformando la actividad fría de GitHub en retención emocional visible."
+          </p>
+
+          <div class="note" style="margin-top: auto; margin-bottom: 40px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); color: #fff;">
+            <b style="color: #10b981;">SHOWCASE FINAL</b>
+            Mockups 3D en modo oscuro · HUD Widgets · Reacción de Mascota en vivo.
+          </div>
+
+          <div class="foot">
+            <span>Product Showcase</span>
+            <span>03 / 03</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta">
+        <span>Viernes — Showcase / App Preview 3D</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
