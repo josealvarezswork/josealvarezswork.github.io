@@ -245,9 +245,67 @@
               <strong>Behavioral KPIs</strong>
               <span>Streak recovery rate, Day 7 retention, time-to-first-commit — already in the DuoGit/Cuak copy.</span>
             </div>
-            <div class="concept-checklist-item">
-              <strong>The Logic</strong>
-              <span>Flow diagrams: cold data → mascot emotion. Not built yet.</span>
+            <div class="concept-checklist-item" style="border-color: rgba(167, 139, 250, 0.3); background: rgba(167, 139, 250, 0.04);">
+              <strong style="color: var(--accent);">The Logic — DuoGit & Cuak Flow Diagrams ✅</strong>
+              <span>Visualized data pipeline: Cold Data Input → Threshold Evaluation → Mascot Emotional Reaction → UI Action.</span>
+              
+              <!-- DuoGit Logic Flow -->
+              <div style="margin-top: 20px; padding: 20px; background: rgba(11, 8, 23, 0.8); border: 1px solid rgba(167, 139, 250, 0.2); border-radius: 12px;">
+                <h4 style="font-size: 13px; font-weight: 700; color: #a78bfa; margin: 0 0 12px; display: flex; align-items: center; gap: 8px;">
+                  <span>🐱 DuoGit — Emotional Logic Flow</span>
+                </h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; text-align: center; font-size: 11px;">
+                  <div style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;">
+                    <span style="display:block; color: rgba(242,239,232,0.4); font-size: 9px; text-transform: uppercase; margin-bottom: 4px;">01. Raw Data</span>
+                    <strong style="color: #fff; font-size: 12px;">GitHub API</strong>
+                    <div style="color: rgba(242,239,232,0.6); margin-top: 2px;">hours_since_commit</div>
+                  </div>
+                  <div style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;">
+                    <span style="display:block; color: rgba(242,239,232,0.4); font-size: 9px; text-transform: uppercase; margin-bottom: 4px;">02. Engine</span>
+                    <strong style="color: #60a5fa; font-size: 12px;">Thresholds</strong>
+                    <div style="color: rgba(242,239,232,0.6); margin-top: 2px;">0h / >3d / >20h / >24h</div>
+                  </div>
+                  <div style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(16,185,129,0.25); border-radius: 8px;">
+                    <span style="display:block; color: #10b981; font-size: 9px; text-transform: uppercase; margin-bottom: 4px;">03. Mascot State</span>
+                    <strong style="color: #10b981; font-size: 12px;">Cat Sprite</strong>
+                    <div style="color: rgba(242,239,232,0.6); margin-top: 2px;">Neutral/Happy/Worried/Sad</div>
+                  </div>
+                  <div style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(245,158,11,0.25); border-radius: 8px;">
+                    <span style="display:block; color: #f59e0b; font-size: 9px; text-transform: uppercase; margin-bottom: 4px;">04. Output</span>
+                    <strong style="color: #f59e0b; font-size: 12px;">Nudge & Widget</strong>
+                    <div style="color: rgba(242,239,232,0.6); margin-top: 2px;">Streak lock-screen update</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cuak Logic Flow -->
+              <div style="margin-top: 14px; padding: 20px; background: rgba(11, 8, 23, 0.8); border: 1px solid rgba(79, 124, 99, 0.3); border-radius: 12px;">
+                <h4 style="font-size: 13px; font-weight: 700; color: #4f7c63; margin: 0 0 12px; display: flex; align-items: center; gap: 8px;">
+                  <span>🦆 Cuak — Emotional Logic Flow</span>
+                </h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; text-align: center; font-size: 11px;">
+                  <div style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;">
+                    <span style="display:block; color: rgba(242,239,232,0.4); font-size: 9px; text-transform: uppercase; margin-bottom: 4px;">01. Open Banking</span>
+                    <strong style="color: #fff; font-size: 12px;">Belvo API</strong>
+                    <div style="color: rgba(242,239,232,0.6); margin-top: 2px;">utilization_% + billing_date</div>
+                  </div>
+                  <div style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;">
+                    <span style="display:block; color: rgba(242,239,232,0.4); font-size: 9px; text-transform: uppercase; margin-bottom: 4px;">02. Engine</span>
+                    <strong style="color: #4f7c63; font-size: 12px;">Simulator</strong>
+                    <div style="color: rgba(242,239,232,0.6); margin-top: 2px;"><30% / 30-60% / >60% / >90%</div>
+                  </div>
+                  <div style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(79,124,99,0.3); border-radius: 8px;">
+                    <span style="display:block; color: #4f7c63; font-size: 9px; text-transform: uppercase; margin-bottom: 4px;">03. Mascot State</span>
+                    <strong style="color: #4f7c63; font-size: 12px;">Duck Sprite</strong>
+                    <div style="color: rgba(242,239,232,0.6); margin-top: 2px;">Waiting/Happy/Watchful/Worried/Alert</div>
+                  </div>
+                  <div style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(239,68,68,0.25); border-radius: 8px;">
+                    <span style="display:block; color: #ef4444; font-size: 9px; text-transform: uppercase; margin-bottom: 4px;">04. Output</span>
+                    <strong style="color: #ef4444; font-size: 12px;">Decision Advisory</strong>
+                    <div style="color: rgba(242,239,232,0.6); margin-top: 2px;">21 vs 50 interest-free days</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@
 
 | Sección | Placeholders | Listos | Pendientes |
 |---|---|---|---|
-| 01 — Product & Behavioral UX | 4 | 3 | 1 |
+| 01 — Product & Behavioral UX | 4 | 4 | 0 |
 | 02 — Hardware & Spatial 3D | 2 | 0 | 2 |
 | 03 — Micro-Motion & UI (grid 3x3) | 9 | 0 | 9 |
 | 04 — Game UI & Diegetic Lab | 1 | 0 | 1 (bloqueada por 02 y 03) |
@@ -32,13 +32,11 @@ Proyectos estrella: DuoGit y Cuak.
 > Métricas de negocio reales que prueban que el diseño funciona, no solo que se ve bien — streak recovery rate, Day 7 retention, time-to-first-commit.
 > Qué falta: nada, ya está en el copy de DuoGit/Cuak.
 
-**The Logic — DuoGit** — *DuoGit — Emotional Logic Flow* · Diagram · ❌ Falta
+**The Logic — DuoGit** — *DuoGit — Emotional Logic Flow* · Diagram · ✅ Listo
 > Diagrama de flujo mostrando cómo un dato frío (ej. días sin commit) se traduce paso a paso en el estado emocional del gato de DuoGit.
-> Qué falta: dibujarlo en Figma/Excalidraw, sin animación.
 
-**The Logic — Cuak** — *Cuak — Emotional Logic Flow* · Diagram · ❌ Falta
+**The Logic — Cuak** — *Cuak — Emotional Logic Flow* · Diagram · ✅ Listo
 > Mismo diagrama aplicado a Cuak: cómo el balance/gasto se traduce en el estado emocional del pato.
-> Qué falta: dibujarlo en Figma/Excalidraw, sin animación.
 
 **Prioridad:** alta, es lo único que falta y el dato ya existe — solo falta visualizarlo.
 
@@ -203,8 +201,8 @@ Recalculado tras confirmar el pipeline real: **02 pasa de 7 días a 4** (sin aut
 
 Marcar acá cada item cuando el asset real reemplace el placeholder en `concept.html`. Fecha = deadline de esa tarea según el cronograma de arriba.
 
-- [ ] 01 — The Logic (DuoGit) — due 2026-07-31
-- [ ] 01 — The Logic (Cuak) — due 2026-07-31
+- [x] 01 — The Logic (DuoGit) — due 2026-07-31
+- [x] 01 — The Logic (Cuak) — due 2026-07-31
 - [ ] 03 — Tile 3 Mascot Reaction — due 2026-08-01
 - [ ] 03 — Tile 1 The Morph — due 2026-08-03
 - [ ] 03 — Tile 2 The Birth — due 2026-08-04
