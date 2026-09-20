@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>ØDEJ · Calendario Semanal — Carrusel 4:5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="./slides.css">
+<style>
+/* Ajustes específicos para el carrusel semanal */
+.guide-header {
+  width: 100%;
+  max-width: 1180px;
+  background: #16112e;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 20px;
+  padding: 36px 44px;
+  color: var(--text);
+  font-family: var(--sans);
+  margin-bottom: 32px;
+}
+.guide-header h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+.guide-header p { font-size: 14.5px; line-height: 1.65; color: var(--muted); max-width: 75ch; }
+.guide-header code { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+
+.pipeline-diagram {
+  display: flex;
+  gap: 24px;
+  margin: auto 0 0;
+  padding-bottom: 40px;
+  width: 100%;
+}
+.pipe-step {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(208, 236, 224, 0.25);
+  border-radius: 16px;
+  padding: 24px 20px;
+}
+.pipe-step .p-label { font-family: var(--mono); font-size: 16px; color: var(--accent-amber); margin-bottom: 8px; }
+.pipe-step .p-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.pipe-step .p-desc { font-size: 18px; line-height: 1.4; color: rgba(238, 247, 242, 0.7); }
+</style>
+</head>
+<body>
+
+<div class="guide-header">
+  <h2>ØDEJ · Guía Visual de Contenido Semanal</h2>
+  <p>
+    Diseñado bajo el mismo sistema estético del portafolio (<code>tools/slides.css</code> y <code>tokens.css</code>). 
+    Tres piezas clave estructuradas según el flujo <strong>TALK (Lunes) ➔ BUILD (Miércoles) ➔ VISUAL (Viernes)</strong>.
+  </p>
+</div>
+
+<!-- LUNES · TALK / THINK -->
+<section class="slide s-paper"><span class="tag">LUNES · TALK / THINK</span>
+  <div class="pad">
+    <p class="eyebrow">Lunes · TALK / THINK</p>
+    <h1 class="head sm">Iniciar <em>antes</em><br>de estar listo.</h1>
+    <p class="sub">No esperamos tener el 3D perfecto ni el código sin errores para mostrar lo que hacemos. En ØDEJ documentamos la práctica viva mientras ocurre.</p>
+    <div class="note" style="margin-top:auto; margin-bottom: 56px;">
+      <b>PRINCIPIO ØDEJ #01</b>
+      Documentar > Fabricar.<br>
+      El portafolio no es una galería estática, es el reflejo de un sistema que se construye en tiempo real.
+    </div>
+    <div class="foot"><span>ØDEJ · Jose Alvarez</span><span>LUNES · 1 / 3</span></div>
+  </div>
+</section>
+
+<!-- MIÉRCOLES · BUILD / MOTION -->
+<section class="slide s-mat"><span class="tag">MIÉRCOLES · BUILD / MOTION</span>
+  <div class="pad">
+    <p class="eyebrow">Miércoles · BUILD / MOTION</p>
+    <h1 class="head xs">Figma ➔ AEUX:<br>curvas de <em>overshoot</em>.</h1>
+    <p class="sub">Del vector limpio en Figma al Graph Editor en After Effects: cómo animar la reacción del gato de DuoGit en un solo clic.</p>
+    
+    <div class="pipeline-diagram">
+      <div class="pipe-step">
+        <div class="p-label">01. FIGMA</div>
+        <div class="p-title">AEUX Handoff</div>
+        <div class="pipe-desc">Transferencia directa de capas vectoriales sin pasar por Illustrator.</div>
+      </div>
+      <div class="pipe-step">
+        <div class="p-label">02. GRAPH EDITOR</div>
+        <div class="p-title">Overshoot 12%</div>
+        <div class="pipe-desc">Ajuste de curvas de velocidad para dar peso y elasticidad al sprite.</div>
+      </div>
+      <div class="pipe-step">
+        <div class="p-label">03. UI REACTION</div>
+        <div class="p-title">State Feedback</div>
+        <div class="pipe-desc">Neutral ➔ Happy cuando el commit se confirma.</div>
+      </div>
+    </div>
+
+    <div class="foot"><span>Pipeline &amp; Craft</span><span>MIÉRCOLES · 2 / 3</span></div>
+  </div>
+</section>
+
+<!-- VIERNES · VISUAL / WORK -->
+<section class="slide s-ground"><span class="tag">VIERNES · VISUAL / WORK</span>
+  <div class="pad">
+    <p class="eyebrow">Viernes · VISUAL / WORK</p>
+    <h1 class="head sm">DuoGit:<br>el sistema en <em>acción</em>.</h1>
+    <p class="sub">De la teoría al producto: la mascota reaccionando al streak en tiempo real en la pantalla de bloqueo e interfaz nativa.</p>
+
+    <div class="solo" style="margin-top: auto; padding-bottom: 50px;">
+      <img class="art pin" src="../assets/img/duogit/cat-happy.png" alt="DuoGit Mascot State" style="max-width: 280px;">
+      <span class="state-label" style="color: var(--accent);">Happy · Streak Activa</span>
+      <p class="trigger">El resultado final del pipeline: interfaces que muestran en qué estado estás en medio segundo.</p>
+    </div>
+
+    <div class="foot"><span>Showcase · ØDEJ</span><span>VIERNES · 3 / 3</span></div>
+  </div>
+</section>
+
+</body>
+</html>
