@@ -484,25 +484,45 @@ body.page-home .build-grid { border-top: none; }
    wrapping one word per line. */
 body.page-home .build-col {
   position: relative;
-  padding-right: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px 20px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(167, 139, 250, 0.12);
+  border-radius: var(--r-md);
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
 }
-body.page-home .build-col h3 { font-size: 16px; margin-bottom: 6px; }
-body.page-home .build-col p {
-  font-size: 12.5px;
-  color: rgba(242, 239, 232, 0.5);
-  max-width: 22ch;
+body.page-home .build-col:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(167, 139, 250, 0.28);
+  transform: translateY(-2px);
 }
 body.page-home .build-sketch {
-  position: absolute;
-  top: 10px;
-  right: -10px;
-  /* square now: these come from a 24x24 set, and the old 68x60 slot was cut
-     for the bespoke sketches it replaced */
-  width: 54px;
-  height: 54px;
-  color: rgba(242, 239, 232, 0.32);
+  position: static;
+  order: -1;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 14px;
+  color: var(--accent);
   fill: currentColor;
+  opacity: 0.9;
+  flex-shrink: 0;
   pointer-events: none;
+}
+body.page-home .build-col h3 {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 8px;
+  color: rgba(242, 239, 232, 0.95);
+}
+body.page-home .build-col p {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: rgba(242, 239, 232, 0.58);
+  max-width: none;
+  margin: 0;
 }
 
 /* --- FOOTER ------------------------------------------------------------ */

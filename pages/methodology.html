@@ -121,7 +121,15 @@
     .state-card.happy-state   { border-color: rgba(16,185,129,.3); background: rgba(16,185,129,.06); }
     .state-card.worried-state { border-color: rgba(251,191,36,.3); background: rgba(251,191,36,.06); }
     .state-card.sad-state     { border-color: rgba(99,102,241,.3); background: rgba(99,102,241,.06); }
-    .state-emoji { font-size: 28px; }
+    .state-img {
+      width: 100%;
+      height: 96px;
+      object-fit: contain;
+      padding: 8px;
+      border-radius: var(--r-sm);
+      background: rgba(34, 29, 51, 0.25);
+      border: 1px solid var(--stroke-light);
+    }
     .state-name { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
     .state-trigger {
       font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
@@ -414,28 +422,28 @@
 
         <div class="states-grid">
           <div class="state-card neutral-state">
-            <span class="state-emoji">😐</span>
+            <img src="../assets/img/cuak/cuak-esperando.png" class="state-img" alt="Cuak neutral waiting state">
             <p class="state-name">Neutral — Ready</p>
             <p class="state-trigger">Trigger: Day start, no activity</p>
             <p class="state-desc">Pure potential. The day begins without pressure. Expectant posture — the character waits, not judges.</p>
             <span class="state-action">→ First action of the day</span>
           </div>
           <div class="state-card happy-state">
-            <span class="state-emoji">😄</span>
+            <img src="../assets/img/cuak/cuak-feliz.png" class="state-img" alt="Cuak happy state">
             <p class="state-name" style="color:#10b981">Happy — On Track</p>
             <p class="state-trigger">Trigger: 3+ day streak / healthy metric</p>
             <p class="state-desc">Positive reinforcement after consistent behavior. Intense glow, lit eyes. The system celebrates, not just records.</p>
             <span class="state-action">→ Sustain consistency</span>
           </div>
           <div class="state-card worried-state">
-            <span class="state-emoji">😟</span>
+            <img src="../assets/img/cuak/cuak-preocupado.png" class="state-img" alt="Cuak worried state">
             <p class="state-name" style="color:var(--accent-amber)">Worried — At Risk</p>
             <p class="state-trigger">Trigger: Inactivity / approaching threshold</p>
             <p class="state-desc">Loss aversion activated. The character's distress makes the risk visible and empathetic — not punitive. The most powerful retention state.</p>
             <span class="state-action">→ Immediate intervention</span>
           </div>
           <div class="state-card sad-state">
-            <span class="state-emoji">😢</span>
+            <img src="../assets/img/cuak/cuak-alerta.png" class="state-img" alt="Cuak alert sad state">
             <p class="state-name" style="color:#818cf8">Sad — Reset</p>
             <p class="state-trigger">Trigger: Streak broken / threshold crossed</p>
             <p class="state-desc">Emotional cost of loss, followed by resilience. The system mourns with the user — then invites them back without shame.</p>
