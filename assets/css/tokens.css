@@ -21,14 +21,23 @@
 
   /* --- ink ------------------------------------------------------------- */
   --text: #f2efe8;
-  --muted: rgba(242, 239, 232, 0.62);
-  --faint: rgba(242, 239, 232, 0.36);
+  /* Alpha is the contrast knob here: every tinted card the muted text sits on
+     lifts the background it is measured against, and at 0.62 / 0.36 the body
+     copy landed around 4.0:1 and the small labels near 3.0:1 — under WCAG AA
+     for text that size. These values clear 4.5:1 on the lightest surface the
+     site puts them on. */
+  --muted: rgba(242, 239, 232, 0.78);
+  --faint: rgba(242, 239, 232, 0.6);
 
   /* --- accents ---------------------------------------------------------
      Three roles, deliberately balanced. Lavender drives interaction, green
      is the material the work sits on, amber is annotation. A colour that
      appears once anywhere is a mistake, not an accent.                    */
   --accent: #a78bfa;                       /* primary · interactive        */
+  /* Same split as the cuak green: the accent is sized for fills, arcs and
+     18px+ headings. At 11px on a raised card it reads 2.8:1, so small text
+     uses this one. */
+  --accent-text: #d8ccff;
   --accent-solid: #7c5cd6;
   --accent-soft: rgba(167, 139, 250, 0.15);
   --accent-glow: rgba(167, 139, 250, 0.08);
@@ -48,9 +57,16 @@
      hardcoded copies of Cuak's green meant no way to change it once. */
   --brand-cuak: #6fba96;
   --brand-cuak-soft: rgba(111, 186, 150, 0.12);
+  /* The brand green is a display colour: at 11-13px it reads 3.2:1 on the
+     tinted panels and 1.7:1 on the light ones. These two carry the same hue
+     to text size — -text on dark surfaces, -ink on paper. --brand-cuak
+     itself stays exactly as the product defines it. */
+  --brand-cuak-text: #b0e5c7;
+  --brand-cuak-ink: #1c5740;
 
   --accent-cyan: #7cc6ff;
   --accent-red: #e04a3f;
+  --accent-red-text: #f66b6b;              /* red at label size        */
   --accent-pink: #e84c7d;
   --success: #5fd39a;
   --success-soft: rgba(95, 211, 154, 0.15);
@@ -68,7 +84,13 @@
   --mono: "Courier New", ui-monospace, monospace;
 
   /* --- radii -----------------------------------------------------------
-     Rounded throughout, paper included.                                   */
+     Rounded throughout, paper included.
+
+     Nesting rule: a child sitting ON its parent's corner takes the
+     parent's radius MINUS its inset. In practice that means a child
+     flush against a parent that already clips (overflow: hidden) carries
+     no radius of its own — the parent's clip is the corner. Two radii at
+     the same corner read as a mistake, because they are one.            */
   --r-sm: 10px;
   --r-md: 14px;
   --r-lg: 18px;
@@ -101,7 +123,7 @@
      these get retired page by page.                                       */
   --text-muted: var(--muted);
   --text-faint: var(--faint);
-  --muted-2: rgba(242, 239, 232, 0.32);
+  --muted-2: rgba(242, 239, 232, 0.55);
   --muted2: var(--faint);
 
   --r: var(--r-md);

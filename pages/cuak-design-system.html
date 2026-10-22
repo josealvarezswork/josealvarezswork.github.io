@@ -5,17 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cuak — Design System · Jose Alvarez</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <meta name="description" content="The Cuak design system: four emotional states, the palette built for emotional clarity, the 60/40 zoning model, core UI components and the type scale.">
+  <meta property="og:title" content="Cuak — Design System">
+  <meta property="og:description" content="Four emotional states, a palette built for clarity, the 60/40 zoning model and the component kit behind the case study.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://odejbyjose.com/pages/cuak-design-system.html">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cuak.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cuak — a fintech companion built on emotional design">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://odejbyjose.com/pages/cuak-design-system.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=7" />
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
-  <link rel="stylesheet" href="../assets/css/paper.css?v=6" />
+  <link rel="stylesheet" href="../assets/css/paper.css?v=8" />
   <style>
     :root {
-      --muted: rgba(242,239,232,.62);
-      --faint: rgba(242,239,232,.36);
+      --muted: rgba(242,239,232,.78);
+      --faint: rgba(242,239,232,.6);
       --accent: var(--brand-cuak);
+      --accent-text: var(--brand-cuak-text);
       --accent-soft: var(--brand-cuak-soft);
     }
     /* LAYOUT */
@@ -36,7 +48,7 @@
     .hero { padding: 80px 0 60px; }
     .hero-eyebrow {
       font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+      color: var(--accent-text); margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
     }
     .hero-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
     .hero-title {
@@ -49,7 +61,7 @@
       font-size: 11px; letter-spacing: .06em; padding: 6px 12px;
       border-radius: 999px; border: 1px solid var(--stroke-light); color: var(--muted);
     }
-    .pill.accent { border-color: rgba(111,186,150,.3); color: var(--accent); background: var(--accent-soft); }
+    .pill.accent { border-color: rgba(111,186,150,.3); color: var(--accent-text); background: var(--accent-soft); }
 
     /* COLOR TOKENS */
     .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-top: 32px; }
@@ -128,7 +140,7 @@
     .zone-data-bar {
       flex: 60; background: rgba(111,186,150,.15);
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 600; color: var(--accent); border-radius: 6px 0 0 6px;
+      font-size: 11px; font-weight: 600; color: var(--accent);
     }
     .zone-emotional-bar {
       flex: 40; background: rgba(155,143,212,.12);
@@ -275,7 +287,14 @@
     .footer-nav a:hover { color: var(--text); }
   
     /* --- SHARED CARD LANGUAGE ---------------------------------------- */
-    .swatch-info, .state-card, .zone-header, .ref-sheet-card, .ba-card-body, .annotation-item, .component-card {
+    /* Cards that stand on their own carry the card language. The three that
+       used to be in this list — .swatch-info, .zone-header, .ba-card-body —
+       sit INSIDE a card that already clips with overflow: hidden, so their
+       own 18px radius fought the parent's 14px clip and drew a second,
+       mismatched corner. A child on its parent's corner takes the parent's
+       radius minus its inset; at an inset of 1px that is simply the
+       parent's own clip, so they carry none. */
+    .state-card, .ref-sheet-card, .annotation-item, .component-card {
       border-radius: var(--r-lg);
       border: 1px solid var(--stroke);
       box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.32);

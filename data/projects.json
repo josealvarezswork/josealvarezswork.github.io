@@ -4,7 +4,7 @@
       "id": "duogit",
       "title": "Duo Git",
       "meta": "2026 · Progression & feedback system",
-      "description": "Most gamification punishes absence: a broken streak becomes a reason to quit rather than to return. DuoGit designs the fail state as part of the loop instead of the end of it — a character state machine with four states acknowledges a gap without judging it, and comeback mechanics are built in. Nine screens, a full HUD widget family for iOS and Android, league ranking and XP economy, a documented UI style guide, and retention metrics to check the system actually works: streak recovery rate, Day 7 retention, time-to-first-commit.",
+      "description": "Most gamification punishes absence: a broken streak becomes a reason to quit rather than to return. DuoGit designs the fail state as part of the loop instead of the end of it — a character state machine with four states acknowledges a gap without judging it, and comeback mechanics are built in. Nine screens, a full home screen widget family for iOS and Android, league ranking and XP economy, a documented UI style guide, and retention metrics to check the system actually works: streak recovery rate, Day 7 retention, time-to-first-commit.",
       "tags": [
         "Progression System",
         "XP & Leaderboard",
@@ -17,10 +17,6 @@
       "fit": "bleed",
       "link": "./pages/duogit.html",
       "systemLink": "./pages/duogit-design-system.html",
-      "stat": {
-        "label": "Day 7 recovery rate · 94%",
-        "style": "top:-14px; right:6%;"
-      },
       "annotations": [
         {
           "text": "Fail state as part of the loop.",

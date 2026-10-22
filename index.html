@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jose Alvarez — UI Artist | Game UI & State Systems</title>
-    <meta name="description" content="Jose Alvarez — UI Artist. I design progression systems, character states and the interfaces that make a system's state readable at a glance.">
-    <meta property="og:title" content="Jose Alvarez — UI Artist | Game UI & State Systems">
-    <meta property="og:description" content="Jose Alvarez — UI Artist. I design progression systems, character states and the interfaces that make a system's state readable at a glance.">
+    <title>Jose Alvarez — UI/UX Designer | Product & Design Systems</title>
+    <meta name="description" content="Jose Alvarez — UI/UX Designer. I design product interfaces around behaviour: progression systems, state machines and the design systems that keep them consistent.">
+    <meta property="og:title" content="Jose Alvarez — UI/UX Designer | Product & Design Systems">
+    <meta property="og:description" content="Jose Alvarez — UI/UX Designer. I design product interfaces around behaviour: progression systems, state machines and the design systems that keep them consistent.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://odejbyjose.com/">
     <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cover.jpg">
@@ -22,18 +22,18 @@
       "name": "Jose Alvarez",
       "url": "https://odejbyjose.com/",
       "email": "mailto:josealvarezswork@gmail.com",
-      "jobTitle": "UI Artist",
-      "knowsAbout": ["Game UI", "UI Art", "Progression Systems", "Character Design", "Design Systems", "Interaction Design", "Motion Design"],
+      "jobTitle": "UI/UX Designer",
+      "knowsAbout": ["Product Design", "Design Systems", "Progression Systems", "Interaction Design", "Mobile App Design", "Behavioral Design", "Motion Design"],
       "sameAs": [
         "https://www.linkedin.com/in/alvarezcja/",
         "https://github.com/josealvarezswork"
       ]
     }
     </script>
-    <link rel="stylesheet" href="./assets/css/tokens.css?v=3" />
-    <link rel="stylesheet" href="./assets/css/paper.css?v=6" />
-    <link rel="stylesheet" href="./assets/css/styles.css?v=3" />
-    <link rel="stylesheet" href="./assets/css/home.css?v=3" />
+    <link rel="stylesheet" href="./assets/css/tokens.css?v=7" />
+    <link rel="stylesheet" href="./assets/css/paper.css?v=8" />
+    <link rel="stylesheet" href="./assets/css/styles.css?v=4" />
+    <link rel="stylesheet" href="./assets/css/home.css?v=20" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Display sans + handwriting for the annotation layer -->
@@ -84,6 +84,9 @@
     <main>
       <section class="hero">
         <div class="hero-mat" id="hero-mat">
+          <div class="mat-lamp-track" aria-hidden="true">
+            <div class="mat-lamp" aria-hidden="true"></div>
+          </div>
           <!-- Mat accessories. Order matters: they sit above the ruling and below
                the scrim, so the same light falloff that dims the surface under
                the headline dims them too. -->
@@ -119,49 +122,99 @@
           </span>
 
         <div class="hero-grid">
-          <div class="hero-copy">
-            <p class="hero-eyebrow">Jose Alvarez — UI Artist</p>
+          <div class="hero-copy hero-desk-notes">
+            <!-- Piece 1: Identity & Role Washi Tape Tag -->
+            <div class="desk-card desk-card--tag" data-card="tag">
+              <div class="desk-tape" aria-hidden="true"></div>
+              <p class="hero-eyebrow">
+                <span class="eyebrow-name">Jose Alvarez</span>
+                <span class="eyebrow-sep">·</span>
+                <span class="eyebrow-role">UI/UX Designer</span>
+              </p>
+            </div>
 
-            <h1 class="hero-title">
-              I design interfaces<br>that show you<br>
-              what state you're in.
-            </h1>
+            <!-- Piece 2: Core Statement / Headline Sheet -->
+            <div class="desk-card desk-card--title paper-surface" data-card="title">
+              <h1 class="hero-title">
+                I design interfaces <br> that show you <br>
+                <span class="hl-state">what state</span> you're in.
+              </h1>
+            </div>
 
-            <p class="hero-lead">Progression systems, character states and HUDs. Two case studies below, both running on the same four-state framework.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="./pages/resume.html"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-resume"/></svg>View resume</a>
-              <a class="btn btn-ghost" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-mail"/></svg>Email me</a>
+            <!-- Piece 3: Context Memo & Action Tools -->
+            <div class="desk-card desk-card--memo paper-surface" data-card="memo">
+              <div class="desk-tape" aria-hidden="true"></div>
+              <p class="hero-lead">
+                Progression systems, character states and the design systems behind them. Two case studies below, both running on the same four-state framework.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="./pages/resume.html"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-resume"/></svg>View resume</a>
+                <a class="btn btn-ghost" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-mail"/></svg>Email me</a>
+              </div>
             </div>
           </div>
 
-          <div class="hero-board" id="hero-board" aria-hidden="true">
-            <div class="paper-stack">
-              <span class="sheet paper-surface sheet--back" aria-hidden="true"></span>
-              <span class="sheet paper-surface sheet--mid" aria-hidden="true"></span>
+          <div class="hero-board" id="hero-board">
+            <div class="paper-stack" tabindex="0" role="region" aria-label="Interactive framework deck — drag or click to cycle sheets">
+              <!-- Sheet 2 (Initially Back) -->
+              <article class="sheet paper-surface sheet--pos-2 sheet--back" data-sheet-index="2">
+                <div class="sheet-curl-flap" aria-hidden="true"><div class="sheet-curl-back"></div></div>
+                <div class="sheet-fold-shine" aria-hidden="true"></div>
+                <div class="sheet-body">
+                  <p class="sheet-kicker">Case study — character-driven UI</p>
+                  <p class="sheet-title">
+                    <span class="sel">State</span> First, <span class="hl">Data</span> Second
+                  </p>
+                  <ul class="sheet-list">
+                    <li>60/40 layout</li>
+                    <li>Progression tiers</li>
+                    <li>Feedback states</li>
+                    <li>Spend simulator</li>
+                    <li>Playtested ×5</li>
+                  </ul>
+                  <span class="sheet-tape">Am I okay? →</span>
+                </div>
+              </article>
 
-              <div class="sheet paper-surface sheet--front">
+              <!-- Sheet 1 (Initially Mid) -->
+              <article class="sheet paper-surface sheet--pos-1 sheet--mid" data-sheet-index="1">
+                <div class="sheet-curl-flap" aria-hidden="true"><div class="sheet-curl-back"></div></div>
+                <div class="sheet-fold-shine" aria-hidden="true"></div>
+                <div class="sheet-body">
+                  <p class="sheet-kicker">Case study — progression &amp; feedback</p>
+                  <p class="sheet-title">
+                    <span class="sel">Fail</span> <span class="hl">State</span> as Loop
+                  </p>
+                  <ul class="sheet-list">
+                    <li>Streak recovery</li>
+                    <li>XP economy</li>
+                    <li>League ranking</li>
+                    <li>Widget family</li>
+                    <li>UI style guide</li>
+                  </ul>
+                  <span class="sheet-tape">Data is the conversation →</span>
+                </div>
+              </article>
 
-
-                <p class="sheet-kicker">The framework behind both projects</p>
-
-                <p class="sheet-title">
-                  <span class="sel">Emotional</span>
-                  <span class="hl">State</span>
-                  Architecture
-                </p>
-
-                <ul class="sheet-list">
-                  <li>Trigger</li>
-                  <li>State Machine</li>
-                  <li>Feedback</li>
-                  <li>Progression</li>
-                  <li>Presentation</li>
-                </ul>
-
-                <span class="sheet-tape">State changes everything →</span>
-              </div>
-
-            </div>
+              <!-- Sheet 0 (Initially Front) -->
+              <article class="sheet paper-surface sheet--pos-0 sheet--front" data-sheet-index="0">
+                <div class="sheet-curl-flap" aria-hidden="true"><div class="sheet-curl-back"></div></div>
+                <div class="sheet-fold-shine" aria-hidden="true"></div>
+                <div class="sheet-body">
+                  <p class="sheet-kicker">The framework behind both projects</p>
+                  <p class="sheet-title">
+                    <span class="sel">Emotional</span> <span class="hl">State</span> Architecture
+                  </p>
+                  <ul class="sheet-list">
+                    <li>Trigger</li>
+                    <li>State Machine</li>
+                    <li>Feedback</li>
+                    <li>Progression</li>
+                    <li>Presentation</li>
+                  </ul>
+                  <span class="sheet-tape">State changes everything →</span>
+                </div>
+              </article>
           </div>
         </div>
         </div>
@@ -170,7 +223,7 @@
       <section class="work" id="work">
         <div class="container">
           <p class="section-label">Case Studies</p>
-          <p class="section-sub">Two systems built on the same idea: a progression loop only works if the player can read, at any moment, what state they're in and what the system is asking of them. Characters, XP economies, streaks and <em>fail states</em> — designed as systems, not decorations.</p>
+          <p class="section-sub">Two systems built on the same idea: a progression loop only works if the person using it can read, at any moment, what state they're in and what the system is asking of them. Characters, XP economies, streaks and <em>fail states</em> — designed as systems, not decorations.</p>
         </div>
       </section>
 
@@ -285,7 +338,7 @@
       </div>
     </footer>
 
-    <script src="./scripts/app.js?v=3"></script>
+    <script src="./scripts/app.js?v=18"></script>
       <script src="./scripts/brand.js?v=1" defer></script>
   </body>
 </html>

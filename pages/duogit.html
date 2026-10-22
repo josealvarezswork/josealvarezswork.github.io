@@ -12,16 +12,22 @@
   <meta property="og:description" content="Filling the market gap between utilitarian coding tools and generic gamification apps.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://odejbyjose.com/pages/duogit.html">
-  <meta property="og:image" content="https://odejbyjose.com/assets/img/duogit/home-screens.webp">
+  <!-- JPEG at 1200x630: LinkedIn does not reliably render WebP, and a
+       square image is cropped unpredictably in the feed. -->
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-duogit.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="DuoGit — a behavioral design system for developer consistency">
+  <link rel="canonical" href="https://odejbyjose.com/pages/duogit.html">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=7" />
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
-  <link rel="stylesheet" href="../assets/css/paper.css?v=6" />
+  <link rel="stylesheet" href="../assets/css/paper.css?v=8" />
   <style>
 
     .accent-bar {
@@ -183,6 +189,53 @@
       color: var(--text-muted);
       margin-bottom: 16px
     }
+
+    /* --- PROCESS STRIP -------------------------------------------------
+       The case study used to go straight from the problem to the finished
+       product. This is the middle: what the data looked like before, what
+       the reframe changed, and the reference sheet the character had to be
+       built against so four states would stay the same character. */
+    .proc { margin-top: 36px; }
+    .proc + .proc { margin-top: 48px; }
+    .proc-step {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .proc h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .proc > p {
+      font-size: 15px; line-height: 1.75;
+      color: var(--text-muted);
+      max-width: 68ch;
+    }
+    .proc-figs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+    .proc-figs--wide { grid-template-columns: 1fr; max-width: 720px; }
+    .proc-fig { margin: 0; }
+    .proc-fig img {
+      width: 100%; height: auto; display: block;
+      border-radius: var(--r-md);
+      background: var(--bg-sunk);
+    }
+    .proc-fig--plain img {
+      border: 1px solid var(--stroke-light);
+    }
+    .proc-cap {
+      margin-top: 10px;
+      font-size: 13px; line-height: 1.6;
+      color: var(--text-muted);
+    }
+    .proc-cap strong { color: var(--text); font-weight: 600; }
 
     .section-label.insight {
       background: rgba(251, 191, 36, .15);
@@ -936,7 +989,7 @@
 
     .btn-download {
       padding: 6px 12px;
-      border: 1px solid rgba(255, 106, 45, 0.5);
+      border: 1px solid rgba(167, 139, 250, 0.5);
       border-radius: 999px;
       font-weight: 500;
     }
@@ -961,7 +1014,7 @@
     .screen-slide { display:flex; flex-direction:column; align-items:center; gap:12px; flex-shrink:0; width:260px; }
     .screen-slide img { width:100%; display:block; filter:drop-shadow(0 16px 32px rgba(0,0,0,0.6)); transition:transform .3s ease; border-radius:28px; }
     .screen-slide:hover img { transform:translateY(-6px); }
-    .screen-slide span { font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,0.3); }
+    .screen-slide span { font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,0.62); }
     .screen-slide.featured span { color:var(--accent); }
   
     /* --- SHARED CARD LANGUAGE -------------------------------------
@@ -1078,6 +1131,90 @@
           <div class="pws-card featured">
             <h3><span style="color:var(--accent)">●</span> The Opportunity</h3>
             <p>Define a new product category that addresses both technical tracking and emotional engagement. An interactive widget combining a familiar psychological trigger (a mascot) with direct GitHub API integration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS: FROM FEED TO INTERFACE -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">02 — Process</span>
+        <h2 class="section-title">From a contribution feed to <span class="accent">something worth opening</span></h2>
+        <p class="section-text">
+          The GitHub API hands you dates and counts. Everything below reshapes that same
+          payload — no new data point was invented along the way.
+        </p>
+
+        <div class="proc">
+          <span class="proc-step">Step 01 · the raw signal</span>
+          <h3>What GitHub already gives you</h3>
+          <p>
+            115 contributions in a year, laid out as a grid. Technically complete and
+            emotionally flat: it records what happened and asks nothing of you. Nothing here
+            tells a developer whether today matters.
+          </p>
+          <div class="proc-figs proc-figs--wide">
+            <figure class="proc-fig proc-fig--plain">
+              <img loading="lazy" decoding="async" src="../assets/img/duogit/compare-github.webp"
+                   alt="A real GitHub profile: pinned repositories and the yearly contribution grid">
+              <figcaption class="proc-cap"><strong>The starting point</strong> — my own profile. The green grid is a good data visualisation and a poor nudge.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="proc">
+          <span class="proc-step">Step 02 · the reframe</span>
+          <h3>Three readings of the same payload</h3>
+          <p>
+            Counting commits rewards volume — a panic day with forty commits is not a good day.
+            So the same feed is read three ways instead: as effort worth measuring, as a streak
+            that has a state, and as a position among peers.
+          </p>
+          <div class="proc-figs">
+            <figure class="proc-fig">
+              <img loading="lazy" decoding="async" src="../assets/img/duogit/compare-dashboard.webp"
+                   alt="DuoGit dashboard: streak state, SPACE metrics and recent commits">
+              <figcaption class="proc-cap"><strong>Streak as a state</strong> — the number carries a mascot and a status, not just a count.</figcaption>
+            </figure>
+            <figure class="proc-fig">
+              <img loading="lazy" decoding="async" src="../assets/img/duogit/compare-metrics.webp"
+                   alt="DuoGit SPACE metrics screen with sparkline trends per dimension">
+              <figcaption class="proc-cap"><strong>SPACE instead of counts</strong> — flow time and PR velocity, each with its own trend.</figcaption>
+            </figure>
+            <figure class="proc-fig">
+              <img loading="lazy" decoding="async" src="../assets/img/duogit/compare-league.webp"
+                   alt="DuoGit league screen showing developer ranking by streak consistency">
+              <figcaption class="proc-cap"><strong>Peer context</strong> — the same activity as a ranking, which motivates without self-surveillance.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="proc">
+          <span class="proc-step">Step 03 · the character</span>
+          <h3>Four states have to stay one character</h3>
+          <p>
+            The mascot is a 3D asset, not a drawing per mood, because the four states have to
+            read as the same creature under different light. The reference sheet is what the
+            states are built against — same volumes, same eye geometry, same silhouette from
+            every angle.
+          </p>
+          <div class="proc-figs">
+            <figure class="proc-fig">
+              <img loading="lazy" decoding="async" src="../assets/img/duogit/process-ref-front.webp"
+                   alt="Character reference: the DuoGit cat seen from the front">
+              <figcaption class="proc-cap"><strong>Front</strong> — the neutral pose the four states are built from. The glow in the eyes is the channel that carries the state.</figcaption>
+            </figure>
+            <figure class="proc-fig">
+              <img loading="lazy" decoding="async" src="../assets/img/duogit/process-ref-back.webp"
+                   alt="Character reference: the DuoGit cat seen from behind">
+              <figcaption class="proc-cap"><strong>Back</strong> — the same volumes from behind, so the silhouette holds whichever way the character is turned.</figcaption>
+            </figure>
+            <figure class="proc-fig">
+              <img loading="lazy" decoding="async" src="../assets/img/duogit/process-ref-extra.webp"
+                   alt="Character reference: the DuoGit cat with both arms raised, mid-step">
+              <figcaption class="proc-cap"><strong>Arms up, mid-step</strong> — the body language the Happy state needs. A smile on its own does not carry it.</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -1214,7 +1351,7 @@
         <h2 class="section-title">Three widgets, one <span class="accent">behavioral loop</span></h2>
         <p class="section-text">Designed as the next phase, the widget layer surfaces the most critical state — streak health — directly on the home screen. Three sizes, each with a distinct role: reinforce progress, broadcast rank, or trigger recovery before the streak breaks.</p>
         <div class="screen-card" style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius: var(--r-xl);padding:48px 32px;display:flex;gap:48px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;max-width:1000px;">
-          <div style="display:grid;gap:12px;flex:0 0 42%;min-width:260px;">
+          <div style="display:grid;gap:12px;flex:0 0 42%;min-width:min(260px, 100%);">
             <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;">
               <div style="border-radius:var(--r);overflow:hidden;">
                 <img loading="lazy" decoding="async" src="../assets/img/duogit/widget-racha.webp" alt="Widget Racha" style="width:100%;display:block;" />
@@ -1227,7 +1364,7 @@
               <img loading="lazy" decoding="async" src="../assets/img/duogit/widget-critico.webp" alt="Widget Crítico" style="width:100%;display:block;" />
             </div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:20px;flex:1 1 52%;min-width:280px;">
+          <div style="display:flex;flex-direction:column;gap:20px;flex:1 1 52%;min-width:min(280px, 100%);">
             <div style="display:flex;gap:16px;align-items:flex-start;">
               <div style="width:44px;height:44px;flex-shrink:0;background:var(--accent-soft);border-radius: var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;">🔥</div>
               <div>
@@ -1309,7 +1446,7 @@
         <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius: var(--r-xl);padding:48px 32px;display:flex;gap:48px;align-items:center;justify-content:center;flex-wrap:wrap;">
 
           <!-- Phone frame — OAuth screen -->
-          <div style="flex-shrink:0;width:520px;display:flex;align-items:center;justify-content:center;">
+          <div style="width:min(520px, 100%);display:flex;align-items:center;justify-content:center;">
             <img loading="lazy" decoding="async" src="../assets/img/duogit/mockup-github-oauth.webp" alt="GitHub OAuth — What's Coming" style="width:100%;height:auto;display:block;object-fit:contain;border-radius:40px;box-shadow:0 32px 64px rgba(0,0,0,0.4);" />
           </div>
 
@@ -1354,7 +1491,7 @@
         <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius: var(--r-xl);padding:48px 32px;display:flex;gap:48px;align-items:center;justify-content:center;flex-wrap:wrap;">
 
           <!-- iOS Phone Frame — Widget Auto-Slider -->
-          <div style="flex-shrink:0;width:460px;position:relative;">
+          <div style="width:min(460px, 100%);position:relative;">
             <div id="widget-slide-home" style="transition:opacity 0.6s ease;">
               <img loading="lazy" decoding="async" src="../assets/img/duogit/mockup-widget-home.webp" alt="Widget — Home Screen" style="width:100%;height:auto;display:block;border-radius:40px;box-shadow:0 40px 80px rgba(0,0,0,0.55);" />
             </div>
@@ -1450,12 +1587,12 @@
           <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius: var(--r-xl);padding:48px 40px;display:flex;gap:40px;align-items:center;justify-content:center;flex-wrap:wrap;">
 
             <!-- Phone mockup — Liga screen -->
-            <div style="flex-shrink:0;width:420px;">
+            <div style="width:min(420px, 100%);">
               <img loading="lazy" decoding="async" src="../assets/img/duogit/mockup-league-rank.webp" alt="Liga — League Rank screen" style="width:100%;height:auto;display:block;object-fit:contain;border-radius:40px;box-shadow:0 32px 64px rgba(0,0,0,0.55);" />
             </div>
 
             <!-- Text — Rank progression -->
-            <div style="flex:0 0 320px;min-width:320px;box-sizing:border-box;">
+            <div style="flex:0 0 320px;min-width:min(320px, 100%);max-width:100%;box-sizing:border-box;">
               <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-faint);margin-bottom:12px;text-align:center;">8 Ranks · Unlocked by Streak</div>
               <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:20px;width:100%;">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px;height:74px;justify-content:center;border-radius: var(--r-sm);background:rgba(100,116,139,0.08);border:1px solid rgba(100,116,139,0.15);text-align:center;">
@@ -1509,7 +1646,7 @@
                 <img loading="lazy" decoding="async" src="../assets/img/duogit/cat-neutral.webp" style="width:100%;max-width:120px;display:block;" alt="Neutral"/>
                 <div style="text-align:center;">
                   <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Neutral</div>
-                  <div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.5;">Waiting for your first commit. The day is full of potential.</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.68);line-height:1.5;">Waiting for your first commit. The day is full of potential.</div>
                 </div>
               </div>
 
@@ -1521,7 +1658,7 @@
                 <img loading="lazy" decoding="async" src="../assets/img/duogit/cat-happy.webp" style="width:100%;max-width:120px;display:block;" alt="Happy"/>
                 <div style="text-align:center;">
                   <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Happy</div>
-                  <div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.5;">You're crushing it! Consistent commits over the last 3 days.</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.68);line-height:1.5;">You're crushing it! Consistent commits over the last 3 days.</div>
                 </div>
               </div>
 
@@ -1533,7 +1670,7 @@
                 <img loading="lazy" decoding="async" src="../assets/img/duogit/cat-worried.webp" style="width:100%;max-width:120px;display:block;" alt="Worried"/>
                 <div style="text-align:center;">
                   <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Worried</div>
-                  <div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.5;">No activity for 20 hours. 4 hours left to save your streak.</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.68);line-height:1.5;">No activity for 20 hours. 4 hours left to save your streak.</div>
                 </div>
               </div>
 
@@ -1545,7 +1682,7 @@
                 <img loading="lazy" decoding="async" src="../assets/img/duogit/cat-sad.webp" style="width:100%;max-width:120px;display:block;filter:grayscale(0.35);" alt="Sad"/>
                 <div style="text-align:center;">
                   <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Sad</div>
-                  <div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.5;">Oh no! You missed yesterday. Commit today to cheer them up.</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,0.68);line-height:1.5;">Oh no! You missed yesterday. Commit today to cheer them up.</div>
                 </div>
               </div>
 
@@ -1553,42 +1690,42 @@
           </div>
 
           <!-- Competitive Analysis Table -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr));gap:24px;margin-top:48px;">
             <div>
-              <div style="margin-top:12px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);overflow:hidden">
-                <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left">
+              <div style="margin-top:12px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);overflow-x:auto">
+                <table style="width:100%;min-width:300px;border-collapse:collapse;font-size:13px;text-align:left">
                   <thead>
                     <tr style="border-bottom:1px solid var(--stroke-light);color:var(--text-muted)">
-                      <th style="padding:12px 20px;font-weight:500">Feature</th>
+                      <th style="padding:12px 12px;font-weight:500">Feature</th>
                       <th style="padding:12px 20px;font-weight:600;color:var(--accent)">DuoGit</th>
-                      <th style="padding:12px 20px;font-weight:500">GitHub</th>
-                      <th style="padding:12px 20px;font-weight:500">Duolingo</th>
+                      <th style="padding:12px 12px;font-weight:500">GitHub</th>
+                      <th style="padding:12px 12px;font-weight:500">Duolingo</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr style="border-bottom:1px solid var(--stroke-light)">
-                      <td style="padding:16px 20px;color:var(--text-muted)">GitHub API Sync</td>
-                      <td style="padding:16px 20px;color:var(--accent)">Yes</td>
-                      <td style="padding:16px 20px;color:var(--text)">Yes</td>
-                      <td style="padding:16px 20px;color:var(--text-faint)">No</td>
+                      <td style="padding:14px 12px;color:var(--text-muted)">GitHub API Sync</td>
+                      <td style="padding:14px 12px;color:var(--accent)">Yes</td>
+                      <td style="padding:14px 12px;color:var(--text)">Yes</td>
+                      <td style="padding:14px 12px;color:var(--text-faint)">No</td>
                     </tr>
                     <tr style="border-bottom:1px solid var(--stroke-light)">
-                      <td style="padding:16px 20px;color:var(--text-muted)">Emotional Avatar</td>
-                      <td style="padding:16px 20px;color:var(--accent)">Yes</td>
-                      <td style="padding:16px 20px;color:var(--text-faint)">No</td>
-                      <td style="padding:16px 20px;color:var(--text)">Yes</td>
+                      <td style="padding:14px 12px;color:var(--text-muted)">Emotional Avatar</td>
+                      <td style="padding:14px 12px;color:var(--accent)">Yes</td>
+                      <td style="padding:14px 12px;color:var(--text-faint)">No</td>
+                      <td style="padding:14px 12px;color:var(--text)">Yes</td>
                     </tr>
                     <tr style="border-bottom:1px solid var(--stroke-light)">
-                      <td style="padding:16px 20px;color:var(--text-muted)">Home Screen Widget</td>
-                      <td style="padding:16px 20px;color:var(--accent-amber)">Next</td>
-                      <td style="padding:16px 20px;color:var(--text-faint)">No</td>
-                      <td style="padding:16px 20px;color:var(--text)">Yes</td>
+                      <td style="padding:14px 12px;color:var(--text-muted)">Home Screen Widget</td>
+                      <td style="padding:14px 12px;color:var(--accent-amber)">Next</td>
+                      <td style="padding:14px 12px;color:var(--text-faint)">No</td>
+                      <td style="padding:14px 12px;color:var(--text)">Yes</td>
                     </tr>
                     <tr>
-                      <td style="padding:16px 20px;color:var(--text-muted)">Developer Focus</td>
-                      <td style="padding:16px 20px;color:var(--accent)">Yes</td>
-                      <td style="padding:16px 20px;color:var(--text)">Yes</td>
-                      <td style="padding:16px 20px;color:var(--text-faint)">No</td>
+                      <td style="padding:14px 12px;color:var(--text-muted)">Developer Focus</td>
+                      <td style="padding:14px 12px;color:var(--accent)">Yes</td>
+                      <td style="padding:14px 12px;color:var(--text)">Yes</td>
+                      <td style="padding:14px 12px;color:var(--text-faint)">No</td>
                     </tr>
                   </tbody>
                 </table>

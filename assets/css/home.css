@@ -80,7 +80,7 @@ body.page-home .hero-mat {
   margin: 0 auto;
   padding: 58px 60px;
   border-radius: var(--r-xl);
-  overflow: hidden;
+  overflow: visible;
   background-color: var(--mat-surface);
   border: 1px solid rgb(var(--mat-ink) / 0.1);
   box-shadow:
@@ -116,6 +116,7 @@ body.page-home .hero-mat::after {
   content: "";
   position: absolute;
   inset: 0;
+  border-radius: inherit;
   pointer-events: none;
   background: linear-gradient(
     100deg,
@@ -125,17 +126,88 @@ body.page-home .hero-mat::after {
   );
 }
 
+/* Clipping container for the lamp spotlight so it stays contained on the mat */
+body.page-home .mat-lamp-track {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Studio desk spotlight: an interactive lamp resting over the work area that
+   follows the cursor across the cutting mat with mechanical spring inertia. */
+body.page-home .mat-lamp {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 780px;
+  height: 780px;
+  margin-left: -390px;
+  margin-top: -390px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 252, 235, 0.28) 0%,
+    rgba(235, 255, 245, 0.16) 24%,
+    rgba(180, 240, 215, 0.07) 50%,
+    rgba(36, 84, 69, 0) 72%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.72;
+  transform: translate3d(820px, 240px, 0);
+  transition: opacity 0.5s ease-out;
+  will-change: transform, opacity;
+}
+
+body.page-home .hero-mat:hover .mat-lamp {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  body.page-home .mat-lamp {
+    width: 520px;
+    height: 520px;
+    margin-left: -260px;
+    margin-top: -260px;
+    opacity: 0.5;
+  }
+}
 
 body.page-home .hero-grid {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
 }
 
 @media (max-width: 1099px) {
   body.page-home .hero-mat { padding: 46px 34px; }
 }
+
+/* Below the split hero, the desk cards are the whole hero, so they take the
+   mat's full width instead of sizing to their own content. They used to size
+   to content: the two buttons on one row set a ~350px floor that a 375px
+   screen could not hold, and since the body clips overflow-x the cut-off CTA
+   was unreachable rather than merely off to the side. */
+@media (max-width: 1099px) {
+  body.page-home .hero-mat { overflow: hidden; }
+  body.page-home .hero-desk-notes { width: 100%; align-items: stretch; }
+  body.page-home .desk-card { max-width: 100%; }
+  body.page-home .desk-card--tag { align-self: flex-start; }
+  body.page-home .desk-card--memo .hero-lead { max-width: none; }
+  body.page-home .desk-card--memo .hero-actions { flex-wrap: wrap; }
+}
 @media (max-width: 640px) {
+  body.page-home .hero-mat { padding: 30px 18px; }
+  /* The headline's line breaks are set for the desktop measure; at phone
+     width they strand "in." on a line of its own. Let it wrap on its own. */
+  body.page-home .desk-card--title .hero-title br { display: none; }
+  body.page-home .desk-card--title { padding: 22px 20px; }
+  body.page-home .desk-card--memo { padding: 16px 18px 18px; }
+  body.page-home .desk-card--memo .hero-actions .btn { flex: 1 1 auto; justify-content: center; }
 }
 
 /* The board is absolutely positioned art: between 900 and 1100px its notes
@@ -153,64 +225,165 @@ body.page-home .hero-grid {
   }
 }
 
-body.page-home .hero-copy { position: relative; padding-top: 18px; }
+/* --- DESK CARDS (HERO COPY AS WORKBENCH STATIONERY) ------------------- */
+body.page-home .hero-desk-notes {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  padding-top: 8px;
+}
 
-/* Who this is, before what he thinks — the role used to be the least visible
-   text in the hero, under a headline that opened on a thesis. */
-body.page-home .hero-eyebrow {
-  margin: 0 0 20px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+/* Base style for any stationery card on the cutting mat */
+body.page-home .desk-card {
+  position: relative;
+  border-radius: 3px;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  will-change: transform, filter;
+  transition: transform 340ms cubic-bezier(0.2, 0.9, 0.3, 1), filter 240ms ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28)) drop-shadow(0 8px 16px rgba(8, 24, 18, 0.32));
+}
+
+body.page-home .desk-card.is-dragging {
+  cursor: grabbing !important;
+  z-index: 55 !important;
+  transition: none !important;
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.34)) drop-shadow(0 28px 46px rgba(8, 24, 18, 0.42)) !important;
+}
+
+body.page-home .desk-card.is-settling {
+  transition: transform 300ms cubic-bezier(0.18, 0.9, 0.32, 1.15), filter 220ms ease !important;
+}
+
+body.page-home .desk-card.is-tidying {
+  transition: transform 580ms cubic-bezier(0.22, 1, 0.36, 1), filter 300ms ease !important;
+}
+
+/* Washi tape strip decoration */
+body.page-home .desk-tape {
+  position: absolute;
+  top: -9px;
+  left: 20px;
+  width: 46px;
+  height: 18px;
+  background: rgba(228, 218, 196, 0.78);
+  background-image: var(--wear-grain);
+  background-size: 80px 80px;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+  transform: rotate(-1.5deg);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Piece 1: Identity & Role Washi Tape Tag */
+body.page-home .desk-card--tag {
+  background: #fbf8f0;
+  padding: 8px 18px 8px 14px;
+  border-left: 3px solid var(--accent-amber);
+  transform: rotate(-1.5deg);
+}
+body.page-home .desk-card--tag .hero-eyebrow {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: #2c2536;
 }
+body.page-home .eyebrow-name { font-weight: 700; color: #15111d; }
+body.page-home .eyebrow-sep { color: #a49786; margin: 0 6px; }
+body.page-home .eyebrow-role { font-weight: 600; color: #8e5800; }
 
-body.page-home .hero-title {
-  font-size: clamp(32px, 4.4vw, 52px);
+/* Piece 2: Core Statement / Headline Sheet */
+body.page-home .desk-card--title {
+  background: var(--paper);
+  padding: 26px 32px;
+  max-width: 540px;
+  transform: rotate(0.6deg);
+}
+body.page-home .desk-card--title .hero-title {
+  font-size: clamp(26px, 3.2vw, 40px);
   font-weight: 800;
-  line-height: 1.08;
+  line-height: 1.12;
   letter-spacing: -0.025em;
+  margin: 0;
+  color: #171320;
 }
-body.page-home .hero-name { display: none; }
+body.page-home .hl-state {
+  background: #d8f1e3;
+  color: #0b3424;
+  padding: 1px 7px;
+  border-radius: 3px;
+  display: inline-block;
+}
 
-/* One supporting line carrying domain and proof, so the claim above isn't
-   the only thing a cold visitor gets. */
-body.page-home .hero-lead {
-  margin: 30px 0 0;
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: rgba(242, 239, 232, 0.58);
+/* Piece 3: Context Memo & Action Tools */
+body.page-home .desk-card--memo {
+  background: var(--paper-2);
+  padding: 18px 24px 20px;
+  max-width: 500px;
+  transform: rotate(-0.8deg);
+}
+body.page-home .desk-card--memo .desk-tape {
+  top: -8px;
+  right: 24px;
+  left: auto;
+  width: 40px;
+  transform: rotate(2deg);
+}
+body.page-home .desk-card--memo .hero-lead {
+  margin: 0 0 16px;
+  font-size: 13.5px;
+  line-height: 1.62;
+  color: #383042;
   max-width: 44ch;
 }
-
-body.page-home .hero-actions { margin-top: 26px; }
-body.page-home .btn-primary {
+body.page-home .desk-card--memo .hero-actions {
+  margin-top: 0;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+body.page-home .desk-card--memo .btn-primary {
+  background: #1c162c;
+  color: #faf8f5;
+  border: 1px solid #100c1c;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+body.page-home .desk-card--memo .btn-primary:hover {
   background: var(--accent-solid);
   color: #fff;
-  /* A lift, not a halo — the old 26px spread bloomed across the ruling. */
-  box-shadow: 0 3px 12px rgba(124, 92, 214, 0.22);
 }
-body.page-home .btn-primary:hover { background: #8b6ae4; }
-
-/* Opaque: the ghost button sat on the mat and the grid ran straight through
-   it, so the outline read as one more rule rather than a control. */
-body.page-home .btn-ghost {
-  background: #221b3d;
-  border-color: rgba(242, 239, 232, 0.26);
-  color: var(--text);
+body.page-home .desk-card--memo .btn-ghost {
+  background: transparent;
+  border-color: rgba(34, 29, 51, 0.3);
+  color: #221d33;
 }
-body.page-home .btn-ghost:hover {
-  background: #2b2249;
-  border-color: rgba(242, 239, 232, 0.45);
+body.page-home .desk-card--memo .btn-ghost:hover {
+  background: rgba(34, 29, 51, 0.08);
+  border-color: rgba(34, 29, 51, 0.6);
 }
 
-/* --- HERO BOARD — THE PAPER STACK -------------------------------------- */
+/* --- HERO BOARD — THE PAPER STACK --------------------------------------
+   The board is hidden by default and only turns on at 1100px. It used to be
+   `display: flex` here, which, sitting after the max-width rule above, won
+   on every narrow screen and pushed a 381px sheet off a 375px viewport. */
 body.page-home .hero-board {
   height: 430px;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+  perspective: 1200px;
+  perspective-origin: 50% 45%;
+}
+@media (min-width: 1100px) {
+  body.page-home .hero-board { display: flex; }
 }
 
 /* --- SECTION HEADS ----------------------------------------------------- */
@@ -257,7 +430,8 @@ body.page-home .case {
   position: relative;
   background: var(--bg-sunk);
   border: 1px solid rgba(167, 139, 250, 0.1);
-  border-radius: var(--r-md);
+  /* 10px inside an 18px wrap — the nesting rule leaves 8. */
+  border-radius: 8px;
   /* Light falls off toward the edges of a sheet lying on a wall. */
   box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.55);
 }
@@ -333,7 +507,7 @@ body.page-home .case-link.primary {
 body.page-home .case-link.primary:hover { background: #8b6ae4; border-color: #8b6ae4; }
 
 body.page-home .case-visual--duogit { background: #0d1620; }
-body.page-home .case-visual--cuak { background: #4f5459; }
+body.page-home .case-visual--cuak { background: #F4DE86; }
 body.page-home .case-visual--wildfrontier { background: #0d130f; }
 
 /* --- ESA --------------------------------------------------------------- */
@@ -406,7 +580,7 @@ body.page-home .esa-card-label {
   font-family: var(--mono);
   font-size: 10.5px;
   letter-spacing: 0.14em;
-  color: rgba(34, 29, 51, 0.45);
+  color: rgba(34, 29, 51, 0.7);
 }
 body.page-home .esa-card.is-active .esa-card-label { color: rgba(34, 29, 51, 0.85); }
 
@@ -421,7 +595,10 @@ body.page-home .esa-card img {
   width: 100%;
   height: 104px;
   padding: 10px;
-  border-radius: var(--r-sm);
+  /* The card is 18px round and the block sits 15px in, so by the nesting
+     rule its corner is 3px — not the 10px it carried, which read as a
+     second, rounder sticker pasted onto the first. */
+  border-radius: 3px;
   background: rgba(34, 29, 51, 0.1);
   border: 1.5px solid var(--paper-ink);
   box-shadow: none;
@@ -432,7 +609,7 @@ body.page-home .esa-card.is-active img { background: rgb(var(--state) / 0.34); }
 
 
 body.page-home .esa-card-trigger { font-size: 11px; color: rgba(34, 29, 51, 0.82); }
-body.page-home .esa-card-sub { font-size: 11.5px; line-height: 1.5; color: rgba(34, 29, 51, 0.55); }
+body.page-home .esa-card-sub { font-size: 11.5px; line-height: 1.5; color: rgba(34, 29, 51, 0.74); }
 
 /* The dashed return loop used to carry the space between the state row and
    the detail panel; without it they sat 10px apart. */
@@ -625,68 +802,134 @@ body.page-home .footer-cta {
 }
 
 /* --- THE PAPER STACK ---------------------------------------------------
-   Light stock on the dark ruled mat, the way the reference puts cream paper
-   on a green cutting mat. Three sheets: two peek out behind, the front one
-   carries the content. Everything that used to float loose on the board —
-   the framework list, the ESA title, the aside — now lives on paper.      */
+   Light stock on the dark ruled mat. Three sheets: two peek out behind, the
+   front one carries the content.
+
+   A CSS transform can only move a rigid rectangle, which is exactly what made
+   the old version read as a board. The turn is therefore a real fold, computed
+   in scripts/app.js every frame: the face is clipped along the crease line and
+   the lifted corner is the same sheet mirrored across that line, showing the
+   blank back of the paper. The structure it relies on, per sheet:
+     .sheet       moves / rotates, carries the drop-shadow (follows the cut)
+     .sheet-face  the printed side, clipped by the fold
+     .sheet-shade soft shadow the lifted corner casts on the face
+     .sheet-flap  the folded-over corner (reverse side)                      */
 body.page-home .paper-stack {
   position: relative;
   width: 352px;
   height: 404px;
-  cursor: pointer;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
 }
-
-/* Turning the top sheet. The two behind ease outward at the same time, so the
-   stack looks handled rather than cross-faded. */
-body.page-home .sheet--front,
-body.page-home .sheet--back,
-body.page-home .sheet--mid {
-  transition: transform 220ms cubic-bezier(0.3, 0.7, 0.3, 1), opacity 180ms ease;
-}
-body.page-home .paper-stack:hover .sheet--back { transform: rotate(-7deg) translate(-20px, 9px); }
-body.page-home .paper-stack:hover .sheet--mid { transform: rotate(4.5deg) translate(17px, -7px); }
-body.page-home .sheet--front.is-turning {
-  transform: rotate(-7deg) translate(-26px, -16px);
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body.page-home .sheet--front,
-  body.page-home .sheet--back,
-  body.page-home .sheet--mid { transition: none; }
-  body.page-home .sheet--front.is-turning { transform: rotate(-1deg); opacity: 1; }
+body.page-home .paper-stack.is-dragging {
+  cursor: grabbing !important;
 }
 
 body.page-home .sheet {
   position: absolute;
   inset: 0;
-  border-radius: var(--r-lg);
-  background: var(--paper);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
-}
-/* The two behind are pure edge: they exist to give the stack thickness. */
-body.page-home .sheet--back {
-  background: var(--paper-3);
-  transform: rotate(-5deg) translate(-14px, 6px);
-}
-body.page-home .sheet--mid {
-  background: var(--paper-2);
-  transform: rotate(3deg) translate(12px, -4px);
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3)) drop-shadow(0 5px 9px rgba(8, 24, 18, 0.32));
+  transition: transform 320ms cubic-bezier(0.2, 0.9, 0.3, 1), filter 240ms ease;
+  will-change: transform, filter;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-body.page-home .sheet--front {
+body.page-home .sheet.is-dragging {
+  transition: none !important;
+  cursor: grabbing !important;
+  /* Card lifts high off the mat: deep diffuse shadow and high z-index */
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.32)) drop-shadow(0 26px 42px rgba(8, 24, 18, 0.4)) !important;
+  z-index: 50 !important;
+}
+
+body.page-home .sheet.is-settling {
+  transition: transform 300ms cubic-bezier(0.18, 0.9, 0.32, 1.15), filter 220ms ease !important;
+}
+
+body.page-home .sheet.is-tidying {
+  transition: transform 580ms cubic-bezier(0.22, 1, 0.36, 1), filter 300ms ease !important;
+}
+
+body.page-home .sheet-face,
+body.page-home .sheet-flap {
+  position: absolute;
+  inset: 0;
+  border: none;
+  border-radius: 2px;
+  box-shadow: none;
+  overflow: hidden;
+  background: var(--paper);
+}
+body.page-home .sheet-flap {
+  display: none;
+  pointer-events: none;
+  transform-origin: 0 0;
+  border-radius: 0;
+}
+
+body.page-home .sheet-body {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 46px 34px 34px;
+  padding: 44px 34px 32px;
+  box-sizing: border-box;
   color: var(--paper-ink);
-  transform: rotate(-1deg);
-  overflow: hidden;
 }
-/* Paper fibre. Multiply, not overlay: on light stock overlay blows out. */
-/* Stock is never flat right to the cut: the edge catches more. */
-body.page-home .sheet--front {
-  box-shadow: inset 0 0 26px rgba(90, 78, 58, 0.14);
+
+body.page-home .sheet-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0;
 }
+
+/* Initial resting poses — fanned out studio arrangement across the cutting mat */
+body.page-home .sheet--pos-1 {
+  /* Center foreground card: Fail State as Loop */
+  z-index: 12;
+  transform: translate(-24px, -36px) rotate(-1.6deg);
+  pointer-events: auto;
+  cursor: grab;
+}
+body.page-home .sheet--pos-1 .sheet-face { background: var(--paper); }
+
+body.page-home .sheet--pos-2 {
+  /* Left fan card: State First, Data Second */
+  z-index: 8;
+  transform: translate(-176px, 18px) rotate(2.2deg);
+  pointer-events: auto;
+  cursor: grab;
+}
+body.page-home .sheet--pos-2 .sheet-face { background: var(--paper-2); }
+
+body.page-home .sheet--pos-0 {
+  /* Right fan card: Emotional State Architecture */
+  z-index: 5;
+  transform: translate(146px, 42px) rotate(4.2deg);
+  pointer-events: auto;
+  cursor: grab;
+}
+body.page-home .sheet--pos-0 .sheet-face { background: var(--paper-3); }
+
+/* Subtle lift on hover */
+body.page-home .sheet:not(.is-dragging):hover {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.28)) drop-shadow(0 14px 22px rgba(8, 24, 18, 0.36));
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  body.page-home .sheet { transition: none; }
+  body.page-home .paper-stack:hover .sheet--pos-1,
+  body.page-home .paper-stack:hover .sheet--pos-2 { transform: none; }
+}
+
 
 body.page-home .sheet-kicker {
   margin: 0 0 14px;
@@ -694,7 +937,7 @@ body.page-home .sheet-kicker {
   font-size: 9.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(34, 29, 51, 0.5);
+  color: rgba(34, 29, 51, 0.72);
 }
 
 /* The reference carries its weight on a display serif. */
@@ -848,7 +1091,12 @@ body.page-home .acc-figma::after {
 
 @media (min-width: 900px) {
   /* The body already carries 42px of its own padding on that side. */
-  body.page-home .case-visual { margin-left: 0; }
+  body.page-home .case { align-items: center; }
+  body.page-home .case-visual {
+    margin-left: 0;
+    margin-right: 28px;
+    border-radius: var(--r-md);
+  }
 }
 
 /* The arrow columns went with the arrows: four equal notes, real gutters. */
@@ -860,3 +1108,9 @@ body.page-home .acc-figma::after {
 }
 
 body.page-home .nav { padding: 0; width: min(1280px, calc(100% - 40px)); }
+
+/* The headline's own scale is declared after the mobile block above, so the
+   phone size has to be restated here to win on source order. */
+@media (max-width: 640px) {
+  body.page-home .desk-card--title .hero-title { font-size: clamp(22px, 6.2vw, 30px); }
+}

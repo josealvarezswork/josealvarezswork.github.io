@@ -4,23 +4,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — Jose Alvarez | UI Artist</title>
+  <title>About — Jose Alvarez | UI/UX Designer</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <meta name="description"
-    content="Jose Alvarez — UI Artist. Progression systems, character states and the interfaces that make a system's state readable at a glance.">
-  <meta property="og:title" content="About Jose Alvarez — UI Artist | Game UI & State Systems">
+    content="Jose Alvarez — UI/UX Designer. I design product interfaces around behaviour: progression systems, state machines and the design systems that keep them consistent.">
+  <meta property="og:title" content="About Jose Alvarez — UI/UX Designer">
   <meta property="og:description"
-    content="Jose Alvarez — UI Artist. Progression systems, character states and the interfaces that make a system's state readable at a glance.">
+    content="Jose Alvarez — UI/UX Designer. Progression systems, character states and the interfaces that make a system's state readable at a glance.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://odejbyjose.com/pages/about.html">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://odejbyjose.com/pages/about.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet" />
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=7" />
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
-  <link rel="stylesheet" href="../assets/css/paper.css?v=6" />
+  <link rel="stylesheet" href="../assets/css/paper.css?v=8" />
 
   <style>
     
@@ -113,7 +117,9 @@
       align-items: start;
     }
 
-    .intro-text h2 {
+    /* The page's one h1. It is set at 15px because heading level is
+       structure, not size — the pull quote above it is the visual title. */
+    .intro-text h1 {
       font-family: var(--sans);
       font-size: 15px;
       font-weight: 500;
@@ -287,7 +293,7 @@
     
     .btn-download {
       padding: 6px 12px;
-      border: 1px solid rgba(255, 106, 45, 0.5);
+      border: 1px solid rgba(167, 139, 250, 0.5);
       border-radius: 999px;
       font-weight: 500;
     }
@@ -354,12 +360,12 @@
       <div class="container">
         <div class="intro-grid">
           <div class="intro-text">
-            <h2>Hi, I'm Jose Alvarez</h2>
+            <h1>Hi, I'm Jose Alvarez</h1>
 
             <p>
-              I'm a UI Artist. I design progression systems, character states and the interfaces
-              that make a system readable at a glance — XP economies, reward tiers, streaks,
-              fail states, and the visual language that carries all of it.
+              I'm a UI/UX Designer. I design product interfaces around behaviour — progression
+              systems, XP economies, reward tiers, streaks and fail states — and the design systems
+              that keep them consistent once they ship.
             </p>
             <p>
               I built ESA (Emotional State Architecture) — a four-state machine where every state has a
@@ -374,7 +380,7 @@
               instead of just animating.
             </p>
             <p>
-              Based in Colombia. UTC-5. Open to roles and contracts in game UI, UI art and interactive systems.
+              Based in Colombia. UTC-5. Open to product design roles and contracts — mobile and web products, design systems, and interfaces where behaviour is the hard part.
             </p>
 
           </div>
@@ -393,9 +399,9 @@
           <div class="list-column">
             <h3>What I Work On</h3>
             <ul>
-              <li>Game UI — HUDs, menus, states and diegetic interfaces</li>
+              <li>Product UI — mobile and web, screen states, information hierarchy</li>
               <li>Progression systems — XP economies, reward tiers, leaderboards</li>
-              <li>Character design as a feedback system</li>
+              <li>Design systems — tokens, components, variants, documentation</li>
               <li>Fail states and comeback loops</li>
               <li>UI style guides, iconography and motion</li>
             </ul>
@@ -404,7 +410,7 @@
           <div class="list-column">
             <h3>Highlights</h3>
             <ul>
-              <li>DuoGit <em>(progression system + HUD widget family)</em></li>
+              <li>DuoGit <em>(progression system + home screen widget family)</em></li>
               <li>Cuak <em>(character-driven interface, playtested)</em></li>
               <li>Created ESA — Emotional State Architecture</li>
               <li>Shipped UX Lab OS <em>(agentic tool, in production)</em></li>

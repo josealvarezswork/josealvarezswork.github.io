@@ -4,18 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESA — Emotional State Architecture · Jose Alvarez | UI Artist</title>
+  <title>ESA — Emotional State Architecture · Jose Alvarez | UI/UX Designer</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <meta property="og:title" content="ESA — Emotional State Architecture">
+  <meta property="og:description" content="My own four-state machine for designing how a system waits, responds, warns and fails — grounded in behavioral psychology, applied across two products.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://odejbyjose.com/pages/methodology.html">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://odejbyjose.com/pages/methodology.html">
   <meta name="description" content="Emotional State Architecture (ESA) — my own four-state machine for designing how a system waits, responds, warns and fails. Applied to a fintech app, a developer tool, and a physical object.">
-  <meta property="og:title" content="ESA — Emotional State Architecture · Jose Alvarez | UI Artist">
+  <meta property="og:title" content="ESA — Emotional State Architecture · Jose Alvarez | UI/UX Designer">
   <meta property="og:description" content="A four-state machine for character states, progression and fail states. The logic behind everything I design.">
   <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=7" />
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
-  <link rel="stylesheet" href="../assets/css/paper.css?v=6" />
+  <link rel="stylesheet" href="../assets/css/paper.css?v=8" />
   <style>
     
 
@@ -107,49 +116,79 @@
     .states-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px; margin-top: 32px;
+      /* 16px, the same gutter the home gives these four — rotated cards eat
+         about 6px of it, so a tighter gap reads as a crowd. */
+      gap: 16px; margin-top: 32px;
     }
     @media (max-width: 860px) { .states-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 480px) { .states-grid { grid-template-columns: 1fr; } }
+    /* The four states are the framework's signature component, and the home
+       already draws them: paper, ink, a pin and a hard offset shadow. They
+       used to be flat dark panels here, so the same four states looked like
+       two unrelated components on two pages. The material now comes from
+       .sticker / .pinned in paper.css — this block only sets geometry and
+       the per-state colour, exactly as the home does. */
     .state-card {
-      border-radius: var(--rl);
-      border: 1px solid var(--stroke-light);
-      padding: 24px 20px;
+      /* room for the pin head above the first line */
+      padding: 30px 16px 18px;
       display: flex; flex-direction: column; gap: 10px;
+      text-align: left;
     }
-    .state-card.neutral-state { border-color: rgba(255,255,255,.1); background: rgba(255,255,255,.03); }
-    .state-card.happy-state   { border-color: rgba(16,185,129,.3); background: rgba(16,185,129,.06); }
-    .state-card.worried-state { border-color: rgba(251,191,36,.3); background: rgba(251,191,36,.06); }
-    .state-card.sad-state     { border-color: rgba(99,102,241,.3); background: rgba(99,102,241,.06); }
+    /* Each state owns a colour and the card wears it — the same four values
+       the home uses, so the two pages cannot drift apart. */
+    .state-card.neutral-state { --state: 167 139 250; }
+    .state-card.happy-state   { --state: 95 211 154; }
+    .state-card.worried-state { --state: 240 180 41; }
+    .state-card.sad-state     { --state: 224 74 63; }
+
+    /* Laid down by hand, and the shadow falls on the side each one leans
+       toward, so tilt and light read as one gesture. */
+    .state-card:nth-of-type(1) { transform: rotate(-1.4deg); box-shadow: -4px 4px 0 rgba(0, 0, 0, .3); }
+    .state-card:nth-of-type(2) { transform: rotate(0.9deg);  box-shadow:  4px 4px 0 rgba(0, 0, 0, .3); }
+    .state-card:nth-of-type(3) { transform: rotate(-0.7deg); box-shadow: -4px 4px 0 rgba(0, 0, 0, .3); }
+    .state-card:nth-of-type(4) { transform: rotate(1.3deg);  box-shadow:  4px 4px 0 rgba(0, 0, 0, .3); }
+    .state-card:nth-of-type(1)::after,
+    .state-card:nth-of-type(3)::after {
+      box-shadow: inset 2px -2px 0 rgba(0, 0, 0, .22), -2px 3px 0 rgba(0, 0, 0, .4);
+    }
+
+    /* A block printed on the sticker: 16px in from an 18px corner leaves 3. */
     .state-img {
       width: 100%;
-      height: 96px;
+      height: 104px;
       object-fit: contain;
-      padding: 8px;
-      border-radius: var(--r-sm);
-      background: rgba(34, 29, 51, 0.25);
-      border: 1px solid var(--stroke-light);
+      padding: 10px;
+      border-radius: 3px;
+      background: rgb(var(--state) / .28);
+      border: 1.5px solid var(--paper-ink);
     }
-    .state-name { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
+    /* Ink on paper from here down — the dark-surface colours do not survive
+       the switch, and neither do the per-state text colours in the markup. */
+    .state-name {
+      font-family: var(--mono);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(34, 29, 51, 0.85);
+    }
     .state-trigger {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
-      opacity: 0.6; margin-bottom: 2px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+      color: rgba(34, 29, 51, 0.82);
+      margin-bottom: 2px;
     }
-    .state-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .state-desc { font-size: 12px; color: rgba(34, 29, 51, 0.74); line-height: 1.55; }
     .state-action {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
       padding: 5px 10px; border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--stroke-light);
-      display: inline-block; margin-top: 4px;
-      color: var(--text-muted);
+      background: rgba(34, 29, 51, 0.07);
+      border: 1px solid rgba(34, 29, 51, 0.3);
+      display: inline-block; margin-top: auto;
+      color: rgba(34, 29, 51, 0.86);
     }
 
     /* REFERENCES TABLE */
     .ref-table {
       width: 100%; border-collapse: collapse;
-      font-size: 13px; margin-top: 28px;
-      border-radius: var(--rl); overflow: hidden;
+      font-size: 13px;
     }
     .ref-table thead tr {
       background: var(--bg-elevated);
@@ -161,6 +200,19 @@
       color: var(--text-faint);
     }
     .ref-table td { padding: 16px 20px; border-bottom: 1px solid var(--stroke); }
+    /* On the narrowest phones three columns of prose cannot fit, so the
+       table keeps its shape and scrolls inside its own box. */
+    /* The rounded corner and the clip belong to the wrapper: on the table
+       itself, overflow: hidden cut the rows the wrapper means to scroll. */
+    .ref-table-scroll {
+      margin-top: 28px; border-radius: var(--rl);
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 720px) {
+      .ref-table { font-size: 12px; min-width: 300px; }
+      .ref-table th { padding: 12px 10px; }
+      .ref-table td { padding: 12px 10px; }
+    }
     .ref-table tr:last-child td { border-bottom: none; }
     .ref-table td:first-child { color: var(--accent); font-weight: 600; }
     .ref-table td:nth-child(2) { color: var(--text-faint); font-size: 12px; }
@@ -222,7 +274,7 @@
     .zone-split {
       display: flex; gap: 6px; margin: 12px 0;
     }
-    .zone-data { flex: 60; background: rgba(167,139,250,.15); border-radius: var(--r-sm); padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--accent); text-align: center; }
+    .zone-data { flex: 60; background: rgba(167,139,250,.15); border-radius: var(--r-sm); padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--accent-text); text-align: center; }
     .zone-emotional { flex: 40; background: rgba(255,255,255,.05); border-radius: var(--r-sm); padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--text-faint); text-align: center; }
     .zone-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
 
@@ -421,30 +473,30 @@
         </p>
 
         <div class="states-grid">
-          <div class="state-card neutral-state">
+          <div class="state-card sticker pinned neutral-state">
             <img src="../assets/img/cuak/cuak-esperando.png" class="state-img" alt="Cuak neutral waiting state">
             <p class="state-name">Neutral — Ready</p>
             <p class="state-trigger">Trigger: Day start, no activity</p>
             <p class="state-desc">Pure potential. The day begins without pressure. Expectant posture — the character waits, not judges.</p>
             <span class="state-action">→ First action of the day</span>
           </div>
-          <div class="state-card happy-state">
+          <div class="state-card sticker pinned happy-state">
             <img src="../assets/img/cuak/cuak-feliz.png" class="state-img" alt="Cuak happy state">
-            <p class="state-name" style="color:#10b981">Happy — On Track</p>
+            <p class="state-name">Happy — On Track</p>
             <p class="state-trigger">Trigger: 3+ day streak / healthy metric</p>
             <p class="state-desc">Positive reinforcement after consistent behavior. Intense glow, lit eyes. The system celebrates, not just records.</p>
             <span class="state-action">→ Sustain consistency</span>
           </div>
-          <div class="state-card worried-state">
+          <div class="state-card sticker pinned worried-state">
             <img src="../assets/img/cuak/cuak-preocupado.png" class="state-img" alt="Cuak worried state">
-            <p class="state-name" style="color:var(--accent-amber)">Worried — At Risk</p>
+            <p class="state-name">Worried — At Risk</p>
             <p class="state-trigger">Trigger: Inactivity / approaching threshold</p>
             <p class="state-desc">Loss aversion activated. The character's distress makes the risk visible and empathetic — not punitive. The most powerful retention state.</p>
             <span class="state-action">→ Immediate intervention</span>
           </div>
-          <div class="state-card sad-state">
+          <div class="state-card sticker pinned sad-state">
             <img src="../assets/img/cuak/cuak-alerta.png" class="state-img" alt="Cuak alert sad state">
-            <p class="state-name" style="color:#818cf8">Sad — Reset</p>
+            <p class="state-name">Sad — Reset</p>
             <p class="state-trigger">Trigger: Streak broken / threshold crossed</p>
             <p class="state-desc">Emotional cost of loss, followed by resilience. The system mourns with the user — then invites them back without shame.</p>
             <span class="state-action">→ Guilt-free restart</span>
@@ -467,6 +519,7 @@
           ESA draws on established behavioral psychology — combined into a repeatable design pattern. Here's the source for each principle:
         </p>
 
+        <div class="ref-table-scroll">
         <table class="ref-table">
           <thead>
             <tr>
@@ -508,6 +561,7 @@
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
     </section>
 
@@ -526,7 +580,7 @@
               <span class="case-tag duogit">Developer Tools</span>
               <h2 class="case-title">DuoGit</h2>
               <p class="case-desc">GitHub activity is cold and judgmental by default. DuoGit applies the 4-state ESA system through Ghost — an emotional cat character that reacts to commit streaks in real time. League ranking, SPACE metrics, and home screen widgets keep the emotional layer visible outside the app.</p>
-              <span class="case-metric" style="color:#10b981">Users checked streak in first 30s unprompted</span>
+              <span class="case-metric" style="color:#10b981">Design target: &gt;70% Day 30 retention</span>
             </div>
             <div class="case-card-footer">
               <span>React Native · Expo · GitHub API</span>

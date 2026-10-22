@@ -4,17 +4,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resume — Jose Alvarez | UI Artist</title>
+  <title>Resume — Jose Alvarez | UI/UX Designer</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <meta name="description"
+    content="Jose Alvarez — UI/UX Designer. Progression systems, character states and the interfaces that make them readable. Case studies in fintech and developer tools, plus a shipped agentic tool.">
+  <meta property="og:title" content="Jose Alvarez — UI/UX Designer · Resume">
+  <meta property="og:description" content="Progression systems, character states and the interfaces that carry them. Based in Colombia, remote, UTC-5.">
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://odejbyjose.com/pages/resume.html">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://odejbyjose.com/pages/resume.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet" />
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=7" />
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
-  <link rel="stylesheet" href="../assets/css/paper.css?v=6" />
+  <link rel="stylesheet" href="../assets/css/paper.css?v=8" />
 
   <style>
     
@@ -57,7 +68,7 @@
 
     .btn-download {
       padding: 6px 12px;
-      border: 1px solid rgba(255, 106, 45, 0.5);
+      border: 1px solid rgba(167, 139, 250, 0.5);
       border-radius: 999px;
       font-weight: 500;
     }
@@ -123,7 +134,7 @@
 
     .location {
       font-size: 12px;
-      color: var(--muted2);
+      color: var(--muted);
     }
 
     .download-btn {
@@ -217,9 +228,9 @@
     }
 
     .skill-tag.highlight {
-      background: rgba(255, 106, 45, 0.1);
-      border-color: rgba(255, 106, 45, 0.25);
-      color: #ff8c5a;
+      background: rgba(167, 139, 250, 0.1);
+      border-color: rgba(167, 139, 250, 0.3);
+      color: #c4b5fd;
     }
 
     /* EXPERIENCE ITEM */
@@ -368,8 +379,8 @@
       text-transform: uppercase;
       padding: 3px 6px;
       border-radius: var(--r-sm);
-      background: rgba(255, 106, 45, 0.15);
-      color: #ff8c5a;
+      background: rgba(167, 139, 250, 0.15);
+      color: #c4b5fd;
       margin-left: 8px;
       vertical-align: middle;
     }
@@ -410,6 +421,22 @@
     }
 
     .cta-accent { color: var(--accent); }
+
+    .cv-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #1E1A2E;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: transform 160ms ease;
+    }
+    .cv-download:hover { transform: translateY(-2px); }
 
     /* Responsive */
     @media (max-width: 900px) {
@@ -491,7 +518,7 @@
       <div class="container">
         <div class="mat">
           <h1 class="resume-title">Jose Alvarez</h1>
-          <p class="resume-role"><strong>UI Artist</strong> — Game UI, progression systems, and the character states that carry them</p>
+          <p class="resume-role"><strong>UI/UX Designer</strong> — product interfaces, progression systems, and the design systems that hold them together</p>
 
           <div class="resume-links">
             <a href="../index.html">Portfolio</a>
@@ -503,8 +530,7 @@
             <span class="location">Colombia, LATAM · Remote</span>
           </div>
 
-          <a href="../cv/Jose_Alvarez_CV.pdf" download
-            style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:12px 22px;border-radius:999px;background:var(--accent);color:#1E1A2E;font-size:13px;font-weight:600;letter-spacing:0.03em;transition:transform 160ms ease">
+          <a class="cv-download" href="../cv/Jose_Alvarez_CV.pdf" download>
             ↓ Download CV (PDF)
           </a>
         </div>
@@ -516,9 +542,9 @@
     <section class="profile-section">
       <div class="container">
         <p class="profile-text">
-          UI Artist working on <strong>progression systems, character states and the interfaces that make them readable</strong> — XP economies, reward tiers, streaks, fail states, and the visual language that carries all of it.
+          UI/UX Designer working on <strong>product interfaces built around behaviour</strong> — progression systems, XP economies, reward tiers, streaks, fail states, and the design systems that keep them consistent once they ship.
           Built ESA (Emotional State Architecture), a four-state machine applied across a fintech app, a developer tool, and a physical object with its own diegetic interface.
-          Background in visual systems and motion design; also ship what I design. Open to roles and contracts in game UI, UI art and interactive systems.
+          Background in visual systems and motion design; also ship what I design. Open to product design roles and contracts — mobile and web products, design systems, and interfaces where behaviour is the hard part.
         </p>
       </div>
     </section>
@@ -530,12 +556,12 @@
 
         <div class="skills-grid">
           <div class="skill-category">
-            <h4>Game UI</h4>
+            <h4>Product UI</h4>
             <div class="skill-tags">
-              <span class="skill-tag">HUD Design</span>
-              <span class="skill-tag">Menus & Navigation</span>
-              <span class="skill-tag highlight">Diegetic Interfaces</span>
-              <span class="skill-tag">Screen States</span>
+              <span class="skill-tag">Mobile &amp; Web UI</span>
+              <span class="skill-tag">Navigation &amp; IA</span>
+              <span class="skill-tag highlight">Screen States</span>
+              <span class="skill-tag">Onboarding Flows</span>
               <span class="skill-tag">Information Hierarchy</span>
               <span class="skill-tag">Readability at a Glance</span>
             </div>
@@ -555,7 +581,7 @@
           </div>
 
           <div class="skill-category">
-            <h4>UI Art & Craft</h4>
+            <h4>Design Systems &amp; Craft</h4>
             <div class="skill-tags">
               <span class="skill-tag">Figma</span>
               <span class="skill-tag">UI Style Guides</span>
@@ -629,7 +655,7 @@
 
         <div class="experience-item">
           <div class="exp-header">
-            <h3 class="exp-role">UI Artist &amp; Builder</h3>
+            <h3 class="exp-role">UI/UX Designer &amp; Builder</h3>
             <span class="exp-date">2026</span>
           </div>
           <p class="exp-company">Cuak · Emotional Fintech · <a href="./cuak.html">View Case Study →</a></p>
@@ -659,7 +685,7 @@
 
         <div class="experience-item">
           <div class="exp-header">
-            <h3 class="exp-role">UI Artist</h3>
+            <h3 class="exp-role">UI/UX Designer</h3>
             <span class="exp-date">2026</span>
           </div>
           <p class="exp-company">Duo Git · UI Complete · iOS & Android · <a href="./duogit.html">View Case Study →</a></p>
@@ -689,7 +715,7 @@
 
         <div class="experience-item">
           <div class="exp-header">
-            <h3 class="exp-role">UI Artist</h3>
+            <h3 class="exp-role">UI/UX Designer</h3>
             <span class="exp-date">2025</span>
           </div>
           <p class="exp-company">UX Lab OS · Agentic AI Tool · <a href="https://uxlab.odejbyjose.com/" target="_blank" rel="noreferrer">Live →</a></p>

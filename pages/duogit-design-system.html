@@ -5,16 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DuoGit — Design System · Jose Alvarez</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <meta name="description" content="The DuoGit design system: palette, four mascot states, league ranks and XP mechanics, the 60/40 zoning model, core components and the type scale.">
+  <meta property="og:title" content="DuoGit — Design System">
+  <meta property="og:description" content="Palette, four mascot states, league ranks and XP mechanics, the zoning model and the components behind the case study.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://odejbyjose.com/pages/duogit-design-system.html">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-duogit.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="DuoGit — a behavioral design system for developer consistency">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://odejbyjose.com/pages/duogit-design-system.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=3" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=7" />
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
-  <link rel="stylesheet" href="../assets/css/paper.css?v=6" />
+  <link rel="stylesheet" href="../assets/css/paper.css?v=8" />
   <style>
     :root {
-      --muted: rgba(242,239,232,.62);
-      --faint: rgba(242,239,232,.36);
+      --muted: rgba(242,239,232,.78);
+      --faint: rgba(242,239,232,.6);
       --accent-soft: rgba(155,143,212,.12);
       --accent-green: #10b981;
     }
@@ -47,7 +58,7 @@
       font-size: 11px; letter-spacing: .06em; padding: 6px 12px;
       border-radius: 999px; border: 1px solid var(--stroke-light); color: var(--muted);
     }
-    .pill.accent { border-color: rgba(155,143,212,.3); color: var(--accent); background: var(--accent-soft); }
+    .pill.accent { border-color: rgba(155,143,212,.3); color: var(--accent-text); background: var(--accent-soft); }
 
     .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-top: 32px; }
     .color-swatch { border-radius: var(--r); overflow: hidden; border: 1px solid var(--stroke); }
@@ -93,7 +104,7 @@
     .zone-data-bar {
       flex: 60; background: rgba(155,143,212,.12);
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 600; color: var(--accent); border-radius: 6px 0 0 6px;
+      font-size: 11px; font-weight: 600; color: var(--accent);
     }
     .zone-emotional-bar {
       flex: 40; background: rgba(16,185,129,.1);
@@ -113,7 +124,7 @@
     }
     .league-icon { font-size: 32px; margin-bottom: 8px; }
     .league-name { font-size: 13px; font-weight: 600; }
-    .league-xp { font-size: 11px; color: var(--accent); margin-top: 2px; }
+    .league-xp { font-size: 11px; color: var(--accent-text); margin-top: 2px; }
 
     /* BA grid */
     .ref-sheet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
@@ -200,7 +211,14 @@
     .footer-nav a:hover { color: var(--text); }
   
     /* --- SHARED CARD LANGUAGE ---------------------------------------- */
-    .swatch-info, .state-card, .zone-header, .ref-sheet-card, .ba-card-body, .annotation-item, .component-card, .league-card {
+    /* Cards that stand on their own carry the card language. The three that
+       used to be in this list — .swatch-info, .zone-header, .ba-card-body —
+       sit INSIDE a card that already clips with overflow: hidden, so their
+       own 18px radius fought the parent's 14px clip and drew a second,
+       mismatched corner. A child on its parent's corner takes the parent's
+       radius minus its inset; at an inset of 1px that is simply the
+       parent's own clip, so they carry none. */
+    .state-card, .ref-sheet-card, .annotation-item, .component-card, .league-card {
       border-radius: var(--r-lg);
       border: 1px solid var(--stroke);
       box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.32);
