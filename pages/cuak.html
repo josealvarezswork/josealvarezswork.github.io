@@ -27,9 +27,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=7" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=8" />
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
-  <link rel="stylesheet" href="../assets/css/paper.css?v=8" />
+  <link rel="stylesheet" href="../assets/css/paper.css?v=11" />
   <style>
     
 
@@ -518,7 +518,63 @@
       margin-inline: auto;
     }
     .shot--wide .shot-frame { aspect-ratio: 16 / 10; }
-    .shot--wide .shot-cap { max-width: 56ch; }
+    /* A mockup exported with its own bezel needs no second frame around it:
+       the panel, the border and the radius would each draw a box on top of a
+       box — the nested-corner problem the token file warns about. Strip the
+       chrome and let the artwork sit directly on the page. The exports are
+       trimmed to the device's own top edge, so aligning a column to the top of
+       this figure lands level with the phone rather than with empty margin. */
+    /* A phone is tall and narrow. Set alone it leaves two thirds of the row
+       empty, so the prose that explains it goes beside it instead of above. */
+    .shot-beside {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 36px;
+      align-items: start;
+      margin-top: 24px;
+    }
+    .shot-beside .shot { margin: 0; }
+    @media (max-width: 760px) {
+      .shot-beside { grid-template-columns: 1fr; gap: 20px; }
+    }
+
+    /* A pair that tells a before/after gets the same treatment: both phones on
+       one side, the prose naming the two outcomes on the other. */
+    .shot-beside--pair { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+    .shot-pair {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+      gap: 20px;
+    }
+    .shot-pair .shot-frame { max-width: 265px; }
+    @media (max-width: 900px) { .shot-beside--pair { grid-template-columns: 1fr; } }
+
+    .zoning-figure {
+      display: grid;
+      grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+      gap: 40px;
+      align-items: start;
+      margin-top: 32px;
+    }
+    @media (max-width: 760px) { .zoning-figure { grid-template-columns: 1fr; gap: 24px; } }
+
+    .zoning-phone { position: relative; margin: 0; }
+    .zoning-phone img { width: 100%; display: block; }
+
+    /* Beside the phone the rule card is the legend, so it drops the spacing
+       it needs when it stands alone. */
+    .zoning-figure .rule-card { margin-top: 0; }
+
+    .shot--device .shot-frame {
+      aspect-ratio: 650 / 1148;
+      max-width: 300px;
+      margin-inline: auto;
+      background: none;
+      background-image: none;
+      border: 0;
+      border-radius: 0;
+      overflow: visible;
+    }
 
     .shot-img {
       width: 100%; height: 100%;
@@ -544,15 +600,6 @@
       font-family: var(--mono);
       color: var(--text-muted);
     }
-    .shot-cap {
-      margin-top: 12px;
-      max-width: 34ch;
-      margin-inline: auto;
-      text-align: center;
-      font-size: 13px; line-height: 1.6;
-      color: var(--text-muted);
-    }
-    .shot-cap strong { color: var(--text); font-weight: 600; }
 
     /* unfilled: show the placeholder, keep the <img> out of the layout */
     .shot.is-empty .shot-img { display: none; }
@@ -754,44 +801,42 @@
         </p>
 
         <div class="shot-row">
-          <figure class="shot shot--phone is-empty" data-shot="screen-home">
+          <figure class="shot shot--device" data-shot="screen-home">
             <div class="shot-frame">
               <img class="shot-img" loading="lazy" decoding="async"
-                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-                   data-src="../assets/img/cuak/screen-home.webp"
+                   src="../assets/img/cuak/screen-home.webp?v=2"
                    alt="Cuak Home screen — mascot state above the billing cycle summary">
               <div class="shot-empty" aria-hidden="true">
                 <span class="shot-empty-name">Home</span>
-                <span class="shot-empty-spec">1170 × 2532 · @2×</span>
+                <span class="shot-empty-spec">same export as the others</span>
               </div>
             </div>
-            <figcaption class="shot-cap"><strong>Home</strong> — the state reads first, the numbers second.</figcaption>
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>Home</strong> — the state reads first, the numbers second.</figcaption>
           </figure>
-          <figure class="shot shot--phone is-empty" data-shot="screen-progress">
+          <figure class="shot shot--device" data-shot="screen-progress">
             <div class="shot-frame">
               <img class="shot-img" loading="lazy" decoding="async"
-                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-                   data-src="../assets/img/cuak/screen-progress.webp"
+                   src="../assets/img/cuak/screen-progress.webp?v=2"
                    alt="Cuak Progress screen — financial behaviour history as readable trends">
               <div class="shot-empty" aria-hidden="true">
                 <span class="shot-empty-name">Progress</span>
-                <span class="shot-empty-spec">1170 × 2532 · @2×</span>
+                <span class="shot-empty-spec">same export as the others</span>
               </div>
             </div>
-            <figcaption class="shot-cap"><strong>Progress</strong> — behaviour over time, not a ledger.</figcaption>
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>Progress</strong> — behaviour over time, not a ledger.</figcaption>
           </figure>
           <figure class="shot shot--phone is-empty" data-shot="screen-more">
             <div class="shot-frame">
               <img class="shot-img" loading="lazy" decoding="async"
                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-                   data-src="../assets/img/cuak/screen-more.webp"
+                   data-src="../assets/img/cuak/screen-more.webp?v=2"
                    alt="Cuak More screen — account connection, alerts and notification settings">
               <div class="shot-empty" aria-hidden="true">
                 <span class="shot-empty-name">More</span>
-                <span class="shot-empty-spec">1170 × 2532 · @2×</span>
+                <span class="shot-empty-spec">same export as the others</span>
               </div>
             </div>
-            <figcaption class="shot-cap"><strong>More</strong> — connection, alerts and notification control.</figcaption>
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>More</strong> — connection, alerts and notification control.</figcaption>
           </figure>
         </div>
 
@@ -816,43 +861,29 @@
           </div>
         </div>
 
-        <div class="info-card" style="margin-top:16px">
-          <h3>+ Installment calculator — implemented</h3>
-          <p>Opens from the front card of the deck. The user enters an amount and number of installments with a vertical sliding selector. Calculates in real time: <strong>monthly payment, total paid, total interest and amortization table</strong>. Uses the card's real rate or estimates from usage level. Blocks the calculation if the amount exceeds available credit. The entry animation uses Reanimated — it reveals below the deck without interrupting the gesture.</p>
-        </div>
-
-        <div class="shot-row" style="grid-template-columns:repeat(auto-fit, minmax(min(220px, 100%), 1fr));max-width:620px">
-          <figure class="shot shot--phone is-empty" data-shot="screen-installments">
+        <div class="shot-beside">
+          <figure class="shot shot--device" data-shot="screen-card-deck">
             <div class="shot-frame">
               <img class="shot-img" loading="lazy" decoding="async"
-                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-                   data-src="../assets/img/cuak/screen-installments.webp"
-                   alt="Cuak installment calculator — amount, term selector and amortization table">
-              <div class="shot-empty" aria-hidden="true">
-                <span class="shot-empty-name">Installment calculator</span>
-                <span class="shot-empty-spec">1170 × 2532 · @2×</span>
-              </div>
-            </div>
-            <figcaption class="shot-cap"><strong>Installment calculator</strong> — monthly payment, total interest and the amortization table, calculated live.</figcaption>
-          </figure>
-          <figure class="shot shot--phone is-empty" data-shot="screen-card-deck">
-            <div class="shot-frame">
-              <img class="shot-img" loading="lazy" decoding="async"
-                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-                   data-src="../assets/img/cuak/screen-card-deck.webp"
+                   src="../assets/img/cuak/screen-card-deck.webp?v=2"
                    alt="Cuak card deck — swipe-down gesture changing the front card">
               <div class="shot-empty" aria-hidden="true">
                 <span class="shot-empty-name">Card deck · gesture</span>
-                <span class="shot-empty-spec">1170 × 2532 · @2×</span>
+                <span class="shot-empty-spec">same export as the others</span>
               </div>
             </div>
-            <figcaption class="shot-cap"><strong>Card deck</strong> — the swipe that brings a card to the front, on the UI thread.</figcaption>
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>Card deck</strong> — the swipe that brings a card to the front, on the UI thread.</figcaption>
           </figure>
-        </div>
-
-        <div class="info-card" style="margin-top:12px;background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.07)">
-          <h3 style="color:var(--text-muted)">+ Card deck with gesture animations</h3>
-          <p style="color:var(--text-faint)">The card deck uses <code style="font-size:12px;color:var(--brand-cuak);background:rgba(79,124,99,.1);padding:1px 5px;border-radius:3px">react-native-gesture-handler</code> + Reanimated on the UI thread. The user swipes down to change the front card. Animations run off the JS thread — no frame drops during gestures.</p>
+          <div style="display:grid;gap:12px">
+            <div class="info-card">
+              <h3>+ Installment calculator — implemented</h3>
+              <p>Opens from the front card of the deck. The user enters an amount and number of installments with a vertical sliding selector. Calculates in real time: <strong>monthly payment, total paid, total interest and amortization table</strong>. Uses the card's real rate or estimates from usage level. Blocks the calculation if the amount exceeds available credit. The entry animation uses Reanimated — it reveals below the deck without interrupting the gesture.</p>
+            </div>
+            <div class="info-card" style="background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.07)">
+              <h3 style="color:var(--text-muted)">+ Card deck with gesture animations</h3>
+              <p style="color:var(--text-faint)">The card deck uses <code style="font-size:12px;color:var(--brand-cuak);background:rgba(79,124,99,.1);padding:1px 5px;border-radius:3px">react-native-gesture-handler</code> + Reanimated on the UI thread. The user swipes down to change the front card. Animations run off the JS thread — no frame drops during gestures.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -926,34 +957,30 @@
           </div>
         </div>
 
-        <div class="shot-row shot-row--wide" style="max-width:720px">
-          <figure class="shot shot--wide is-empty" data-shot="screen-zoning-annotated">
-            <div class="shot-frame">
-              <img class="shot-img" loading="lazy" decoding="async"
-                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-                   data-src="../assets/img/cuak/screen-zoning-annotated.webp"
-                   alt="Cuak Home screen annotated with the 60/40 split between data and emotional state">
-              <div class="shot-empty" aria-hidden="true">
-                <span class="shot-empty-name">Home, annotated</span>
-                <span class="shot-empty-spec">1600 × 1000 · @2×</span>
-              </div>
-            </div>
-            <figcaption class="shot-cap"><strong>The rule on the real screen</strong> — the same Home, with the split drawn over it.</figcaption>
+        <div class="zoning-figure">
+          <figure class="zoning-phone">
+            <img loading="lazy" decoding="async"
+                 src="../assets/img/cuak/screen-home.webp?v=2"
+                 alt="The Cuak Home screen: the mascot and its verdict on top, the cards and figures below">
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>Home</strong> — the surface the rule describes.</figcaption>
           </figure>
+          <div class="rule-card">
+            <div class="rule-side data">
+              <div class="rule-label">Financial data</div>
+              <div class="rule-value">60%</div>
+              <div class="rule-desc">Objective financial information: balance, used limit, billing date</div>
+            </div>
+            <div class="rule-side emotional">
+              <div class="rule-label">Emotional state</div>
+              <div class="rule-value" style="color:var(--brand-cuak-ink)">40%</div>
+              <div class="rule-desc">The mascot and its state — the signal the user reads first</div>
+            </div>
+          </div>
         </div>
 
-        <div class="rule-card">
-          <div class="rule-side data">
-            <div class="rule-label">Data (left)</div>
-            <div class="rule-value">60%</div>
-            <div class="rule-desc">Objective financial information: balance, used limit, billing date</div>
-          </div>
-          <div class="rule-side emotional">
-            <div class="rule-label">Emotional state (right)</div>
-            <div class="rule-value" style="color:var(--brand-cuak-ink)">40%</div>
-            <div class="rule-desc">The mascot and its state — the signal the user reads first</div>
-          </div>
-        </div>
+        <p class="section-text" style="margin-top:14px;font-size:13px;color:var(--text-faint)">
+          The ratio is fixed; the axis follows the surface. On the full screen the state sits above the data. On the 2×2 and 4×2 home widgets it sits beside it — same split, rotated.
+        </p>
       </div>
     </section>
 
@@ -967,45 +994,45 @@
         <p class="section-text">
           The user enters the amount of a future purchase — a TV, a trip. The backend engine (<code style="font-family:monospace;font-size:13px;color:var(--brand-cuak);background:rgba(79,124,99,.12);padding:2px 6px;border-radius:4px">cycle_service.py</code>) analyzes the billing cycle and responds with the optimal strategy.
         </p>
-        <div class="two-col" style="margin-top:32px">
-          <div class="info-card featured">
+        <div class="shot-beside shot-beside--pair" style="margin-top:32px">
+          <div class="shot-pair">
+            <figure class="shot shot--device" data-shot="screen-simulator-input">
+            <div class="shot-frame">
+            <img class="shot-img" loading="lazy" decoding="async"
+            src="../assets/img/cuak/screen-simulator-input.webp?v=2"
+            alt="Cuak purchase simulator — entering the amount of a planned purchase">
+            <div class="shot-empty" aria-hidden="true">
+            <span class="shot-empty-name">Simulator · input</span>
+            <span class="shot-empty-spec">same export as the others</span>
+            </div>
+            </div>
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>Before the decision</strong> — the user enters what they are about to spend.</figcaption>
+            </figure>
+            <figure class="shot shot--device" data-shot="screen-simulator-result">
+            <div class="shot-frame">
+            <img class="shot-img" loading="lazy" decoding="async"
+            src="../assets/img/cuak/screen-simulator-result.webp?v=2"
+            alt="Cuak purchase simulator — recommended purchase window and interest-free days">
+            <div class="shot-empty" aria-hidden="true">
+            <span class="shot-empty-name">Simulator · result</span>
+            <span class="shot-empty-spec">same export as the others</span>
+            </div>
+            </div>
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>The answer</strong> — buy today or wait, with the interest-free days behind it.</figcaption>
+            </figure>
+          </div>
+          <div style="display:grid;gap:12px">
+            <div class="info-card featured">
             <h3>● If you buy today</h3>
             <p style="font-size:22px;font-family:var(--serif);font-weight:700;color:var(--brand-cuak);margin:8px 0">21 interest-free days</p>
             <p>Cuak is <strong>happy</strong>. The purchase lands inside the current cycle and you have enough time to pay at no cost.</p>
-          </div>
-          <div class="info-card" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.05)">
+            </div>
+            <div class="info-card" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.05)">
             <h3><span style="color:#ef4444">●</span> If you buy tomorrow</h3>
             <p style="font-size:22px;font-family:var(--serif);font-weight:700;color:#ef4444;margin:8px 0">50 interest-free days</p>
             <p>One day after the billing date = a full new cycle. Cuak warns you before you make the mistake.</p>
+            </div>
           </div>
-        </div>
-        <div class="shot-row" style="grid-template-columns:repeat(auto-fit, minmax(min(220px, 100%), 1fr));max-width:620px">
-          <figure class="shot shot--phone is-empty" data-shot="screen-simulator-input">
-            <div class="shot-frame">
-              <img class="shot-img" loading="lazy" decoding="async"
-                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-                   data-src="../assets/img/cuak/screen-simulator-input.webp"
-                   alt="Cuak purchase simulator — entering the amount of a planned purchase">
-              <div class="shot-empty" aria-hidden="true">
-                <span class="shot-empty-name">Simulator · input</span>
-                <span class="shot-empty-spec">1170 × 2532 · @2×</span>
-              </div>
-            </div>
-            <figcaption class="shot-cap"><strong>Before the decision</strong> — the user enters what they are about to spend.</figcaption>
-          </figure>
-          <figure class="shot shot--phone is-empty" data-shot="screen-simulator-result">
-            <div class="shot-frame">
-              <img class="shot-img" loading="lazy" decoding="async"
-                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-                   data-src="../assets/img/cuak/screen-simulator-result.webp"
-                   alt="Cuak purchase simulator — recommended purchase window and interest-free days">
-              <div class="shot-empty" aria-hidden="true">
-                <span class="shot-empty-name">Simulator · result</span>
-                <span class="shot-empty-spec">1170 × 2532 · @2×</span>
-              </div>
-            </div>
-            <figcaption class="shot-cap"><strong>The answer</strong> — buy today or wait, with the interest-free days behind it.</figcaption>
-          </figure>
         </div>
 
         <div class="info-card" style="margin-top:16px;background:var(--accent-soft);border-color:rgba(79,124,99,.35)">
@@ -1041,34 +1068,6 @@
         </div>
 
         <!-- Levels grid 3×2 -->
-        <div class="shot-row" style="grid-template-columns:repeat(auto-fit, minmax(min(220px, 100%), 1fr));max-width:620px;margin-bottom:8px">
-          <figure class="shot shot--phone is-empty" data-shot="screen-xp">
-            <div class="shot-frame">
-              <img class="shot-img" loading="lazy" decoding="async"
-                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-                   data-src="../assets/img/cuak/screen-xp.webp"
-                   alt="Cuak XP screen — points earned and progress toward the next tier">
-              <div class="shot-empty" aria-hidden="true">
-                <span class="shot-empty-name">XP &amp; progress</span>
-                <span class="shot-empty-spec">1170 × 2532 · @2×</span>
-              </div>
-            </div>
-            <figcaption class="shot-cap"><strong>XP in the interface</strong> — what the user sees when a good decision pays out.</figcaption>
-          </figure>
-          <figure class="shot shot--phone is-empty" data-shot="screen-tier-up">
-            <div class="shot-frame">
-              <img class="shot-img" loading="lazy" decoding="async"
-                   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-                   data-src="../assets/img/cuak/screen-tier-up.webp"
-                   alt="Cuak tier promotion screen — reaching the next credit level">
-              <div class="shot-empty" aria-hidden="true">
-                <span class="shot-empty-name">Tier up</span>
-                <span class="shot-empty-spec">1170 × 2532 · @2×</span>
-              </div>
-            </div>
-            <figcaption class="shot-cap"><strong>Tier up</strong> — the moment the rank changes, which is the loop's reward.</figcaption>
-          </figure>
-        </div>
 
         <div class="levels-grid">
           <div class="level-card" style="border-color:rgba(239,68,68,.2)">
@@ -1167,7 +1166,7 @@
         <div style="margin-top:20px;padding-top:24px;border-top:1px solid var(--stroke);display:grid;grid-template-columns:1fr 1fr;gap:32px">
           <div>
             <div style="font-weight:600;margin-bottom:6px">Lower churn through cognitive clarity</div>
-            <div style="font-size:13px;color:var(--text-muted);line-height:1.7">The 60/40 rule (data left, emotion right) removes the cognitive load of interpreting financial information. Less confusion, less churn.</div>
+            <div style="font-size:13px;color:var(--text-muted);line-height:1.7">The 60/40 rule removes the cognitive load of interpreting financial information. Less confusion, less churn.</div>
           </div>
           <div>
             <div style="font-weight:600;margin-bottom:6px;color:var(--brand-cuak)">Pre-qualified B2B conversion</div>
@@ -1289,6 +1288,45 @@
         <p class="section-text">
           Every emotional state, color and component is codified into a reusable system — palette built for emotional clarity, the 60/40 zoning model, and a full UI kit.
         </p>
+
+        <div class="shot-beside shot-beside--pair" style="margin-top:28px">
+          <div class="shot-pair">
+            <figure class="shot shot--device" data-shot="screen-get-started">
+            <div class="shot-frame">
+            <img class="shot-img" loading="lazy" decoding="async"
+            src="../assets/img/cuak/screen-get-started.webp?v=2"
+            alt="Cuak first-run screen — the mascot above the sign-in options">
+            <div class="shot-empty" aria-hidden="true">
+            <span class="shot-empty-name">First run</span>
+            <span class="shot-empty-spec">1170 × 2532 · @3×</span>
+            </div>
+            </div>
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>First run</strong> — the mascot carries the brand before a single number exists.</figcaption>
+            </figure>
+            <figure class="shot shot--device" data-shot="screen-onboarding">
+            <div class="shot-frame">
+            <img class="shot-img" loading="lazy" decoding="async"
+            src="../assets/img/cuak/screen-onboarding.webp?v=2"
+            alt="Cuak onboarding screen — illustration introducing the credit companion">
+            <div class="shot-empty" aria-hidden="true">
+            <span class="shot-empty-name">Onboarding</span>
+            <span class="shot-empty-spec">1170 × 2532 · @3×</span>
+            </div>
+            </div>
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>The promise</strong> — one illustration and one line to say what the product is for.</figcaption>
+            </figure>
+          </div>
+          <div style="display:grid;gap:12px">
+            <div class="info-card">
+              <h3>● The mascot before it reports anything</h3>
+              <p>These are the only two screens where Cuak appears with no number attached — no balance, no state colour, no verdict. The order is deliberate: the user has to read the duck as a companion before it starts telling them things they would rather not hear.</p>
+            </div>
+            <div class="info-card">
+              <h3>● One primary action, four screens</h3>
+              <p>The purple behind <strong>Continue</strong> is <code style="font-size:12px;color:var(--accent-text);background:var(--accent-soft);padding:1px 5px;border-radius:3px">#6C43DA</code> — the same value that carries <em>Wait and earn +50 XP</em> in the simulator and the add button on the card deck. Wordmark, cream surface and type scale carry over untouched. The first screen is already the system, not a splash built for it.</p>
+            </div>
+          </div>
+        </div>
         <a href="./cuak-design-system.html" style="margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 26px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r);transition:border-color .2s">
           <span>
             <strong style="display:block;font-size:15px;margin-bottom:4px;color:var(--text)">Explore the full Cuak Design System →</strong>

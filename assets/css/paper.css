@@ -185,6 +185,63 @@
   .taped::after { display: none; }
 }
 
+/* --- NOTE ---------------------------------------------------------------
+   A caption that reads as a scrap taped under the thing it describes: the
+   Polaroid anatomy from the home page with the photo well taken out, so only
+   the chin and its one strip of tape are left.
+
+   The strip is a child element rather than a pseudo-element because
+   `paper-surface` already spends ::after on grain and `taped` spends both on
+   its two corner strips — a note that wanted all three would run out.      */
+.note {
+  position: relative;
+  display: block;
+  /* The artwork above carries ~60px of its own shadow inside the image box,
+     so a positive margin here reads as a gap twice the size it looks in the
+     stylesheet. Pull back into that shadow instead. */
+  margin-top: -22px;
+  padding: 13px 15px 14px;
+  background: var(--paper);
+  color: rgba(34, 29, 51, 0.78);
+  border: 1px solid rgba(34, 29, 51, 0.1);
+  border-radius: 3px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
+  font-size: 12.5px;
+  line-height: 1.55;
+  text-align: left;
+}
+.note strong { color: var(--paper-ink); font-weight: 700; }
+
+.note-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 62px;
+  height: 20px;
+  z-index: 3;
+  background-color: rgba(228, 218, 196, 0.78);
+  background-image: var(--wear-grain);
+  background-size: 80px 80px;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+  transform: translateX(-50%) rotate(-3deg);
+  pointer-events: none;
+}
+
+/* Nobody sticks two scraps down at the same angle, and a scrap put up by hand
+   never lands square. Both the sheet and its strip vary by the note's position
+   in its row, so neighbours always lean different ways. The sheet turns about
+   its top edge, which is the end the tape is holding. */
+.note { transform: rotate(-1.3deg); transform-origin: 50% 0; }
+:nth-child(2) > .note { transform: rotate(1.7deg); }
+:nth-child(3) > .note { transform: rotate(-2.1deg); }
+:nth-child(4) > .note { transform: rotate(1.1deg); }
+
+:nth-child(2) > .note > .note-tape { transform: translateX(-54%) rotate(3.2deg); }
+:nth-child(3) > .note > .note-tape { transform: translateX(-46%) rotate(-2.4deg); }
+:nth-child(4) > .note > .note-tape { transform: translateX(-52%) rotate(4.1deg); }
+
 /* --- WELL ---------------------------------------------------------------
    Imagery mounted inside a card instead of running to its edge.           */
 .well {
@@ -523,4 +580,56 @@
   .brand-logo.is-drawing .brand-ring,
   .brand-logo.is-drawing .brand-o,
   .brand-logo.is-drawing .brand-slash { animation: none; }
+}
+
+/* --- LANGUAGE SWITCH ----------------------------------------------------
+   Lives in this file because it is the one stylesheet every page links.
+   The label is the language you would switch TO, not the one you are in:
+   a control says what it does, not what already happened. */
+.lang-switch {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  background: var(--bg-card);
+  border: 1px solid var(--stroke-light);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+.lang-switch:hover,
+.lang-switch:focus-visible {
+  transform: translateY(-2px);
+  background: var(--bg-elevated);
+  border-color: var(--stroke-strong);
+}
+.lang-switch svg {
+  width: 15px; height: 15px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: var(--accent-text);
+  stroke-width: 1.6;
+}
+/* The code is the quiet half of the label. */
+.lang-switch .lang-code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+@media (max-width: 640px) {
+  .lang-switch { right: 14px; bottom: 14px; padding: 9px 13px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lang-switch { transition: none; }
+  .lang-switch:hover, .lang-switch:focus-visible { transform: none; }
 }

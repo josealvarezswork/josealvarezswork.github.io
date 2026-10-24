@@ -1,0 +1,68 @@
+{
+  "projects": [
+    {
+      "id": "duogit",
+      "title": "Duo Git",
+      "meta": "2026 · Sistema de progresión y feedback",
+      "description": "Casi toda la gamificación castiga la ausencia: una racha rota se vuelve una razón para abandonar en vez de para volver. DuoGit diseña el fail state como parte del bucle y no como su final — una máquina de cuatro estados reconoce el hueco sin juzgarlo, y la mecánica de regreso viene incorporada. Nueve pantallas, una familia completa de widgets de pantalla de inicio para iOS y Android, ranking por ligas y economía de XP, una guía de estilo UI documentada, y métricas de retención para comprobar que el sistema funciona de verdad: tasa de recuperación de racha, retención a día 7 y tiempo hasta el primer commit.",
+      "tags": [
+        "Sistema de progresión",
+        "XP y ranking",
+        "Estados de personaje",
+        "Guía de estilo UI"
+      ],
+      "image": "../assets/img/duogit/home-screens.webp",
+      "imageAlt": "Pantallas de DuoGit — autorización de GitHub, ranking por ligas y métricas SPACE",
+      "tint": "duogit",
+      "fit": "bleed",
+      "link": "../pages/duogit.html",
+      "systemLink": "../pages/duogit-design-system.html",
+      "annotations": [
+        {
+          "text": "El fail state como parte del bucle.",
+          "color": "blue",
+          "style": "bottom:-10px; left:2%;"
+        },
+        {
+          "text": "Los datos son la conversación.",
+          "color": "orange",
+          "style": "bottom:16px; right:4%; text-align:right;"
+        }
+      ],
+      "linkText": "Ver case study",
+      "systemLinkText": "Design system"
+    },
+    {
+      "id": "cuak",
+      "title": "Cuak",
+      "meta": "2026 · Interfaz guiada por personaje",
+      "description": "Las apps de banco muestran saldo, cupo y fecha de corte, pero nunca responden la pregunta que la gente sí tiene: ¿estoy bien? Cuak asciende el estado a interfaz principal — un layout 60/40 le da el lado izquierdo a los datos objetivos y el derecho al personaje, seis niveles de progresión convierten el comportamiento en rango visible, y un simulador avisa antes de la acción en lugar de reportar después. Probado con cinco personas: las cinco leyeron su situación más rápido en el estado del personaje que en el mismo número mostrado solo.",
+      "tags": [
+        "Interfaz con personaje",
+        "Estados de feedback",
+        "Niveles de progresión",
+        "Probado con usuarios"
+      ],
+      "image": "../assets/img/cuak/home-screens.webp",
+      "imageAlt": "Pantallas de Cuak — inicio de sesión, home con el estado del personaje y las tarjetas, y onboarding",
+      "tint": "cuak",
+      "fit": "bleed",
+      "link": "../pages/cuak.html",
+      "systemLink": "../pages/cuak-design-system.html",
+      "annotations": [
+        {
+          "text": "El personaje es parte de la interfaz.",
+          "color": "orange",
+          "style": "top:16px; right:4%; text-align:right;"
+        },
+        {
+          "text": "Estado primero, datos después.",
+          "color": "pink",
+          "style": "bottom:-30px; left:3%;"
+        }
+      ],
+      "linkText": "Ver case study",
+      "systemLinkText": "Design system"
+    }
+  ]
+}

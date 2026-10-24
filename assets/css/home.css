@@ -532,85 +532,136 @@ body.page-home [data-state="happy"]   { --state: 95 211 154; }
 body.page-home [data-state="worried"] { --state: 240 180 41; }
 body.page-home [data-state="broken"]  { --state: 224 74 63; }
 
-/* Four cut-outs. The material — flat fill, thick outline, hard offset shadow
-   — comes from .sticker in paper.css; this rule only sets geometry. With the
-   pill strip gone the notes are the control, so the selected one lifts. */
+
+/* --- THE STATE AS A POLAROID -------------------------------------------
+   Four photographs of the same character, taped up. The frame is the one
+   Polaroid tell: thin and even on three sides, deep along the bottom. The
+   caption is handwritten because that is already this site's annotation
+   voice, and the tape is the hero's own washi — which is also what gives
+   the paper a reason to be there. Paper lying on a dark page reads as
+   pasted in; paper taped to it reads as placed. */
 body.page-home .esa-card {
-  /* room for the pin head above the label */
-  padding: 30px 15px 18px;
-  gap: 10px;
-  overflow: hidden;
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-/* Each note sits slightly off square, like four sheets laid down by hand. */
-body.page-home .esa-card:nth-of-type(1) { transform: rotate(-1.4deg); }
-body.page-home .esa-card:nth-of-type(2) { transform: rotate(0.9deg); }
-body.page-home .esa-card:nth-of-type(3) { transform: rotate(-0.7deg); }
-body.page-home .esa-card:nth-of-type(4) { transform: rotate(1.3deg); }
-
-/* The shadow falls on the side each note leans toward, so the tilt and the
-   light read as one gesture instead of two. Notes 1 and 3 lean left, 2 and 4
-   lean right — the sign of the x offset tracks the sign of the rotation. */
-body.page-home .esa-card:nth-of-type(1),
-body.page-home .esa-card:nth-of-type(3) { box-shadow: -4px 4px 0 rgba(0, 0, 0, 0.3); }
-body.page-home .esa-card:nth-of-type(2),
-body.page-home .esa-card:nth-of-type(4) { box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3); }
-
-body.page-home .esa-card:nth-of-type(1):hover,
-body.page-home .esa-card:nth-of-type(1).is-active,
-body.page-home .esa-card:nth-of-type(3):hover,
-body.page-home .esa-card:nth-of-type(3).is-active { box-shadow: -6px 6px 0 rgba(0, 0, 0, 0.36); }
-body.page-home .esa-card:nth-of-type(2):hover,
-body.page-home .esa-card:nth-of-type(2).is-active,
-body.page-home .esa-card:nth-of-type(4):hover,
-body.page-home .esa-card:nth-of-type(4).is-active { box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.36); }
-
-/* The pin head is lit from the same side as its note. */
-body.page-home .esa-card:nth-of-type(1)::after,
-body.page-home .esa-card:nth-of-type(3)::after {
-  box-shadow: inset 2px -2px 0 rgba(0, 0, 0, 0.22), -2px 3px 0 rgba(0, 0, 0, 0.4);
-}
-
-body.page-home .esa-card.is-active:nth-of-type(1) { transform: rotate(-1.4deg) translateY(-6px); }
-body.page-home .esa-card.is-active:nth-of-type(2) { transform: rotate(0.9deg) translateY(-6px); }
-body.page-home .esa-card.is-active:nth-of-type(3) { transform: rotate(-0.7deg) translateY(-6px); }
-body.page-home .esa-card.is-active:nth-of-type(4) { transform: rotate(1.3deg) translateY(-6px); }
-
-body.page-home .esa-card-label {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  color: rgba(34, 29, 51, 0.7);
-}
-body.page-home .esa-card.is-active .esa-card-label { color: rgba(34, 29, 51, 0.85); }
-
-
-/* The character sits in a well, like a specimen mounted on the card rather
-   than an image dropped on the background. */
-/* The character is mounted on a printed panel, the way the hero sheet blocks
-   a word in mint. Flat colour, no gradient. */
-/* A drawn block, same outline weight as the cut-out it sits on — not a
-   sunken well, which belongs to the other paper language. */
-body.page-home .esa-card img {
-  width: 100%;
-  height: 104px;
-  padding: 10px;
-  /* The card is 18px round and the block sits 15px in, so by the nesting
-     rule its corner is 3px — not the 10px it carried, which read as a
-     second, rounder sticker pasted onto the first. */
+  position: relative;
+  display: block;
+  padding: 13px 13px 0;
+  background: var(--paper);
+  border: 1px solid rgba(34, 29, 51, 0.1);
   border-radius: 3px;
-  background: rgba(34, 29, 51, 0.1);
-  border: 1.5px solid var(--paper-ink);
-  box-shadow: none;
-  transition: background 180ms ease;
+  color: var(--paper-ink);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
+  overflow: visible;
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms ease;
 }
-body.page-home .esa-card:hover img { background: rgb(var(--state) / 0.22); }
-body.page-home .esa-card.is-active img { background: rgb(var(--state) / 0.34); }
 
+/* One strip over the top edge, half on the photograph and half on the wall
+   behind it — tape that stops at the border is a sticker, not tape. Each
+   one sits at its own angle so four of them do not read as a mechanism. */
+body.page-home .esa-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 62px;
+  height: 20px;
+  background: rgba(228, 218, 196, 0.78);
+  background-image: var(--wear-grain);
+  background-size: 80px 80px;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+  pointer-events: none;
+  z-index: 3;
+}
+body.page-home .esa-card:nth-of-type(1) .esa-tape { transform: translateX(-50%) rotate(-4deg); }
+body.page-home .esa-card:nth-of-type(2) .esa-tape { transform: translateX(-54%) rotate(3.2deg); }
+body.page-home .esa-card:nth-of-type(3) .esa-tape { transform: translateX(-46%) rotate(-2.4deg); }
+body.page-home .esa-card:nth-of-type(4) .esa-tape { transform: translateX(-50%) rotate(4.4deg); }
 
-body.page-home .esa-card-trigger { font-size: 11px; color: rgba(34, 29, 51, 0.82); }
-body.page-home .esa-card-sub { font-size: 11.5px; line-height: 1.5; color: rgba(34, 29, 51, 0.74); }
+/* The photograph. The state's colour is the light in it, not a panel
+   behind it, so the glow lives here and the character sits inside. */
+body.page-home .esa-photo {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background-color: #141022;
+  background-image: radial-gradient(circle closest-side at 50% 48%,
+    rgb(var(--state) / 0.62) 0%,
+    rgb(var(--state) / 0.30) 46%,
+    rgb(var(--state) / 0.08) 74%,
+    rgb(var(--state) / 0) 97%);
+  overflow: hidden;
+  transition: background-image 220ms ease;
+}
+body.page-home .esa-card img {
+  position: absolute;
+  inset: 11% 8%;
+  width: 84%;
+  height: 78%;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 16px rgb(var(--state) / 0.42));
+}
 
+/* The chin: the handwritten caption first, then the note under it. */
+body.page-home .esa-chin {
+  display: block;
+  padding: 11px 4px 14px;
+  text-align: center;
+}
+body.page-home .esa-caption {
+  display: block;
+  font-family: var(--hand);
+  font-size: 23px;
+  line-height: 1;
+  color: rgba(34, 29, 51, 0.88);
+}
+body.page-home .esa-note {
+  display: block;
+  margin-top: 11px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(34, 29, 51, 0.12);
+  text-align: left;
+}
+body.page-home .esa-card-trigger {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(34, 29, 51, 0.8);
+}
+body.page-home .esa-card-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: rgba(34, 29, 51, 0.72);
+}
+
+/* Picked up off the wall: it straightens and lifts. The selected one stays
+   straight, which is what tells you which photograph you are reading. */
+body.page-home .esa-card:nth-of-type(1) { transform: rotate(-3.4deg); }
+body.page-home .esa-card:nth-of-type(2) { transform: rotate(2.2deg); }
+body.page-home .esa-card:nth-of-type(3) { transform: rotate(-1.8deg); }
+body.page-home .esa-card:nth-of-type(4) { transform: rotate(3deg); }
+body.page-home .esa-card:hover,
+body.page-home .esa-card:focus-visible {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.5);
+}
+body.page-home .esa-card.is-active {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.48);
+}
+body.page-home .esa-card.is-active .esa-photo {
+  background-image: radial-gradient(circle closest-side at 50% 48%,
+    rgb(var(--state) / 0.88) 0%,
+    rgb(var(--state) / 0.46) 46%,
+    rgb(var(--state) / 0.12) 74%,
+    rgb(var(--state) / 0) 97%);
+}
+@media (prefers-reduced-motion: reduce) {
+  body.page-home .esa-card,
+  body.page-home .esa-card:hover,
+  body.page-home .esa-card.is-active { transition: none; transform: none; }
+}
 /* The dashed return loop used to carry the space between the state row and
    the detail panel; without it they sat 10px apart. */
 body.page-home .esa-cycle { margin-bottom: 30px; }
@@ -1103,7 +1154,10 @@ body.page-home .acc-figma::after {
 @media (min-width: 760px) {
   body.page-home .esa-cycle {
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    /* A tilted photograph is wider than its column: at 3.4 degrees a 380px
+       card reaches about 11px past each side, so 16px of gutter left them
+       almost touching. */
+    gap: 34px;
   }
 }
 

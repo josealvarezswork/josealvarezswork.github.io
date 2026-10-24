@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jose Alvarez — Diseñador UI/UX | Producto y Design Systems</title>
+    <meta name="description" content="Jose Alvarez — Diseñador UI/UX. Diseño interfaces de producto alrededor del comportamiento: sistemas de progresión, máquinas de estado y los design systems que los mantienen coherentes.">
+    <meta property="og:title" content="Jose Alvarez — Diseñador UI/UX | Producto y Design Systems">
+    <meta property="og:description" content="Jose Alvarez — Diseñador UI/UX. Diseño interfaces de producto alrededor del comportamiento: sistemas de progresión, máquinas de estado y los design systems que los mantienen coherentes.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://odejbyjose.com/es/">
+    <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cover.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://odejbyjose.com/es/">
+    <link rel="alternate" hreflang="en" href="https://odejbyjose.com/">
+    <link rel="alternate" hreflang="es" href="https://odejbyjose.com/es/">
+    <link rel="alternate" hreflang="x-default" href="https://odejbyjose.com/">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jose Alvarez",
+      "url": "https://odejbyjose.com/",
+      "email": "mailto:josealvarezswork@gmail.com",
+      "jobTitle": "Diseñador UI/UX",
+      "knowsAbout": ["Product Design", "Design Systems", "Progression Systems", "Interaction Design", "Mobile App Design", "Behavioral Design", "Motion Design"],
+      "sameAs": [
+        "https://www.linkedin.com/in/alvarezcja/",
+        "https://github.com/josealvarezswork"
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=8" />
+    <link rel="stylesheet" href="../assets/css/paper.css?v=11" />
+    <link rel="stylesheet" href="../assets/css/styles.css?v=4" />
+    <link rel="stylesheet" href="../assets/css/home.css?v=33" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Display sans + handwriting for the annotation layer -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="page-home">
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="./" aria-label="Inicio">
+          <svg class="brand-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <defs>
+              <filter id="brand-rough" x="-14%" y="-14%" width="128%" height="128%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="5" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+            <g filter="url(#brand-rough)">
+              <circle class="brand-ring" cx="20" cy="20" r="17"/>
+              <ellipse class="brand-o" cx="20" cy="20" rx="7.6" ry="10.2"/>
+              <line class="brand-slash" x1="26" y1="8.5" x2="14" y2="31.5"/>
+            </g>
+          </svg>
+          <span class="brand-text">
+            <span class="brand-name">Jose Alvarez</span>
+            <span class="brand-sub">Design</span>
+          </span>
+        </a>
+
+        <button class="hamburger" aria-label="Menú" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('active')">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-links">
+          <a href="#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Proyectos</a>
+          <a href="../pages/methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a href="../pages/craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Oficio</a>
+          <a href="../pages/resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>CV</a>
+          <a href="../pages/about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>Sobre mí</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-mat" id="hero-mat">
+          <div class="mat-lamp-track" aria-hidden="true">
+            <div class="mat-lamp" aria-hidden="true"></div>
+          </div>
+          <!-- Mat accessories. Order matters: they sit above the ruling and below
+               the scrim, so the same light falloff that dims the surface under
+               the headline dims them too. -->
+          <svg class="mat-cuts" viewBox="0 0 1280 547" preserveAspectRatio="none" aria-hidden="true">
+                <g fill="none" stroke="#dff3e7" stroke-linecap="round">
+                  <path d="M502 148 q18 3 36 6" stroke-opacity="0.081" stroke-width="1.4"/>
+                  <path d="M729 405 q-33 8 -66 8" stroke-opacity="0.129" stroke-width="1.6"/>
+                  <path d="M430 160 q34 3 67 2" stroke-opacity="0.053" stroke-width="1.5"/>
+                  <path d="M1036 141 q35 3 70 6" stroke-opacity="0.051" stroke-width="0.9"/>
+                  <path d="M227 461 q18 -1 37 -3" stroke-opacity="0.099" stroke-width="0.9"/>
+                  <path d="M1090 435 q22 -4 44 -6" stroke-opacity="0.103" stroke-width="1.2"/>
+                  <path d="M518 50 q-17 -1 -34 -1" stroke-opacity="0.11" stroke-width="1.2"/>
+                  <path d="M1081 346 q23 -1 45 -6" stroke-opacity="0.108" stroke-width="1.3"/>
+                  <path d="M1048 432 q-43 5 -85 7" stroke-opacity="0.11" stroke-width="1.3"/>
+                  <path d="M545 436 q-42 -5 -84 -8" stroke-opacity="0.087" stroke-width="1.4"/>
+                  <path d="M975 79 q33 -1 66 1" stroke-opacity="0.122" stroke-width="1.1"/>
+                  <path d="M1133 217 q40 1 79 7" stroke-opacity="0.063" stroke-width="0.8"/>
+                  <path d="M270 351 q15 -2 30 -3" stroke-opacity="0.06" stroke-width="1.1"/>
+                  <path d="M897 424 q26 3 53 5" stroke-opacity="0.09" stroke-width="1.6"/>
+                  <path d="M1097 424 q14 2 28 1" stroke-opacity="0.091" stroke-width="1.3"/>
+                  <path d="M265 380 q37 -8 73 -12" stroke-opacity="0.082" stroke-width="1.5"/>
+                </g>
+              </svg>
+
+          <span class="acc acc-figma" aria-hidden="true">
+            <svg viewBox="0 0 38 57" aria-hidden="true">
+              <path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/>
+              <path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/>
+              <path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/>
+              <path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/>
+              <path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/>
+            </svg>
+          </span>
+
+        <div class="hero-grid">
+          <div class="hero-copy hero-desk-notes">
+            <!-- Piece 1: Identity & Role Washi Tape Tag -->
+            <div class="desk-card desk-card--tag" data-card="tag">
+              <div class="desk-tape" aria-hidden="true"></div>
+              <p class="hero-eyebrow">
+                <span class="eyebrow-name">Jose Alvarez</span>
+                <span class="eyebrow-sep">·</span>
+                <span class="eyebrow-role">Diseñador UI/UX</span>
+              </p>
+            </div>
+
+            <!-- Piece 2: Core Statement / Headline Sheet -->
+            <div class="desk-card desk-card--title paper-surface" data-card="title">
+              <h1 class="hero-title">
+                Diseño interfaces <br> que te muestran <br>
+                <span class="hl-state">en qué estado</span> estás.
+              </h1>
+            </div>
+
+            <!-- Piece 3: Context Memo & Action Tools -->
+            <div class="desk-card desk-card--memo paper-surface" data-card="memo">
+              <div class="desk-tape" aria-hidden="true"></div>
+              <p class="hero-lead">
+                Sistemas de progresión, estados de personaje y los design systems que los sostienen. Abajo hay dos case studies, los dos corriendo sobre el mismo framework de cuatro estados.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="../pages/resume.html"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>Ver CV</a>
+                <a class="btn btn-ghost" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>Escríbeme</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-board" id="hero-board">
+            <div class="paper-stack" tabindex="0" role="region" aria-label="Mazo interactivo del framework — arrastra o haz clic para pasar las hojas">
+              <!-- Sheet 2 (Initially Back) -->
+              <article class="sheet paper-surface sheet--pos-2 sheet--back" data-sheet-index="2">
+                <div class="sheet-curl-flap" aria-hidden="true"><div class="sheet-curl-back"></div></div>
+                <div class="sheet-fold-shine" aria-hidden="true"></div>
+                <div class="sheet-body">
+                  <p class="sheet-kicker">Case study — interfaz guiada por personaje</p>
+                  <p class="sheet-title">
+                    <span class="sel">Estado</span> primero, <span class="hl">datos</span> después
+                  </p>
+                  <ul class="sheet-list">
+                    <li>Layout 60/40</li>
+                    <li>Niveles de progresión</li>
+                    <li>Estados de feedback</li>
+                    <li>Simulador de gasto</li>
+                    <li>Probado con 5 personas</li>
+                  </ul>
+                  <span class="sheet-tape">¿Estoy bien? →</span>
+                </div>
+              </article>
+
+              <!-- Sheet 1 (Initially Mid) -->
+              <article class="sheet paper-surface sheet--pos-1 sheet--mid" data-sheet-index="1">
+                <div class="sheet-curl-flap" aria-hidden="true"><div class="sheet-curl-back"></div></div>
+                <div class="sheet-fold-shine" aria-hidden="true"></div>
+                <div class="sheet-body">
+                  <p class="sheet-kicker">Case study — progresión y feedback</p>
+                  <p class="sheet-title">
+                    El <span class="sel">fail</span> <span class="hl">state</span> como bucle
+                  </p>
+                  <ul class="sheet-list">
+                    <li>Recuperación de racha</li>
+                    <li>Economía de XP</li>
+                    <li>Ranking por ligas</li>
+                    <li>Familia de widgets</li>
+                    <li>Guía de estilo UI</li>
+                  </ul>
+                  <span class="sheet-tape">Los datos son la conversación →</span>
+                </div>
+              </article>
+
+              <!-- Sheet 0 (Initially Front) -->
+              <article class="sheet paper-surface sheet--pos-0 sheet--front" data-sheet-index="0">
+                <div class="sheet-curl-flap" aria-hidden="true"><div class="sheet-curl-back"></div></div>
+                <div class="sheet-fold-shine" aria-hidden="true"></div>
+                <div class="sheet-body">
+                  <p class="sheet-kicker">El framework detrás de los dos</p>
+                  <p class="sheet-title">
+                    <span class="sel">Emotional</span> <span class="hl">State</span> Architecture
+                  </p>
+                  <ul class="sheet-list">
+                    <li>Disparador</li>
+                    <li>Máquina de estados</li>
+                    <li>Feedback</li>
+                    <li>Progresión</li>
+                    <li>Presentación</li>
+                  </ul>
+                  <span class="sheet-tape">El estado lo cambia todo →</span>
+                </div>
+              </article>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <section class="work" id="work">
+        <div class="container">
+          <p class="section-label">Case studies</p>
+          <p class="section-sub">Dos sistemas construidos sobre la misma idea: un bucle de progresión solo funciona si quien lo usa puede leer, en cualquier momento, en qué estado está y qué le está pidiendo el sistema. Personajes, economías de XP, rachas y <em>fail states</em> — diseñados como sistemas, no como decoración.</p>
+        </div>
+      </section>
+
+      <section class="work" style="padding-top: 0;">
+        <div class="container">
+          <div class="cards" id="projects-container" data-src="../data/projects.es.json">
+            <!-- Projects loaded dynamically from projects.json -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ESA FRAMEWORK -->
+      <section class="esa">
+        <div class="container">
+          <p class="section-label">El framework detrás de los dos</p>
+
+          <h2 class="esa-title">Emotional State Architecture</h2>
+          <p class="esa-lead">
+          ESA es un framework propio: una máquina de cuatro estados donde cada estado tiene un
+          disparador, un mecanismo psicológico y una acción que invita a hacer. Es la lógica detrás
+          de los personajes, los niveles de recompensa y los fail states de los dos case studies.
+          </p>
+
+          <div class="esa-cycle">
+          <button class="esa-card is-active" data-state="waiting" aria-label="Estado en espera">
+          <span class="esa-tape" aria-hidden="true"></span>
+          <span class="esa-photo">
+          <img src="../assets/img/cuak/cuak-esperando.png" alt="Cuak en pose de espera" decoding="async">
+          </span>
+          <span class="esa-chin">
+          <span class="esa-caption">En espera</span>
+          <span class="esa-note">
+          <span class="esa-card-trigger">Disparador: sin actividad</span>
+          <span class="esa-card-sub">El día empieza sin presión.<br>Una postura expectante.</span>
+          </span>
+          </span>
+          </button>
+          <button class="esa-card" data-state="happy" aria-label="Estado contento">
+          <span class="esa-tape" aria-hidden="true"></span>
+          <span class="esa-photo">
+          <img src="../assets/img/cuak/cuak-feliz.png" alt="Cuak en pose contenta" decoding="async">
+          </span>
+          <span class="esa-chin">
+          <span class="esa-caption">Contento</span>
+          <span class="esa-note">
+          <span class="esa-card-trigger">Disparador: acción positiva</span>
+          <span class="esa-card-sub">Una victoria pequeña.<br>El sistema refuerza el bucle.</span>
+          </span>
+          </span>
+          </button>
+          <button class="esa-card" data-state="worried" aria-label="Estado preocupado">
+          <span class="esa-tape" aria-hidden="true"></span>
+          <span class="esa-photo">
+          <img src="../assets/img/cuak/cuak-preocupado.png" alt="Cuak en pose preocupada" decoding="async">
+          </span>
+          <span class="esa-chin">
+          <span class="esa-caption">Preocupado</span>
+          <span class="esa-note">
+          <span class="esa-card-trigger">Disparador: meta incumplida</span>
+          <span class="esa-card-sub">Aparece la tensión.<br>El sistema avisa sin castigar.</span>
+          </span>
+          </span>
+          </button>
+          <button class="esa-card" data-state="broken" aria-label="Estado roto">
+          <span class="esa-tape" aria-hidden="true"></span>
+          <span class="esa-photo">
+          <img src="../assets/img/cuak/cuak-alerta.png" alt="Cuak en pose de alerta" decoding="async">
+          </span>
+          <span class="esa-chin">
+          <span class="esa-caption">Roto</span>
+          <span class="esa-note">
+          <span class="esa-card-trigger">Disparador: abandono</span>
+          <span class="esa-card-sub">El bucle se rompe.<br>El sistema ofrece una vuelta.</span>
+          </span>
+          </span>
+          </button>
+          </div>
+
+          <div class="esa-panel" aria-live="polite">
+          <p class="esa-trigger" id="esa-trigger">Disparador — inicio del día, sin actividad</p>
+          <p class="esa-text" id="esa-text">Potencial puro. El día empieza sin presión. Una postura expectante: el personaje espera, no juzga.</p>
+          <p class="esa-mech" id="esa-mech">Anthropomorphism · Epley, Waytz &amp; Cacioppo</p>
+          </div>
+
+          <a class="esa-link" href="../pages/methodology.html"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Leer el framework completo</a>
+        </div>
+      </section>
+
+      <!-- CRAFT TEASER -->
+      <section class="esa" style="padding: 64px 0;">
+        <div class="container">
+          <p class="section-label">Cómo construyo</p>
+
+          <div class="build-layout">
+            <div>
+              <h2 class="build-head">Sistemas de personaje, datos hechos legibles, y por qué la <span class="build-circled">presentación</span> es parte del trabajo.</h2>
+              <a class="esa-link" href="../pages/craft.html"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Ver cómo construyo</a>
+            </div>
+
+            <div class="build-grid">
+              <div class="build-col">
+                <svg class="build-sketch" aria-hidden="true"><use href="../assets/img/icons.svg#i-character"/></svg>
+                <h3>Sistemas de<br>personaje</h3>
+                <p>Máquinas de estado, comportamiento, bucles de feedback, progresión.</p>
+              </div>
+              <div class="build-col">
+                <svg class="build-sketch" aria-hidden="true"><use href="../assets/img/icons.svg#i-data"/></svg>
+                <h3>Datos hechos<br>legibles</h3>
+                <p>Jerarquía de información, lenguaje visual, claridad antes que ruido.</p>
+              </div>
+              <div class="build-col">
+                <svg class="build-sketch" aria-hidden="true"><use href="../assets/img/icons.svg#i-present"/></svg>
+                <h3>La presentación<br>como acción</h3>
+                <p>La interfaz es el producto hablando.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-cta taped">
+          <div class="footer-cta-row">
+            <p class="cta-text">Abierto a contratos y <span class="accent">colaboraciones</span> de producto.</p>
+            <a class="cta-accent cta-link" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>Escríbeme</a>
+          </div>
+        </div>
+
+        <div class="footer-top">
+          <span class="footer-mark" aria-hidden="true"></span>
+          <span class="footer-item muted">Disponible · UTC-5 · Trabajo asíncrono</span>
+          <a class="footer-item muted" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>josealvarezswork@gmail.com</a>
+          <a class="footer-item muted" href="https://www.linkedin.com/in/alvarezcja/" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-linkedin"/></svg>LinkedIn</a>
+          <a class="footer-item muted" href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-github"/></svg>GitHub</a>
+        </div>
+
+        <p class="footer-credit">Iconos de <a href="https://streamlinehq.com" target="_blank" rel="noreferrer">Streamline</a> (CC BY 4.0) · marcas de <a href="https://simpleicons.org" target="_blank" rel="noreferrer">Simple Icons</a></p>
+      </div>
+    </footer>
+
+    <script src="../scripts/app.js?v=19"></script>
+      <script src="../scripts/brand.js?v=1" defer></script>
+    <a class="lang-switch" href="../" hreflang="en" lang="en" aria-label="View this page in English"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/></svg>English<span class="lang-code">EN</span></a>
+  </body>
+</html>

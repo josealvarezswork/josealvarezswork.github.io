@@ -8,7 +8,10 @@ async function loadProjects() {
   if (!container) return;
 
   try {
-    const response = await fetch('./data/projects.json');
+    // The Spanish home lives one level down in /es/, so the data file and
+    // the links inside it come from the container instead of being fixed here.
+    const src = container.dataset.src || './data/projects.json';
+    const response = await fetch(src);
     if (!response.ok) throw new Error('Failed to load projects');
 
     const data = await response.json();

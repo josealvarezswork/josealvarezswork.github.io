@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV — Jose Alvarez | Diseñador UI/UX</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <meta name="description"
+    content="Jose Alvarez — UI/UX Designer. Progression systems, character states and the interfaces that make them readable. Case studies in fintech and developer tools, plus a shipped agentic tool.">
+  <meta property="og:title" content="Jose Alvarez — Diseñador UI/UX · CV">
+  <meta property="og:description" content="Progression systems, character states and the interfaces that carry them. Based in Colombia, remote, UTC-5.">
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://odejbyjose.com/es/resume.html">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://odejbyjose.com/es/resume.html">
+  <link rel="alternate" hreflang="en" href="https://odejbyjose.com/pages/resume.html">
+  <link rel="alternate" hreflang="es" href="https://odejbyjose.com/es/resume.html">
+  <link rel="alternate" hreflang="x-default" href="https://odejbyjose.com/pages/resume.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+    rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=8" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=4">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=11" />
+
+  <style>
+    
+
+    /* `height: 100%` here made <body> only as tall as the viewport while the
+       page runs far longer, so the sticky header could only travel inside
+       that first screen and then scrolled away. */
+
+    body {
+      margin: 0;
+    }
+
+    a.link {
+      color: rgba(255, 255, 255, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      transition: border-color 150ms ease;
+    }
+
+    a.link:hover {
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* The sticky frosted header now comes from paper.css, the same one the
+       home uses. This page used to opt out of it deliberately; with one
+       shared nav there is nothing left to opt out of. */
+
+    .container {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* paper.css pads the nav by 24px to match the shared .container; this
+       page's container has none, so the nav has to drop it to line up. */
+    .nav {
+      width: min(var(--max), calc(100% - 48px));
+      max-width: none;
+      padding: 0;
+    }
+
+    .btn-download {
+      padding: 6px 12px;
+      border: 1px solid rgba(167, 139, 250, 0.5);
+      border-radius: 999px;
+      font-weight: 500;
+    }
+
+    /* RESUME HEADER */
+    .resume-header {
+      padding: 70px 0 40px;
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .resume-title {
+      font-family: var(--serif);
+      font-size: clamp(38px, 5vw, 54px);
+      font-weight: 600;
+      margin: 0 0 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .resume-role {
+      font-size: 15px;
+      color: var(--muted);
+      margin: 0 0 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .resume-role strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .resume-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .resume-links a {
+      color: rgba(255, 255, 255, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 2px;
+      transition: border-color 150ms ease, color 150ms ease;
+    }
+
+    /* paper.css turns the footer links into flex rows so an icon can sit
+       beside the label; this row needs the same treatment. */
+    .resume-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .resume-links a:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+      color: var(--text);
+    }
+
+    .resume-links .separator {
+      color: var(--muted2);
+    }
+
+    .location {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      transition: background 150ms ease, border-color 150ms ease;
+    }
+
+    .download-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* PROFILE */
+    .profile-section {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .profile-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin: 0;
+      max-width: 70ch;
+    }
+
+    .profile-text strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* SECTIONS */
+    .resume-section {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .resume-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted2);
+      margin: 0 0 24px;
+    }
+
+    /* SKILLS GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .skill-category h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0 0 14px;
+      color: var(--text);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--r-md);
+      transition: border-color 150ms ease;
+    }
+
+    .skill-tag:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .skill-tag.highlight {
+      background: rgba(167, 139, 250, 0.1);
+      border-color: rgba(167, 139, 250, 0.3);
+      color: #c4b5fd;
+    }
+
+    /* EXPERIENCE ITEM */
+    .experience-item {
+      margin-bottom: 40px;
+    }
+
+    .experience-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 4px;
+    }
+
+    .exp-role {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .exp-date {
+      font-size: 12px;
+      color: var(--muted2);
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: var(--r-sm);
+    }
+
+    .exp-company {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+
+    .exp-company a {
+      color: var(--accent);
+      border-bottom: 1px solid transparent;
+      transition: border-color 150ms ease;
+    }
+
+    .exp-company a:hover {
+      border-color: var(--accent);
+    }
+
+    .exp-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .exp-list li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .exp-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+
+    .exp-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .exp-list strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .exp-list .metric {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .exp-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .exp-tech span {
+      font-size: 11px;
+      color: var(--muted2);
+      padding: 4px 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--r-sm);
+    }
+
+    /* EDUCATION */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .edu-item {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--r-lg);
+    }
+
+    .edu-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 4px;
+    }
+
+    .edu-institution {
+      font-size: 12px;
+      color: var(--muted2);
+      margin: 0 0 10px;
+    }
+
+    .edu-description {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 6px;
+      border-radius: var(--r-sm);
+      background: rgba(167, 139, 250, 0.15);
+      color: #c4b5fd;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 34px 0 52px;
+      background: rgba(0, 0, 0, 0.28);
+      border-top: 1px solid var(--stroke);
+      margin-top: 40px;
+    }
+
+    .site-footer .container {
+      width: min(1080px, calc(100% - 48px));
+    }
+
+    .footer-top {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .footer-item {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: lowercase;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .footer-cta {
+      text-align: center;
+      font-family: var(--serif);
+      font-size: clamp(34px, 4.6vw, 64px);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+
+    .cta-accent { color: var(--accent); }
+
+    .cv-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #1E1A2E;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: transform 160ms ease;
+    }
+    .cv-download:hover { transform: translateY(-2px); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .edu-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .exp-header {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .exp-date {
+        order: -1;
+        align-self: flex-start;
+      }
+
+      .resume-links {
+        gap: 12px 16px;
+      }
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <header class="site-header is-shared">
+    <nav class="nav">
+      <a class="brand" href="./" aria-label="Home">
+        <svg class="brand-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <defs>
+              <filter id="brand-rough" x="-14%" y="-14%" width="128%" height="128%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="5" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+            <g filter="url(#brand-rough)">
+              <circle class="brand-ring" cx="20" cy="20" r="17"/>
+              <ellipse class="brand-o" cx="20" cy="20" rx="7.6" ry="10.2"/>
+              <line class="brand-slash" x1="26" y1="8.5" x2="14" y2="31.5"/>
+            </g>
+          </svg>
+        <span class="brand-text">
+          <span class="brand-name">Jose Alvarez</span>
+          <span class="brand-sub">Design</span>
+        </span>
+      </a>
+
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('active')">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      <div class="nav-links">
+          <a href="./#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Proyectos</a>
+          <a href="../pages/methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a href="../pages/craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Oficio</a>
+          <a href="./resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>CV</a>
+          <a href="./about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>Sobre mí</a>
+        </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HEADER -->
+    <section class="resume-header">
+      <div class="container">
+        <div class="mat">
+          <h1 class="resume-title">Jose Alvarez</h1>
+          <p class="resume-role"><strong>Diseñador UI/UX</strong> — interfaces de producto, sistemas de progresión y los design systems que los sostienen</p>
+
+          <div class="resume-links">
+            <a href="./">Portfolio</a>
+            <span class="separator">·</span>
+            <a href="https://www.linkedin.com/in/alvarezcja/" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-linkedin"/></svg>LinkedIn</a>
+            <span class="separator">·</span>
+            <a href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-github"/></svg>GitHub</a>
+            <span class="separator">·</span>
+            <span class="location">Colombia, LATAM · Remoto</span>
+          </div>
+
+          <a class="cv-download" href="../cv/Jose_Alvarez_CV.pdf" download>
+            ↓ Descargar CV (PDF)
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="profile-section">
+      <div class="container">
+        <p class="profile-text">
+          Diseñador UI/UX trabajando en <strong>interfaces de producto construidas alrededor del comportamiento</strong> — sistemas de progresión, economías de XP, niveles de recompensa, rachas, fail states, y los design systems que las mantienen coherentes una vez publicadas.
+          Construí ESA (Emotional State Architecture), una máquina de cuatro estados aplicada en una app fintech, una herramienta para desarrolladores y un objeto físico con su propia interfaz diegética.
+          <strong>Cuatro años</strong> definiendo el lenguaje visual de una plataforma de contenido antes de pasar a producto. También construyo lo que diseño: este portfolio está escrito a mano, y la herramienta agéntica de abajo también. Abierto a puestos y contratos de diseño de producto — productos móviles y web, design systems, e interfaces donde lo difícil es el comportamiento.
+        </p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="resume-section">
+      <div class="container">
+        <h2 class="section-title">Habilidades</h2>
+
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h4>UI de producto</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">UI móvil y web</span>
+              <span class="skill-tag">Navegación y AI</span>
+              <span class="skill-tag highlight">Estados de pantalla</span>
+              <span class="skill-tag">Flujos de onboarding</span>
+              <span class="skill-tag">Jerarquía de información</span>
+              <span class="skill-tag">Legibilidad de un vistazo</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h4>Sistemas y progresión</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Sistemas de progresión</span>
+              <span class="skill-tag">Economías de XP</span>
+              <span class="skill-tag">Niveles de recompensa</span>
+              <span class="skill-tag">Rankings</span>
+              <span class="skill-tag">Rachas y fail states</span>
+              <span class="skill-tag highlight">Máquinas de estado de personaje</span>
+              <span class="skill-tag">Métricas de retención</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h4>Design systems y oficio</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Figma</span>
+              <span class="skill-tag">Guías de estilo UI</span>
+              <span class="skill-tag">Componentes y variantes</span>
+              <span class="skill-tag">Design tokens</span>
+              <span class="skill-tag">Escalas tipográficas</span>
+              <span class="skill-tag highlight">Iconografía</span>
+              <span class="skill-tag">Color y señalización</span>
+              <span class="skill-tag">Motion y feedback</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h4>Herramientas</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">After Effects</span>
+              <span class="skill-tag highlight">Blender</span>
+              <span class="skill-tag">Premiere Pro</span>
+              <span class="skill-tag">Notion</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">Flujos asistidos por IA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK EXPERIENCE -->
+    <section class="resume-section">
+      <div class="container">
+        <h2 class="section-title">Experiencia</h2>
+
+        <div class="experience-item">
+          <div class="exp-header">
+            <h3 class="exp-role">Diseñador visual y de motion</h3>
+            <span class="exp-date">2020 — 2024</span>
+          </div>
+          <p class="exp-company">Serudda · <a href="https://www.youtube.com/watch?v=xANs2lsWFNs" target="_blank" rel="noreferrer">Plataforma de contenido digital →</a></p>
+
+          <ul class="exp-list">
+            <li>
+              Construí una <strong>librería de componentes en Figma</strong> con elementos reutilizables, variantes y flujos de auto-layout para un catálogo de contenido de varios años.
+            </li>
+            <li>
+              Definí el lenguaje visual: tipografía, sistema de color, retículas e ilustración — aplicado de forma consistente en todos los formatos de contenido.
+            </li>
+            <li>
+              Diseñé <strong>motion graphics y micro-interacciones</strong> en After Effects para miniaturas, intros y piezas de marca.
+            </li>
+            <li>
+              Fui responsable del sistema visual de un catálogo que creció de <strong>0 a 34.5K suscriptores</strong> en cuatro años, iterando layout y jerarquía contra datos de engagement.
+            </li>
+          </ul>
+
+          <div class="exp-tech">
+            <span>Figma</span>
+            <span>After Effects</span>
+            <span>Premiere Pro</span>
+            <span>Photoshop</span>
+            <span>Ilustración</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCT PROJECTS -->
+    <section class="resume-section">
+      <div class="container">
+        <h2 class="section-title">Proyectos de producto</h2>
+
+        <div class="experience-item">
+          <div class="exp-header">
+            <h3 class="exp-role">Diseñador UI/UX y constructor</h3>
+            <span class="exp-date">2026</span>
+          </div>
+          <p class="exp-company">Cuak · Emotional Fintech · <a href="../pages/cuak.html">Ver case study →</a></p>
+
+          <ul class="exp-list">
+            <li>
+              Diseñé un <strong>sistema de personaje reactivo para fintech</strong> que traduce la salud crediticia invisible en cuatro estados emocionales claros, cambiando la ansiedad financiera por claridad accionable.
+            </li>
+            <li>
+              Definí el núcleo conductual: reacciones del personaje en tiempo real a las decisiones de gasto, un sistema de progresión por nivel de crédito (Aprendiz → Maestro) y momentos de aviso antes de compras arriesgadas.
+            </li>
+            <li>
+              Diseñado para gente a la que los números le generan ansiedad y los evita: el estado financiero se externaliza en un personaje en lugar de en gráficas y puntajes.
+            </li>
+            <li>
+              Validé el concepto en pruebas de prototipo: <strong>5 de 5 personas dijeron sentir más control</strong> sobre su panorama financiero.
+            </li>
+          </ul>
+
+          <div class="exp-tech">
+            <span>Figma</span>
+            <span>Diseño conductual</span>
+            <span>Estados de personaje</span>
+            <span>Gamificación</span>
+          </div>
+        </div>
+
+        <div class="experience-item">
+          <div class="exp-header">
+            <h3 class="exp-role">Diseñador UI/UX</h3>
+            <span class="exp-date">2026</span>
+          </div>
+          <p class="exp-company">Duo Git · UI Complete · iOS & Android · <a href="../pages/duogit.html">Ver case study →</a></p>
+
+          <ul class="exp-list">
+            <li>
+              Diseñé una <strong>app móvil conductual y un sistema de widgets</strong> que convierte los datos de contribución de GitHub en feedback emocional basado en rachas, con un objetivo de 70%+ de retención a día 30.
+            </li>
+            <li>
+              Hice análisis competitivo de Duolingo, GitHub y Streaks, y encontré una posición sin disputar en el cruce entre <strong>feedback emocional alto y seguimiento específico de código</strong>.
+            </li>
+            <li>
+              Definí la arquitectura de información, la lógica de onboarding, las vistas de dashboard, el ranking por ligas, los estados de personaje y la familia completa de widgets para iOS y Android.
+            </li>
+            <li>
+              Creé una estrategia de medición con KPIs conductuales: tasa de recuperación de racha, retención a día 7, tiempo hasta el primer commit y objetivos de NPS.
+            </li>
+          </ul>
+
+          <div class="exp-tech">
+            <span>Figma</span>
+            <span>GitHub API</span>
+            <span>Visualización de datos</span>
+            <span>Motion design</span>
+          </div>
+        </div>
+
+        <div class="experience-item">
+          <div class="exp-header">
+            <h3 class="exp-role">Diseñador UI/UX</h3>
+            <span class="exp-date">2025</span>
+          </div>
+          <p class="exp-company">UX Lab OS · Agentic AI Tool · <strong>en producción</strong> · <a href="https://uxlab.odejbyjose.com/" target="_blank" rel="noreferrer">Live →</a></p>
+
+          <ul class="exp-list">
+            <li>
+              Diseñé un <strong>flujo de descubrimiento guiado</strong> que convierte una idea cruda de producto en un brief de UX estructurado, recortando el tiempo de documentación un <strong>60%</strong>: de cerca de una hora a 24 minutos.
+            </li>
+            <li>
+              Estructuré más de 10 entregables de UX por proyecto: briefs, personas, user flows, definición de problema, métricas, supuestos y journey maps.
+            </li>
+            <li>
+              Resolví la tensión entre flexibilidad y consistencia acotando las entradas, para que las salidas sean predecibles y compartibles dentro de un equipo.
+            </li>
+          </ul>
+
+          <div class="exp-tech">
+            <span>Figma</span>
+            <span>OpenAI API</span>
+            <span>HTML/CSS</span>
+            <span>Design Systems</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="resume-section">
+      <div class="container">
+        <h2 class="section-title">Formación y certificaciones</h2>
+
+        <div class="edu-grid">
+          <div class="edu-item">
+            <h3 class="edu-title">Técnico en desarrollo de software <span class="badge">En curso</span></h3>
+            <p class="edu-institution">TecMD – Fundación Politécnico Minuto de Dios · ene 2026 – dic 2027 (previsto) ·
+              Virtual</p>
+          </div>
+
+          <div class="edu-item">
+            <h3 class="edu-title">Especialización en diseño UI/UX</h3>
+            <p class="edu-institution">California Institute of the Arts (CalArts) · Coursera</p>
+            <p class="edu-description">
+              Fundamentos de UX, sistemas de diseño visual, arquitectura de información, product thinking y diseño centrado en el usuario.
+            </p>
+          </div>
+
+          <div class="edu-item">
+            <h3 class="edu-title">Certificación en motion graphics</h3>
+            <p class="edu-institution">Coderhouse · 2024</p>
+            <p class="edu-description">
+              Principios de motion, narrativa visual y fundamentos de animación aplicados a las
+              micro-interacciones de interfaz.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <span class="footer-item">Colombia, LATAM</span>
+        <a class="footer-item" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>josealvarezswork@gmail.com</a>
+        <a class="footer-item" href="https://www.linkedin.com/in/alvarezcja/" target="_blank"
+          rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-linkedin"/></svg>LinkedIn</a>
+        <a class="footer-item" href="https://github.com/josealvarezswork" target="_blank" rel="noreferrer"><svg class="ico ico--brand" aria-hidden="true"><use href="../assets/img/icons.svg#i-github"/></svg>GitHub</a>
+      </div>
+
+      <div class="footer-cta">
+        <span>Construyamos </span><span class="cta-accent">algo bueno.</span>
+      </div>
+    </div>
+  </footer>
+    <script src="../scripts/brand.js?v=1" defer></script>
+    <a class="lang-switch" href="../pages/resume.html" hreflang="en" lang="en" aria-label="View this page in English"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/></svg>English<span class="lang-code">EN</span></a>
+  </body>
+
+</html>
+

@@ -66,7 +66,8 @@
 
   --accent-cyan: #7cc6ff;
   --accent-red: #e04a3f;
-  --accent-red-text: #f66b6b;              /* red at label size        */
+  --accent-red-text: #f66b6b;              /* red text on a dark bg    */
+  --accent-red-deep: #c2362b;              /* red fill that holds text */
   --accent-pink: #e84c7d;
   --success: #5fd39a;
   --success-soft: rgba(95, 211, 154, 0.15);
