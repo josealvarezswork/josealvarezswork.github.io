@@ -77,7 +77,7 @@
 .proc > p {
   font-size: 15px; line-height: 1.75;
   color: var(--text-muted);
-  max-width: 68ch;
+  max-width: none;
 }
 .proc-figs {
   display: grid;
@@ -85,7 +85,12 @@
   gap: 18px;
   margin-top: 22px;
 }
-.proc-figs--wide { grid-template-columns: 1fr; max-width: 720px; }
+/* One figure on its own line, filling the column. The image keeps width:100%
+   and height:auto, so it scales evenly and cannot distort — the only thing
+   that changes is how far it is allowed to grow. It used to stop at 720px.
+   Worth knowing: compare-github.webp is 637px wide, so above that it is being
+   upscaled. Re-export it around 1920px and it stays sharp at any width. */
+.proc-figs--wide { grid-template-columns: 1fr; }
 .proc-fig { margin: 0; }
 .proc-fig img {
   width: 100%; height: auto; display: block;
