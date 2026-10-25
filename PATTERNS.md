@@ -59,6 +59,36 @@ item five times longer than its neighbours is not an item — it is a different
 kind of thing wearing the same bullet. Section 09's rewards marketplace left
 the list and became the section's closing paragraph.
 
+## Where the CSS lives
+
+| File | Lines | What it is |
+|---|---|---|
+| `tokens.css` | 165 | colour, radius, type and the spacing scale — values, no rules |
+| `system.css` | 173 | the shell: html, body, header, nav, container |
+| `pages.css` | 214 | the chrome every inner page draws: section, hero, cta, footer |
+| `paper.css` | 928 | the components: paper, notes, tape, figures, brand mark |
+| `about.css` | 218 | the about page, both languages |
+| `resume.css` | 442 | the resume, both languages |
+| `design-system.css` | 136 | what the two design-system pages draw the same way |
+| `styles.css` | 895 | the home only |
+| `home.css` | 1170 | the home only |
+
+
+Load order on an inner page: `tokens` → `system` → `pages` → `paper` → the
+page's own. Paper components come after the page chrome so a sheet wins over a
+page default; the page's own sheet comes last so it can override anything.
+
+Six pages now have no `<style>` block at all. What is still embedded is
+genuinely page-specific: the two case studies and the pages whose layout
+nothing else shares. It went from 4338 lines to 2119.
+
+A page's own file is justified when the same CSS was written out twice —
+`resume.css` and `about.css` each existed in two copies, one per language, so
+a change had to be made twice and one of the two would eventually be
+forgotten. The two case studies share almost nothing (2 identical rules out
+of 63 and 124), so there is no `case-study.css`: forcing one would be a file
+that exists for the name rather than for the code.
+
 ## The components
 
 Everything here lives in `assets/css/paper.css`, which every page loads.

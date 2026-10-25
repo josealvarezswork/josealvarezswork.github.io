@@ -1,0 +1,442 @@
+/* ===========================================================================
+   resume.css — the resume, in both languages — the two pages carried the same 437 lines.
+   Only this page uses it, but it was written out twice, so a change had to
+   be made twice and one of the two would eventually be forgotten.
+   =========================================================================== */
+
+a.link {
+  color: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: border-color 150ms ease;
+}
+
+a.link:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* paper.css pads the nav by 24px to match the shared .container; this
+   page's container has none, so the nav has to drop it to line up. */
+.nav {
+  width: min(var(--max), calc(100% - 48px));
+  max-width: none;
+  padding: 0;
+}
+
+/* RESUME HEADER */
+.resume-header {
+  padding: 70px 0 var(--s-40);
+  border-bottom: 1px solid var(--stroke);
+}
+
+.resume-title {
+  font-family: var(--serif);
+  font-size: clamp(38px, 5vw, 54px);
+  font-weight: 600;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+
+.resume-role {
+  font-size: 15px;
+  color: var(--muted);
+  margin: 0 0 var(--s-20);
+  letter-spacing: 0.02em;
+}
+
+.resume-role strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.resume-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-20);
+  font-size: 13px;
+  margin-bottom: var(--s-24);
+}
+
+.resume-links a {
+  color: rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 2px;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+
+/* paper.css turns the footer links into flex rows so an icon can sit
+   beside the label; this row needs the same treatment. */
+.resume-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+}
+
+.resume-links a:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--text);
+}
+
+.resume-links .separator {
+  color: var(--muted2);
+}
+
+.location {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  padding: var(--s-12) var(--s-20);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.download-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* PROFILE */
+.profile-section {
+  padding: 36px 0;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.profile-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 0;
+  max-width: 70ch;
+}
+
+.profile-text strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* SECTIONS */
+.resume-section {
+  padding: 36px 0;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.resume-section:last-child {
+  border-bottom: none;
+}
+
+/* SKILLS GRID */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-32);
+}
+
+.skill-category h4 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 14px;
+  color: var(--text);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-8);
+}
+
+.skill-tag {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 6px var(--s-12);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--r-md);
+  transition: border-color 150ms ease;
+}
+
+.skill-tag:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.skill-tag.highlight {
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.3);
+  color: #c4b5fd;
+}
+
+/* EXPERIENCE ITEM */
+.experience-item {
+  margin-bottom: var(--s-40);
+}
+
+.experience-item:last-child {
+  margin-bottom: 0;
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--s-20);
+  margin-bottom: var(--s-4);
+}
+
+.exp-role {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.exp-date {
+  font-size: 12px;
+  color: var(--muted2);
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: var(--s-4) 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--r-sm);
+}
+
+.exp-company {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 var(--s-16);
+}
+
+.exp-company a {
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 150ms ease;
+}
+
+.exp-company a:hover {
+  border-color: var(--accent);
+}
+
+.exp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.exp-list li {
+  position: relative;
+  padding-left: var(--s-20);
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.exp-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.exp-list li:last-child {
+  margin-bottom: 0;
+}
+
+.exp-list strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.exp-list .metric {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.exp-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.exp-tech span {
+  font-size: 11px;
+  color: var(--muted2);
+  padding: var(--s-4) var(--s-8);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--r-sm);
+}
+
+/* EDUCATION */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-28);
+}
+
+.edu-item {
+  padding: var(--s-20);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--r-lg);
+}
+
+.edu-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 var(--s-4);
+}
+
+.edu-institution {
+  font-size: 12px;
+  color: var(--muted2);
+  margin: 0 0 10px;
+}
+
+.edu-description {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cv-download {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  margin-top: 22px;
+  padding: var(--s-12) 22px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #1E1A2E;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: transform 160ms ease;
+}
+.cv-download:hover { transform: translateY(-2px); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .edu-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: var(--s-24);
+  }
+
+  .exp-header {
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+
+  .exp-date {
+    order: -1;
+    align-self: flex-start;
+  }
+
+  .resume-links {
+    gap: var(--s-12) var(--s-16);
+  }
+}
+
+/* --- SKILL TAGS, ONE MOVING ROW --------------------------------------
+   At 375px the four groups wrap into three or four rows each and the
+   block runs 747px tall. Below 600px tag-marquee.js wraps each group's
+   tags in a track, and these rules turn that track into one row that
+   moves on its own. None of this matches without the script, so with it
+   blocked the tags wrap exactly as before. */
+@keyframes skill-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(calc(-1 * var(--marquee-w)), 0, 0); }
+}
+
+@media (max-width: 600px) {
+  .skill-tags[data-marquee] {
+    display: block;
+    /* A tag should leave the row by fading, not by being cut in half. */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+  }
+  .skill-tags[data-marquee="animated"] { overflow: hidden; }
+
+  /* A grid item's automatic minimum size is its content, so a row 950px
+     long drags the whole column out to 950px and the scroll container
+     never gets to scroll. The item has to be allowed to be smaller than
+     what is inside it. */
+  .skill-category { min-width: 0; }
+  .skill-tags[data-marquee] { min-width: 0; }
+
+  /* Still mode, for prefers-reduced-motion: no copy and no animation,
+     just one row the visitor swipes. It fixes the same stacking without
+     anything moving by itself. */
+  .skill-tags[data-marquee="still"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+  .skill-tags[data-marquee="still"]::-webkit-scrollbar { display: none; }
+
+  .skill-tags-track {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    /* The spacing lives on the tags, not here: the animation travels one
+       set's width, and a trailing margin is what makes that distance land
+       the copy's first tag where the original's first tag was. A flex gap
+       would leave the loop half a gap short and the seam would show. */
+    gap: 0;
+  }
+  .skill-tags-track .skill-tag {
+    flex: none;
+    margin-right: var(--s-8);
+    white-space: nowrap;
+  }
+
+  .skill-tags[data-marquee="animated"] .skill-tags-track {
+    animation: skill-marquee var(--marquee-dur, 26s) linear infinite;
+    will-change: transform;
+  }
+  /* Opposite directions, so four rows do not read as one sheet sliding
+     behind the page. */
+  .skill-category:nth-child(even) .skill-tags-track {
+    animation-direction: reverse;
+  }
+
+  /* WCAG 2.2.2: moving content needs a way to stop it. A finger down or
+     a pointer over the row holds it — the same gesture someone makes to
+     read one tag. */
+  .skill-tags[data-held] .skill-tags-track,
+  .skill-tags:hover .skill-tags-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-tags-track { animation: none; }
+}
+
+
+/* this page wants the footer pushed further down */
+.site-footer { margin-top: var(--s-40); }
+  

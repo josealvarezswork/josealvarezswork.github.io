@@ -1,0 +1,136 @@
+/* ===========================================================================
+   design-system.css — what the two design-system pages draw the same way
+
+   Both pages show a palette, a type scale and a component kit, and both
+   wrote out the same 50 rules to do it. What is NOT here, and stays in each
+   page, is what actually differs between them: each :root with its own brand
+   colours, the state swatches, the zoning bars and the before/after cards.
+   =========================================================================== */
+
+.accent { color: var(--accent); }
+.hero-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
+.hero-sub { font-size: 16px; color: var(--muted); max-width: 600px; line-height: 1.7; }
+.pill {
+  font-size: 11px; letter-spacing: .06em; padding: 6px var(--s-12);
+  border-radius: 999px; border: 1px solid var(--stroke-light); color: var(--muted);
+}
+/* COLOR TOKENS */
+.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--s-16); margin-top: var(--s-32); }
+.color-swatch {
+  border-radius: var(--r); overflow: hidden;
+  border: 1px solid var(--stroke);
+}
+.swatch-block { height: 80px; }
+.swatch-info { padding: var(--s-12); background: var(--bg-card); }
+.swatch-name { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.swatch-token { font-size: 10px; color: var(--faint); font-family: monospace; }
+.swatch-hex { font-size: 11px; color: var(--muted); margin-top: 2px; }
+/* MASCOT STATES */
+.states-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-16);
+  margin-top: var(--s-32);
+}
+.state-card {
+  background: var(--bg-card);
+  border: 1px solid var(--stroke-light);
+  border-radius: var(--r);
+  padding: var(--s-24) var(--s-20);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.state-name { font-size: 14px; font-weight: 600; }
+.state-trigger { font-size: 11px; color: var(--faint); letter-spacing: .04em; }
+.state-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.state-drive {
+  font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+  padding: var(--s-4) var(--s-8); border-radius: 4px; background: var(--accent-soft);
+  color: var(--accent); align-self: flex-start; margin-top: var(--s-4);
+}
+/* 60/40 DIAGRAM */
+.zone-diagram {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--s-20);
+  margin-top: var(--s-32);
+}
+.zone-card {
+  border-radius: var(--r);
+  border: 1px solid var(--stroke-light);
+  overflow: hidden;
+}
+.zone-header {
+  padding: 14px var(--s-16);
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--stroke);
+}
+.zone-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+.zone-name { font-size: 14px; font-weight: 600; margin-top: 2px; }
+.zone-body { padding: var(--s-16); display: flex; flex-direction: column; gap: var(--s-8); }
+.zone-split-visual {
+  display: flex; height: 48px; border-radius: var(--r-sm); overflow: hidden; gap: 2px;
+}
+.zone-emotional-bar.warn {
+  background: rgba(251,191,36,.12); color: var(--accent-warn);
+}
+.zone-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.zone-drive { font-size: 10px; color: var(--faint); margin-top: var(--s-4); letter-spacing: .04em; }
+/* REFERENCE SHEET */
+.ref-sheet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-16); margin-top: var(--s-28); }
+.ref-sheet-card { border-radius: var(--r); border: 1px solid var(--stroke-light); overflow: hidden; background: var(--bg-card); }
+.ref-sheet-card img { width: 100%; display: block; }
+.ref-sheet-card p { padding: 10px 14px; font-size: 12px; color: var(--faint); letter-spacing: .04em; }
+.ba-card-header {
+  padding: 10px var(--s-16);
+  border-bottom: 1px solid var(--stroke);
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+}
+.ba-placeholder {
+  width: 100%; min-height: 160px;
+  border: 2px dashed var(--stroke-light);
+  border-radius: var(--r-sm);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--s-8); color: var(--faint); font-size: 13px;
+}
+.ba-arrow { font-size: 24px; color: var(--accent); text-align: center; }
+.ba-annotation {
+  font-size: 12px; color: var(--muted); padding: var(--s-12) var(--s-16);
+  border-top: 1px solid var(--stroke); line-height: 1.6;
+}
+.annotation-list {
+  display: flex; flex-direction: column; gap: var(--s-12); margin-top: var(--s-20);
+}
+.annotation-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 14px var(--s-16); background: var(--bg-card);
+  border: 1px solid var(--stroke); border-radius: var(--r-sm);
+}
+.annotation-dot {
+  width: 24px; height: 24px; border-radius: 999px;
+  background: var(--accent-soft); border: 2px solid var(--accent);
+  color: var(--accent); font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.annotation-label { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.annotation-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
+/* COMPONENTS */
+.component-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-20); margin-top: var(--s-28); }
+.component-card {
+  background: var(--bg-card); border: 1px solid var(--stroke-light);
+  border-radius: var(--r); padding: var(--s-24);
+}
+.component-name { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); margin-bottom: var(--s-16); }
+.component-desc { font-size: 13px; color: var(--muted); margin-top: var(--s-12); line-height: 1.6; }
+.progress-track { height: 8px; background: var(--bg-elevated); border-radius: 999px; overflow: hidden; }
+/* TYPOGRAPHY */
+.type-grid { display: flex; flex-direction: column; gap: var(--s-20); margin-top: var(--s-28); }
+.type-item { padding: var(--s-20) var(--s-24); background: var(--bg-card); border: 1px solid var(--stroke); border-radius: var(--r); }
+.type-meta { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); margin-bottom: var(--s-8); }
+.state-img, .annotated-placeholder, .state-img-placeholder {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 70px rgba(0, 0, 0, 0.38);
+}
+/* this page wants the footer pushed further down */
+.site-footer { margin-top: var(--s-80); }
