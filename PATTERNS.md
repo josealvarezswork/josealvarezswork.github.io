@@ -132,6 +132,8 @@ A `.note-lg` has one of three heads, chosen by what the card is about:
   feature, a rule. The icon comes from `assets/img/icons.svg`.
 - **a statement** → `.note-lg-head` with the title alone. *The problem*,
   *Design principle*, *B2B — the real business*.
+- **a step in a sequence** → `.note-lg-head--stacked`: the same kicker over an
+  ordinary title instead of a figure. *State 1 · Happy / Active streak*.
 
 **Never force an icon.** The sprite holds twelve symbols; none of them means
 "a date inside the billing cycle". A wrong icon reads worse than none, so a

@@ -28,8 +28,8 @@
     <link rel="stylesheet" href="../assets/css/tokens.css?v=9" />
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
   <link rel="stylesheet" href="../assets/css/pages.css?v=1">
-  <link rel="stylesheet" href="../assets/css/paper.css?v=25" />
-  <link rel="stylesheet" href="../assets/css/duogit.css?v=1">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=26" />
+  <link rel="stylesheet" href="../assets/css/duogit.css?v=2">
 </head>
 
 <body>
@@ -235,56 +235,20 @@
         <p class="section-text">The goal is not just to build a widget, but to foster positive behavioral change among developers — moving from sporadic, high-stress commits to consistent, stress-free daily routines.</p>
         
         <div class="two-col" style="margin-top: var(--s-40);align-items:start">
-          <div>
-            <p style="font-size:13px;font-weight:600;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom: var(--s-12)">
-              Behavioral Metrics</p>
-            <div class="features-list">
-              <div class="feature-row">
-                <div class="feature-info">
-                  <h4>Daily Commit Rate</h4>
-                  <p>Target: increase baseline from ~1 commit/day to ≥3 commits/day</p>
-                </div>
-              </div>
-              <div class="feature-row">
-                <div class="feature-info">
-                  <h4>Weekly Streak Duration</h4>
-                  <p>Target: increase baseline from 2-3 days to 5+ consecutive days</p>
-                </div>
-              </div>
-              <div class="feature-row">
-                <div class="feature-info">
-                  <h4>Post-Streak Recovery</h4>
-                  <p>Target: improve rate of recovery within 3 days from <30% to >60%</p>
-                </div>
-              </div>
-            </div>
+          <div class="note-lg">
+            <div class="note-lg-head"><h3>Behavioral metrics</h3></div>
+            <p><strong>Daily commit rate.</strong> Target: from ~1 commit/day to ≥3 commits/day.</p>
+            <p><strong>Weekly streak duration.</strong> Target: from 2–3 days to 5+ consecutive days.</p>
+            <p><strong>Post-streak recovery.</strong> Target: recovery within 3 days, from &lt;30% to &gt;60%.</p>
           </div>
-          <div>
-            <p style="font-size:13px;font-weight:600;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom: var(--s-12)">
-              Emotional Satisfaction</p>
-            <div class="features-list">
-              <div class="feature-row">
-                <div class="feature-info">
-                  <h4>Perceived Progress Clarity</h4>
-                  <p>Target a 50% increase in user-reported clarity (Survey 1-10)</p>
-                </div>
-              </div>
-              <div class="feature-row">
-                <div class="feature-info">
-                  <h4>Streak-related Anxiety</h4>
-                  <p>Target a 40% reduction in reported stress levels</p>
-                </div>
-              </div>
-              <div class="feature-row">
-                <div class="feature-info">
-                  <h4>Guilt-free Motivation</h4>
-                  <p>Ensure users feel motivated by the ghost mascot, not guilty</p>
-                </div>
-              </div>
-            </div>
+          <div class="note-lg">
+            <div class="note-lg-head"><h3>Emotional satisfaction</h3></div>
+            <p><strong>Perceived progress clarity.</strong> Target a 50% increase in user-reported clarity (survey 1–10).</p>
+            <p><strong>Streak-related anxiety.</strong> Target a 40% reduction in reported stress.</p>
+            <p><strong>Guilt-free motivation.</strong> Users should feel motivated by the ghost, not guilty.</p>
           </div>
         </div>
-      </div>
+        </div>
     </section>
 
     <!-- JOURNEY -->
@@ -293,34 +257,40 @@
         <h2 class="section-title">The Streak Journey Flow</h2>
         <p class="section-text">The widget introduces a simple but effective daily loop based on the GitHub commit status. It seamlessly maps the emotional state of the character to the user's progress.</p>
         <div class="journey">
-          <div class="journey-stage">
-            <div class="stage-num">State 1 · Happy</div>
-            <h4>Active Streak</h4>
-            <p>User sees "HAPPY" status. Taps the widget, performs their daily commit, and the widget verifies the streak.</p>
+          <div class="note-lg">
+            <div class="note-lg-head note-lg-head--stacked">
+              <span class="note-lg-kicker">State 1 · Happy</span>
+              <h3>Active streak</h3>
+            </div>
+            <p>User sees the <strong>Happy</strong> status, taps the widget, makes the daily commit, and the widget verifies the streak.</p>
             <div class="stage-feeling">
               <span class="feeling-tag positive">Motivated</span>
               <span class="feeling-tag positive">Consistent</span>
             </div>
           </div>
-          <div class="journey-stage">
-            <div class="stage-num">State 2 · Worried</div>
-            <h4>At Risk</h4>
-            <p>Widget displays warning (e.g., "Quedan 5h"). User sees the alert, feels the urgency, and is driven to commit.</p>
+          <div class="note-lg">
+            <div class="note-lg-head note-lg-head--stacked">
+              <span class="note-lg-kicker">State 2 · Worried</span>
+              <h3>At risk</h3>
+            </div>
+            <p>The widget warns — <em>Quedan 5h</em>. The user sees the alert, feels the urgency, and is driven to commit.</p>
             <div class="stage-feeling">
               <span class="feeling-tag">Alert</span>
               <span class="feeling-tag">Urgent</span>
             </div>
           </div>
-          <div class="journey-stage">
-            <div class="stage-num">State 3 · Sad / Neutral</div>
-            <h4>Streak Lost</h4>
-            <p>Streak is broken ("0 DÍAS"). User acknowledges the loss and is prompted to start a new streak with a first commit.</p>
+          <div class="note-lg">
+            <div class="note-lg-head note-lg-head--stacked">
+              <span class="note-lg-kicker">State 3 · Sad</span>
+              <h3>Streak lost</h3>
+            </div>
+            <p>The streak breaks — <em>0 días</em>. The user acknowledges the loss and is prompted to start again with a first commit.</p>
             <div class="stage-feeling">
               <span class="feeling-tag">Determined</span>
             </div>
           </div>
         </div>
-      </div>
+        </div>
     </section>
 
     <!-- TRADEOFF/ZONING -->

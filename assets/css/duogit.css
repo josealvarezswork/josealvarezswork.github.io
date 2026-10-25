@@ -249,38 +249,21 @@
   }
 }
 
+/* Three states, so three columns — auto-fit made four tracks and left one
+   empty. The sheets carry their own surface now, so the grid no longer draws
+   the hairline frame the old stage cards sat in. */
 .journey {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1px;
-  background: var(--stroke);
-  border: 1px solid var(--stroke);
-  border-radius: var(--rl);
-  overflow: hidden;
-  margin-top: var(--s-32)}
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-16);
+  margin-top: var(--s-32);
+}
+@media (max-width: 860px) { .journey { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .journey { grid-template-columns: 1fr; } }
 
-.journey-stage {
-  background: var(--bg-card);
-  padding: var(--s-24) var(--s-20)}
 
-.stage-num {
-  font-size: 10px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--text-faint);
-  margin-bottom: var(--s-8)}
 
-.journey-stage h4 {
-  font-family: var(--serif);
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: var(--s-8)}
 
-.journey-stage p {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: var(--s-12)}
 
 .stage-feeling {
   display: flex;
@@ -726,7 +709,7 @@
    on paper, and imagery is mounted in a well instead of running to
    the card edge. Last in this page's own stylesheet on purpose —
    these have to beat the rules above without a specificity war. */
-.spec-card, .persona-card, .journey-stage, .tradeoff-visual, .feature-row, .screen-card {
+.spec-card, .persona-card, .tradeoff-visual, .feature-row, .screen-card {
   border-radius: var(--r-lg);
   border: 1px solid var(--stroke);
   box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.32);

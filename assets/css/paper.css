@@ -350,6 +350,32 @@
   pointer-events: none;
 }
 
+/* A head that stacks a small kicker over an ordinary title, for a sheet whose
+   subject has a label as well as a name — a step in a sequence, a state in a
+   machine. The figure head below is the same shape with a number instead. */
+.note-lg-head--stacked { display: block; }
+.note-lg-head--stacked h3 { margin-top: 2px; }
+
+/* A tag on paper. The dark-surface version is tuned for a dark card and its
+   muted grey falls under AA on this stock. */
+.note-lg .feeling-tag {
+  display: inline-block;
+  padding: 3px 9px;
+  border: 1px solid rgba(34, 29, 51, 0.2);
+  border-radius: var(--r-pill);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(34, 29, 51, 0.72);
+  background: none;
+}
+.note-lg .feeling-tag.positive {
+  border-color: rgba(28, 87, 64, 0.34);
+  color: var(--brand-cuak-ink);
+}
+.note-lg .stage-feeling { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
 /* Two readings of the same decision. The figure IS the headline, so it takes
    the head instead of an icon: none of the twelve icons in the sprite means
    "a date inside the billing cycle", and a wrong icon reads worse than none.
