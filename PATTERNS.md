@@ -130,18 +130,51 @@ directly above it. Cuak went from twenty strips to eight, one per screen.
 - **Radius.** Paper is `--r-md`, the product's own cards are `--r-lg`. A sheet's
   corners are tighter than a UI card's. Everything else comes from the token
   scale; `.note` at 3px is the exception, because a taped slip has almost none.
-- **Section rhythm.** `64px` top and bottom. One value, no exceptions.
+- **Spacing.** A four-point grid in `tokens.css`: `--s-4` through `--s-128`,
+  stepping by four to 32 and by sixteen after. It was measured, not guessed.
+  The site held 48 different spacing values across 1182 declarations; a pure
+  doubling scale (2-4-6-8-16-32-64-128) would have covered 37% of them, since
+  12px, 20px and 24px are each used more often than most of its steps. The
+  four-point grid covers 69%, and going finer than that buys two points for
+  eighteen more steps.
+
+  Values under 8 stay literal in the component that needs them — they are
+  optical corrections to a border or a cap height, not layout, and a token
+  would invite using them as layout.
+
+- **Section rhythm.** `var(--s-64)` top and bottom, on all seven pages that
+  have sections. Three of them used 72px for no reason anyone recorded.
 - **Contrast.** AA, measured with the alpha composited through the whole
   ancestor chain. A naive reading of `color` against the nearest background
   gives the wrong ratio on both the paper and the dark surfaces.
 
 ## What is not done yet
 
-The law holds on `index.html` and `pages/cuak.html`. It does not hold anywhere
-else:
+The law holds on `index.html`, `pages/cuak.html` and the parts of
+`pages/duogit.html` it reaches. It does not hold anywhere else:
 
-- `pages/duogit.html` solves the same problems under different names —
-  `feature-row` for `.shot-beside`, `proc-cap` for `.note`, 250 inline styles.
+- `pages/duogit.html` now shares the vocabulary where it matters: its seven
+  `proc-cap` captions are `.note`, the problem and the opportunity are
+  `.note-lg`, and its four target figures became one sheet with a
+  `.note-lg-figs--quad` row. What stayed dark is the product's own content:
+  the widget feature rows, the screen carousel, the colour swatches (renamed
+  `.spec-card`, since the class they shared no longer described them). It
+  Below "Defining Success" the four commentary panels beside the mockups are
+  `.note-lg--sm`, a sheet sized to sit inside a frame, and the closing
+  "What's next" is a sheet. What stayed dark there is the product's own
+  content: the widget feature rows and the screen carousel. It still carries
+  231 inline styles.
+
+- `.site-footer`, `.footer-inner`, `.footer-copy` and `.footer-nav` live in
+  `paper.css` now. Ten pages declared them and had drifted — 32px of padding
+  against 34, a background of .2 against .25 against .28 — and the two case
+  studies had no real footer at all. They have one, with a link to the other
+  case study, the framework, the resume and contact.
+
+- A sheet sets its own ink with a repeated class. `paper.css` loads before a
+  page's `<style>`, so a page rule like `.screen-card p { color: faint }` tied
+  on specificity and won on source order; dark ink on cream paper measures
+  1.03:1.
 - The nine other pages use dark cards only, and each declares its own `.hero`,
   `.section-title`, `.section-text` and `.site-footer`. `section-title` is
   written out on eight pages.

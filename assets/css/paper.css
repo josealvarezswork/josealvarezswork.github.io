@@ -19,7 +19,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  padding: 24px 0 34px;
+  padding: var(--s-24) 0 34px;
   background: none;
   border-bottom: none;
 }
@@ -54,7 +54,7 @@
   width: 100%;
   max-width: var(--nav-max, var(--max));
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--s-24);
 }
 .nav-links { font-size: 12.5px; opacity: 0.78; }
 .nav-links a:hover { opacity: 1; }
@@ -94,6 +94,41 @@
 .case-links { align-items: center; }
 
 /* CC BY 4.0 asks for visible credit. */
+/* --- SITE FOOTER --------------------------------------------------------
+   Ten pages declared this themselves and drifted: 32px of padding against
+   34px, a background of .2 against .25 against .28. None of that was a
+   decision. One rule here, and the two case studies — which had a footer
+   written by hand with no links in it at all — get the same one.
+
+   Pages that need the footer pushed further down keep a margin-top of their
+   own; that is page rhythm, not the component.                            */
+.site-footer {
+  padding: 34px 0 52px;
+  border-top: 1px solid var(--stroke);
+  background: rgba(0, 0, 0, 0.28);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-16);
+}
+.footer-copy {
+  font-size: 12px;
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+}
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-24);
+  font-size: 12px;
+  color: var(--text-faint);
+  letter-spacing: 0.06em;
+}
+.footer-nav a:hover { color: var(--text); }
+
 .footer-credit {
   margin: 18px 0 0;
   font-size: 10.5px;
@@ -202,17 +237,14 @@
 .note {
   position: relative;
   display: block;
-  /* The artwork above carries ~60px of its own shadow inside the image box,
-     so a positive margin here reads as a gap twice the size it looks in the
-     stylesheet. Pull back into that shadow instead. */
-  margin-top: -22px;
+  margin-top: 10px;
   /* One slip size for the whole page, narrower than any figure it hangs
      under, so the captions read as sheets off the same pad rather than as
      bands sized to whatever is above them. It is a max, so a figure narrower
      than the slip still governs. */
   max-width: 215px;
   margin-inline: auto;
-  padding: 10px 12px 11px;
+  padding: 10px var(--s-12) 11px;
   background: var(--paper);
   color: rgba(34, 29, 51, 0.78);
   border: 1px solid rgba(34, 29, 51, 0.1);
@@ -223,7 +255,14 @@
   line-height: 1.5;
   text-align: left;
 }
+.note.note { color: rgba(34, 29, 51, 0.78); }
 .note strong { color: var(--paper-ink); font-weight: 700; }
+
+/* A phone export carries ~60px of its own drop shadow inside the image box,
+   so a positive margin under it reads as a gap twice the size the stylesheet
+   says. Pull back into that shadow. Artwork without a baked shadow — a flat
+   screenshot, a render on a panel — keeps the normal gap above. */
+.shot .note { margin-top: -22px; }
 
 .note-tape {
   position: absolute;
@@ -248,7 +287,7 @@
    leaning would read as knocked over rather than stuck up.                 */
 .note-lg {
   position: relative;
-  padding: 20px 22px 22px;
+  padding: var(--s-20) 22px 22px;
   background: var(--paper);
   color: rgba(34, 29, 51, 0.8);
   border: 1px solid rgba(34, 29, 51, 0.1);
@@ -257,8 +296,15 @@
   font-size: 13.5px;
   line-height: 1.68;
 }
-.note-lg > p { color: inherit; }
-.note-lg > p + p { margin-top: 12px; }
+/* A sheet sets its own ink, whatever the page says about the elements inside
+   its own containers. paper.css loads before a page's <style>, so a rule like
+   `.screen-card p { color: var(--text-faint) }` ties on specificity and wins
+   on source order — and dark-surface ink on cream paper measures 1.03:1,
+   which is invisible. The repeated class buys the weight without !important. */
+.note-lg.note-lg > p,
+.note-lg.note-lg li,
+.note-lg.note-lg cite { color: inherit; }
+.note-lg > p + p { margin-top: var(--s-12); }
 .note-lg > p strong { color: var(--paper-ink); font-weight: 700; }
 .note-lg > p em { font-style: italic; }
 
@@ -335,6 +381,30 @@
    asks about its own head; every current browser has had it since 2023. */
 .note-lg:has(.note-lg-head--figure)::after { display: none; }
 
+/* A sheet sized to sit inside a mockup frame: the author's note on the thing
+   being shown, where a full sheet would crowd the artwork it belongs to. The
+   head keeps the small uppercase label these panels already used.          */
+.note-lg--sm {
+  padding: 14px var(--s-16) 15px;
+  border-radius: var(--r-md);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+.note-lg--sm .note-lg-head {
+  padding-right: 0;
+  padding-bottom: 9px;
+  margin-bottom: 10px;
+}
+.note-lg--sm .note-lg-head h3 {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(34, 29, 51, 0.72);
+}
+.note-lg--sm::after { display: none; }
+
 /* --- FIGURES INSIDE A SHEET ---------------------------------------------
    Two or three sheets stacked beside one phone read as a pile of stationery.
    The same words on one sheet read as a note somebody wrote. So a sheet that
@@ -345,13 +415,14 @@
    drawn by the layout rather than only stated by the numbers.            */
 .note-lg-figs {
   display: grid;
-  gap: 20px;
-  margin-bottom: 16px;
+  gap: var(--s-20);
+  margin-bottom: var(--s-16);
 }
 .note-lg-figs--ratio { grid-template-columns: 60fr 40fr; }
 .note-lg-figs--even { grid-template-columns: 1fr 1fr; }
+.note-lg-figs--quad { grid-template-columns: repeat(4, 1fr); gap: var(--s-16); }
 .note-lg-figs > * + * {
-  padding-left: 20px;
+  padding-left: var(--s-20);
   border-left: 1px solid rgba(34, 29, 51, 0.12);
 }
 .note-lg-figs p {
@@ -365,9 +436,13 @@
 /* The sheet is widest when the figure beside it has collapsed, so the only
    width that threatens two columns is a phone. A viewport query cannot read
    the sheet's own width, so it goes by the one case that matters. */
+@media (max-width: 860px) {
+  .note-lg-figs--quad { grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 560px) {
   .note-lg-figs--ratio,
-  .note-lg-figs--even { grid-template-columns: 1fr; }
+  .note-lg-figs--even,
+  .note-lg-figs--quad { grid-template-columns: 1fr; }
   .note-lg-figs > * + * { padding-left: 0; border-left: 0; }
 }
 
@@ -418,10 +493,10 @@
   grid-template-columns: 300px 1fr;
   gap: 36px;
   align-items: start;
-  margin-top: 24px;
+  margin-top: var(--s-24);
 }
 @media (max-width: 760px) {
-  .shot-beside { grid-template-columns: 1fr; gap: 20px; }
+  .shot-beside { grid-template-columns: 1fr; gap: var(--s-20); }
 }
 
 /* Three screens will not take prose beside them — there is no room left.
@@ -431,11 +506,11 @@
 .shot-trio {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  margin-top: 32px;
+  gap: var(--s-20);
+  margin-top: var(--s-32);
 }
 @media (max-width: 680px) {
-  .shot-trio { grid-template-columns: 1fr; gap: 28px; }
+  .shot-trio { grid-template-columns: 1fr; gap: var(--s-28); }
 }
 
 /* The column of paper cards that fills the other side. */
@@ -447,7 +522,7 @@
 .shot-pair {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
-  gap: 20px;
+  gap: var(--s-20);
 }
 .shot-pair .shot-frame { max-width: 265px; }
 @media (max-width: 900px) {
@@ -524,7 +599,7 @@
 .mat > * { position: relative; z-index: 1; }
 
 @media (max-width: 900px) {
-  .mat { padding: 40px 26px; border-radius: var(--r-lg); }
+  .mat { padding: var(--s-40) 26px; border-radius: var(--r-lg); }
   .mat::before { inset: 12px; }
 }
 
@@ -537,8 +612,8 @@
 .hero-back {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 40px;
+  gap: var(--s-8);
+  margin-bottom: var(--s-40);
   font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--muted-2);
@@ -811,8 +886,8 @@
   z-index: 40;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
+  gap: var(--s-8);
+  padding: 10px var(--s-16);
   border-radius: var(--r-pill);
   background: var(--bg-card);
   border: 1px solid var(--stroke-light);

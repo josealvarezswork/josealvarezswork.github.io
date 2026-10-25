@@ -98,6 +98,33 @@
   --r-xl: 22px;
   --r-pill: 999px;
 
+  /* --- spacing ----------------------------------------------------------
+     A four-point grid. The site used 48 different spacing values across
+     1182 declarations before this existed, and a scale of 2-4-6-8-16-32-
+     64-128 would have covered 37% of them — 12px, 20px and 24px are each
+     used more often than most of the steps in it. Doubling alone leaves a
+     hole exactly where layout lives. Stepping by four up to 32, then by
+     sixteen, covers 69% as written and is the set everything else should
+     be moved onto.
+
+     Values below 8 — 2, 5, 6 — stay literal in the component that needs
+     them. They are optical corrections to a border or a cap height, not
+     layout, and a token would invite using them as layout.              */
+  --s-4: 4px;
+  --s-8: 8px;
+  --s-12: 12px;
+  --s-16: 16px;
+  --s-20: 20px;
+  --s-24: 24px;
+  --s-28: 28px;
+  --s-32: 32px;
+  --s-40: 40px;
+  --s-48: 48px;
+  --s-64: 64px;
+  --s-80: 80px;
+  --s-96: 96px;
+  --s-128: 128px;
+
   /* --- paper ----------------------------------------------------------- */
   --paper: #efeae1;
   --paper-2: #e6e0d4;

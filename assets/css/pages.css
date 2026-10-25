@@ -1,0 +1,214 @@
+/* ===========================================================================
+   pages.css — the chrome every inner page draws
+
+   Before this file existed, 124 of these rules were written out inside the
+   pages themselves: `.section-title` on nine pages in five versions, `.hero`
+   on eight in three, `.section-text` on seven in five. None of the
+   differences were decisions — clamp(24px..38px) against clamp(26px..40px),
+   a margin of 16 against 20 — they were copies that drifted.
+
+   What is here is the version most pages already used. A page that genuinely
+   needs something else keeps a short override in its own <style>, with a
+   comment saying why. That way a difference is visible in one place instead
+   of hidden across nine files.
+
+   Load order: tokens.css → system.css → pages.css → paper.css. Paper
+   components come last so a sheet wins over page defaults.
+   =========================================================================== */
+
+/* --- page ---------------------------------------------------------------- */
+body {
+  margin: 0;
+}
+
+.container {
+  width: min(var(--max), calc(100% - 48px));
+  margin: 0 auto;
+  padding: 0;
+}
+
+.accent-bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100vh;
+  background: linear-gradient(180deg, var(--accent) 0%, rgba(167,139,250,.2) 100%);
+  z-index: 100;
+}
+
+/* --- section ------------------------------------------------------------- */
+.section {
+  padding: var(--s-64) 0;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s-16);
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--s-20);
+}
+
+.section-text {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 680px;
+  line-height: 1.8;
+  margin-bottom: var(--s-16);
+}
+
+/* --- hero ---------------------------------------------------------------- */
+.hero {
+  padding: var(--s-80) 0 60px;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s-16);
+}
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  padding: 6px var(--s-12);
+  background: var(--accent-soft);
+  border: 1px solid rgba(79, 124, 99, .3);
+  border-radius: var(--r-pill);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--brand-cuak-text);
+  margin-bottom: var(--s-24);
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5.5vw, 64px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s-20);
+}
+
+.hero-title .accent {
+  color: var(--accent);
+}
+
+.hero-subtitle {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 660px;
+  line-height: 1.7;
+}
+
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-8);
+  margin-top: var(--s-24);
+}
+
+/* --- call to action ------------------------------------------------------ */
+.cta-section {
+  padding: var(--s-80) 0;
+  text-align: center;
+}
+
+.cta-heading {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 600;
+  margin-bottom: var(--s-12);
+}
+
+.cta-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: var(--s-32);
+}
+
+.cta-accent {
+  color: var(--accent);
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 14px var(--s-32);
+  background: var(--accent);
+  color: #1b1436;
+  border-radius: var(--r);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  transition: opacity 150ms ease;
+}
+
+/* --- footer extras ------------------------------------------------------- */
+.site-footer .container {
+  width: min(1080px, calc(100% - 48px));
+}
+
+.footer-top {
+  display: flex;
+  gap: var(--s-28);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.footer-item {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-cta {
+  text-align: center;
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.6vw, 64px);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* --- buttons and badges -------------------------------------------------- */
+.btn-download {
+  padding: 6px var(--s-12);
+  border: 1px solid rgba(167, 139, 250, 0.5);
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 6px;
+  border-radius: var(--r-sm);
+  background: rgba(167, 139, 250, 0.15);
+  color: #c4b5fd;
+  margin-left: var(--s-8);
+  vertical-align: middle;
+}
+
