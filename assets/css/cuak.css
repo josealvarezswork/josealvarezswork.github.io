@@ -333,16 +333,6 @@ code {
 .mockup-phone-placeholder span { font-size: 24px }
 
   
-/* The page's inline code chip is tuned for the dark surface; on paper it
-   needs the ink treatment instead. */
-.note-lg code {
-  font-family: var(--mono);
-  font-size: 12px;
-  padding: 1px 6px;
-  border-radius: 3px;
-  color: #3f2a86;
-  background: rgba(124, 92, 226, 0.14);
-}
 
 
 /* --- CLAIM TAGS ---------------------------------------------------

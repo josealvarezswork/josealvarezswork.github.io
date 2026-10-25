@@ -308,6 +308,18 @@
 .note-lg > p strong { color: var(--paper-ink); font-weight: 700; }
 .note-lg > p em { font-style: italic; }
 
+/* An inline code chip on paper. The dark-surface version each page defines is
+   tuned for a dark card; this is the ink one, and it belongs to the sheet
+   rather than to whichever case study happened to need it first. */
+.note-lg code {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: #3f2a86;
+  background: rgba(124, 92, 226, 0.14);
+}
+
 .note-lg-head {
   display: flex;
   align-items: center;

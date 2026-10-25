@@ -28,8 +28,8 @@
     <link rel="stylesheet" href="../assets/css/tokens.css?v=9" />
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
   <link rel="stylesheet" href="../assets/css/pages.css?v=1">
-  <link rel="stylesheet" href="../assets/css/paper.css?v=26" />
-  <link rel="stylesheet" href="../assets/css/duogit.css?v=2">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
+  <link rel="stylesheet" href="../assets/css/duogit.css?v=3">
 </head>
 
 <body>
@@ -313,26 +313,11 @@
             </div>
           </div>
           <div style="display:flex;flex-direction:column;gap: var(--s-20);flex:1 1 52%;min-width:min(280px, 100%);">
-            <div style="display:flex;gap: var(--s-16);align-items:flex-start;">
-              <div style="width:44px;height:44px;flex-shrink:0;background:var(--accent-soft);border-radius: var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;">🔥</div>
-              <div>
-                <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom: var(--s-4);">Small — Progress</div>
-                <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Reinforces streak momentum by rewarding daily commits with visible habit progress. One look = full context, no app open needed.</div>
-              </div>
-            </div>
-            <div style="display:flex;gap: var(--s-16);align-items:flex-start;">
-              <div style="width:44px;height:44px;flex-shrink:0;background:rgba(59,130,246,0.12);border-radius: var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;">🏆</div>
-              <div>
-                <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom: var(--s-4);">Small — Status</div>
-                <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Delivers instant competitive awareness with league placement and points context. Motivates without friction.</div>
-              </div>
-            </div>
-            <div style="display:flex;gap: var(--s-16);align-items:flex-start;">
-              <div style="width:44px;height:44px;flex-shrink:0;background:rgba(245,158,11,0.12);border-radius: var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;">⚠️</div>
-              <div>
-                <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom: var(--s-4);">Wide — Risk</div>
-                <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Triggers intervention when streak health drops, using urgency and emotional cues to prompt recovery before the day ends.</div>
-              </div>
+            <div class="note-lg">
+              <div class="note-lg-head"><h3>The three sizes</h3></div>
+              <p><strong>Small — Progress.</strong> Reinforces streak momentum by rewarding daily commits with visible habit progress. One look = full context, no app open needed.</p>
+              <p><strong>Small — Status.</strong> Delivers instant competitive awareness with league placement and points context. Motivates without friction.</p>
+              <p><strong>Wide — Risk.</strong> Triggers intervention when streak health drops, using urgency and emotional cues to prompt recovery before the day ends.</p>
             </div>
             <div class="note-lg note-lg--sm">
               <div class="note-lg-head"><h3>Design Principle</h3></div>
@@ -401,28 +386,11 @@
           <!-- Description -->
           <div style="max-width:380px;flex:1;">
             <div style="display:flex;flex-direction:column;gap: var(--s-20);">
-              <div style="display:flex;gap: var(--s-16);align-items:flex-start;">
-                <div style="width:44px;height:44px;flex-shrink:0;background:rgba(35,134,54,0.12);border-radius: var(--r-sm);display:flex;align-items:center;justify-content:center;">
-                  <svg width="20" height="20" viewBox="0 0 16 16" style="fill:#3fb950;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                </div>
-                <div>
-                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom: var(--s-4);">Native GitHub Auth</div>
-                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Uses <code style="font-size:11px;background:var(--bg-card);border:1px solid var(--stroke-light);padding:1px 5px;border-radius:3px;">expo-auth-session</code> for a proper OAuth 2.0 flow — no password stored, no third-party keys, just GitHub's own consent screen.</div>
-                </div>
-              </div>
-              <div style="display:flex;gap: var(--s-16);align-items:flex-start;">
-                <div style="width:44px;height:44px;flex-shrink:0;background:var(--accent-soft);border-radius: var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;">⚡</div>
-                <div>
-                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom: var(--s-4);">Automatic Sync</div>
-                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Once authorized, every commit syncs in real time. Streak tracking, SPACE metrics and Liga ranking all update without any manual input.</div>
-                </div>
-              </div>
-              <div style="display:flex;gap: var(--s-16);align-items:flex-start;">
-                <div style="width:44px;height:44px;flex-shrink:0;background:rgba(59,130,246,0.12);border-radius: var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;">🔒</div>
-                <div>
-                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom: var(--s-4);">Read-Only Scope</div>
-                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Minimal permissions — Duogit only reads activity. It never writes, creates, or modifies anything in your repositories.</div>
-                </div>
+              <div class="note-lg">
+                <div class="note-lg-head"><h3>What the connection does</h3></div>
+                <p><strong>Native GitHub Auth.</strong> Uses <code>expo-auth-session</code> for a proper OAuth 2.0 flow — no password stored, no third-party keys, just GitHub's own consent screen.</p>
+                <p><strong>Automatic Sync.</strong> Once authorized, every commit syncs in real time. Streak tracking, SPACE metrics and Liga ranking all update without any manual input.</p>
+                <p><strong>Read-Only Scope.</strong> Minimal permissions — Duogit only reads activity. It never writes, creates, or modifies anything in your repositories.</p>
               </div>
               <div class="note-lg note-lg--sm">
                 <div class="note-lg-head"><h3>Implementation</h3></div>
@@ -467,26 +435,11 @@
           <!-- Widget Descriptions -->
           <div style="max-width:380px;flex:1;">
             <div style="display:flex;flex-direction:column;gap: var(--s-20);">
-              <div style="display:flex;gap: var(--s-16);align-items:flex-start;">
-                <div style="width:44px;height:44px;flex-shrink:0;background:var(--accent-soft);border-radius: var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;">🔥</div>
-                <div>
-                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom: var(--s-4);">Small — Streak at a Glance</div>
-                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Current streak count + happy mascot in a compact 2×2 tile. One look = full context, no app open needed.</div>
-                </div>
-              </div>
-              <div style="display:flex;gap: var(--s-16);align-items:flex-start;">
-                <div style="width:44px;height:44px;flex-shrink:0;background:rgba(59,130,246,0.12);border-radius: var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;">🏆</div>
-                <div>
-                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom: var(--s-4);">Small — Liga Rank</div>
-                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Current league rank and title. Motivates without friction — no need to open the app to know where you stand.</div>
-                </div>
-              </div>
-              <div style="display:flex;gap: var(--s-16);align-items:flex-start;">
-                <div style="width:44px;height:44px;flex-shrink:0;background:rgba(245,158,11,0.12);border-radius: var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;">⚠️</div>
-                <div>
-                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom: var(--s-4);">Wide — Streak Alert</div>
-                  <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Real-time countdown when your streak is at risk. The worried mascot creates urgency without being annoying — emotional design with intent.</div>
-                </div>
+              <div class="note-lg">
+                <div class="note-lg-head"><h3>The widget family</h3></div>
+                <p><strong>Small — Streak at a Glance.</strong> Current streak count + happy mascot in a compact 2×2 tile. One look = full context, no app open needed.</p>
+                <p><strong>Small — Liga Rank.</strong> Current league rank and title. Motivates without friction — no need to open the app to know where you stand.</p>
+                <p><strong>Wide — Streak Alert.</strong> Real-time countdown when your streak is at risk. The worried mascot creates urgency without being annoying — emotional design with intent.</p>
               </div>
               <div class="note-lg note-lg--sm">
                 <div class="note-lg-head"><h3>Design Principle</h3></div>
