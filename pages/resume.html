@@ -28,7 +28,7 @@
     rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/tokens.css?v=8" />
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
-  <link rel="stylesheet" href="../assets/css/paper.css?v=11" />
+  <link rel="stylesheet" href="../assets/css/paper.css?v=23" />
 
   <style>
     
@@ -473,6 +473,82 @@
       }
     }
 
+    /* --- SKILL TAGS, ONE MOVING ROW --------------------------------------
+       At 375px the four groups wrap into three or four rows each and the
+       block runs 747px tall. Below 600px tag-marquee.js wraps each group's
+       tags in a track, and these rules turn that track into one row that
+       moves on its own. None of this matches without the script, so with it
+       blocked the tags wrap exactly as before. */
+    @keyframes skill-marquee {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(calc(-1 * var(--marquee-w)), 0, 0); }
+    }
+
+    @media (max-width: 600px) {
+      .skill-tags[data-marquee] {
+        display: block;
+        /* A tag should leave the row by fading, not by being cut in half. */
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+                mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+      }
+      .skill-tags[data-marquee="animated"] { overflow: hidden; }
+
+      /* A grid item's automatic minimum size is its content, so a row 950px
+         long drags the whole column out to 950px and the scroll container
+         never gets to scroll. The item has to be allowed to be smaller than
+         what is inside it. */
+      .skill-category { min-width: 0; }
+      .skill-tags[data-marquee] { min-width: 0; }
+
+      /* Still mode, for prefers-reduced-motion: no copy and no animation,
+         just one row the visitor swipes. It fixes the same stacking without
+         anything moving by itself. */
+      .skill-tags[data-marquee="still"] {
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none;
+      }
+      .skill-tags[data-marquee="still"]::-webkit-scrollbar { display: none; }
+
+      .skill-tags-track {
+        display: flex;
+        flex-wrap: nowrap;
+        width: max-content;
+        /* The spacing lives on the tags, not here: the animation travels one
+           set's width, and a trailing margin is what makes that distance land
+           the copy's first tag where the original's first tag was. A flex gap
+           would leave the loop half a gap short and the seam would show. */
+        gap: 0;
+      }
+      .skill-tags-track .skill-tag {
+        flex: none;
+        margin-right: 8px;
+        white-space: nowrap;
+      }
+
+      .skill-tags[data-marquee="animated"] .skill-tags-track {
+        animation: skill-marquee var(--marquee-dur, 26s) linear infinite;
+        will-change: transform;
+      }
+      /* Opposite directions, so four rows do not read as one sheet sliding
+         behind the page. */
+      .skill-category:nth-child(even) .skill-tags-track {
+        animation-direction: reverse;
+      }
+
+      /* WCAG 2.2.2: moving content needs a way to stop it. A finger down or
+         a pointer over the row holds it — the same gesture someone makes to
+         read one tag. */
+      .skill-tags[data-held] .skill-tags-track,
+      .skill-tags:hover .skill-tags-track {
+        animation-play-state: paused;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .skill-tags-track { animation: none; }
+    }
+
 
   </style>
 </head>
@@ -795,6 +871,7 @@
     </div>
   </footer>
     <script src="../scripts/brand.js?v=1" defer></script>
+    <script src="../scripts/tag-marquee.js?v=1" defer></script>
     <a class="lang-switch" href="../es/resume.html" hreflang="es" lang="es" aria-label="Ver esta página en español"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/></svg>Español<span class="lang-code">ES</span></a>
   </body>
 

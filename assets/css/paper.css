@@ -192,7 +192,13 @@
 
    The strip is a child element rather than a pseudo-element because
    `paper-surface` already spends ::after on grain and `taped` spends both on
-   its two corner strips — a note that wanted all three would run out.      */
+   its two corner strips — a note that wanted all three would run out.
+
+   Only a caption gets one. The large sheets carried a strip each until the
+   page held twelve of them and the tape stopped reading as tape; what marks a
+   sheet now is the sheet. A caption is the one thing small enough that the
+   strip is most of what you see, and the one thing that really is stuck to
+   something — the artwork right above it.                                 */
 .note {
   position: relative;
   display: block;
@@ -200,24 +206,31 @@
      so a positive margin here reads as a gap twice the size it looks in the
      stylesheet. Pull back into that shadow instead. */
   margin-top: -22px;
-  padding: 13px 15px 14px;
+  /* One slip size for the whole page, narrower than any figure it hangs
+     under, so the captions read as sheets off the same pad rather than as
+     bands sized to whatever is above them. It is a max, so a figure narrower
+     than the slip still governs. */
+  max-width: 215px;
+  margin-inline: auto;
+  padding: 10px 12px 11px;
   background: var(--paper);
   color: rgba(34, 29, 51, 0.78);
   border: 1px solid rgba(34, 29, 51, 0.1);
   border-radius: 3px;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
-  font-size: 12.5px;
-  line-height: 1.55;
+  /* A smaller scrap sits closer to the page, so it casts a shorter shadow. */
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
+  font-size: 11.5px;
+  line-height: 1.5;
   text-align: left;
 }
 .note strong { color: var(--paper-ink); font-weight: 700; }
 
 .note-tape {
   position: absolute;
-  top: -10px;
+  top: -8px;
   left: 50%;
-  width: 62px;
-  height: 20px;
+  width: 52px;
+  height: 17px;
   z-index: 3;
   background-color: rgba(228, 218, 196, 0.78);
   background-image: var(--wear-grain);
@@ -229,6 +242,135 @@
   pointer-events: none;
 }
 
+/* --- NOTE, LARGE --------------------------------------------------------
+   The same stock, sized for a paragraph that carries its own heading: an icon
+   chip, a title, a rule, then the text. It stays square — a sheet this big
+   leaning would read as knocked over rather than stuck up.                 */
+.note-lg {
+  position: relative;
+  padding: 20px 22px 22px;
+  background: var(--paper);
+  color: rgba(34, 29, 51, 0.8);
+  border: 1px solid rgba(34, 29, 51, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.42);
+  font-size: 13.5px;
+  line-height: 1.68;
+}
+.note-lg > p { color: inherit; }
+.note-lg > p + p { margin-top: 12px; }
+.note-lg > p strong { color: var(--paper-ink); font-weight: 700; }
+.note-lg > p em { font-style: italic; }
+
+.note-lg-head {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  /* keep the title clear of the emphasis strokes in the corner */
+  padding-right: 34px;
+  padding-bottom: 13px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(34, 29, 51, 0.12);
+}
+.note-lg-head h3 {
+  font-size: 16.5px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--paper-ink);
+}
+.note-lg-ico {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-sm);
+  background: rgba(124, 92, 226, 0.18);
+  color: #3f2a86;
+}
+.note-lg-ico svg { width: 23px; height: 23px; }
+
+/* Three strokes of emphasis, the way a margin gets marked up by hand. */
+.note-lg::after {
+  content: "";
+  position: absolute;
+  top: 19px;
+  right: 19px;
+  width: 26px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='22' fill='none' stroke='%233f2a86' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M4 14 L8 4'/%3E%3Cpath d='M13 11 L20 3'/%3E%3Cpath d='M18 18 L25 15'/%3E%3C/svg%3E");
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+/* Two readings of the same decision. The figure IS the headline, so it takes
+   the head instead of an icon: none of the twelve icons in the sprite means
+   "a date inside the billing cycle", and a wrong icon reads worse than none.
+   The emphasis strokes go with it — a 26px coloured figure is already the
+   loudest thing on the sheet. */
+.note-lg-head--figure { display: block; }
+.note-lg-kicker {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  /* 0.62 landed at 4.33:1 on this stock — under AA for 10.5px text. */
+  color: rgba(34, 29, 51, 0.72);
+  margin-bottom: 7px;
+}
+.note-lg-fig {
+  display: block;
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.12;
+  color: var(--paper-ink);
+}
+.note-lg--good .note-lg-fig { color: var(--brand-cuak-ink); }
+.note-lg--warn .note-lg-fig { color: var(--accent-red-deep); }
+/* Any sheet whose head is a figure drops the strokes, coloured or not: the
+   number is already the loudest mark on the paper. :has() is how a parent
+   asks about its own head; every current browser has had it since 2023. */
+.note-lg:has(.note-lg-head--figure)::after { display: none; }
+
+/* --- FIGURES INSIDE A SHEET ---------------------------------------------
+   Two or three sheets stacked beside one phone read as a pile of stationery.
+   The same words on one sheet read as a note somebody wrote. So a sheet that
+   carries more than one figure holds them in a row of its own instead of
+   splitting into more sheets.
+
+   Where the figures are a ratio, the columns are that ratio: the split is
+   drawn by the layout rather than only stated by the numbers.            */
+.note-lg-figs {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+.note-lg-figs--ratio { grid-template-columns: 60fr 40fr; }
+.note-lg-figs--even { grid-template-columns: 1fr 1fr; }
+.note-lg-figs > * + * {
+  padding-left: 20px;
+  border-left: 1px solid rgba(34, 29, 51, 0.12);
+}
+.note-lg-figs p {
+  margin-top: 7px;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+.note-lg-fig-item--good .note-lg-fig { color: var(--brand-cuak-ink); }
+.note-lg-fig-item--warn .note-lg-fig { color: var(--accent-red-deep); }
+
+/* The sheet is widest when the figure beside it has collapsed, so the only
+   width that threatens two columns is a phone. A viewport query cannot read
+   the sheet's own width, so it goes by the one case that matters. */
+@media (max-width: 560px) {
+  .note-lg-figs--ratio,
+  .note-lg-figs--even { grid-template-columns: 1fr; }
+  .note-lg-figs > * + * { padding-left: 0; border-left: 0; }
+}
+
 /* Nobody sticks two scraps down at the same angle, and a scrap put up by hand
    never lands square. Both the sheet and its strip vary by the note's position
    in its row, so neighbours always lean different ways. The sheet turns about
@@ -238,9 +380,85 @@
 :nth-child(3) > .note { transform: rotate(-2.1deg); }
 :nth-child(4) > .note { transform: rotate(1.1deg); }
 
-:nth-child(2) > .note > .note-tape { transform: translateX(-54%) rotate(3.2deg); }
-:nth-child(3) > .note > .note-tape { transform: translateX(-46%) rotate(-2.4deg); }
-:nth-child(4) > .note > .note-tape { transform: translateX(-52%) rotate(4.1deg); }
+/* A caption's strip is a grandchild of the thing being counted; a large
+   note's strip is a child of it. Vary both. */
+:nth-child(2) > * > .note-tape { transform: translateX(-54%) rotate(3.2deg); }
+:nth-child(3) > * > .note-tape { transform: translateX(-46%) rotate(-2.4deg); }
+:nth-child(4) > * > .note-tape { transform: translateX(-52%) rotate(4.1deg); }
+
+/* --- SCREEN FIGURES -----------------------------------------------------
+   How a case study shows an app screen. Lived in cuak.html until both case
+   studies needed it; it is the portfolio's figure system, not one page's.
+
+   A figure is artwork plus a `.note` caption. The artwork is an export that
+   already carries its own phone bezel and shadow on transparency, so the
+   figure draws no frame around it: a frame around a frame is the nested-corner
+   problem tokens.css warns about. The exports are trimmed to the device's own
+   top edge, so a column aligned to the top of the figure lands level with the
+   phone rather than with empty margin.                                      */
+.shot { margin: 0; }
+.shot-frame { position: relative; }
+.shot--device .shot-frame {
+  aspect-ratio: 650 / 1148;
+  max-width: 300px;
+  margin-inline: auto;
+  overflow: visible;
+}
+.shot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* A phone is tall and narrow. Set alone it leaves two thirds of the row
+   empty, so the prose that explains it goes beside it instead of above. */
+.shot-beside {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 36px;
+  align-items: start;
+  margin-top: 24px;
+}
+@media (max-width: 760px) {
+  .shot-beside { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* Three screens will not take prose beside them — there is no room left.
+   A trio goes in one row and its sheets sit underneath, which is how notes
+   end up under photographs anyway. Straight to one column: two columns of
+   three would leave an orphan. */
+.shot-trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+@media (max-width: 680px) {
+  .shot-trio { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* The column of paper cards that fills the other side. */
+.note-stack { display: grid; gap: 18px; align-content: start; }
+
+/* A pair that tells a before/after: both phones on one side, the prose
+   naming the two outcomes on the other. */
+.shot-beside--pair { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+.shot-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  gap: 20px;
+}
+.shot-pair .shot-frame { max-width: 265px; }
+@media (max-width: 900px) {
+  .shot-beside--pair { grid-template-columns: 1fr; }
+  /* Collapsed, the stack inherits the whole width, and one paragraph set
+     across 800px is a line nobody finishes. Put the cards side by side
+     instead; they drop back to one column when that no longer fits. */
+  .shot-beside--pair > .note-stack {
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  }
+}
 
 /* --- WELL ---------------------------------------------------------------
    Imagery mounted inside a card instead of running to its edge.           */
