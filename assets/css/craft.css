@@ -1,0 +1,179 @@
+/* ===========================================================================
+   craft.css — the craft page. Nothing else uses it.
+   Loads last, in the slot its <style> had, so it still overrides the
+   shared sheets.
+   =========================================================================== */
+
+.section:last-of-type { border-bottom: none; }
+.section-title .accent { color: var(--accent); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-16); margin-top: var(--s-32); }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 720px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card {
+  background: var(--bg-card); border: 1px solid var(--stroke-light);
+  border-radius: var(--rl); padding: var(--s-24);
+}
+.card.featured { border-color: rgba(167,139,250,.3); background: var(--accent-soft); }
+.card-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 10px; color: var(--accent);
+}
+.card h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
+.card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+/* CHARACTER GRID */
+.char-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-12); margin-top: var(--s-28);
+}
+@media (max-width: 860px) { .char-grid { grid-template-columns: 1fr 1fr; } }
+.char-card {
+  border-radius: var(--rl); border: 1px solid var(--stroke-light);
+  padding: var(--s-20) var(--s-16); text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.char-card img { width: 76px; height: 76px; object-fit: contain; }
+.char-card-name { font-size: 12px; font-weight: 700; letter-spacing: 0.02em; }
+.char-card-trigger { font-size: 11px; color: var(--text-faint); line-height: 1.5; }
+
+/* PAIR COMPARISON */
+.pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-20); margin-top: var(--s-28); }
+@media (max-width: 640px) { .pair-grid { grid-template-columns: 1fr; } }
+.pair-card {
+  border-radius: var(--rl); border: 1px solid var(--stroke-light);
+  padding: var(--s-28); text-align: center;
+}
+.pair-card img { width: 110px; height: 110px; object-fit: contain; margin-bottom: var(--s-12); }
+.pair-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.pair-card p { font-size: 12.5px; color: var(--text-muted); line-height: 1.65; }
+
+/* DATA FLOW */
+.flow-row {
+  display: flex; align-items: center; gap: var(--s-16);
+  margin-top: var(--s-32); flex-wrap: wrap;
+}
+.flow-step {
+  flex: 1; min-width: 200px;
+  background: var(--bg-card); border: 1px solid var(--stroke-light);
+  border-radius: var(--rl); padding: 22px;
+}
+.flow-step-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: var(--s-8);
+}
+.flow-step h4 { font-size: 14px; font-weight: 700; margin-bottom: var(--s-8); }
+.flow-step p { font-size: 12.5px; color: var(--text-muted); line-height: 1.65; }
+.flow-arrow { font-size: 20px; color: var(--accent); opacity: 0.5; flex-shrink: 0; }
+@media (max-width: 720px) {
+  .flow-row { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); }
+}
+
+/* PRESENTATION SHOWCASE */
+.showcase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-20); margin-top: var(--s-32); }
+@media (max-width: 640px) { .showcase-grid { grid-template-columns: 1fr; } }
+.showcase-card {
+  border-radius: var(--rl); overflow: hidden; border: 1px solid var(--stroke-light);
+}
+.showcase-visual {
+  aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.showcase-visual.duogit { background: #0F1922; }
+.showcase-visual.cuak   { background: #F4DE86; }
+.showcase-visual img { width: 100%; height: 100%; object-fit: contain; }
+.showcase-caption { padding: var(--s-16) var(--s-20); background: var(--bg-card); }
+.showcase-caption h4 { font-size: 13px; font-weight: 700; margin-bottom: var(--s-4); }
+.showcase-caption p { font-size: 12px; color: var(--text-faint); }
+
+.principle-list { display: flex; flex-direction: column; gap: 2px; margin-top: var(--s-32); }
+.principle {
+  display: flex; gap: var(--s-20); align-items: flex-start;
+  padding: 22px var(--s-24);
+  background: var(--bg-card); border: 1px solid var(--stroke-light);
+}
+.principle:first-child { border-radius: var(--rl) var(--rl) 0 0; }
+.principle:last-child  { border-radius: 0 0 var(--rl) var(--rl); }
+.principle-num {
+  font-size: 32px; font-weight: 700; font-family: var(--serif);
+  color: var(--accent); opacity: 0.4; line-height: 1; flex-shrink: 0;
+  width: 32px;
+}
+.principle-content h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.principle-content p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+.section-link {
+  display: inline-flex; align-items: center; gap: var(--s-8);
+  margin-top: var(--s-28);
+  font-size: 13px; font-weight: 600; color: var(--accent);
+  transition: opacity 160ms ease;
+}
+.section-link:hover { opacity: 0.75; }
+.cta-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700; letter-spacing: -0.02em;
+  margin-bottom: var(--s-16); line-height: 1.1;
+}
+.cta-buttons { display: flex; gap: var(--s-12); justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  padding: var(--s-12) var(--s-28); border-radius: 999px;
+  background: var(--accent); color: #1E1A2E;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.04em;
+  transition: opacity 160ms ease;
+}
+.btn-primary:hover { opacity: 0.85; }
+.btn-ghost {
+  padding: var(--s-12) var(--s-28); border-radius: 999px;
+  border: 1px solid var(--stroke-light);
+  color: var(--text-muted);
+  font-size: 13px; letter-spacing: 0.04em;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
+
+/* FOOTER */
+  
+/* --- SHARED CARD LANGUAGE -------------------------------------
+   Matches the home: panels are sunken and rounded, statements sit
+   on paper, and imagery is mounted in a well instead of running to
+   the card edge. Last in this page's own stylesheet on purpose —
+   these have to beat the rules above without a specificity war. */
+.card, .flow-step, .showcase-caption {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--stroke);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.32);
+}
+.principle {
+  position: relative;
+  background: var(--paper);
+  color: var(--paper-ink);
+  border: 1px solid rgba(34, 29, 51, 0.14);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42), inset 0 0 22px rgba(90, 78, 58, 0.12);
+}
+.principle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--paper-fleck), var(--paper-fiber), var(--wear-blotch);
+  background-size: 200px 200px, 155px 155px, 360px 360px;
+  filter: grayscale(1);
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+.principle h3, .principle h4, .principle strong { color: var(--paper-ink); }
+.principle p, .principle li { color: rgba(34, 29, 51, 0.66); }
+/* Flush inside .showcase-card, which already clips at 18px — its own
+   14px corner only drew a second, smaller one inside the first. */
+.showcase-visual {
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 70px rgba(0, 0, 0, 0.38);
+}
+  /* The step numerals are the only ordering cue these cards carry,
+     so they read as content, not as a watermark. */
+  .principle-num { color: rgba(34, 29, 51, 0.5); }
+  

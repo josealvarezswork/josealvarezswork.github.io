@@ -61,33 +61,51 @@ the list and became the section's closing paragraph.
 
 ## Where the CSS lives
 
-| File | Lines | What it is |
-|---|---|---|
-| `tokens.css` | 165 | colour, radius, type and the spacing scale — values, no rules |
-| `system.css` | 173 | the shell: html, body, header, nav, container |
-| `pages.css` | 214 | the chrome every inner page draws: section, hero, cta, footer |
-| `paper.css` | 928 | the components: paper, notes, tape, figures, brand mark |
-| `about.css` | 218 | the about page, both languages |
-| `resume.css` | 442 | the resume, both languages |
-| `design-system.css` | 136 | what the two design-system pages draw the same way |
-| `styles.css` | 895 | the home only |
-| `home.css` | 1170 | the home only |
+**No page has a `<style>` block.** All of it is in `assets/css/`.
 
+| File | Kind | Lines | What it is |
+|---|---|---|---|
+| `tokens.css` | shared | 165 | colour, radius, type and the spacing scale — values, no rules |
+| `system.css` | shared | 173 | the shell: html, body, header, nav, container |
+| `pages.css` | shared | 214 | the chrome every inner page draws: section, hero, cta, footer |
+| `paper.css` | shared | 928 | the components: paper, notes, tape, figures, brand mark |
+| `design-system.css` | shared | 136 | what the two design-system pages draw the same way |
+| `styles.css` | home | 895 | the home |
+| `home.css` | home | 1170 | the home |
+| `about.css` | page | 218 | about, both languages |
+| `resume.css` | page | 442 | the resume, both languages |
+| `cuak.css` | page | 422 | the Cuak case study |
+| `duogit.css` | page | 762 | the DuoGit case study |
+| `craft.css` | page | 179 | craft |
+| `methodology.css` | page | 279 | the ESA framework |
+| `mindset.css` | page | 148 | mindset |
+| `how-i-work.css` | page | 87 | how I work |
+| `cuak-design-system.css` | page | 119 | what Cuak's design system page does differently |
+| `duogit-design-system.css` | page | 111 | and DuoGit's |
 
 Load order on an inner page: `tokens` → `system` → `pages` → `paper` → the
 page's own. Paper components come after the page chrome so a sheet wins over a
-page default; the page's own sheet comes last so it can override anything.
+page default; the page's own file comes last, in the slot its `<style>`
+occupied, so the cascade did not change when it moved out.
 
-Six pages now have no `<style>` block at all. What is still embedded is
-genuinely page-specific: the two case studies and the pages whose layout
-nothing else shares. It went from 4338 lines to 2119.
+A shared file exists because the same CSS was written twice. `resume.css` and
+`about.css` each existed in two copies, one per language. `pages.css` held 124
+declarations spread over nine pages in up to five versions each. A page file
+exists for the opposite reason: nothing else uses it, and 822 lines of CSS
+inside the markup means scrolling past the styles to reach the HTML.
 
-A page's own file is justified when the same CSS was written out twice —
-`resume.css` and `about.css` each existed in two copies, one per language, so
-a change had to be made twice and one of the two would eventually be
-forgotten. The two case studies share almost nothing (2 identical rules out
-of 63 and 124), so there is no `case-study.css`: forcing one would be a file
-that exists for the name rather than for the code.
+There is deliberately no `case-study.css`. Cuak and DuoGit share two identical
+rules out of 63 and 124 — their page CSS really is different, and a file
+grouping them would exist for the name rather than for the code.
+
+The fourteen pages went from 9745 lines to 5420.
+
+### What still has the same name for different things
+
+`.state-card` and its family are declared on four pages in four versions: a
+dark card on Cuak, a paper card on the framework page, a swatch tile on each
+design system. Centralising them would break three of the four. The real fix
+is a rename, which is markup work on four pages and has not been done.
 
 ## The components
 
