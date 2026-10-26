@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
   <link rel="stylesheet" href="../assets/css/pages.css?v=1">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
-  <link rel="stylesheet" href="../assets/css/pipeline.css?v=1">
+  <link rel="stylesheet" href="../assets/css/pipeline.css?v=2">
   <!-- Slot reveal. Visit ?draft=1 once and this machine remembers; ?draft=0
        forgets. It runs in <head> so a draft session never flashes the live
        page first, and every branch is wrapped: with storage blocked the page
@@ -87,12 +87,12 @@
     <section class="hero">
       <div class="container">
         <div class="mat">
-          <p class="hero-eyebrow">Pipeline</p>
+          <p class="hero-eyebrow">Pipeline — how I make things</p>
           <h1 class="hero-title">
-            One state change, <span class="accent">six layers</span>
+            I take one feeling <span class="accent">all the way down</span>
           </h1>
           <p class="hero-subtitle">
-            Cuak's home screen says <em>Looking good</em> while your credit usage is inside the safe zone, and the duck celebrates. When a purchase would take you out of it, the same duck puts the party down and picks up a megaphone. That one change is the whole job — and it takes six different kinds of work to land. This page takes it through all six.
+            A product decision starts as a rule and ends as something a person feels in under a second. Between those two points sit six different crafts, and most teams split them across three or four people. I run the chain myself — which is the only claim on this page worth checking, so below it is traced on real work, layer by layer, including the layers that are not finished yet.
           </p>
         </div>
       </div>
@@ -110,13 +110,13 @@
     <section class="section section--map">
       <div class="container">
         <span class="section-label">The chain</span>
-        <h2 class="section-title">Each layer makes the state <span class="accent">legible in a different way</span></h2>
+        <h2 class="section-title">Six crafts, and each one <span class="accent">fails differently</span></h2>
         <p class="section-text">
-          A state is not a picture and it is not a feature. It is a claim about what a person is living through right now, and a claim has to survive being translated — into a rule, a screen, a body, a movement, a sound, and finally into eight seconds somebody can watch. Most teams split these six across three or four people. I do the chain.
+          A state is not a picture and it is not a feature. It is a claim about what a person is living through right now, and a claim has to survive being translated six times — into a rule, a screen, a body, a movement, a sound, and finally into a few seconds somebody can watch. Drop any one of them and the state arrives incomplete: a rule nobody feels, a body that cannot move, a movement nobody hears.
         </p>
 
         <ol class="map">
-          <li class="map-step" data-state="live">
+          <li class="map-step">
             <span class="map-num">01</span>
             <span class="map-body">
               <strong>The state</strong>
@@ -124,7 +124,7 @@
               <span class="map-craft">Product</span>
             </span>
           </li>
-          <li class="map-step" data-state="live">
+          <li class="map-step">
             <span class="map-num">02</span>
             <span class="map-body">
               <strong>On screen</strong>
@@ -132,7 +132,7 @@
               <span class="map-craft">UI</span>
             </span>
           </li>
-          <li class="map-step" data-state="live">
+          <li class="map-step">
             <span class="map-num">03</span>
             <span class="map-body">
               <strong>A body</strong>
@@ -140,7 +140,7 @@
               <span class="map-craft">3D</span>
             </span>
           </li>
-          <li class="map-step" data-state="wip">
+          <li class="map-step">
             <span class="map-num">04</span>
             <span class="map-body">
               <strong>The change</strong>
@@ -148,7 +148,7 @@
               <span class="map-craft">Motion</span>
             </span>
           </li>
-          <li class="map-step" data-state="wip">
+          <li class="map-step">
             <span class="map-num">05</span>
             <span class="map-body">
               <strong>The landing</strong>
@@ -156,7 +156,7 @@
               <span class="map-craft">Sound</span>
             </span>
           </li>
-          <li class="map-step" data-state="wip">
+          <li class="map-step">
             <span class="map-num">06</span>
             <span class="map-body">
               <strong>In context</strong>
@@ -165,12 +165,79 @@
             </span>
           </li>
         </ol>
-        <p class="map-key">
-          <span class="map-key-item" data-state="live">Published</span>
-          <span class="map-key-item" data-state="wip">In production</span>
-        </p>
       </div>
     </section>
+
+    <!-- THE TRACES -->
+    <section class="section section--traces">
+      <div class="container">
+        <span class="section-label">Traced so far</span>
+        <h2 class="section-title">The chain, <span class="accent">run on real work</span></h2>
+        <p class="section-text">
+          A chain is easy to draw and hard to finish, so each trace below says exactly how far down it has been taken. Nothing is counted as done because it was planned, and a layer with no artifact behind it is marked missing rather than described.
+        </p>
+
+        <div class="traces">
+          <article class="trace">
+            <div class="trace-head">
+              <span class="trace-num">Trace 01</span>
+              <h3>Cuak — leaving the safe zone</h3>
+            </div>
+            <p class="trace-what">
+              The home screen says <em>Looking good</em> while credit usage is safe. A simulated purchase would end that, so the duck puts the confetti down and picks up a megaphone — before the money moves.
+            </p>
+            <ul class="trace-layers">
+              <li data-state="live"><span>01</span> Product</li>
+              <li data-state="live"><span>02</span> UI</li>
+              <li data-state="part"><span>03</span> 3D</li>
+              <li data-state="wip"><span>04</span> Motion</li>
+              <li data-state="wip"><span>05</span> Sound</li>
+              <li data-state="wip"><span>06</span> Video</li>
+            </ul>
+            <p class="trace-status">
+              <strong>Two layers finished, one at concept.</strong> The character exists as corrected AI renders rather than geometry, which is exactly why the three below it are still open. The full trace is the rest of this page.
+            </p>
+          </article>
+
+          <!-- SLOT · the second trace -->
+          <div class="slot" data-slot="trace-duogit">
+            <div class="slot-box">
+              <span class="slot-layer">Trace 02</span>
+              <span class="slot-name">DuoGit — the streak breaking</span>
+              <p class="slot-why">One trace is an anecdote; the same chain run twice is a method. This is the argument the page cannot make yet. The cat already has four states and the widget already has three variants, so layers 01–03 are mostly assembly from <code>pages/duogit.html</code> rather than new work.</p>
+              <ul class="slot-spec">
+                <li>Layers 01–03 — the ESA spec, the widget, the four cat states: <strong>already exist, need writing up</strong></li>
+                <li>Layers 04–06 — same dependency as Cuak: no mesh, no motion</li>
+              </ul>
+              <p class="slot-note">Cheapest trace available, and the one that turns the chain from something done once into something done twice.</p>
+            </div>
+          </div>
+
+          <!-- SLOT · the trace with no product under it -->
+          <div class="slot" data-slot="trace-motion">
+            <div class="slot-box">
+              <span class="slot-layer">Trace 03</span>
+              <span class="slot-name">A piece with no product behind it</span>
+              <p class="slot-why">Both traces above start from a product decision, so both prove the same half of the range. A piece that is only craft — a title sequence, a launch cut, a loop that exists to be watched — proves the other half. It is also the only thing on this site that would back the After Effects and Premiere Pro claims on the resume.</p>
+              <ul class="slot-spec">
+                <li>The piece itself — 20–45 s, hosted off the repo</li>
+                <li>A breakdown: the brief, the board, the cut, what got thrown out</li>
+                <li><code>assets/img/lab/breakdown-timeline.webp</code> — 1600 × 900, the post timeline</li>
+              </ul>
+              <p class="slot-note">This trace runs 01, 04, 05 and 06 and skips UI entirely. The chain does not demand all six every time — it demands that none of them be the reason a piece stopped.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACE 01, IN FULL -->
+    <div class="trace-open">
+      <div class="container">
+        <span class="trace-open-num">Trace 01</span>
+        <p class="trace-open-title">Cuak — leaving the safe zone, layer by layer</p>
+      </div>
+    </div>
 
     <!-- 01 THE STATE -->
     <section class="section">

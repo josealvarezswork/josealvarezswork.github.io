@@ -4,10 +4,23 @@ The law this page follows — when a block is paper and when it is a dark card �
 is in [PATTERNS.md](PATTERNS.md). This file is only about what is still missing
 from `pages/pipeline.html` and what each missing piece has to be.
 
-The page traces **one state change in Cuak** through six layers. Three of the
-six are published. Three are not, and rather than wait for all six or ship
-three empty sections, every unbuilt piece is a **slot** that names the file to
-produce and its specs.
+The page opens as a **hub**: the chain is the method, and a *trace* is one run
+of it on real work. One trace exists — Cuak leaving the safe zone — and it is
+three layers deep out of six.
+
+Rather than wait for all six, or ship three empty sections, every unbuilt piece
+is a **slot** that names what to produce and its specs. A slot can be a missing
+file inside a trace, or a whole missing trace.
+
+**Why a hub and not just the Cuak trace.** Depth and range are two different
+claims. One artifact taken six layers down proves you own the chain; it says
+nothing about range. A hub lists the traces, so range lives on the cards while
+depth lives in the trace below them — and the page can hold a trace that is
+pure craft with no product under it, which is the only place on this site where
+the After Effects and Premiere Pro claims on the resume would be backed.
+
+**One trace is an anecdote.** The same chain run twice is a method. That is why
+`trace-duogit` is the highest-value slot on the list after `home-flagged`.
 
 ## Seeing the slots
 
@@ -26,22 +39,37 @@ private window or blocked storage simply gets the live page.
 **A visitor cannot reach the draft view by accident**, and nothing in an empty
 slot is in the live page's way.
 
-## The six slots
+## The eight slots
 
-| Slot | Layer | Blocked by |
+| Slot | Where | Blocked by |
 |---|---|---|
-| `home-flagged` | 02 · UI | nothing — do this one first |
-| `blender-model` | 03 · 3D | nothing |
-| `transition-clip` | 04 · Motion | `blender-model` |
-| `turntable` | 04 · Motion | `blender-model` |
-| `state-cue` | 05 · Sound | `transition-clip` (timing) |
-| `context-clip` | 06 · Video | everything above |
+| `home-flagged` | trace 01, layer 02 · UI | nothing — do this one first |
+| `trace-duogit` | a whole trace | nothing for layers 01–03 |
+| `blender-model` | trace 01, layer 03 · 3D | nothing |
+| `transition-clip` | trace 01, layer 04 · Motion | `blender-model` |
+| `turntable` | trace 01, layer 04 · Motion | `blender-model` |
+| `state-cue` | trace 01, layer 05 · Sound | `transition-clip` (timing) |
+| `context-clip` | trace 01, layer 06 · Video | everything above |
+| `trace-motion` | a whole trace | the piece has to exist |
 
-The order is not a preference. `home-flagged` is one screen export and it is
-the half of the transition the whole page is about — right now the page can
-show where the change starts but not where it lands on a real screen. The
-three video slots cannot be done honestly before the model exists, because
-there is no geometry under the current renders to interpolate between.
+The order is not a preference.
+
+`home-flagged` is one screen export and it is the half of the transition the
+whole page is about — right now the page can show where the change starts but
+not where it lands on a real screen.
+
+`trace-duogit` is next because its first three layers are mostly assembly from
+`pages/duogit.html`: the cat already has four states, the widget already has
+three variants, the ESA spec is already written. It is the cheapest way to stop
+the chain from being a one-off.
+
+The video slots cannot be done honestly before the model exists, because there
+is no geometry under the current renders to interpolate between.
+
+`trace-motion` is last here but it is the one that closes the gap between what
+the resume claims and what the site shows. It runs layers 01, 04, 05 and 06 and
+skips UI entirely — the chain does not demand all six every time, it demands
+that none of them be the reason a piece stopped.
 
 Each slot in the page carries its own spec list. The specs are not suggestions:
 the sizes match the exports already in `assets/img/cuak/` (650 × 1148 for a
@@ -54,15 +82,17 @@ Three edits, no CSS:
 
 1. Drop the real figure in **above** the `.slot` block.
 2. Delete the `.slot` block.
-3. In the chain map near the top of the page, flip that step's
-   `data-state="wip"` to `data-state="live"`.
+3. On that trace's card, flip the layer's `data-state` in `.trace-layers`
+   from `wip` (or `part`) to `live`, and update the sentence under it.
 
 When a section's last slot goes, drop `section--wip` from its `<section>` and
 the section goes live with it.
 
-The map is what keeps the live page honest while this is half-done: it lists
-all six layers and marks which ones are still in production, so a visitor sees
-a chain with three steps pending rather than a page that forgot three steps.
+The trace cards are what keep the live page honest while this is half-done.
+The chain map above them describes the method and never changes; each card
+says how far that particular trace actually got, so a visitor sees three
+layers finished and three pending rather than a page that forgot three steps.
+A layer is `live` only when there is an artifact on the page for it.
 
 ## Where video goes
 

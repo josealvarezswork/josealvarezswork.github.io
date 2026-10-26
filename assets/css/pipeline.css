@@ -270,6 +270,135 @@
 
 .map-key-item[data-state="wip"]::before { border-style: dashed; }
 
+/* --- the traces ----------------------------------------------------------- */
+
+/* The page opens as a hub: the chain above is the method, and a trace is one
+   run of it on real work. Each trace states which of the six layers it has
+   actually produced, so the honesty lives on the card rather than in prose —
+   and a trace that does not exist yet is a slot, same as a missing file. */
+
+.traces { margin-top: var(--s-32); display: grid; gap: var(--s-24); }
+
+.trace {
+  padding: var(--s-24) var(--s-24) var(--s-20);
+  border: 1px solid var(--accent-soft);
+  border-radius: var(--r-lg);
+  background: var(--accent-glow);
+}
+
+.trace-head { margin-bottom: var(--s-12); }
+
+.trace-num {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin-bottom: 5px;
+}
+
+.trace-head h3 {
+  font-family: var(--serif);
+  font-size: clamp(19px, 2.4vw, 23px);
+  font-weight: 600;
+  margin: 0;
+}
+
+.trace-what {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 68ch;
+}
+
+/* Six pills, one per layer. The state is carried by fill AND by the border
+   style, so the three cases stay apart without relying on hue alone. */
+.trace-layers {
+  list-style: none;
+  padding: 0;
+  margin: var(--s-20) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-8);
+}
+
+.trace-layers li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: var(--r-pill, 999px);
+  border: 1px solid var(--stroke);
+  font-size: 12.5px;
+  color: var(--text-faint);
+}
+
+.trace-layers li span {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.trace-layers li[data-state="live"] {
+  border-color: var(--accent-soft);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+
+.trace-layers li[data-state="part"] {
+  border-color: var(--accent-amber);
+  color: var(--accent-amber);
+}
+
+.trace-layers li[data-state="wip"] { border-style: dashed; }
+
+.trace-status {
+  margin-top: var(--s-16);
+  padding-top: var(--s-12);
+  border-top: 1px solid var(--stroke);
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-faint);
+  max-width: 68ch;
+}
+
+.trace-status strong { color: var(--text-muted); }
+
+/* A trace inside .traces is a slot like any other, so it keeps the dashed
+   box — but it sits in a column of cards, so it loses the top margin a slot
+   carries when it interrupts prose. */
+.traces .slot { margin-top: 0; }
+
+/* The divider that opens the full trace. It is not a section — it is a label
+   on the six sections that follow, so it draws a rule and nothing else. */
+.trace-open {
+  padding-top: var(--s-48);
+  margin-bottom: calc(var(--s-64) * -1 + var(--s-24));
+}
+
+.trace-open .container {
+  padding-top: var(--s-20);
+  border-top: 1px solid var(--stroke);
+}
+
+.trace-open-num {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin-bottom: 4px;
+}
+
+.trace-open-title {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--text-muted);
+  margin: 0;
+}
+
 /* --- 01 · the spec sheet -------------------------------------------------- */
 
 .spec-sheet { margin-top: var(--s-32); max-width: 720px; }
