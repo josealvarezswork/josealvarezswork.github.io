@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From State to Frame · Jose Alvarez</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <meta name="description" content="One state change in Cuak, taken through six layers: the system that defines it, the screen that shows it, the body that carries it, the motion between, the sound that lands it and the loop in context.">
+  <meta property="og:title" content="From State to Frame · Jose Alvarez">
+  <meta property="og:description" content="One state change, six layers — product, UI, 3D, motion, sound and video on a single artifact.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://odejbyjose.com/pages/pipeline.html">
+  <link rel="canonical" href="https://odejbyjose.com/pages/pipeline.html">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cuak.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=9" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=4">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=1">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
+  <link rel="stylesheet" href="../assets/css/pipeline.css?v=1">
+  <!-- Slot reveal. Visit ?draft=1 once and this machine remembers; ?draft=0
+       forgets. It runs in <head> so a draft session never flashes the live
+       page first, and every branch is wrapped: with storage blocked the page
+       is simply the live one. A visitor can never reach the draft view by
+       accident, and nothing in an empty slot is in the live DOM's way. -->
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(location.search);
+        if (q.has('draft')) {
+          if (q.get('draft') === '0') localStorage.removeItem('jaDraft');
+          else localStorage.setItem('jaDraft', '1');
+        }
+        if (localStorage.getItem('jaDraft')) {
+          document.documentElement.setAttribute('data-slots', 'draft');
+        }
+      } catch (e) { /* private window, blocked storage — stay live */ }
+    })();
+  </script>
+</head>
+
+<body>
+  <div class="accent-bar"></div>
+
+  <header class="site-header is-shared">
+    <nav class="nav">
+      <a class="brand" href="../index.html" aria-label="Home">
+        <svg class="brand-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <defs>
+              <filter id="brand-rough" x="-14%" y="-14%" width="128%" height="128%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="5" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+            <g filter="url(#brand-rough)">
+              <circle class="brand-ring" cx="20" cy="20" r="17"/>
+              <ellipse class="brand-o" cx="20" cy="20" rx="7.6" ry="10.2"/>
+              <line class="brand-slash" x1="26" y1="8.5" x2="14" y2="31.5"/>
+            </g>
+          </svg>
+        <span class="brand-text">
+          <span class="brand-name">Jose Alvarez</span>
+          <span class="brand-sub">Design</span>
+        </span>
+      </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+          <a href="../index.html#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Work</a>
+          <a href="./methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a href="./craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Craft</a>
+          <a href="./pipeline.html" aria-current="page"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-system"/></svg>Pipeline</a>
+          <a href="./resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>Resume</a>
+          <a href="./about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>About</a>
+        </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="mat">
+          <p class="hero-eyebrow">Pipeline</p>
+          <h1 class="hero-title">
+            One state change, <span class="accent">six layers</span>
+          </h1>
+          <p class="hero-subtitle">
+            Cuak's home screen says <em>Looking good</em> while your credit usage is inside the safe zone, and the duck celebrates. When a purchase would take you out of it, the same duck puts the party down and picks up a megaphone. That one change is the whole job — and it takes six different kinds of work to land. This page takes it through all six.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DRAFT STATUS. Draft sessions only. -->
+    <div class="draft-bar">
+      <div class="container">
+        <span class="draft-dot" aria-hidden="true"></span>
+        <strong>Draft view.</strong> Empty slots are visible to you only. Each one names the file to produce and its specs. Add <code>?draft=0</code> to the URL to go back to the live page.
+      </div>
+    </div>
+
+    <!-- THE MAP -->
+    <section class="section section--map">
+      <div class="container">
+        <span class="section-label">The chain</span>
+        <h2 class="section-title">Each layer makes the state <span class="accent">legible in a different way</span></h2>
+        <p class="section-text">
+          A state is not a picture and it is not a feature. It is a claim about what a person is living through right now, and a claim has to survive being translated — into a rule, a screen, a body, a movement, a sound, and finally into eight seconds somebody can watch. Most teams split these six across three or four people. I do the chain.
+        </p>
+
+        <ol class="map">
+          <li class="map-step" data-state="live">
+            <span class="map-num">01</span>
+            <span class="map-body">
+              <strong>The state</strong>
+              <span class="map-what">The rule that fires it</span>
+              <span class="map-craft">Product</span>
+            </span>
+          </li>
+          <li class="map-step" data-state="live">
+            <span class="map-num">02</span>
+            <span class="map-body">
+              <strong>On screen</strong>
+              <span class="map-what">Where it is readable</span>
+              <span class="map-craft">UI</span>
+            </span>
+          </li>
+          <li class="map-step" data-state="live">
+            <span class="map-num">03</span>
+            <span class="map-body">
+              <strong>A body</strong>
+              <span class="map-what">The form that carries it</span>
+              <span class="map-craft">3D</span>
+            </span>
+          </li>
+          <li class="map-step" data-state="wip">
+            <span class="map-num">04</span>
+            <span class="map-body">
+              <strong>The change</strong>
+              <span class="map-what">The frames in between</span>
+              <span class="map-craft">Motion</span>
+            </span>
+          </li>
+          <li class="map-step" data-state="wip">
+            <span class="map-num">05</span>
+            <span class="map-body">
+              <strong>The landing</strong>
+              <span class="map-what">What you hear it do</span>
+              <span class="map-craft">Sound</span>
+            </span>
+          </li>
+          <li class="map-step" data-state="wip">
+            <span class="map-num">06</span>
+            <span class="map-body">
+              <strong>In context</strong>
+              <span class="map-what">The loop, end to end</span>
+              <span class="map-craft">Video</span>
+            </span>
+          </li>
+        </ol>
+        <p class="map-key">
+          <span class="map-key-item" data-state="live">Published</span>
+          <span class="map-key-item" data-state="wip">In production</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 01 THE STATE -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">01 — The state · Product</span>
+        <h2 class="section-title">A state is a trigger, a mechanism <span class="accent">and an action</span></h2>
+        <p class="section-text">
+          Before anything is drawn, the state has to exist as a rule. ESA — the framework behind both of my case studies — says every state owes three answers: what fires it, what psychological mechanism it uses, and what the person is now invited to do. A state that cannot answer the third one is decoration.
+        </p>
+        <p class="section-text">
+          This is the one I am tracing. It matters because of <em>when</em> it fires: it fires on a purchase the user has only simulated, not one they have made. A warning you can still act on is help; the same warning one day later is just a receipt.
+        </p>
+
+        <div class="spec-sheet">
+          <div class="note-lg paper-surface">
+            <div class="note-lg-head note-lg-head--stacked">
+              <span class="note-lg-kicker">The transition</span>
+              <h3>Looking good → Flagging</h3>
+            </div>
+            <dl class="spec-list">
+              <dt>Trigger</dt>
+              <dd>A simulated purchase would take credit usage out of the safe zone — the same zone the home screen is reporting on when it says <em>Looking good</em>.</dd>
+              <dt>Mechanism</dt>
+              <dd>Loss aversion, used early, and then immediately defused. The cost is made visible <strong>while the decision is still open</strong>, so the feeling attaches to the choice instead of to the consequence.</dd>
+              <dt>Action invited</dt>
+              <dd>Wait. The product names a better date, puts a figure on what waiting saves, and <strong>pays XP for taking it</strong> — so the way out is a reward, not a scolding.</dd>
+              <dt>Why a character, not a red number</dt>
+              <dd>A number that turns red is a report. A character that <strong>speaks up</strong> is an interruption, and only an interruption arrives in time to change a decision that has not been made yet.</dd>
+              <dt>What it must not do</dt>
+              <dd>Punish. A character that reads as disappointed in you produces avoidance — the user stops opening the app, which is the one outcome that makes the problem worse. That is why this moment uses the duck's voice and not its sadness.</dd>
+            </dl>
+          </div>
+        </div>
+
+        <a class="section-link" href="./methodology.html">See the full ESA framework →</a>
+      </div>
+    </section>
+
+    <!-- 02 ON SCREEN -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">02 — On screen · UI</span>
+        <h2 class="section-title">The state needs a place <span class="accent">it can be read from</span></h2>
+        <p class="section-text">
+          Two screens carry this between them, and they do different jobs. Home is where the state is <em>read</em>: the duck and its verdict come first, the cards and the figures after. The simulator is where the state can be <em>changed</em> — it is the way out, offered before the money moves.
+        </p>
+
+        <div class="shot-solo">
+          <figure class="shot shot--device">
+            <div class="shot-frame">
+              <img class="shot-img" loading="lazy" decoding="async"
+                   src="../assets/img/cuak/screen-home.webp"
+                   alt="Cuak home screen with the duck celebrating above a Looking good verdict">
+            </div>
+            <figcaption class="note">
+              <span class="note-tape" aria-hidden="true"></span>
+              <strong>Home, inside the safe zone.</strong> The duck answers first, <em>Looking good</em> second, the numbers third. You know where you stand before you have read anything.
+            </figcaption>
+          </figure>
+        </div>
+
+        <p class="section-text">
+          That ordering is the whole 60/40 bet: state above data. It also sets the problem this page is tracing — if the duck is what you read first, then the duck is what has to change when the answer changes.
+        </p>
+
+        <div class="shot-pair-row">
+          <figure class="shot shot--device">
+            <div class="shot-frame">
+              <img class="shot-img" loading="lazy" decoding="async"
+                   src="../assets/img/cuak/screen-simulator-input.webp"
+                   alt="Cuak's purchase simulator before an amount is entered">
+            </div>
+            <figcaption class="note">
+              <span class="note-tape" aria-hidden="true"></span>
+              <strong>Before.</strong> An empty field and one instruction. Nothing is judged until the user has said what they are considering.
+            </figcaption>
+          </figure>
+          <figure class="shot shot--device">
+            <div class="shot-frame">
+              <img class="shot-img" loading="lazy" decoding="async"
+                   src="../assets/img/cuak/screen-simulator-result.webp"
+                   alt="Cuak's purchase simulator showing the result of a risky amount">
+            </div>
+            <figcaption class="note">
+              <span class="note-tape" aria-hidden="true"></span>
+              <strong>After.</strong> A better date, a figure on what waiting saves, and XP for taking it. The way out is the primary button.
+            </figcaption>
+          </figure>
+        </div>
+
+        <p class="section-text">
+          The state also has to survive being small. On home the duck is a fraction of the size it is here, which sets a hard constraint on the layer below: whatever body this state gets, it has to stay identifiable at 48 pixels.
+        </p>
+
+        <!-- SLOT · home in the flagged state -->
+        <div class="slot" data-slot="home-flagged">
+          <div class="slot-box">
+            <span class="slot-layer">Layer 02</span>
+            <span class="slot-name">Home screen — out of the safe zone</span>
+            <p class="slot-why">The missing half of the transition. Home exists in the <em>Looking good</em> state only, so right now this page can show where the change starts but not where it lands on a real screen. Same layout, flagged verdict, the duck swapped for the megaphone state.</p>
+            <ul class="slot-spec">
+              <li><code>assets/img/cuak/screen-home-flagged.webp</code> — 650 × 1148, matching the other seven exports</li>
+            </ul>
+            <p class="slot-note">Worth doing before anything in layers 04–06: it is the cheapest artifact on this list and it is the one the whole page is about.</p>
+          </div>
+        </div>
+
+        <a class="section-link" href="./cuak.html">See the full Cuak case study →</a>
+      </div>
+    </section>
+
+    <!-- 03 A BODY -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">03 — A body · 3D</span>
+        <h2 class="section-title">Five states have to stay <span class="accent">one character</span></h2>
+        <p class="section-text">
+          The hard part of a character system is not getting one pose right. It is getting five that are unmistakably the same animal, each legible at a glance, each tied to a threshold in the data rather than to a mood I happened to like. Same silhouette, same beak, same volume — only the posture and the face carry the state.
+        </p>
+
+        <div class="state-row">
+          <figure class="state-fig">
+            <img src="../assets/img/cuak/cuak-feliz.png" alt="Cuak celebrating with raised arms and confetti" width="320" height="320" loading="lazy" decoding="async">
+            <figcaption class="note">
+              <span class="note-tape" aria-hidden="true"></span>
+              <strong>Looking good.</strong> Arms up, confetti. Usage is inside the safe zone and the duck says so without a number.
+            </figcaption>
+          </figure>
+          <span class="state-arrow" aria-hidden="true">
+            <svg viewBox="0 0 48 24"><path d="M2 12h40m-8-7 8 7-8 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <figure class="state-fig">
+            <img src="../assets/img/cuak/cuak-atento.png" alt="Cuak standing with a megaphone and an alert badge" width="320" height="320" loading="lazy" decoding="async">
+            <figcaption class="note">
+              <span class="note-tape" aria-hidden="true"></span>
+              <strong>Flagging.</strong> Confetti gone, megaphone up, alert badge over the shoulder. The duck speaks <em>with</em> you, not at you.
+            </figcaption>
+          </figure>
+        </div>
+
+        <p class="section-text">
+          The warning has two volumes, which is a system decision rather than a drawing one. This state carries a purple megaphone; a second state carries a red one with the hand raised, for a threshold that is no longer a suggestion. Two steps mean the loud one still means something — a system with a single alarm teaches people to ignore it.
+        </p>
+
+        <p class="section-text">
+          Keeping a character consistent across states is a spec problem before it is an art problem, so the spec came first. The turnaround below is the reference every state gets checked against: if a pose breaks the silhouette, the pose is wrong — not the reference.
+        </p>
+
+        <div class="ref-row">
+          <figure class="ref-fig">
+            <img src="../assets/img/cuak/process-ref-frontal.webp" alt="Cuak reference, front view" width="480" height="480" loading="lazy" decoding="async">
+            <figcaption>Front</figcaption>
+          </figure>
+          <figure class="ref-fig">
+            <img src="../assets/img/cuak/process-ref-back.webp" alt="Cuak reference, back view" width="480" height="480" loading="lazy" decoding="async">
+            <figcaption>Back</figcaption>
+          </figure>
+          <figure class="ref-fig">
+            <img src="../assets/img/cuak/process-ref-arms-up.webp" alt="Cuak reference, arms raised" width="480" height="480" loading="lazy" decoding="async">
+            <figcaption>Arms up</figcaption>
+          </figure>
+        </div>
+
+        <div class="note-lg note-lg--tool paper-surface">
+          <div class="note-lg-head">
+            <h3>How these were made</h3>
+          </div>
+          <p>
+            These are <strong>concept renders, generated with AI</strong>, then selected and corrected against the spec above. What that bought was volume, lighting and five usable states in days instead of weeks — which is the only reason the system got playtested at all.
+          </p>
+          <p>
+            What it cannot buy is <strong>geometry</strong>. There is no mesh under these images, so there is nothing to interpolate between. That is a real limit, not a cosmetic one, and it is exactly where the next layer starts.
+          </p>
+        </div>
+
+        <!-- SLOT · the modelled version -->
+        <div class="slot" data-slot="blender-model">
+          <div class="slot-box">
+            <span class="slot-layer">Layer 03</span>
+            <span class="slot-name">Blender model — viewport + wireframe</span>
+            <p class="slot-why">Upgrades this layer from "concept, corrected" to "modelled, rigged, posed". One mesh, one rig; the five states come from shape keys and pose, not from five separate models.</p>
+            <ul class="slot-spec">
+              <li><code>assets/img/cuak/model-viewport.webp</code> — 1600 × 1000, solid shading</li>
+              <li><code>assets/img/cuak/model-wireframe.webp</code> — 1600 × 1000, topology visible</li>
+              <li><code>assets/img/cuak/model-shapekeys.webp</code> — 1600 × 600, the state sliders</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 THE CHANGE -->
+    <section class="section section--wip">
+      <div class="container">
+        <span class="section-label">04 — The change · Motion</span>
+        <h2 class="section-title">The states are the end points. <span class="accent">The design is in between</span></h2>
+        <p class="section-text">
+          Two renders tell you where the character starts and where it ends. They say nothing about what the user actually experiences, which is the half second in the middle — and that half second decides the whole bet. The megaphone arriving fast reads as an alarm. The confetti falling first, the arms coming down, and only then the megaphone coming up, reads as someone catching your arm.
+        </p>
+        <p class="section-text">
+          This layer also audits the one above it. Motion is a consistency test that stills always pass: put two images on screen in sequence and any drift in the beak, the proportions or the volume becomes the only thing anyone can see.
+        </p>
+
+        <!-- SLOT · the transition -->
+        <div class="slot" data-slot="transition-clip">
+          <div class="slot-box">
+            <span class="slot-layer">Layer 04</span>
+            <span class="slot-name">The transition — looking good → flagging</span>
+            <p class="slot-why">Needs the model from layer 03. Ease out on the weight shift, ease in on the face, so the body moves before the expression does.</p>
+            <ul class="slot-spec">
+              <li><code>assets/video/cuak-transition.webm</code> — 1080 × 1080, ~1.2 s, VP9, <strong>muted, under 800 KB</strong></li>
+              <li><code>assets/video/cuak-transition.mp4</code> — same, H.264, for Safari</li>
+              <li><code>assets/img/cuak/cuak-transition-poster.webp</code> — 1080 × 1080, first frame</li>
+            </ul>
+            <p class="slot-note">Small and muted, so it can live in git and autoplay on loop. Needs a pause control and a poster fallback for reduced motion.</p>
+          </div>
+        </div>
+
+        <!-- SLOT · the turntable -->
+        <div class="slot" data-slot="turntable">
+          <div class="slot-box">
+            <span class="slot-layer">Layer 04</span>
+            <span class="slot-name">Turntable — the body in the round</span>
+            <p class="slot-why">Proves the body exists in three dimensions, which two stills never can. The cheapest piece of evidence available once the model is done.</p>
+            <ul class="slot-spec">
+              <li><code>assets/video/cuak-turntable.webm</code> — 900 × 900, 4 s seamless loop, <strong>under 600 KB</strong></li>
+              <li><code>assets/img/cuak/cuak-turntable-poster.webp</code> — 900 × 900</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 THE LANDING -->
+    <section class="section section--wip">
+      <div class="container">
+        <span class="section-label">05 — The landing · Sound</span>
+        <h2 class="section-title">A state that makes no sound <span class="accent">arrives half-way</span></h2>
+        <p class="section-text">
+          Sound is where the state stops being something you watch and becomes something that happened to you. The flagging state needs a cue with no sting in it — closer to a held breath than to an error tone, because the screen is already carrying the bad news and the audio's only job is to mark the moment it landed.
+        </p>
+        <p class="section-text">
+          Worth being plain about the medium: browsers block audio from starting on its own, so an ambient loop on a web page is heard by nobody. Sound only pays off where somebody presses play — which is why it is specced here against the clip in layer 06, and not against the loop in layer 04.
+        </p>
+
+        <!-- SLOT · the cue -->
+        <div class="slot" data-slot="state-cue">
+          <div class="slot-box">
+            <span class="slot-layer">Layer 05</span>
+            <span class="slot-name">State cue — the flagging landing</span>
+            <p class="slot-why">One cue, designed against the transition's timing: the body settles, then the cue marks it. Mixed quiet enough to sit under a voice.</p>
+            <ul class="slot-spec">
+              <li><code>assets/audio/cue-flagging.mp3</code> — ~0.6 s, mono, −18 LUFS, under 20 KB</li>
+              <li><code>assets/audio/cue-clear.mp3</code> — ~0.4 s, the way back</li>
+              <li><code>assets/img/cuak/cue-waveform.webp</code> — 1200 × 300, both cues against the transition's frames</li>
+            </ul>
+            <p class="slot-note">The waveform still is what makes this layer readable with the sound off — which is how most people will read it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 IN CONTEXT -->
+    <section class="section section--wip">
+      <div class="container">
+        <span class="section-label">06 — In context · Video</span>
+        <h2 class="section-title">Six layers, <span class="accent">eight seconds</span></h2>
+        <p class="section-text">
+          The last layer is the only one a stranger will actually watch, and it has to carry the five below it without explaining any of them: a hand types an amount, the number turns, the duck settles back, the cue lands, and a way out is offered. If the chain works, nobody watching it needs this page.
+        </p>
+
+        <!-- SLOT · the clip -->
+        <div class="slot" data-slot="context-clip">
+          <div class="slot-box">
+            <span class="slot-layer">Layer 06</span>
+            <span class="slot-name">The loop in context — with sound</span>
+            <p class="slot-why">Click to play, with audio and controls. This is the one piece where the sound design is actually heard, so it is the one that justifies layer 05.</p>
+            <ul class="slot-spec">
+              <li><code>cuak-simulator.mp4</code> — 1920 × 1080, 8 s, H.264 + AAC</li>
+              <li><code>cuak-simulator-poster.webp</code> — 1920 × 1080, a frame mid-transition</li>
+            </ul>
+            <p class="slot-note"><strong>Host this one off the repo.</strong> At 1080p with audio it runs several megabytes, and git keeps every version forever — <code>.git</code> is already 192 MB because of images deleted from the working tree two designs ago.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-heading">The same chain, applied end to end</h2>
+        <p class="cta-sub">
+          This page takes one state apart. The case studies show what happens when a whole product is built out of them — four-state machines, progression tiers, and fail states designed as part of the loop instead of the end of it.
+        </p>
+        <div class="cta-pair">
+          <a class="cta-btn" href="./cuak.html">Cuak — character-driven UI</a>
+          <a class="cta-btn cta-btn--ghost" href="./duogit.html">DuoGit — progression &amp; feedback</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2026 Jose Alvarez</span>
+        <nav class="footer-nav">
+          <a href="../index.html">Work</a>
+          <a href="./methodology.html">Framework</a>
+          <a href="./craft.html">Craft</a>
+          <a href="./resume.html">Resume</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+    <script src="../scripts/brand.js?v=1" defer></script>
+  </body>
+</html>

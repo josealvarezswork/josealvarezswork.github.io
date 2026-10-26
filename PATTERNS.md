@@ -76,6 +76,7 @@ the list and became the section's closing paragraph.
 | `resume.css` | page | 442 | the resume, both languages |
 | `cuak.css` | page | 422 | the Cuak case study |
 | `duogit.css` | page | 762 | the DuoGit case study |
+| `pipeline.css` | page | 390 | the pipeline page, and the slot system |
 | `craft.css` | page | 179 | craft |
 | `methodology.css` | page | 279 | the ESA framework |
 | `mindset.css` | page | 148 | mindset |
@@ -99,6 +100,32 @@ rules out of 63 and 124 — their page CSS really is different, and a file
 grouping them would exist for the name rather than for the code.
 
 The fourteen pages went from 9745 lines to 5420.
+
+## The sixth rule
+
+> **A page may ship half-built, but never half-honest.**
+
+`pages/pipeline.html` traces one state change through six layers and only
+three of them exist. The three that do not are **slots**: a dashed box naming
+the file to produce and its specs, visible only to Jose at `?draft=1`. The
+visitor gets a three-layer page with no holes in it.
+
+What keeps that honest is the chain map near the top, which lists all six
+layers and marks three as *in production*. A page that quietly showed three
+and implied that was the whole chain would be the dishonest version; a page
+with three empty frames would be the unfinished one. The map is neither.
+
+The same rule governs the page's third layer, where it states plainly that the
+character renders were generated with AI and corrected against the turnaround,
+and that there is no mesh under them. That sentence is why the Blender model
+in the slot above it reads as the next step instead of as a correction.
+
+The full inventory, the order the slots have to be filled in, and why video
+stays out of git are in [PIPELINE-SLOTS.md](PIPELINE-SLOTS.md). The mechanism
+is the one Cuak's screens used while they were being drawn — see
+[SCREENS-SLOTS.md](SCREENS-SLOTS.md) — with one change: there a slot stood for
+a single image, so it carried one filename; here it can stand for a video, an
+audio cue or a render, so it carries a spec list.
 
 ### What still has the same name for different things
 

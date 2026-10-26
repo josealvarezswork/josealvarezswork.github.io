@@ -1,0 +1,444 @@
+/* ===========================================================================
+   PIPELINE — one state change, six layers
+   ===========================================================================
+
+   The page follows the law in PATTERNS.md: paper is Jose's voice (the ESA
+   spec, the captions, the note about how the renders were made), the dark
+   surface is everything the product says for itself (the screens, the
+   renders, the reference turnaround).
+
+   --- THE SLOT SYSTEM ------------------------------------------------------
+
+   Three of the six layers are not produced yet. Rather than ship the page
+   with three empty sections, or wait until all six exist, every unbuilt
+   piece is a `.slot` that names the file to produce and its specs.
+
+   Slots are invisible to visitors. They appear only while <html> carries
+   data-slots="draft", which the inline script in the page head sets from
+   ?draft=1 and remembers in localStorage. So:
+
+     odejbyjose.com/pages/pipeline.html          → the live page
+     odejbyjose.com/pages/pipeline.html?draft=1  → every slot, with specs
+     odejbyjose.com/pages/pipeline.html?draft=0  → back to live
+
+   Filling a slot is a three-line edit: drop the real figure in above it,
+   delete the `.slot` block, and flip that step's data-state in the map
+   from "wip" to "live". When a section's last slot goes, drop
+   `section--wip` from the <section> and it goes live with it.
+
+   This is the same mechanism Cuak's screens used while they were being
+   drawn — see SCREENS-SLOTS.md. The difference is that there, a slot stood
+   where a single image went; here a slot can stand for a video, an audio
+   cue or a render, so it carries a spec list instead of one filename.
+
+   Sections 04–06 carry `section--wip`: on the live page they are hidden
+   whole, because a section whose only evidence is a slot is a promise, not
+   work. The chain map near the top is what keeps the live page honest — it
+   lists all six layers and marks which three are still in production.
+   =========================================================================== */
+
+/* --- draft chrome --------------------------------------------------------- */
+
+.draft-bar,
+.slot { display: none; }
+
+:root[data-slots="draft"] .draft-bar { display: block; }
+:root[data-slots="draft"] .slot { display: block; }
+:root[data-slots="draft"] .section--wip { display: block; }
+
+.section--wip { display: none; }
+
+.draft-bar {
+  padding: 10px 0;
+  background: var(--accent-amber-soft);
+  border-bottom: 1px solid var(--accent-amber);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.draft-bar .container { display: flex; align-items: baseline; gap: 9px; }
+.draft-bar strong { color: var(--accent-amber); }
+
+.draft-bar code {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .25);
+}
+
+.draft-dot {
+  flex: none;
+  width: 7px; height: 7px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--accent-amber);
+}
+
+/* A slot is deliberately not pretty. It is a hole in the page with a label
+   on it, and it should read as unfinished at a glance — the moment a slot
+   looks designed, it stops being obvious that something is missing. */
+.slot { margin-top: var(--s-32); }
+
+.slot-box {
+  padding: var(--s-24) var(--s-24) var(--s-20);
+  border: 1.5px dashed var(--stroke-strong);
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, .015);
+}
+
+.slot-layer {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent-amber);
+  margin-bottom: 7px;
+}
+
+.slot-name {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-text);
+  margin-bottom: var(--s-8);
+}
+
+.slot-why {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 68ch;
+  margin-bottom: var(--s-16);
+}
+
+.slot-spec {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 7px;
+}
+
+.slot-spec li {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  padding-left: var(--s-16);
+  position: relative;
+}
+
+.slot-spec li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 8px;
+  width: 5px; height: 5px;
+  border: 1px solid var(--accent-amber);
+  border-radius: 1px;
+}
+
+.slot-spec code {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--accent-text);
+  overflow-wrap: anywhere;
+}
+
+.slot-note {
+  margin-top: var(--s-16);
+  padding-top: var(--s-12);
+  border-top: 1px solid var(--stroke);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-faint);
+}
+
+.slot-note strong { color: var(--text-muted); }
+
+.slot-note code {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* --- the chain map -------------------------------------------------------- */
+
+.section--map .map {
+  list-style: none;
+  padding: 0;
+  margin: var(--s-32) 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-16);
+  counter-reset: none;
+}
+
+.map-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-12);
+  padding: var(--s-16) var(--s-20) var(--s-20);
+  border: 1px solid var(--stroke);
+  border-radius: var(--r-lg);
+  background: var(--bg-card);
+}
+
+/* The live/wip distinction has to survive being read by someone who cannot
+   see the colour difference, so it is carried by the border weight and by
+   the word in the key as well as by the hue. */
+.map-step[data-state="live"] {
+  border-color: var(--accent-soft);
+  background: var(--accent-glow);
+}
+
+.map-step[data-state="wip"] {
+  border-style: dashed;
+  border-color: var(--stroke-strong);
+}
+
+.map-num {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  padding-top: 3px;
+}
+
+.map-step[data-state="live"] .map-num { color: var(--accent-text); }
+.map-step[data-state="wip"] .map-num { color: var(--text-faint); }
+
+.map-body { display: block; min-width: 0; }
+
+.map-body strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.map-step[data-state="wip"] .map-body strong { color: var(--text-muted); }
+
+.map-what {
+  display: block;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-faint);
+  margin-bottom: var(--s-8);
+}
+
+.map-craft {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: var(--r-pill, 999px);
+  border: 1px solid var(--stroke);
+  color: var(--text-muted);
+}
+
+.map-step[data-state="live"] .map-craft {
+  border-color: var(--accent-soft);
+  color: var(--accent-text);
+}
+
+.map-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-20);
+  margin-top: var(--s-16);
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.map-key-item { display: inline-flex; align-items: center; gap: 7px; }
+
+.map-key-item::before {
+  content: "";
+  width: 11px; height: 11px;
+  border-radius: 3px;
+  border: 1px solid var(--stroke-strong);
+}
+
+.map-key-item[data-state="live"]::before {
+  border-color: var(--accent-soft);
+  background: var(--accent-glow);
+}
+
+.map-key-item[data-state="wip"]::before { border-style: dashed; }
+
+/* --- 01 · the spec sheet -------------------------------------------------- */
+
+.spec-sheet { margin-top: var(--s-32); max-width: 720px; }
+
+.spec-list { margin: var(--s-16) 0 0; }
+
+.spec-list dt {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  /* .72, not .62 — at 10.5px this is small text and owes 4.5:1 on the cream
+     stock. .62 measures 4.33 once the paper's own layers are composited in,
+     which is the same trap .note-lg-kicker fell into. */
+  color: rgba(34, 29, 51, .72);
+  margin-bottom: 5px;
+}
+
+.spec-list dd {
+  margin: 0 0 var(--s-16);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+.spec-list dd:last-child { margin-bottom: 0; }
+.spec-list dd strong { font-weight: 700; }
+
+/* --- 02 · the screens ----------------------------------------------------- */
+
+/* Home stands alone: it is the screen the whole page is about, and the two
+   simulator screens below it are a pair that answers it. Left-aligned rather
+   than centred so it sits on the same edge as the prose it belongs to —
+   .shot--device already centres the phone inside its own 300px frame. */
+.shot-solo {
+  margin-top: var(--s-32);
+  max-width: 300px;
+}
+
+.shot-pair-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-40);
+  margin-top: var(--s-32);
+  max-width: 740px;
+}
+
+/* --- 03 · the two states and the turnaround ------------------------------- */
+
+.state-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--s-24);
+  margin-top: var(--s-32);
+  max-width: 640px;
+}
+
+.state-fig { margin: 0; }
+
+/* The renders are 320 × 320 PNGs on transparency, so they are shown below
+   their natural size on purpose — at 1:1 they go soft on a 2× display, and
+   there is no frame to hide behind. */
+.state-fig img {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  margin-inline: auto;
+}
+
+.state-arrow {
+  align-self: center;
+  width: 44px;
+  color: var(--accent);
+  opacity: .7;
+}
+
+.state-arrow svg { width: 100%; height: auto; display: block; }
+
+.ref-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-20);
+  margin-top: var(--s-32);
+  max-width: 620px;
+}
+
+.ref-fig {
+  margin: 0;
+  padding: var(--s-12) var(--s-12) var(--s-8);
+  border: 1px solid var(--stroke);
+  border-radius: var(--r-lg);
+  background: var(--bg-card);
+}
+
+.ref-fig img { display: block; width: 100%; height: auto; }
+
+.ref-fig figcaption {
+  margin-top: var(--s-8);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--text-faint);
+}
+
+/* The sheet that says how the renders were made. It is a statement, not a
+   figure, so it keeps the emphasis strokes and takes no icon — there is no
+   honest symbol for "generated, then corrected". */
+.note-lg--tool {
+  margin-top: var(--s-40);
+  max-width: 680px;
+}
+
+/* --- shared bits this page needs ----------------------------------------- */
+
+/* Also declared in craft.css. Two copies now, which is one more than the
+   law allows — it belongs in pages.css, and goes there the next time that
+   file's cache version is bumped for a reason of its own. */
+.section-link {
+  display: inline-block;
+  margin-top: var(--s-24);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-text);
+  transition: opacity 150ms ease;
+}
+
+.section-link:hover { opacity: 0.75; }
+
+.cta-pair {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-12);
+}
+
+.cta-btn--ghost {
+  background: transparent;
+  color: var(--accent-text);
+  border: 1px solid var(--accent-soft);
+}
+
+/* --- narrow ------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .section--map .map { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 680px) {
+  .shot-pair-row { gap: var(--s-24); }
+  .ref-row { gap: var(--s-12); }
+}
+
+@media (max-width: 560px) {
+  .section--map .map { grid-template-columns: 1fr; }
+
+  /* The pair and the state row both stack. The arrow between the two states
+     turns a quarter so it still reads as "this becomes that" rather than as
+     a stray mark between two unrelated pictures. */
+  .shot-pair-row { grid-template-columns: 1fr; }
+
+  .state-row {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .state-arrow { transform: rotate(90deg); width: 34px; }
+
+  .slot-box { padding: var(--s-20) var(--s-16) var(--s-16); }
+}
