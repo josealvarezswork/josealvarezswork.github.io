@@ -53,6 +53,50 @@ body {
   margin-bottom: var(--s-16);
 }
 
+/* --- STAR badge ----------------------------------------------------------
+   One square per section carrying its letter in situación / tarea / acción /
+   resultado. A case study that goes straight from the problem to the solution
+   reads as "I had an idea and built it"; naming each section's part makes the
+   shape legible without a paragraph explaining it.
+
+   Sections outside the four — the business model, the projections, what's
+   next — carry no badge on purpose. The gap is the signal: the story is over
+   and what follows is appendix.
+
+   The letter alone would be noise to a screen reader, so each badge is an
+   image with its full word as the label. */
+/* paper.css already lays the label out as a flex row with a dot in its
+   ::before. The badge takes the dot's job, so where there is a badge the dot
+   goes — two markers before the same three words is one too many. The
+   repeated class beats paper.css on specificity, which it has to: paper
+   loads after this file. */
+.section-label.section-label:has(.star-tag)::before { display: none; }
+
+.star-tag {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 19px;
+  height: 19px;
+  border-radius: 4px;
+  border: 1px solid var(--accent-soft);
+  background: var(--accent-glow);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--accent-text);
+}
+
+/* The result is the one that earned something, so it is the one that is
+   filled in rather than outlined. */
+.star-tag[data-star="R"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #1b1436;
+}
+
 .section-title {
   font-family: var(--serif);
   font-size: clamp(26px, 3.5vw, 40px);

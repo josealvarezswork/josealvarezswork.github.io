@@ -91,6 +91,17 @@
    Worth knowing: compare-github.webp is 637px wide, so above that it is being
    upscaled. Re-export it around 1920px and it stays sharp at any width. */
 .proc-figs--wide { grid-template-columns: 1fr; }
+/* The three character references are three exports with slightly different
+   heights — 480x721, 480x681 and 480x682 — so the images ended at different
+   y and the captions under them stepped down like a ragged list, which is
+   what made the row read as a list instead of a set. One shared ratio with
+   object-fit: contain squares the boxes up; the art sits on transparency, so
+   the letterboxing is invisible and nothing is cropped or stretched. */
+.proc-figs--refs .proc-fig img {
+  aspect-ratio: 480 / 700;
+  object-fit: contain;
+}
+
 .proc-fig { margin: 0; }
 .proc-fig img {
   width: 100%; height: auto; display: block;
