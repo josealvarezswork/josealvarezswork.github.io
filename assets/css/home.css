@@ -869,8 +869,34 @@ body.page-home .footer-cta {
    "...onal ...cture". Smaller sheets, spread wider, all three legible. */
 body.page-home .paper-stack {
   position: relative;
-  width: 195px;
-  height: 276px;
+
+  /* The whole arrangement comes from these four. The sheets are no longer
+     draggable, so every one of them has to be readable where it sits: the
+     spread has to clear a sheet's own content width, or the neighbour hides
+     the end of each line. Below 1300 there is not enough mat for the large
+     size — at 1100 it spilled 44px past the right edge and took the page
+     into horizontal scroll — so the whole set steps down together. */
+  --sheet-w: 226px;
+  --sheet-h: 318px;
+  --sheet-spread: 222px;
+  --sheet-tilt: 4.6deg;
+
+  width: var(--sheet-w);
+  height: var(--sheet-h);
+}
+
+@media (max-width: 1299px) {
+  body.page-home .paper-stack {
+    --sheet-w: 193px;
+    /* 292, not 272: "Emotional State Architecture" wraps to three lines at
+       this width and overran the shorter box by 17px. */
+    --sheet-h: 292px;
+    --sheet-spread: 189px;
+    --sheet-tilt: 3.2deg;
+  }
+  body.page-home .sheet-body { padding: 21px 16px 15px; }
+  body.page-home .sheet-title { font-size: 23px; margin-bottom: 13px; }
+  body.page-home .sheet-list { font-size: 10px; line-height: 1.78; }
 }
 
 body.page-home .sheet {
@@ -907,7 +933,7 @@ body.page-home .sheet-body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 21px 16px 15px;
+  padding: 24px 19px 17px;
   box-sizing: border-box;
   color: var(--paper-ink);
 }
@@ -924,7 +950,7 @@ body.page-home .sheet-shade {
 body.page-home .sheet--pos-1 {
   /* Center foreground card: Fail State as Loop */
   z-index: 12;
-  transform: translate(0, -20px) rotate(-1.4deg);
+  transform: translate(0, -26px) rotate(-0.8deg);
   pointer-events: auto;
 }
 body.page-home .sheet--pos-1 .sheet-face { background: var(--paper); }
@@ -932,7 +958,7 @@ body.page-home .sheet--pos-1 .sheet-face { background: var(--paper); }
 body.page-home .sheet--pos-2 {
   /* Left fan card: State First, Data Second */
   z-index: 8;
-  transform: translate(-192px, 8px) rotate(1.9deg);
+  transform: translate(calc(var(--sheet-spread) * -1), 10px) rotate(calc(var(--sheet-tilt) * -1));
   pointer-events: auto;
 }
 body.page-home .sheet--pos-2 .sheet-face { background: var(--paper-2); }
@@ -940,7 +966,7 @@ body.page-home .sheet--pos-2 .sheet-face { background: var(--paper-2); }
 body.page-home .sheet--pos-0 {
   /* Right fan card: Emotional State Architecture */
   z-index: 5;
-  transform: translate(192px, 24px) rotate(2.8deg);
+  transform: translate(var(--sheet-spread), 28px) rotate(var(--sheet-tilt));
   pointer-events: auto;
 }
 body.page-home .sheet--pos-0 .sheet-face { background: var(--paper-3); }
@@ -969,11 +995,11 @@ body.page-home .sheet-kicker {
 
 /* The reference carries its weight on a display serif. */
 body.page-home .sheet-title {
-  margin: 0 0 13px;
+  margin: 0 0 15px;
   font-family: "Playfair Display", Georgia, serif;
   font-weight: 800;
-  font-size: 23px;
-  line-height: 1.05;
+  font-size: 26px;
+  line-height: 1.04;
   letter-spacing: -0.01em;
 }
 
@@ -1008,8 +1034,8 @@ body.page-home .sheet-list {
   border-top: 1px solid rgba(34, 29, 51, 0.18);
   list-style: none;
   font-family: var(--mono);
-  font-size: 10px;
-  line-height: 1.78;
+  font-size: 10.5px;
+  line-height: 1.85;
   color: rgba(34, 29, 51, 0.78);
 }
 

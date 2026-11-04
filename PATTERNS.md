@@ -265,8 +265,21 @@ mat reads as a desk whether or not the paper moves.
 Three 352px sheets overlapping is fine when you can pull the one you want to
 the front. Static, the overlap is just hidden content: the left sheet ran 54px
 into the text column and the titles read *"State F… Data S…"* and
-*"…onal …cture"*. They are 195 × 276 now, spread 192px apart, and all three
-read in full with 11–13px of overlap left for the stacked-paper look.
+*"…onal …cture"*.
+
+The arrangement is now four custom properties on `.paper-stack` —
+`--sheet-w`, `--sheet-h`, `--sheet-spread`, `--sheet-tilt` — with the outer two
+fanned away from the middle. **The spread has to clear a sheet's own content
+width**, or the neighbour covers the end of every line; that single constraint
+sets the whole geometry.
+
+There are two sizes, because 226 × 318 needs more mat than exists below 1300:
+at 1100 the large set spilled 44px past the right edge and put the page into
+horizontal scroll. Under 1300 the sheets step down to 193 × 292 together with
+their type. Measured at 1100, 1299, 1440 and 1920: zero covered pixels, no
+horizontal scroll, both hero buttons hit-testable, and no sheet body
+overflowing its box — the last one caught by *Emotional State Architecture*,
+whose title wraps to three lines and needs 20px more height than the others.
 
 ### One place writes a position
 
