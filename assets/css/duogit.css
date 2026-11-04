@@ -105,25 +105,15 @@
   border: 1px solid var(--stroke-light);
 }
 
-.section-label.insight {
-  background: rgba(251, 191, 36, .15);
-  color: var(--accent-amber)
-}
+/* Four coloured .section-label variants lived here — insight, tradeoff,
+   solution, persona. Only `solution` was ever used, and it set a background
+   with no padding and no display of its own. paper.css makes .section-label
+   a flex row, which is block-level, so that background stretched the full
+   width of the container and the label read as a highlighted bar rather than
+   a tag. It was also the only label on either case study wearing a colour,
+   which made it look like a mistake next to ten plain ones.
 
-.section-label.tradeoff {
-  background: rgba(239, 68, 68, .15);
-  color: #ef4444
-}
-
-.section-label.solution {
-  background: var(--accent-soft);
-  color: var(--accent)
-}
-
-.section-label.persona {
-  background: rgba(139, 92, 246, .15);
-  color: #8b5cf6
-}
+   The STAR badge is the marker now. The other three were dead classes. */
 
 .section-text+.section-text {
   margin-top: var(--s-16)}
