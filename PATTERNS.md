@@ -70,6 +70,7 @@ the list and became the section's closing paragraph.
 | `pages.css` | shared | 214 | the chrome every inner page draws: section, hero, cta, footer |
 | `paper.css` | shared | 928 | the components: paper, notes, tape, figures, brand mark |
 | `design-system.css` | shared | 136 | what the two design-system pages draw the same way |
+| `slots.css` | shared | 146 | the slot system: a named hole in a page, draft-only |
 | `styles.css` | home | 895 | the home |
 | `home.css` | home | 1170 | the home |
 | `about.css` | page | 218 | about, both languages |
@@ -201,6 +202,44 @@ is already the signal.
 A caption keeps its strip for two reasons. It is small enough that the strip
 is most of what you see, and it really is stuck to something — the artwork
 directly above it. Cuak went from twenty strips to eight, one per screen.
+
+## A case study is S-T-A-R
+
+> **Situación, Tarea, Acción, Resultado — and the Tarea is the one everybody skips.**
+
+Two reviewers independently said the same thing about these case studies, one
+politely ("the balance leans UI over UX") and one bluntly ("you are in love
+with the solution, not the problem"). Measured, they were right: the problem
+took **6–7%** of each page and the solution **84–87%**, with the result sitting
+at position 9 of 13 on Cuak and 9 of 10 on DuoGit.
+
+Both now run S-T-A-R, and nothing was invented to do it — every section already
+existed, in the wrong place.
+
+| | Cuak | DuoGit |
+|---|---|---|
+| **S** · the situation | 01 The problem | 01 The problem |
+| **T** · the task | 02 The gap and the target | 02 Defining success |
+| **A** · the actions | 03–07 | 03–07 |
+| **R** · the result | 08 What testing revealed | 08 Results |
+| | 09–11 business and next | 09 UI kit |
+
+**The Tarea is what was missing, and it was buried in both.** DuoGit's was at
+position 4, behind the process. Cuak's was at position 9, titled *Projections*
+— but read it and it is not a projection, it is a competitive gap: no fintech
+uses a mascot as the primary emotional signal, Nequi and Greenlight have
+friendly UX without a reactive layer, Duolingo proved anthropomorphism retains.
+That is the brief. It belongs before the work, not after it.
+
+Going straight from problem to solution is what makes a case study read as
+*I had an idea and built it*. The Tarea is where the analysis lives, and
+analysis is what someone reading a portfolio is actually checking for.
+
+**What still is not fixed.** The problems are stated but not evidenced — the
+vocabulary count across both pages is 0 interviews, 0 usability sessions, 0
+hypotheses, 0 documented pain points. Cuak's five-tester session is real and
+honestly labelled, and it is validation after the fact, not discovery before
+it. No reordering can fix that; it needs research that has not been done.
 
 ## The desk does not move
 

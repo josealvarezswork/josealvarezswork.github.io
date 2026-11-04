@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
   <link rel="stylesheet" href="../assets/css/pages.css?v=1">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
-  <link rel="stylesheet" href="../assets/css/cuak.css?v=2">
+  <link rel="stylesheet" href="../assets/css/cuak.css?v=3">
 </head>
 
 <body>
@@ -126,9 +126,42 @@
       </div>
     </section>
 
+    <!-- 07 IMPACTO ESTIMADO -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">02 — The gap and the target</span>
+        <h2 class="section-title">No one else is doing this — <span style="color:var(--brand-cuak)">and here is what would count as working</span></h2>
+        <p class="section-text">
+          A 0-to-1 project — no real users yet. No existing fintech product uses a mascot as the primary emotional signal for financial data: Nequi and Greenlight have friendly UX, but no reactive emotional layer. Duolingo proved that anthropomorphism drives retention — Cuak applies that mechanism to personal finance for the first time. The projections start from that gap.
+        </p>
+        <div style="display:flex;flex-direction:column;gap: var(--s-16);margin-top: var(--s-32)">
+          <div style="padding: var(--s-24);background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);display:grid;grid-template-columns:auto minmax(0, 1fr);gap: var(--s-20);align-items:center">
+            <div style="font-family:var(--serif);font-size:42px;font-weight:700;color:var(--brand-cuak);min-width:100px">+70%</div>
+            <div>
+              <span class="claim">Projected · no users yet</span>
+              <div style="font-weight:600;margin-bottom: var(--s-4)">Estimated Day 30 retention</div>
+              <div style="font-size:13px;color:var(--text-muted)">vs. the ~25% benchmark for generic finance apps. Mascot anthropomorphism and the fear of "breaking the streak" of XP build a daily open habit.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--s-20);padding-top: var(--s-24);border-top:1px solid var(--stroke);display:grid;grid-template-columns:1fr 1fr;gap: var(--s-32)">
+          <div>
+            <div style="font-weight:600;margin-bottom:6px">Lower churn through cognitive clarity</div>
+            <div style="font-size:13px;color:var(--text-muted);line-height:1.7">The 60/40 rule removes the cognitive load of interpreting financial information. Less confusion, less churn.</div>
+          </div>
+          <div>
+            <div style="font-weight:600;margin-bottom:6px;color:var(--brand-cuak)">Pre-qualified B2B conversion</div>
+            <div style="font-size:13px;color:var(--text-muted);line-height:1.7">Leads reach banks only once the user hits verified behavioral maturity, so the bank buys a qualified lead rather than a slice of the whole base.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 02 SOLUCIÓN -->
     <section class="section">
       <div class="container">
+        <span class="section-label">03 — The character</span>
         <h2 class="section-title">A mascot that <span style="color:var(--brand-cuak)">reacts</span> to your financial behavior</h2>
         <p class="section-text">
           Cuak connects to credit card data via Open Banking (Belvo) and maps user behavior to one of four emotional states. The mascot's state is the primary interface: it occupies the top of the screen and drives everything below it.
@@ -193,6 +226,7 @@
     <!-- 03 SISTEMA EMOCIONAL -->
     <section class="section">
       <div class="container">
+        <span class="section-label">04 — The four states</span>
         <h2 class="section-title">Four states. One <span style="color:var(--brand-cuak)">clear signal</span>.</h2>
         <p class="section-text">
           The system maps the user's financial behavior to four emotional states. Each state has a visual expression, a color and a suggested action — reducing the cognitive friction of interpreting financial data.
@@ -272,6 +306,7 @@
     <!-- 04 CORE: SIMULADOR PREVENTIVO -->
     <section class="section">
       <div class="container">
+        <span class="section-label">05 — The advice moment</span>
         <h2 class="section-title">Cuak advises you <span style="color:var(--brand-cuak)">before</span> you spend</h2>
         <p class="section-text">
           Banking apps tell you what you already spent. Cuak shows you what you <em>should</em> do before making the decision. The Purchase Simulator is the product's flagship feature.
@@ -332,7 +367,7 @@
     <!-- 05 RETENCIÓN: GAMIFICACIÓN -->
     <section class="section">
       <div class="container">
-        <span class="section-label">05 — The Retention Engine</span>
+        <span class="section-label">06 — The retention engine</span>
         <h2 class="section-title">From Apprentice to <span style="color:var(--brand-cuak)">Credit Master</span></h2>
         <p class="section-text">
           Good financial decisions generate Experience Points (XP). This positive reinforcement turns debt payment from a stressful chore into a rewarding experience — the same mechanism that gives Duolingo 40M daily active users.
@@ -409,64 +444,58 @@
       </div>
     </section>
 
-    <!-- 06 MODELO DE NEGOCIO -->
+    <!-- 10 DESIGN SYSTEM -->
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Behavioral Scoring and <span style="color:var(--brand-cuak)">B2B Lead Generation</span></h2>
+        <span class="section-label">07 — The visual system</span>
+        <h2 class="section-title">The visual system behind Cuak</h2>
         <p class="section-text">
-          Cuak flips the traditional banking model. Instead of charging users for their financial mistakes, Cuak charges banks for their best customers.
+          Every emotional state, color and component is codified into a reusable system — palette built for emotional clarity, the 60/40 zoning model, and a full UI kit.
         </p>
-        <div class="two-col" style="margin-top: var(--s-32)">
-          <div class="note-lg">
-            <div class="note-lg-head note-lg-head--figure">
-              <span class="note-lg-kicker">B2C — Freemium</span>
-              <span class="note-lg-fig">$9.99 / month</span>
-            </div>
-            <p>Premium plan with unlimited simulations, multi-card analysis and advanced proactive alerts. The free plan includes 1 card and 3 simulations per month.</p>
-          </div>
-          <div class="note-lg">
-            <div class="note-lg-head"><h3>B2B — The real business</h3></div>
-            <p>By tracking the user's daily discipline through gamification, Cuak builds a <strong>Behavioral Score</strong>. A "Credit Master" level user with a consistently happy Cuak is the zero-risk customer banks actively look for.</p>
-            <p><strong>CPA model:</strong> Banks pay an acquisition fee for every behaviorally pre-qualified lead. The internal AI recommends higher-tier financial products at the exact moment of user maturity.</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 07 IMPACTO ESTIMADO -->
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Projections grounded in <span style="color:var(--brand-cuak)">behavioral design</span></h2>
-        <p class="section-text">
-          A 0-to-1 project — no real users yet. No existing fintech product uses a mascot as the primary emotional signal for financial data: Nequi and Greenlight have friendly UX, but no reactive emotional layer. Duolingo proved that anthropomorphism drives retention — Cuak applies that mechanism to personal finance for the first time. The projections start from that gap.
-        </p>
-        <div style="display:flex;flex-direction:column;gap: var(--s-16);margin-top: var(--s-32)">
-          <div style="padding: var(--s-24);background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);display:grid;grid-template-columns:auto minmax(0, 1fr);gap: var(--s-20);align-items:center">
-            <div style="font-family:var(--serif);font-size:42px;font-weight:700;color:var(--brand-cuak);min-width:100px">+70%</div>
-            <div>
-              <span class="claim">Projected · no users yet</span>
-              <div style="font-weight:600;margin-bottom: var(--s-4)">Estimated Day 30 retention</div>
-              <div style="font-size:13px;color:var(--text-muted)">vs. the ~25% benchmark for generic finance apps. Mascot anthropomorphism and the fear of "breaking the streak" of XP build a daily open habit.</div>
+        <div class="shot-beside shot-beside--pair" style="margin-top: var(--s-28)">
+          <div class="shot-pair">
+            <figure class="shot shot--device" data-shot="screen-get-started">
+            <div class="shot-frame">
+            <img class="shot-img" loading="lazy" decoding="async"
+            src="../assets/img/cuak/screen-get-started.webp?v=2"
+            alt="Cuak first-run screen — the mascot above the sign-in options">
+            </div>
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>First run</strong> — the mascot carries the brand before a single number exists.</figcaption>
+            </figure>
+            <figure class="shot shot--device" data-shot="screen-onboarding">
+            <div class="shot-frame">
+            <img class="shot-img" loading="lazy" decoding="async"
+            src="../assets/img/cuak/screen-onboarding.webp?v=2"
+            alt="Cuak onboarding screen — illustration introducing the credit companion">
+            </div>
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>The promise</strong> — one illustration and one line to say what the product is for.</figcaption>
+            </figure>
+          </div>
+          <div class="note-stack">
+            <div class="note-lg">
+              <div class="note-lg-head">
+                <span class="note-lg-ico" aria-hidden="true"><svg><use href="../assets/img/icons.svg#i-about"/></svg></span>
+                <h3>Before it reports anything</h3>
+              </div>
+              <p>These are the only two screens where Cuak appears with no number attached — no balance, no state colour, no verdict. The order is deliberate: the user has to read the duck as a companion before it starts telling them things they would rather not hear.</p>
+              <p><strong>One primary action, four screens.</strong> The purple behind <strong>Continue</strong> is <code>#6C43DA</code> — the same value that carries <em>Wait and earn +50 XP</em> in the simulator and the add button on the card deck. Wordmark, cream surface and type scale carry over untouched. The first screen is already the system, not a splash built for it.</p>
             </div>
           </div>
         </div>
-
-        <div style="margin-top: var(--s-20);padding-top: var(--s-24);border-top:1px solid var(--stroke);display:grid;grid-template-columns:1fr 1fr;gap: var(--s-32)">
-          <div>
-            <div style="font-weight:600;margin-bottom:6px">Lower churn through cognitive clarity</div>
-            <div style="font-size:13px;color:var(--text-muted);line-height:1.7">The 60/40 rule removes the cognitive load of interpreting financial information. Less confusion, less churn.</div>
-          </div>
-          <div>
-            <div style="font-weight:600;margin-bottom:6px;color:var(--brand-cuak)">Pre-qualified B2B conversion</div>
-            <div style="font-size:13px;color:var(--text-muted);line-height:1.7">Leads reach banks only once the user hits verified behavioral maturity, so the bank buys a qualified lead rather than a slice of the whole base.</div>
-          </div>
-        </div>
+        <a href="./cuak-design-system.html" style="margin-top: var(--s-28);display:flex;align-items:center;justify-content:space-between;gap: var(--s-16);padding:22px 26px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r);transition:border-color .2s">
+          <span>
+            <strong style="display:block;font-size:15px;margin-bottom: var(--s-4);color:var(--text)">Explore the full Cuak Design System →</strong>
+            <span style="font-size:13px;color:var(--text-muted)">4 emotional states, palette, zoning model, core UI components and type system.</span>
+          </span>
+        </a>
       </div>
     </section>
 
     <!-- EARLY SIGNAL -->
     <section class="section">
       <div class="container">
+        <span class="section-label">08 — What testing revealed</span>
         <h2 class="section-title">What <span style="color:var(--brand-cuak)">prototype testing</span> revealed</h2>
         <p class="section-text">
           5 testers. 1 clickable prototype. 1 session each. Before a single line of production code — the behavioral design was validated.
@@ -499,9 +528,35 @@
       </div>
     </section>
 
+    <!-- 06 MODELO DE NEGOCIO -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">09 — The business model</span>
+        <h2 class="section-title">Behavioral Scoring and <span style="color:var(--brand-cuak)">B2B Lead Generation</span></h2>
+        <p class="section-text">
+          Cuak flips the traditional banking model. Instead of charging users for their financial mistakes, Cuak charges banks for their best customers.
+        </p>
+        <div class="two-col" style="margin-top: var(--s-32)">
+          <div class="note-lg">
+            <div class="note-lg-head note-lg-head--figure">
+              <span class="note-lg-kicker">B2C — Freemium</span>
+              <span class="note-lg-fig">$9.99 / month</span>
+            </div>
+            <p>Premium plan with unlimited simulations, multi-card analysis and advanced proactive alerts. The free plan includes 1 card and 3 simulations per month.</p>
+          </div>
+          <div class="note-lg">
+            <div class="note-lg-head"><h3>B2B — The real business</h3></div>
+            <p>By tracking the user's daily discipline through gamification, Cuak builds a <strong>Behavioral Score</strong>. A "Credit Master" level user with a consistently happy Cuak is the zero-risk customer banks actively look for.</p>
+            <p><strong>CPA model:</strong> Banks pay an acquisition fee for every behaviorally pre-qualified lead. The internal AI recommends higher-tier financial products at the exact moment of user maturity.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 08 STACK -->
     <section class="section">
       <div class="container">
+        <span class="section-label">10 — Built to scale</span>
         <h2 class="section-title">Built to scale with <span style="color:var(--brand-cuak)">Open Banking</span></h2>
         <p class="section-text">
           The stack was chosen to support future integration with banking data. The MVP currently runs on a custom backend calculation engine and mock data to validate the user experience and the behavioral design. The architecture is ready to swap those mocks for the real connection in the next phase.
@@ -565,7 +620,7 @@
     <!-- 09 LO QUE SIGUE -->
     <section class="section">
       <div class="container">
-        <span class="section-label">09 — What's next</span>
+        <span class="section-label">11 — What's next</span>
         <h2 class="section-title">From MVP to <span style="color:var(--brand-cuak)">Production Integration</span></h2>
         <p class="section-text">
           The emotional state system is designed and the simulator's core flow works in isolation. The next strategic steps are:
@@ -588,53 +643,6 @@
         <p class="section-text" style="margin-top:36px">
           <strong>Further out: a sponsored rewards marketplace.</strong> The XP economy becomes tangible — Credit Master users redeem points with partner banks and merchants for cinema tickets, restaurants, in-store discounts. The difference from a traditional points programme is what earns them: <strong>disciplined financial behavior, not spending volume</strong>. The partner reaches a user with verified credit health at minimal acquisition cost.
         </p>
-      </div>
-    </section>
-
-    <!-- 10 DESIGN SYSTEM -->
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">The visual system behind Cuak</h2>
-        <p class="section-text">
-          Every emotional state, color and component is codified into a reusable system — palette built for emotional clarity, the 60/40 zoning model, and a full UI kit.
-        </p>
-
-        <div class="shot-beside shot-beside--pair" style="margin-top: var(--s-28)">
-          <div class="shot-pair">
-            <figure class="shot shot--device" data-shot="screen-get-started">
-            <div class="shot-frame">
-            <img class="shot-img" loading="lazy" decoding="async"
-            src="../assets/img/cuak/screen-get-started.webp?v=2"
-            alt="Cuak first-run screen — the mascot above the sign-in options">
-            </div>
-            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>First run</strong> — the mascot carries the brand before a single number exists.</figcaption>
-            </figure>
-            <figure class="shot shot--device" data-shot="screen-onboarding">
-            <div class="shot-frame">
-            <img class="shot-img" loading="lazy" decoding="async"
-            src="../assets/img/cuak/screen-onboarding.webp?v=2"
-            alt="Cuak onboarding screen — illustration introducing the credit companion">
-            </div>
-            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>The promise</strong> — one illustration and one line to say what the product is for.</figcaption>
-            </figure>
-          </div>
-          <div class="note-stack">
-            <div class="note-lg">
-              <div class="note-lg-head">
-                <span class="note-lg-ico" aria-hidden="true"><svg><use href="../assets/img/icons.svg#i-about"/></svg></span>
-                <h3>Before it reports anything</h3>
-              </div>
-              <p>These are the only two screens where Cuak appears with no number attached — no balance, no state colour, no verdict. The order is deliberate: the user has to read the duck as a companion before it starts telling them things they would rather not hear.</p>
-              <p><strong>One primary action, four screens.</strong> The purple behind <strong>Continue</strong> is <code>#6C43DA</code> — the same value that carries <em>Wait and earn +50 XP</em> in the simulator and the add button on the card deck. Wordmark, cream surface and type scale carry over untouched. The first screen is already the system, not a splash built for it.</p>
-            </div>
-          </div>
-        </div>
-        <a href="./cuak-design-system.html" style="margin-top: var(--s-28);display:flex;align-items:center;justify-content:space-between;gap: var(--s-16);padding:22px 26px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--r);transition:border-color .2s">
-          <span>
-            <strong style="display:block;font-size:15px;margin-bottom: var(--s-4);color:var(--text)">Explore the full Cuak Design System →</strong>
-            <span style="font-size:13px;color:var(--text-muted)">4 emotional states, palette, zoning model, core UI components and type system.</span>
-          </span>
-        </a>
       </div>
     </section>
 

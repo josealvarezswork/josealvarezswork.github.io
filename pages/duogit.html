@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
   <link rel="stylesheet" href="../assets/css/pages.css?v=1">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
-  <link rel="stylesheet" href="../assets/css/duogit.css?v=4">
+  <link rel="stylesheet" href="../assets/css/duogit.css?v=5">
 </head>
 
 <body>
@@ -94,7 +94,7 @@
     <!-- PROBLEM -->
     <section class="section">
       <div class="container">
-        <span class="section-label">01 — Problem</span>
+        <span class="section-label">01 — The problem</span>
         <h2 class="section-title">GitHub lacks the <span class="accent">emotional dimension</span></h2>
         <p class="section-text">The GitHub contribution graph is a powerful data visualization, but it offers purely passive, technical feedback. There are no proactive "nudges" or emotional reinforcements when a developer is at risk of breaking their streak.</p>
         <p class="section-text">Current solutions are either strictly utilitarian coding tools or generic gamification (habit-tracking) apps that don't differentiate meaningful code contributions from generic daily tasks.</p>
@@ -111,10 +111,34 @@
       </div>
     </section>
 
+    <!-- PERSONA / METRICS -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">02 — Defining success</span>
+        <h2 class="section-title">Defining Success for DuoGit</h2>
+        <p class="section-text">The goal is not just to build a widget, but to foster positive behavioral change among developers — moving from sporadic, high-stress commits to consistent, stress-free daily routines.</p>
+        
+        <div class="two-col" style="margin-top: var(--s-40);align-items:start">
+          <div class="note-lg">
+            <div class="note-lg-head"><h3>Behavioral metrics</h3></div>
+            <p><strong>Daily commit rate.</strong> Target: from ~1 commit/day to ≥3 commits/day.</p>
+            <p><strong>Weekly streak duration.</strong> Target: from 2–3 days to 5+ consecutive days.</p>
+            <p><strong>Post-streak recovery.</strong> Target: recovery within 3 days, from &lt;30% to &gt;60%.</p>
+          </div>
+          <div class="note-lg">
+            <div class="note-lg-head"><h3>Emotional satisfaction</h3></div>
+            <p><strong>Perceived progress clarity.</strong> Target a 50% increase in user-reported clarity (survey 1–10).</p>
+            <p><strong>Streak-related anxiety.</strong> Target a 40% reduction in reported stress.</p>
+            <p><strong>Guilt-free motivation.</strong> Users should feel motivated by the ghost, not guilty.</p>
+          </div>
+        </div>
+        </div>
+    </section>
+
     <!-- PROCESS: FROM FEED TO INTERFACE -->
     <section class="section">
       <div class="container">
-        <span class="section-label">02 — Process</span>
+        <span class="section-label">03 — The process</span>
         <h2 class="section-title">From a contribution feed to <span class="accent">something worth opening</span></h2>
         <p class="section-text">
           The GitHub API hands you dates and counts. Everything below reshapes that same
@@ -198,6 +222,7 @@
     <!-- RESEARCH -->
     <section class="section">
       <div class="container">
+        <span class="section-label">04 — The psychological trigger</span>
         <h2 class="section-title">The "worried mascot" is a powerful psychological trigger.</h2>
         <p class="section-text">Inspiration came from evaluating adjacent markets. Duolingo proved that emotional mascots and streak mechanics drive retention. However, no competitor combined these elements specifically for software development integration.</p>
         <div class="note-lg" style="margin-top: var(--s-28)">
@@ -229,32 +254,10 @@
       </div>
     </section>
 
-    <!-- PERSONA / METRICS -->
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Defining Success for DuoGit</h2>
-        <p class="section-text">The goal is not just to build a widget, but to foster positive behavioral change among developers — moving from sporadic, high-stress commits to consistent, stress-free daily routines.</p>
-        
-        <div class="two-col" style="margin-top: var(--s-40);align-items:start">
-          <div class="note-lg">
-            <div class="note-lg-head"><h3>Behavioral metrics</h3></div>
-            <p><strong>Daily commit rate.</strong> Target: from ~1 commit/day to ≥3 commits/day.</p>
-            <p><strong>Weekly streak duration.</strong> Target: from 2–3 days to 5+ consecutive days.</p>
-            <p><strong>Post-streak recovery.</strong> Target: recovery within 3 days, from &lt;30% to &gt;60%.</p>
-          </div>
-          <div class="note-lg">
-            <div class="note-lg-head"><h3>Emotional satisfaction</h3></div>
-            <p><strong>Perceived progress clarity.</strong> Target a 50% increase in user-reported clarity (survey 1–10).</p>
-            <p><strong>Streak-related anxiety.</strong> Target a 40% reduction in reported stress.</p>
-            <p><strong>Guilt-free motivation.</strong> Users should feel motivated by the ghost, not guilty.</p>
-          </div>
-        </div>
-        </div>
-    </section>
-
     <!-- JOURNEY -->
     <section class="section">
       <div class="container">
+        <span class="section-label">05 — The streak journey</span>
         <h2 class="section-title">The Streak Journey Flow</h2>
         <p class="section-text">The widget introduces a simple but effective daily loop based on the GitHub commit status. It seamlessly maps the emotional state of the character to the user's progress.</p>
         <div class="journey">
@@ -297,6 +300,7 @@
     <!-- TRADEOFF/ZONING -->
     <section class="section">
       <div class="container">
+        <span class="section-label">06 — The widget family</span>
         <h2 class="section-title">Three widgets, one <span class="accent">behavioral loop</span></h2>
         <p class="section-text">Designed as the next phase, the widget layer surfaces the most critical state — streak health — directly on the home screen. Three sizes, each with a distinct role: reinforce progress, broadcast rank, or trigger recovery before the streak breaks.</p>
         <div class="screen-card" style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius: var(--r-xl);padding: var(--s-48) var(--s-32);display:flex;gap: var(--s-48);align-items:flex-start;justify-content:space-between;flex-wrap:wrap;max-width:1000px;">
@@ -332,7 +336,7 @@
     <!-- SOLUTION -->
     <section class="section">
       <div class="container">
-        <span class="section-label solution">06 — Solution</span>
+        <span class="section-label solution">07 — The solution</span>
         <h2 class="section-title">Visualizing GitHub Progress</h2>
         <p class="section-text" style="margin-bottom: var(--s-32)">DuoGit provides GitHub integration presented dynamically across the app's screens and widget states natively on iOS & Android, using emotional feedback to drive behavior.</p>
         <div class="features-list">
@@ -647,7 +651,7 @@
     <!-- RESULTS & RETRO -->
     <section class="section">
       <div class="container">
-        <span class="section-label">07 — Results</span>
+        <span class="section-label">08 — Results</span>
         <h2 class="section-title">Bringing it all together</h2>
         <p class="section-text" style="margin-bottom: var(--s-40)">DuoGit is not yet in production — these are design targets benchmarked against industry data, not live metrics. The interaction loop is built and testable; the numbers below reflect what success looks like once real users are in.</p>
         <div class="results-grid">
@@ -686,6 +690,7 @@
     <!-- DESIGN SYSTEM -->
     <section class="section">
       <div class="container">
+        <span class="section-label">09 — The UI kit</span>
         <h2 class="section-title">UI Kit built for behavioral clarity</h2>
         <p class="section-text">Every visual decision is codified — colors map directly to emotional states, not aesthetics. The system ships as <strong>NativeWind tokens</strong> inside the React Native codebase.</p>
 
