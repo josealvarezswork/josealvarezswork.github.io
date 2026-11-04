@@ -276,32 +276,12 @@ function initPaperStack() {
     }
   });
 
-  // Fanned out, as they sit in the studio reference. The offsets are what the
-  // drag version used as each sheet's resting place, so the mat looks the same
-  // as it did before the dragging came out.
-  const SHEET_LAYOUT = {
-    'sheet--pos-1': { x: -24,  y: -36, rot: -1.6, z: 12 },  // front: Fail State as Loop
-    'sheet--pos-2': { x: -176, y: 18,  rot: 2.2,  z: 8 },   // left:  State First, Data Second
-    'sheet--pos-0': { x: 146,  y: 42,  rot: 4.2,  z: 5 }    // right: Emotional State Architecture
-  };
-
-  sheets.forEach(sheet => {
-    const key = Object.keys(SHEET_LAYOUT).find(k => sheet.classList.contains(k)) || 'sheet--pos-0';
-    const { x, y, rot, z } = SHEET_LAYOUT[key];
-    sheet.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
-    sheet.style.zIndex = z;
-  });
-
-  // The hero cards are already placed by the stylesheet; they only need the
-  // slight rotation that keeps them from reading as a stack of rectangles.
-  deskCards.forEach(card => {
-    const isTag = card.classList.contains('desk-card--tag');
-    const isTitle = card.classList.contains('desk-card--title');
-
-    const rot = isTag ? -1.5 : isTitle ? 0.6 : -0.8;
-    const z = isTag ? 5 : isTitle ? 8 : 10;
-
-    card.style.transform = `rotate(${rot}deg)`;
-    card.style.zIndex = z;
-  });
+  // Positioning lives in home.css and nowhere else.
+  //
+  // This function used to set each sheet's transform and z-index inline,
+  // duplicating the .sheet--pos-* rules. Inline styles beat a stylesheet, so
+  // the CSS values were dead: editing them moved nothing and the sheets kept
+  // the offsets the drag version had left behind. Two sources of truth, and
+  // the stale one won. One source now — see .sheet--pos-0/1/2 and
+  // .desk-card--tag/title/memo in home.css.
 }

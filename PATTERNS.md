@@ -259,9 +259,26 @@ decides whether there is a second one.
 
 It could have been fixed with `touch-action: pan-y`, but the feature did not
 earn the complication: nobody arrives wanting to rearrange stationery, and the
-mat reads as a desk whether or not the paper moves. The resting positions the
-drag code used are now the only positions, so the composition is unchanged —
-225 lines of JavaScript came out and the page looks identical.
+mat reads as a desk whether or not the paper moves.
+
+**Removing the drag broke the composition, though, and not in an obvious way.**
+Three 352px sheets overlapping is fine when you can pull the one you want to
+the front. Static, the overlap is just hidden content: the left sheet ran 54px
+into the text column and the titles read *"State F… Data S…"* and
+*"…onal …cture"*. They are 195 × 276 now, spread 192px apart, and all three
+read in full with 11–13px of overlap left for the stacked-paper look.
+
+### One place writes a position
+
+`app.js` used to set each sheet's `transform` and `z-index` inline, duplicating
+the `.sheet--pos-*` rules in `home.css`. Inline styles beat a stylesheet, so
+the CSS values were dead: two rounds of editing them moved nothing, and the
+measurements came back identical to the pixel both times. The sheets were still
+wearing offsets the drag code had left behind.
+
+The JavaScript no longer touches position. `home.css` owns `.sheet--pos-0/1/2`
+and `.desk-card--tag/title/memo`, and `initPaperStack` only builds the
+`.sheet-face` wrapper that the fold is drawn against.
 
 ## The numbers
 

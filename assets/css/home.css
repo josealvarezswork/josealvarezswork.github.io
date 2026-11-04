@@ -270,6 +270,11 @@ body.page-home .desk-tape {
 
 /* Piece 1: Identity & Role Washi Tape Tag */
 body.page-home .desk-card--tag {
+  /* Angle and depth used to be written inline by app.js. They live here now,
+     as the single source — inline styles beat the stylesheet, so having both
+     meant edits to this file did nothing. */
+  transform: rotate(-1.5deg);
+  z-index: 5;
   background: #fbf8f0;
   padding: var(--s-8) 18px var(--s-8) 14px;
   border-left: 3px solid var(--accent-amber);
@@ -289,6 +294,8 @@ body.page-home .eyebrow-role { font-weight: 600; color: #8e5800; }
 
 /* Piece 2: Core Statement / Headline Sheet */
 body.page-home .desk-card--title {
+  transform: rotate(0.6deg);
+  z-index: 8;
   background: var(--paper);
   padding: 26px var(--s-32);
   max-width: 540px;
@@ -312,6 +319,8 @@ body.page-home .hl-state {
 
 /* Piece 3: Context Memo & Action Tools */
 body.page-home .desk-card--memo {
+  transform: rotate(-0.8deg);
+  z-index: 10;
   background: var(--paper-2);
   padding: 18px var(--s-24) var(--s-20);
   max-width: 500px;
@@ -852,10 +861,16 @@ body.page-home .footer-cta {
      .sheet-face  the printed side, clipped by the fold
      .sheet-shade soft shadow the lifted corner casts on the face
      .sheet-flap  the folded-over corner (reverse side)                      */
+/* 232 x 300, down from 352 x 404.
+   The sheets used to be draggable, so overlap cost nothing — you pulled the
+   one you wanted to the front. Static, overlap hides content: at the old size
+   three 352px sheets needed 696px of a 612px column, so the left one ran 54px
+   into the text column and the titles read "State F... Data S..." and
+   "...onal ...cture". Smaller sheets, spread wider, all three legible. */
 body.page-home .paper-stack {
   position: relative;
-  width: 352px;
-  height: 404px;
+  width: 195px;
+  height: 276px;
 }
 
 body.page-home .sheet {
@@ -892,7 +907,7 @@ body.page-home .sheet-body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 44px 34px var(--s-32);
+  padding: 21px 16px 15px;
   box-sizing: border-box;
   color: var(--paper-ink);
 }
@@ -909,7 +924,7 @@ body.page-home .sheet-shade {
 body.page-home .sheet--pos-1 {
   /* Center foreground card: Fail State as Loop */
   z-index: 12;
-  transform: translate(-24px, -36px) rotate(-1.6deg);
+  transform: translate(0, -20px) rotate(-1.4deg);
   pointer-events: auto;
 }
 body.page-home .sheet--pos-1 .sheet-face { background: var(--paper); }
@@ -917,7 +932,7 @@ body.page-home .sheet--pos-1 .sheet-face { background: var(--paper); }
 body.page-home .sheet--pos-2 {
   /* Left fan card: State First, Data Second */
   z-index: 8;
-  transform: translate(-176px, 18px) rotate(2.2deg);
+  transform: translate(-192px, 8px) rotate(1.9deg);
   pointer-events: auto;
 }
 body.page-home .sheet--pos-2 .sheet-face { background: var(--paper-2); }
@@ -925,7 +940,7 @@ body.page-home .sheet--pos-2 .sheet-face { background: var(--paper-2); }
 body.page-home .sheet--pos-0 {
   /* Right fan card: Emotional State Architecture */
   z-index: 5;
-  transform: translate(146px, 42px) rotate(4.2deg);
+  transform: translate(192px, 24px) rotate(2.8deg);
   pointer-events: auto;
 }
 body.page-home .sheet--pos-0 .sheet-face { background: var(--paper-3); }
@@ -944,9 +959,9 @@ body.page-home .sheet:hover {
 
 
 body.page-home .sheet-kicker {
-  margin: 0 0 14px;
+  margin: 0 0 9px;
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(34, 29, 51, 0.72);
@@ -954,11 +969,11 @@ body.page-home .sheet-kicker {
 
 /* The reference carries its weight on a display serif. */
 body.page-home .sheet-title {
-  margin: 0 0 22px;
+  margin: 0 0 13px;
   font-family: "Playfair Display", Georgia, serif;
   font-weight: 800;
-  font-size: 42px;
-  line-height: 0.98;
+  font-size: 23px;
+  line-height: 1.05;
   letter-spacing: -0.01em;
 }
 
@@ -989,12 +1004,12 @@ body.page-home .hl {
 
 body.page-home .sheet-list {
   margin: 0;
-  padding: var(--s-16) 0 0;
+  padding: 10px 0 0;
   border-top: 1px solid rgba(34, 29, 51, 0.18);
   list-style: none;
   font-family: var(--mono);
-  font-size: 11px;
-  line-height: 2.05;
+  font-size: 10px;
+  line-height: 1.78;
   color: rgba(34, 29, 51, 0.78);
 }
 
@@ -1002,9 +1017,9 @@ body.page-home .sheet-list {
 body.page-home .sheet-tape {
   align-self: flex-start;
   margin-top: auto;
-  padding: 7px 18px;
+  padding: 5px 12px;
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 8.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(34, 29, 51, 0.72);
