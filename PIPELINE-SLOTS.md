@@ -1,3 +1,37 @@
+# Slots
+
+> The mechanism started here and now runs on three pages. The CSS lives in
+> `assets/css/slots.css` and the draft toggle in `scripts/slots.js`, both
+> shared. Every page that loads them answers to `?draft=1`.
+
+## The case studies
+
+Two slots, one per case study, both in the **Situation** section, both naming
+the same missing thing: evidence.
+
+| Slot | Page | What it asks for |
+|---|---|---|
+| `problem-evidence` | `pages/cuak.html` | 5 × 20 min interviews, no prototype in the room |
+| `problem-evidence` | `pages/duogit.html` | a survey of 30+ developers, or a teardown of the workarounds that already exist |
+
+Both case studies state their problem well and support it with nothing. The
+vocabulary count across the two pages is **0 interviews, 0 usability sessions,
+0 hypotheses, 0 documented pain points**. Cuak's five-tester session is real,
+honestly labelled and genuinely good — and it is validation of a solution, run
+after the prototype existed. Nobody was ever asked what they do about the
+problem.
+
+Reordering both pages into S-T-A-R fixed the shape. It cannot fix this. A
+reviewer put it as *"si el único afectado eres tú, no hay mercado"*, and the
+answer to that is five conversations, not a layout.
+
+DuoGit's is the cheaper of the two: the streak bots, README badges and
+commit-a-day repos that developers already build are evidence sitting in
+public, and collecting them costs an afternoon. People building workarounds is
+a problem proving itself.
+
+---
+
 # Pipeline — slots
 
 The law this page follows — when a block is paper and when it is a dark card —

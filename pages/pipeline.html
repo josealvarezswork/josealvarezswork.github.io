@@ -23,25 +23,9 @@
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
   <link rel="stylesheet" href="../assets/css/slots.css?v=1">
   <link rel="stylesheet" href="../assets/css/pipeline.css?v=3">
-  <!-- Slot reveal. Visit ?draft=1 once and this machine remembers; ?draft=0
-       forgets. It runs in <head> so a draft session never flashes the live
-       page first, and every branch is wrapped: with storage blocked the page
-       is simply the live one. A visitor can never reach the draft view by
-       accident, and nothing in an empty slot is in the live DOM's way. -->
-  <script>
-    (function () {
-      try {
-        var q = new URLSearchParams(location.search);
-        if (q.has('draft')) {
-          if (q.get('draft') === '0') localStorage.removeItem('jaDraft');
-          else localStorage.setItem('jaDraft', '1');
-        }
-        if (localStorage.getItem('jaDraft')) {
-          document.documentElement.setAttribute('data-slots', 'draft');
-        }
-      } catch (e) { /* private window, blocked storage — stay live */ }
-    })();
-  </script>
+  <!-- Slots: see scripts/slots.js. Not deferred, so a draft session does not
+       paint the live page first. -->
+  <script src="../scripts/slots.js?v=1"></script>
 </head>
 
 <body>

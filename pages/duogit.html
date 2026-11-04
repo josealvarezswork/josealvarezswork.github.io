@@ -29,7 +29,11 @@
   <link rel="stylesheet" href="../assets/css/system.css?v=4">
   <link rel="stylesheet" href="../assets/css/pages.css?v=1">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
+  <link rel="stylesheet" href="../assets/css/slots.css?v=1">
   <link rel="stylesheet" href="../assets/css/duogit.css?v=5">
+  <!-- Slots: see scripts/slots.js. Not deferred, so a draft session does not
+       paint the live page first. -->
+  <script src="../scripts/slots.js?v=1"></script>
 </head>
 
 <body>
@@ -106,6 +110,20 @@
           <div class="note-lg">
             <div class="note-lg-head"><h3>The opportunity</h3></div>
             <p>Define a new product category that addresses both technical tracking and emotional engagement. An interactive widget combining a familiar psychological trigger (a mascot) with direct GitHub API integration.</p>
+          </div>
+        </div>
+        <!-- SLOT · the evidence this section does not have -->
+        <div class="slot" data-slot="problem-evidence">
+          <div class="slot-box">
+            <span class="slot-layer">Research · Situation</span>
+            <span class="slot-name">Evidence that developers care about streaks</span>
+            <p class="slot-why"><em>Users care deeply about their coding streaks</em> is the claim the whole project rests on, and nothing on this page supports it. If it is wrong, the mascot, the league and the XP economy are all solving something nobody feels — which is worth half a day to find out before building more of them.</p>
+            <ul class="slot-spec">
+              <li>A short survey in 2–3 developer communities, <strong>n ≥ 30</strong>: do you look at your contribution graph, how often, and what happens when it breaks</li>
+              <li>Cheaper alternative — a teardown of what developers already do about it: the streak bots, the README badges, the commit-a-day repos that exist today</li>
+              <li><code>assets/img/duogit/research-survey.webp</code> — 1600 × 900, responses as a chart</li>
+            </ul>
+            <p class="slot-note">Those existing workarounds are the strongest evidence available and cost nothing to collect. People building workarounds is a problem proving itself.</p>
           </div>
         </div>
       </div>
