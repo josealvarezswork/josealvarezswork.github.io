@@ -24,7 +24,14 @@ async function loadProjects() {
 }
 
 function renderProjects(projects, container) {
-  container.innerHTML = projects.map((project, i) => `
+  container.innerHTML = projects.map((project, i) => {
+    /* The icon sprite lives at the site root, but this template is rendered
+       from two depths: index.html and es/index.html. A hardcoded './assets/…'
+       resolved to /es/assets/icons.svg on the Spanish home and 404'd, so the
+       card links there drew no icon. Each project's own image path already
+       carries the right depth, so the sprite follows it. */
+    const base = (project.image || '').startsWith('../') ? '../' : './';
+    return `
     <div class="case-wrap taped">
       <article class="case">
         <div class="case-body">
@@ -37,8 +44,8 @@ function renderProjects(projects, container) {
           </ul>
 
           <div class="case-links">
-            <a class="case-link primary" href="${project.link}" ${project.target ? `target="${project.target}" rel="noreferrer"` : ''}><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-view"/></svg>${project.linkText || 'View case study'}</a>
-            ${project.systemLink ? `<a class="case-link" href="${project.systemLink}" ${project.target ? `target="${project.target}" rel="noreferrer"` : ''}><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-system"/></svg>${project.systemLinkText || 'Design system'}</a>` : ''}
+            <a class="case-link primary" href="${project.link}" ${project.target ? `target="${project.target}" rel="noreferrer"` : ''}><svg class="ico" aria-hidden="true"><use href="${base}assets/img/icons.svg#i-view"/></svg>${project.linkText || 'View case study'}</a>
+            ${project.systemLink ? `<a class="case-link" href="${project.systemLink}" ${project.target ? `target="${project.target}" rel="noreferrer"` : ''}><svg class="ico" aria-hidden="true"><use href="${base}assets/img/icons.svg#i-system"/></svg>${project.systemLinkText || 'Design system'}</a>` : ''}
           </div>
         </div>
 
@@ -48,7 +55,8 @@ function renderProjects(projects, container) {
       </article>
 
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 // Init
@@ -220,16 +228,28 @@ function initHeroMatSpotlight() {
 }
 
 /**
- * The Paper Stack & Workbench Stationery — Drag & Drop
- * Permite arrastrar libremente las hojas de proyectos y las tarjetas de presentación
- * por todo el tapete de corte verde (#hero-mat).
- * - Cada tarjeta se eleva con sombra de profundidad física al ser tomada.
- * - Al soltarla, se posa suavemente sobre el tapete y se queda en su sitio.
- * - Al hacer clic/tocar cualquier tarjeta, pasa al frente del tapete.
- * - Auto-reordenado: después de 4.5s con el cursor fuera del tapete, se reorganizan solas.
+ * The Paper Stack & Workbench Stationery — static layout
+ *
+ * Lays the project sheets and the hero cards out on the green cutting mat at
+ * fixed angles and depths. Nothing here moves.
+ *
+ * It used to be drag and drop: every sheet and card could be dragged anywhere
+ * on the mat, lifted on pointerdown, settled on release, and auto-tidied 4.5s
+ * after the cursor left. It was removed because it cost more than it gave.
+ *
+ * The cards carried `touch-action: none`, which tells the browser to handle no
+ * touch gesture on that element at all — scrolling and pinch-zoom included. On
+ * a 375px screen the three hero cards covered 40% of the first viewport, from
+ * y=157 to y=601: the middle band, exactly where a thumb lands. A visitor
+ * opening the site on a phone and swiping where it is natural to swipe got a
+ * page that did not move. The first interaction with the portfolio was a dead
+ * gesture, on the screen that decides whether there is a second one.
+ *
+ * Fixing it by allowing vertical panning was possible, but the feature did not
+ * earn the complication: rearranging stationery is not something anyone came
+ * here to do, and the desk reads as a desk whether or not the paper moves.
  */
 function initPaperStack() {
-  const mat = document.getElementById('hero-mat');
   const stack = document.querySelector('.paper-stack');
 
   const sheets = stack ? [
@@ -239,11 +259,10 @@ function initPaperStack() {
   ].filter(Boolean) : [];
 
   const deskCards = [...document.querySelectorAll('.hero-desk-notes .desk-card')];
-  const allCards = [...sheets, ...deskCards];
+  if (!sheets.length && !deskCards.length) return;
 
-  if (!allCards.length) return;
-
-  // Asegurar estructura con .sheet-face en las hojas de proyectos
+  // Project sheets print onto a .sheet-face, so the fold and its shadow can be
+  // drawn over the printed side rather than under it.
   sheets.forEach(sheet => {
     sheet.classList.remove('paper-surface');
     sheet.querySelectorAll('.sheet-curl-flap, .sheet-fold-shine, .sheet-flap, .sheet-shade').forEach(el => el.remove());
@@ -257,297 +276,32 @@ function initPaperStack() {
     }
   });
 
-  // Estados iniciales de cada tarjeta en el tapete
-  const cardStates = new Map();
-  let topZIndex = 14;
+  // Fanned out, as they sit in the studio reference. The offsets are what the
+  // drag version used as each sheet's resting place, so the mat looks the same
+  // as it did before the dragging came out.
+  const SHEET_LAYOUT = {
+    'sheet--pos-1': { x: -24,  y: -36, rot: -1.6, z: 12 },  // front: Fail State as Loop
+    'sheet--pos-2': { x: -176, y: 18,  rot: 2.2,  z: 8 },   // left:  State First, Data Second
+    'sheet--pos-0': { x: 146,  y: 42,  rot: 4.2,  z: 5 }    // right: Emotional State Architecture
+  };
 
-  // 1. Inicializar hojas de proyectos en disposición fanned-out (según la vista de estudio)
-  sheets.forEach((sheet) => {
-    let baseX, baseY, baseRot, baseZ;
-
-    if (sheet.classList.contains('sheet--pos-1')) {
-      // Centro al frente: Fail State as Loop
-      baseX = -24;
-      baseY = -36;
-      baseRot = -1.6;
-      baseZ = 12;
-    } else if (sheet.classList.contains('sheet--pos-2')) {
-      // Izquierda: State First, Data Second
-      baseX = -176;
-      baseY = 18;
-      baseRot = 2.2;
-      baseZ = 8;
-    } else {
-      // Derecha: Emotional State Architecture (sheet--pos-0)
-      baseX = 146;
-      baseY = 42;
-      baseRot = 4.2;
-      baseZ = 5;
-    }
-
-    cardStates.set(sheet, {
-      x: baseX,
-      y: baseY,
-      rot: baseRot,
-      baseX,
-      baseY,
-      baseRot,
-      baseZ,
-      z: baseZ,
-      hasMoved: false
-    });
-
-    sheet.style.transform = `translate(${baseX}px, ${baseY}px) rotate(${baseRot}deg)`;
-    sheet.style.zIndex = baseZ;
+  sheets.forEach(sheet => {
+    const key = Object.keys(SHEET_LAYOUT).find(k => sheet.classList.contains(k)) || 'sheet--pos-0';
+    const { x, y, rot, z } = SHEET_LAYOUT[key];
+    sheet.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+    sheet.style.zIndex = z;
   });
 
-  // 2. Inicializar tarjetas de presentación (hero desk notes)
-  deskCards.forEach((card) => {
+  // The hero cards are already placed by the stylesheet; they only need the
+  // slight rotation that keeps them from reading as a stack of rectangles.
+  deskCards.forEach(card => {
     const isTag = card.classList.contains('desk-card--tag');
     const isTitle = card.classList.contains('desk-card--title');
 
-    const baseRot = isTag ? -1.5 : isTitle ? 0.6 : -0.8;
-    const baseZ = isTag ? 5 : isTitle ? 8 : 10;
+    const rot = isTag ? -1.5 : isTitle ? 0.6 : -0.8;
+    const z = isTag ? 5 : isTitle ? 8 : 10;
 
-    cardStates.set(card, {
-      x: 0,
-      y: 0,
-      rot: baseRot,
-      baseX: 0,
-      baseY: 0,
-      baseRot,
-      baseZ,
-      z: baseZ,
-      hasMoved: false
-    });
-
-    card.style.transform = `translate(0px, 0px) rotate(${baseRot}deg)`;
-    card.style.zIndex = baseZ;
-  });
-
-  let activeCard = null;
-  let activePointerId = null;
-  let isDragging = false;
-  let startPointerX = 0;
-  let startPointerY = 0;
-  let initialCardX = 0;
-  let initialCardY = 0;
-  let hasMovedFar = false;
-  let lastDx = 0;
-
-  function onPointerDown(e) {
-    if (e.button !== 0) return; // Solo clic primario
-    if (e.target.closest('a, button')) return; // Clics directos en enlaces/botones navegan sin interferencia
-
-    const card = e.target.closest('.sheet, .desk-card');
-    if (!card || !cardStates.has(card)) return;
-
-    activeCard = card;
-    activePointerId = e.pointerId;
-    isDragging = true;
-    hasMovedFar = false;
-    lastDx = 0;
-
-    startPointerX = e.clientX;
-    startPointerY = e.clientY;
-
-    const state = cardStates.get(card);
-    initialCardX = state.x;
-    initialCardY = state.y;
-
-    // Elevar la tarjeta seleccionada al frente
-    topZIndex += 2;
-    state.z = topZIndex;
-    card.style.zIndex = topZIndex;
-
-    card.classList.add('is-dragging');
-    if (stack) stack.classList.add('is-dragging');
-
-    try {
-      card.setPointerCapture(activePointerId);
-    } catch (_) {}
-
-    window.addEventListener('pointermove', onPointerMove, { passive: false });
-    window.addEventListener('pointerup', onPointerUp);
-    window.addEventListener('pointercancel', onPointerUp);
-  }
-
-  function onPointerMove(e) {
-    if (!isDragging || e.pointerId !== activePointerId || !activeCard) return;
-
-    const dx = e.clientX - startPointerX;
-    const dy = e.clientY - startPointerY;
-
-    if (!hasMovedFar && Math.hypot(dx, dy) > 4) {
-      hasMovedFar = true;
-    }
-
-    const state = cardStates.get(activeCard);
-    let proposedX = initialCardX + dx;
-    let proposedY = initialCardY + dy;
-
-    // Delimitar permitiendo que las tarjetas puedan salirse holgadamente del tapete
-    // y suavizando el impacto en los bordes con resistencia elástica (rubber-banding)
-    if (mat) {
-      const matRect = mat.getBoundingClientRect();
-      const cardRect = activeCard.getBoundingClientRect();
-      const parentRect = activeCard.parentElement.getBoundingClientRect();
-
-      // Permitir que las tarjetas se asomen solo un poco fuera del tapete (un borde sutil):
-      // ~24px en horizontal y ~16px en vertical
-      const overhangX = 24;
-      const overhangY = 16;
-
-      const minX = -overhangX - (parentRect.left - matRect.left);
-      const maxX = (matRect.width - cardRect.width + overhangX) - (parentRect.left - matRect.left);
-      const minY = -overhangY - (parentRect.top - matRect.top);
-      const maxY = (matRect.height - cardRect.height + overhangY) - (parentRect.top - matRect.top);
-
-      // Suavizado elástico progresivo (amortigua el golpe al llegar al límite):
-      // En vez de frenar en seco, cede suavemente con una amortiguación elástica sutil (~16px)
-      function softClamp(val, min, max, elasticRange) {
-        if (val < min) {
-          const diff = min - val;
-          return min - elasticRange * Math.tanh(diff / elasticRange);
-        }
-        if (val > max) {
-          const diff = val - max;
-          return max + elasticRange * Math.tanh(diff / elasticRange);
-        }
-        return val;
-      }
-
-      proposedX = softClamp(proposedX, minX, maxX, 16);
-      proposedY = softClamp(proposedY, minY, maxY, 12);
-
-      state._limitBounds = { minX, maxX, minY, maxY };
-    }
-
-    // Leve rotación física según movimiento horizontal
-    const deltaMove = dx - lastDx;
-    lastDx = dx;
-    const tilt = Math.max(-14, Math.min(14, deltaMove * 0.3));
-    const dynamicRot = Math.max(-18, Math.min(18, state.rot + tilt));
-
-    activeCard.style.transform = `translate(${proposedX.toFixed(1)}px, ${proposedY.toFixed(1)}px) rotate(${dynamicRot.toFixed(2)}deg)`;
-
-    state.currentDragX = proposedX;
-    state.currentDragY = proposedY;
-    state.currentDragRot = dynamicRot;
-
-    if (hasMovedFar && e.cancelable) {
-      e.preventDefault();
-    }
-  }
-
-  function onPointerUp(e) {
-    if (!isDragging || e.pointerId !== activePointerId || !activeCard) return;
-
-    window.removeEventListener('pointermove', onPointerMove);
-    window.removeEventListener('pointerup', onPointerUp);
-    window.removeEventListener('pointercancel', onPointerUp);
-
-    const card = activeCard;
-    const state = cardStates.get(card);
-
-    isDragging = false;
-    card.classList.remove('is-dragging');
-    if (stack) stack.classList.remove('is-dragging');
-
-    try {
-      card.releasePointerCapture(activePointerId);
-    } catch (_) {}
-
-    if (hasMovedFar && state.currentDragX !== undefined) {
-      // Guardar posición permanente en el tapete
-      // Si la tarjeta quedó dentro de la zona elástica extendida,
-      // se asienta suavemente ("snap-settle") en el límite permitido de reposo
-      let finalX = state.currentDragX;
-      let finalY = state.currentDragY;
-
-      if (state._limitBounds) {
-        finalX = Math.max(state._limitBounds.minX, Math.min(state._limitBounds.maxX, finalX));
-        finalY = Math.max(state._limitBounds.minY, Math.min(state._limitBounds.maxY, finalY));
-      }
-
-      state.x = finalX;
-      state.y = finalY;
-      state.rot = Math.max(-8, Math.min(8, state.currentDragRot || state.rot));
-      state.hasMoved = true;
-      card.classList.add('has-moved');
-
-      card.classList.add('is-settling');
-      card.style.transform = `translate(${state.x.toFixed(1)}px, ${state.y.toFixed(1)}px) rotate(${state.rot.toFixed(2)}deg)`;
-      setTimeout(() => {
-        card.classList.remove('is-settling');
-      }, 300);
-    }
-
-    activeCard = null;
-    activePointerId = null;
-  }
-
-  // Función para reordenar la mesa y juntar todas las tarjetas en sus lugares
-  function tidyDesk() {
-    allCards.forEach((card, i) => {
-      const state = cardStates.get(card);
-      if (!state) return;
-      state.x = state.baseX;
-      state.y = state.baseY;
-      state.rot = state.baseRot;
-      state.hasMoved = false;
-      card.classList.remove('has-moved');
-
-      const delay = (i % 3) * 60; // Stagger suave
-      setTimeout(() => {
-        card.classList.add('is-tidying');
-        card.style.zIndex = state.baseZ;
-        card.style.transform = `translate(${state.baseX}px, ${state.baseY}px) rotate(${state.baseRot}deg)`;
-
-        setTimeout(() => {
-          card.classList.remove('is-tidying');
-        }, 620);
-      }, delay);
-    });
-    topZIndex = 14;
-  }
-
-  let autoTidyTimer = null;
-  const AUTO_TIDY_DELAY = 4500; // 4.5 segundos con el mouse fuera del tapete para reordenar
-
-  function scheduleAutoTidy() {
-    cancelAutoTidy();
-    const anyMoved = allCards.some(c => cardStates.get(c)?.hasMoved);
-    if (!anyMoved || isDragging) return;
-
-    autoTidyTimer = setTimeout(() => {
-      tidyDesk();
-    }, AUTO_TIDY_DELAY);
-  }
-
-  function cancelAutoTidy() {
-    if (autoTidyTimer) {
-      clearTimeout(autoTidyTimer);
-      autoTidyTimer = null;
-    }
-  }
-
-  // Delegación de eventos en el tapete
-  if (mat) {
-    mat.addEventListener('pointerdown', (e) => {
-      cancelAutoTidy();
-      onPointerDown(e);
-    });
-
-    mat.addEventListener('pointerleave', scheduleAutoTidy);
-    mat.addEventListener('pointerenter', cancelAutoTidy);
-    mat.addEventListener('dblclick', tidyDesk);
-  }
-
-  // Atajo de teclado: presionar 'R' reordena las hojas
-  window.addEventListener('keydown', (e) => {
-    if ((e.key === 'r' || e.key === 'R') && !e.target.matches('input, textarea')) {
-      tidyDesk();
-    }
+    card.style.transform = `rotate(${rot}deg)`;
+    card.style.zIndex = z;
   });
 }

@@ -202,6 +202,28 @@ A caption keeps its strip for two reasons. It is small enough that the strip
 is most of what you see, and it really is stuck to something — the artwork
 directly above it. Cuak went from twenty strips to eight, one per screen.
 
+## The desk does not move
+
+The home page's paper used to be draggable: every sheet and hero card could be
+dragged anywhere on the green mat, lifted on pointerdown, settled on release,
+and auto-tidied 4.5 seconds after the cursor left.
+
+It is gone, and the reason is worth keeping. Those cards carried
+`touch-action: none`, which tells the browser to handle **no** touch gesture on
+that element — scrolling and pinch-zoom included. At 375px the three hero cards
+covered **40% of the first viewport**, y=157 to y=601: the middle band, exactly
+where a thumb lands. A visitor opening the site on a phone and swiping where it
+is natural to swipe got a page that did not move.
+
+The first interaction with the portfolio was a dead gesture, on the screen that
+decides whether there is a second one.
+
+It could have been fixed with `touch-action: pan-y`, but the feature did not
+earn the complication: nobody arrives wanting to rearrange stationery, and the
+mat reads as a desk whether or not the paper moves. The resting positions the
+drag code used are now the only positions, so the composition is unchanged —
+225 lines of JavaScript came out and the page looks identical.
+
 ## The numbers
 
 - **Radius.** Paper is `--r-md`, the product's own cards are `--r-lg`. A sheet's
