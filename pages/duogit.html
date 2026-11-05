@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="../assets/css/pages.css?v=3">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
   <link rel="stylesheet" href="../assets/css/slots.css?v=1">
-  <link rel="stylesheet" href="../assets/css/duogit.css?v=9">
+  <link rel="stylesheet" href="../assets/css/duogit.css?v=10">
   <!-- Slots: see scripts/slots.js. Not deferred, so a draft session does not
        paint the live page first. -->
   <script src="../scripts/slots.js?v=1"></script>
@@ -343,6 +343,53 @@
               <div class="note-lg-head"><h3>Design Principle</h3></div>
               <p>A unified 60/40 zoning model across all sizes — data left, emotional state right — ensures instant scanning with zero cognitive load.</p>
             </div>
+          </div>
+        </div>
+
+        <!-- The motion figure. Uncomment when the two video files and the
+             poster exist, then delete the .slot block below it.
+
+             The poster is the END frame, not the first. A visitor who arrives
+             with the clip already past, or who has reduced motion on, should
+             land on the at-risk state - that is the frame the section is
+             about. A poster of the intact state would show the widget before
+             anything happened.
+
+        <div class="motion-fig">
+          <figure>
+            <div class="motion-frame">
+              <video id="widget-motion" autoplay loop muted playsinline
+                     poster="../assets/img/duogit/widget-state-poster.webp"
+                     aria-label="The wide widget moving from streak intact to streak at risk">
+                <source src="../assets/video/duogit-widget-state.webm" type="video/webm">
+                <source src="../assets/video/duogit-widget-state.mp4" type="video/mp4">
+              </video>
+              <img class="motion-poster" src="../assets/img/duogit/widget-state-poster.webp"
+                   alt="The wide widget in its at-risk state, five hours left on the streak" />
+              <button class="motion-pause" type="button" data-target="widget-motion">Pause</button>
+            </div>
+            <figcaption>
+              Streak intact to streak at risk, 1.5s. A widget is glanced at, not
+              watched, so the motion has to survive being missed: it ends on a
+              frame that reads correctly to someone who looked away while it
+              played.
+            </figcaption>
+          </figure>
+        </div>
+        -->
+
+        <!-- SLOT · the widget changing state -->
+        <div class="slot" data-slot="widget-motion">
+          <div class="slot-box">
+            <span class="slot-layer">Interaction</span>
+            <span class="slot-name">The widget changing state — streak intact to streak at risk</span>
+            <p class="slot-why">The widget’s whole job is to make a state change visible without the app being opened. The stills above show the two states but not the moment between them, and that moment is where the design decision actually sits: how long the change takes, and what the screen is left showing for someone who was not watching when it happened.</p>
+            <ul class="slot-spec">
+              <li><code>assets/video/duogit-widget-state.webm</code> — 1080 × 624, ~1.5 s seamless, VP9, <strong>muted, under 800 KB</strong></li>
+              <li><code>assets/video/duogit-widget-state.mp4</code> — same, H.264, for Safari</li>
+              <li><code>assets/img/duogit/widget-state-poster.webp</code> — 1080 × 624, the <strong>at-risk end frame</strong></li>
+            </ul>
+            <p class="slot-note">No dependency on anything unbuilt. The source frames exist: <code>widget-critico.webp</code> is already 852 × 492, and 1080 × 624 is that ratio scaled up. The markup, the CSS and the reduced-motion fallback are written already — see the comment above this block.</p>
           </div>
         </div>
       </div>
@@ -836,6 +883,18 @@
     </div>
   </footer>
 
+    <!-- Pause control for the motion figure. Delegated and guarded, so it is
+         a no-op until the figure above is uncommented and the clip exists. -->
+    <script>
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.motion-pause');
+        if (!btn) return;
+        var vid = document.getElementById(btn.dataset.target);
+        if (!vid) return;
+        if (vid.paused) { vid.play(); btn.textContent = 'Pause'; }
+        else { vid.pause(); btn.textContent = 'Play'; }
+      });
+    </script>
     <script src="../scripts/brand.js?v=1" defer></script>
   </body>
 </html>

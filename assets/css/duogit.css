@@ -742,3 +742,68 @@
 }
   .quote::before { color: rgba(34, 29, 51, 0.18); }
   
+
+/* ---- Motion figure ------------------------------------------------------
+   One motion piece lives in this case study: the widget changing state.
+
+   A widget is glanced at, not watched, so the clip has to end on a frame
+   that still reads correctly to someone who looked away mid-transition.
+   That is the design point the figure exists to make, and the caption
+   states it rather than leaving it to be inferred.
+
+   autoplay + loop + muted + playsinline is the only combination a browser
+   will start without a gesture. The pause control is still required: a
+   clip that loops forever with no way to stop it is a trap for anyone who
+   needs the page still. Under prefers-reduced-motion the video is removed
+   and the poster takes its place, so the frame survives and nothing moves. */
+.motion-fig {
+  margin-top: var(--s-32);
+  max-width: 1000px;
+}
+.motion-fig figure { margin: 0; }
+.motion-frame {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--stroke-light);
+  background: var(--bg-elevated);
+}
+.motion-frame video,
+.motion-frame .motion-poster {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.motion-frame .motion-poster { display: none; }
+.motion-fig figcaption {
+  margin-top: var(--s-12);
+  font-size: 13px;
+  line-height: 1.62;
+  color: var(--text-muted);
+}
+.motion-pause {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  min-width: 70px;
+  padding: 6px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.motion-pause:hover { background: rgba(0, 0, 0, 0.74); }
+.motion-pause:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-frame video { display: none; }
+  .motion-frame .motion-poster { display: block; }
+  .motion-pause { display: none; }
+}
