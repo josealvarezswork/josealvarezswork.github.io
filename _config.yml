@@ -1,0 +1,15 @@
+# GitHub Pages builds this repo with Jekyll. A file with no YAML front matter
+# is copied to the site verbatim, which is why BIO.md, WEEK-ASSETS.md and the
+# rest were readable at odejbyjose.com/<name>.md for as long as they sat here.
+#
+# Those files have been moved out of the repo entirely. The three that remain
+# describe the code rather than being part of the site, so they stay versioned
+# alongside what they document and are excluded from the build instead.
+#
+# Note: setting `exclude` replaces Jekyll's default list. Nothing on that list
+# (Gemfile, node_modules/, vendor/) exists here.
+exclude:
+  - README.md
+  - PATTERNS.md
+  - DESIGN-DIRECTION.md
+  - tools/

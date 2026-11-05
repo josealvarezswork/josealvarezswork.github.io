@@ -1,9 +1,20 @@
 img/duogit_backup/
 
-# Local-only: Fiverr exports and job-search strategy notes.
-# The repo is served by GitHub Pages, so anything tracked here becomes public.
+# Anything tracked here is served by GitHub Pages, so it is public the moment
+# it is pushed. Working notes, job-search material and exports are therefore
+# kept outside the repo entirely, not ignored inside it:
+#
+#   ../portfolio-workspace/   notes, drafts, slides, snapshots, exports
+#   D:\Desktop\cv\            CVs, cover letters, job-search strategy
+#
+# The patterns below are a safety net in case any of it is ever copied back.
 exports/
+linkedin-posts/
 job-search-kit.md
 job-search-empleo.md
-linkedin-posts/
 case-study-template.md
+BIO.md
+WEEK-ASSETS.md
+PIPELINE-SLOTS.md
+SCREENS-SLOTS.md
+cv/
