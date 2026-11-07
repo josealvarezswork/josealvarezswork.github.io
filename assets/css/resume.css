@@ -312,22 +312,6 @@ a.link:hover {
   margin: 0;
 }
 
-.cv-download {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-8);
-  margin-top: 22px;
-  padding: var(--s-12) 22px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: #1E1A2E;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  transition: transform 160ms ease;
-}
-.cv-download:hover { transform: translateY(-2px); }
-
 /* Responsive */
 @media (max-width: 900px) {
   .skills-grid {
