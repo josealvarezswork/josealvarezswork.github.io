@@ -36,7 +36,7 @@
       "id": "cuak",
       "title": "Cuak",
       "meta": "2026 · Interfaz guiada por personaje",
-      "description": "Las apps de banco muestran saldo, cupo y fecha de corte, pero nunca responden la pregunta que la gente sí tiene: ¿estoy bien? Cuak asciende el estado a interfaz principal — un layout 60/40 le da el lado izquierdo a los datos objetivos y el derecho al personaje, seis niveles de progresión convierten el comportamiento en rango visible, y un simulador avisa antes de la acción en lugar de reportar después. Probado con cinco personas: las cinco leyeron su situación más rápido en el estado del personaje que en el mismo número mostrado solo.",
+      "description": "Las apps de banco muestran saldo, cupo y fecha de corte, pero nunca responden la pregunta que la gente sí tiene: ¿estoy bien? Cuak asciende el estado a interfaz principal — un layout 60/40 le da el lado izquierdo a los datos objetivos y el derecho al personaje, seis niveles de progresión convierten el comportamiento en rango visible, y un simulador avisa antes de la acción en lugar de reportar después. Probado con cinco personas: las cinco dijeron sentirse con más control con el feedback del personaje que con el mismo número mostrado solo.",
       "tags": [
         "Interfaz con personaje",
         "Estados de feedback",

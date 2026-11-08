@@ -34,7 +34,7 @@
       "id": "cuak",
       "title": "Cuak",
       "meta": "2026 · Character-driven interface",
-      "description": "Banking apps show balance, limit and due date but never answer the question users actually have: am I okay? Cuak promotes state to primary interface — a 60/40 layout gives objective data the left side and the character the right, six progression tiers turn behaviour into visible rank, and a simulator warns before the action instead of reporting after it. Playtested with five users: five of five read their situation faster from the character's state than from the same number shown alone.",
+      "description": "Banking apps show balance, limit and due date but never answer the question users actually have: am I okay? Cuak promotes state to primary interface — a 60/40 layout gives objective data the left side and the character the right, six progression tiers turn behaviour into visible rank, and a simulator warns before the action instead of reporting after it. Playtested with five users: all five reported feeling more in control with the character's feedback than with the same number shown alone.",
       "tags": [
         "Character-Driven UI",
         "Feedback States",
