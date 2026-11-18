@@ -758,6 +758,10 @@ a { color: inherit; text-decoration: none; }
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: lowercase;
+  /* ~220x18 measured on the email/LinkedIn/GitHub links — padding (not a
+     font-size change) brings the tap target past 44px tall. Vertical
+     only: the text itself is already wide enough. */
+  padding: 16px 0;
 }
 .muted { color: rgba(255,255,255,0.55); }
 
@@ -831,7 +835,10 @@ a { color: inherit; text-decoration: none; }
   display: none;
   flex-direction: column;
   gap: 5px;
-  padding: var(--s-8);
+  /* Was var(--s-8) all around (38x32 — under the 44px tap target on both
+     axes). Asymmetric padding brings the box past 44x44 around the same
+     22px-wide, 16px-tall icon glyph. */
+  padding: 15px 12px;
   background: none;
   border: none;
   cursor: pointer;
@@ -869,7 +876,11 @@ a { color: inherit; text-decoration: none; }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--s-32);
+    /* Reduced from --s-32: the links below now carry their own vertical
+       padding for a 44px tap target, so the gap between link boxes (not
+       link text) is trimmed to keep the overall rhythm close to the
+       original 32px between lines of text. */
+    gap: var(--s-8);
     font-size: 18px;
     transform: translateX(100%);
     transition: transform 300ms ease;
@@ -891,5 +902,8 @@ a { color: inherit; text-decoration: none; }
   .nav-links a {
     text-align: center;
     width: 100%;
+    /* Mobile menu links measured 375x21 — well under the 44px tap target.
+       Padding grows the clickable box without touching font-size. */
+    padding: 12px 0;
   }
 }

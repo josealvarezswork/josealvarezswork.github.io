@@ -96,6 +96,18 @@
   max-width: 52ch;
 }
 
+/* The "UX Lab OS" link measured 68x17 — a link inline inside running
+   prose, where WCAG's target-size rule itself makes an exception (its
+   size can't change without disturbing the sentence around it). Padding
+   with an equal negative margin grows the actual hit area without
+   shifting any surrounding text — the line's own leading has room for it
+   at this line-height, so neighbouring lines aren't visually affected. */
+.intro-text p a {
+  display: inline-block;
+  padding: 14px 4px;
+  margin: -14px -4px;
+}
+
 /* Polaroid-style frame instead of a plain rectangle — cream card,
    slight tilt, a "pin" tab, straightens a bit on hover. */
 .intro-photo {

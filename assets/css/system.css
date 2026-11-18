@@ -116,7 +116,10 @@ a {
   gap: 5px;
   background: none;
   border: none;
-  padding: var(--s-4);
+  /* Was var(--s-4) all around (30x24 — under the 44px tap target on both
+     axes). Asymmetric padding brings the box past 44x44 around the same
+     22px-wide, 16px-tall icon glyph. */
+  padding: 15px 12px;
   cursor: pointer;
   z-index: 1001;
 }
@@ -151,7 +154,11 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--s-32);
+    /* Reduced from --s-32: the links below now carry their own padding
+       for a 44px tap target, so the gap between link boxes (not link
+       text) is trimmed to keep the overall rhythm close to the original
+       32px between lines of text. */
+    gap: var(--s-8);
     font-size: 18px;
     transform: translateX(100%);
     transition: transform 300ms ease;
@@ -159,6 +166,14 @@ a {
   }
   .nav-links.active {
     transform: translateX(0);
+  }
+  .nav-links a {
+    /* "Work" measured 32x19 here (no width:100% override on this
+       implementation, unlike styles.css's — the link hugs its content).
+       Padding brings both axes past the 44px tap target without touching
+       the icon/text size. The shortest label ("CV"/"Resume") needs the
+       most horizontal help, so this is sized for that, not for "Work". */
+    padding: 13px 14px;
   }
 }
 

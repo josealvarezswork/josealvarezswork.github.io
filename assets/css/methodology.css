@@ -5,9 +5,15 @@
    =========================================================================== */
 
 .hero-label span { opacity: 0.5; }
+/* `color` here is cosmetic on this page: inside .mat, paper.css's
+   `.mat .hero-acronym` rule (equal specificity, this file loads after)
+   wins and resolves to --accent-amber. That token at this opacity
+   measured 3.52:1 against the mat's dark green surface — under the
+   4.5:1 AA floor for 13px text. Dropping the opacity reduction (same
+   token, no new color) clears it at ~4.64:1. */
 .hero-acronym {
   font-size: 13px; font-weight: 600; letter-spacing: 0.12em;
-  color: var(--accent); opacity: 0.8; margin-bottom: var(--s-24);
+  color: var(--accent); opacity: 1; margin-bottom: var(--s-24);
 }
 .pill-tag {
   font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;

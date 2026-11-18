@@ -225,6 +225,9 @@ body {
   letter-spacing: 0.14em;
   text-transform: lowercase;
   color: rgba(255, 255, 255, 0.55);
+  /* ~220x18 measured — padding (not a font-size change) brings the tap
+     target past 44px tall on mobile. */
+  padding: 16px 0;
 }
 
 .footer-cta {
