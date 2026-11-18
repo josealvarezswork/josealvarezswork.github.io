@@ -208,6 +208,15 @@ body.page-home .hero-grid {
   body.page-home .desk-card--title { padding: 22px var(--s-20); }
   body.page-home .desk-card--memo { padding: var(--s-16) 18px 18px; }
   body.page-home .desk-card--memo .hero-actions .btn { flex: 1 1 auto; justify-content: center; }
+
+  /* The .lang-switch pill (paper.css) is fixed to the viewport's bottom-right
+     corner on every page. On a short-enough hero and a tall-enough phone
+     viewport, the "Case Studies" intro that follows the hero is already on
+     screen on first paint with no scrolling, and its first line lands right
+     under the pill, hiding the start of the sentence. Pushing this section
+     down clears the pill's ~14px inset + ~36px height on common phone
+     viewports without touching tablet/desktop, where the two never meet. */
+  body.page-home #work { margin-top: var(--s-64); }
 }
 
 /* The board is absolutely positioned art: between 900 and 1100px its notes
@@ -453,7 +462,11 @@ body.page-home .case-meta {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: var(--accent);
+  /* --accent at 0.75 opacity measured 4.33:1 here — under the 4.5:1 AA
+     floor for text this size. --accent-text is the token the system
+     already carries for exactly this (tokens.css: "at 11px on a raised
+     card [--accent] reads 2.8:1, so small text uses this one"). */
+  color: var(--accent-text);
   opacity: 0.75;
 }
 
@@ -819,6 +832,9 @@ body.page-home .footer-item {
   font-size: 11.5px;
   letter-spacing: 0.06em;
   text-transform: none;
+  /* ~220x18 measured — padding (not a font-size change) brings the tap
+     target past 44px tall on mobile. */
+  padding: 16px 0;
 }
 
 @media (max-width: 900px) {
@@ -897,6 +913,14 @@ body.page-home .paper-stack {
   body.page-home .sheet-body { padding: 21px 16px 15px; }
   body.page-home .sheet-title { font-size: 23px; margin-bottom: 13px; }
   body.page-home .sheet-list { font-size: 10px; line-height: 1.78; }
+  /* The Spanish kicker/list copy on the "interfaz guiada por personaje" sheet
+     runs ~14px taller than the English original at this width (measured
+     scrollHeight 306 vs the 292 box), clipping the last list item. Give the
+     Spanish page only the extra height it needs; English already fits the
+     292 box exactly, so it is left untouched. */
+  html[lang="es"] body.page-home .paper-stack {
+    --sheet-h: 308px;
+  }
 }
 
 body.page-home .sheet {
@@ -1169,4 +1193,85 @@ body.page-home .nav { padding: 0; width: min(1280px, calc(100% - 40px)); }
    phone size has to be restated here to win on source order. */
 @media (max-width: 640px) {
   body.page-home .desk-card--title .hero-title { font-size: clamp(22px, 6.2vw, 30px); }
+}
+
+/* --- HERO SHOTS — PRODUCT SCREENS PINNED TO THE MAT ----------------------
+   The hero was all stationery and no product. Two prints, one per case study,
+   hang off the bottom edge of the mat so a real screen of each app is on the
+   first screen at every width. They reuse the cards' own files, so nothing
+   extra is downloaded. Each image is a crop of a three-phone render: the
+   image is centred on a point of the source (--cx, --cy) at a zoom (--z, in
+   box widths), which needs no object-view-box and no extra asset. */
+body.page-home .hero-shots {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: min(1280px, calc(100% - 40px));
+  margin: -34px auto 0;
+  padding: 0 18px;
+}
+body.page-home .shot {
+  position: relative;
+  display: block;
+  min-height: 44px;
+  text-decoration: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) drop-shadow(0 10px 18px rgba(8, 24, 18, 0.4));
+}
+body.page-home .shot--cuak { transform: rotate(-1.1deg); }
+body.page-home .shot--duogit { transform: rotate(0.9deg); }
+body.page-home .shot-frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 1.3;
+  overflow: hidden;
+  padding: 0;
+  border: 5px solid #e9dfc9;
+  border-radius: 3px;
+  background: #14213a;
+}
+body.page-home .shot--cuak .shot-frame { background: #f4dd85; }
+body.page-home .shot img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--z) * 100%);
+  height: auto;
+  max-width: none;
+  transform: translate(calc(var(--cx) * -100%), calc(var(--cy) * -100%));
+}
+/* phone crop: the middle handset, top half */
+body.page-home .shot--cuak   { --z: 2.7; --cx: 0.5; --cy: 0.31; }
+body.page-home .shot--duogit { --z: 3;   --cx: 0.5; --cy: 0.31; }
+body.page-home .shot-tape {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 54px;
+  height: 18px;
+  z-index: 2;
+  background: rgba(228, 218, 196, 0.8);
+  background-image: var(--wear-grain);
+  background-size: 80px 80px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+  transform: translateX(-50%) rotate(-3deg);
+  pointer-events: none;
+}
+body.page-home .shot--duogit .shot-tape { transform: translateX(-50%) rotate(3deg); }
+body.page-home .shot:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  body.page-home .shot { transition: transform 240ms ease; }
+  body.page-home .shot:hover { transform: rotate(0deg) translateY(-3px); }
+}
+
+/* Wide crop: all three handsets. */
+@media (min-width: 641px) {
+  body.page-home .hero-shots { gap: 26px; padding: 0 34px; margin-top: -40px; }
+  body.page-home .shot-frame { aspect-ratio: 2.3; }
+  body.page-home .shot--cuak   { --z: 1.05; --cx: 0.5; --cy: 0.40; }
+  body.page-home .shot--duogit { --z: 1.1;  --cx: 0.5; --cy: 0.40; }
+}
+@media (min-width: 1100px) {
+  body.page-home .hero-shots { padding: 0 60px; margin-top: -48px; }
 }

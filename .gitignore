@@ -18,3 +18,6 @@ WEEK-ASSETS.md
 PIPELINE-SLOTS.md
 SCREENS-SLOTS.md
 cv/
+
+# Team agent definitions carry the private fact rules; keep them local.
+.claude/agents/

@@ -26,8 +26,8 @@
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/tokens.css?v=9" />
-  <link rel="stylesheet" href="../assets/css/system.css?v=4">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=3">
+  <link rel="stylesheet" href="../assets/css/system.css?v=7">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=5">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
   <link rel="stylesheet" href="../assets/css/slots.css?v=1">
   <link rel="stylesheet" href="../assets/css/duogit.css?v=10">
@@ -81,6 +81,12 @@
     <section class="hero">
       <div class="container">
         <div class="mat">
+          <div class="hero-label">
+            <span>Own project</span><span>·</span><span>2026</span><span>·</span><span>Role: UI/UX design, ESA, prototype</span>
+          </div>
+          <div class="hero-label">
+            <span>Status: prototype built, not launched</span><span>·</span><span>Result: design targets, no users yet</span>
+          </div>
           <h1 class="hero-title">
             The developer's <span class="accent">emotional companion</span>
           </h1>
@@ -207,10 +213,10 @@
         <div class="proc">
           <h3>Four states have to stay one character</h3>
           <p>
-            The mascot is a 3D asset, not a drawing per mood, because the four states have to
-            read as the same creature under different light. The reference sheet is what the
-            states are built against — same volumes, same eye geometry, same silhouette from
-            every angle.
+            The mascot has a distinct illustrated expression per mood, not a single static drawing,
+            because the four states have to read as the same creature under different light. The
+            reference sheet is what the states are built against — same volumes, same eye geometry,
+            same silhouette from every angle.
           </p>
           <div class="proc-figs proc-figs--refs">
             <figure class="proc-fig">
@@ -518,7 +524,7 @@
         <!-- App Screens — Infinite Slider -->
         <div style="margin-top: var(--s-64)">
           <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom: var(--s-16)">The Mobile App — 9 Screens</h3>
-          <p class="section-text" style="margin-bottom: var(--s-32)">Beyond the widget, DuoGit ships as a full React Native app. Each screen is purpose-built around a single behavioral goal: making the developer's progress impossible to ignore.</p>
+          <p class="section-text" style="margin-bottom: var(--s-32)">Beyond the widget, DuoGit is built as a full React Native app. Each screen is purpose-built around a single behavioral goal: making the developer's progress impossible to ignore.</p>
 
           <div class="screens-slider" style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius: var(--r-xl);padding: var(--s-40) 0;">
             <div class="screens-track">
@@ -742,7 +748,7 @@
           <div class="note-lg">
             <div class="note-lg-head"><h3>What's next</h3></div>
             <p>The immediate path is <strong>GitHub OAuth</strong> via expo-auth-session to replace mock data with live commits, followed by the <strong>home screen widget</strong> — the original trigger for the product concept.</p>
-            <p>Longer term I'd explore <strong>team streaks</strong> (shared mascot between coworkers) and <strong>unlockable avatar skins</strong> per Liga rank — the 4 emotional states are already shipped, new skins per rank would deepen the reward loop without adding friction.</p>
+            <p>Longer term I'd explore <strong>team streaks</strong> (shared mascot between coworkers) and <strong>unlockable avatar skins</strong> per Liga rank — the 4 emotional states are already implemented in the prototype, new skins per rank would deepen the reward loop without adding friction.</p>
           </div>
         </div>
       </div>
@@ -753,7 +759,7 @@
       <div class="container">
         <span class="section-label">The UI kit</span>
         <h2 class="section-title">UI Kit built for behavioral clarity</h2>
-        <p class="section-text">Every visual decision is codified — colors map directly to emotional states, not aesthetics. The system ships as <strong>NativeWind tokens</strong> inside the React Native codebase.</p>
+        <p class="section-text">Every visual decision is codified — colors map directly to emotional states, not aesthetics. The system is implemented as <strong>NativeWind tokens</strong> inside the React Native codebase.</p>
 
         <!-- Design Tokens -->
         <div style="margin-top: var(--s-40)">
@@ -824,19 +830,19 @@
               <div class="feature-info">
                 <h4>MetricCard</h4>
                 <p>Displays a single SPACE metric with icon, trend badge, value and unit. Reused across Dashboard and Metrics screens.</p>
-              </div><span class="feature-badge shipped">Shipped</span>
+              </div><span class="feature-badge shipped">Built</span>
             </div>
             <div class="feature-row">
               <div class="feature-info">
                 <h4>SparkLineChart</h4>
                 <p>Inline SVG line chart for commit activity trends. Renders inside MetricCard without external dependencies.</p>
-              </div><span class="feature-badge shipped">Shipped</span>
+              </div><span class="feature-badge shipped">Built</span>
             </div>
             <div class="feature-row">
               <div class="feature-info">
                 <h4>MascotDisplay</h4>
                 <p>Renders mascot image with glow halo based on state. Accepts size and grayscale props for widget contexts.</p>
-              </div><span class="feature-badge shipped">Shipped</span>
+              </div><span class="feature-badge shipped">Built</span>
             </div>
             <div class="feature-row">
               <div class="feature-info">
