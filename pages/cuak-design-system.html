@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../assets/css/pages.css?v=5">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
   <link rel="stylesheet" href="../assets/css/design-system.css?v=1">
-  <link rel="stylesheet" href="../assets/css/cuak-design-system.css?v=1">
+  <link rel="stylesheet" href="../assets/css/cuak-design-system.css?v=2">
 </head>
 <body>
 
@@ -424,6 +424,201 @@
           <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Credit utilization · Updated now</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 08 SYSTEM WORKFLOW — SITUATION -->
+  <section class="section" id="system-workflow">
+    <div class="container">
+      <span class="section-label">08 — System workflow</span>
+      <h2 class="section-title">The system behind the screens: <span class="accent">Figma, Claude and one JSON file</span></h2>
+      <p class="section-text">Cuak's 24 screens were built quickly, from HTML imported into Figma. Every value arrived as a number, not as a token, and the file drifted. This is how I used Claude, connected to Figma through an MCP server, to find the drift, organise the file, turn the design system into tokens, and keep screens and system checked against one JSON file.</p>
+      <div class="hero-pills" style="margin-top: var(--s-16)">
+        <span class="pill accent">figma-console-mcp</span>
+        <span class="pill">Claude Code</span>
+        <span class="pill">Design tokens (JSON)</span>
+        <span class="pill">Lint</span>
+      </div>
+      <p class="wf-lead-note">Cuak is a concept project. The numbers below are counts from the Figma file and the checks, not user data.</p>
+
+      <h3 class="annotation-label" style="margin-top: var(--s-40); font-size:15px">Situation — a file that drifted</h3>
+      <p class="section-text">The screens came from HTML imports, so colors, radii and sizes landed as literal values. None of it showed while drawing. It showed when two screens sat side by side. Measured on the 390 flow:</p>
+      <div class="wf-stats">
+        <div class="wf-stat"><span class="wf-stat-fig">151</span><p>colors set by hand, not bound to a variable</p></div>
+        <div class="wf-stat"><span class="wf-stat-fig">5</span><p>different radii on content cards (8, 12, 16, 20, 24)</p></div>
+        <div class="wf-stat"><span class="wf-stat-fig">52</span><p>text styles, most of them near-duplicates such as 14.16 Bold and 12.98 SemiBold</p></div>
+        <div class="wf-stat"><span class="wf-stat-fig">2</span><p>versions of the same design, at 390 and at 460 wide</p></div>
+        <div class="wf-stat"><span class="wf-stat-fig">10</span><p>pages, several empty or from other projects</p></div>
+      </div>
+      <p class="section-text" style="margin-top: var(--s-20)">There was also a hierarchy problem: titles set in the same style as the text under them, as on the Goals card.</p>
+
+      <h3 class="annotation-label" style="margin-top: var(--s-40); font-size:15px">Task — one source of truth that a person and Claude can both read</h3>
+      <p class="section-text">The tokens had to be data, not a picture of data. The checks had to be repeatable, and when something was wrong Claude had to be able to say what and where.</p>
+    </div>
+  </section>
+
+  <!-- 09 CONNECT AND ORGANISE -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">09 — Connect and organise</span>
+      <h2 class="section-title">Claude reads the file <span class="accent">the way a script would</span></h2>
+      <p class="section-text"><a href="https://github.com/southleft/figma-console-mcp" rel="noopener" style="color:var(--accent-text)">figma-console-mcp</a> is an MCP server plus a Figma plugin (the Desktop Bridge). Once the plugin is open in a file, Claude can call tools against it: run Plugin API code in the open file, screenshot any node, read comments. I did not build the server. I built the workflow on top of it: read the file, change one thing, screenshot it, and only then move on.</p>
+      <ul class="wf-chips">
+        <li>figma_execute</li><li>figma_take_screenshot</li><li>figma_get_comments</li><li>figma_get_status</li>
+      </ul>
+      <ol class="wf-rules">
+        <li><strong>One change at a time.</strong></li>
+        <li><strong>A screenshot after each.</strong></li>
+        <li><strong>Nothing deleted without asking.</strong></li>
+      </ol>
+
+      <div class="wf-beside">
+        <figure class="wf-fig">
+          <img loading="lazy" decoding="async" src="../assets/img/cuak/system-screens-390.webp" width="781" height="1593" alt="The 24 screens of Cuak's 390 flow, arranged in order of use">
+          <figcaption>The 24 screens of the 390 flow, in order of use.</figcaption>
+        </figure>
+        <div class="note-stack">
+          <div class="note-lg">
+            <div class="note-lg-head">
+              <span class="note-lg-ico" aria-hidden="true"><svg><use href="../assets/img/icons.svg#i-build"/></svg></span>
+              <h3>Pages and layers</h3>
+            </div>
+            <p><strong>Pages: 10 down to 5.</strong> Cover, UX process, Design system, UI mobile, Assets. Pages from other projects were archived, then removed.</p>
+            <p><strong>Layers.</strong> A <code>role/name</code> convention (<code>cta/</code>, <code>card/</code>, <code>chip/</code>, <code>nav/</code>, <code>row/</code>) so a layer says what it is. Sections instead of loose frames, and the 24 screens ordered by use.</p>
+            <p><strong>One language, one name.</strong> All copy in English, the product written <em>Cuak</em> everywhere. A UX process page built from the screens: an 8-step main flow and 13 branch screens.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 TOKENISE -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">10 — Tokenise</span>
+      <h2 class="section-title">Six collections, <span class="accent">two rules inside them</span></h2>
+      <p class="section-text">The design system became variables and text styles in Figma, so a value has a name and a reason instead of a hex.</p>
+
+      <div class="wf-table-wrap">
+        <table class="wf-table">
+          <thead><tr><th>Collection</th><th>Contents</th></tr></thead>
+          <tbody>
+            <tr><td>Colors</td><td>27 variables: 21 palette colors and 6 status colors</td></tr>
+            <tr><td>Semantic</td><td>28 aliases that say what a color is for: <code>text/primary</code>, <code>bg/card</code>, <code>border/soft</code></td></tr>
+            <tr><td>Spacing</td><td>18 steps plus 9 layout aliases</td></tr>
+            <tr><td>Radius</td><td>9 steps, including <code>sheet</code></td></tr>
+            <tr><td>Size</td><td>11 fixed dimensions</td></tr>
+            <tr><td>Type</td><td>24 text styles named Zone/Variant: Display, Title, Amount, Heading, Body, Number, Text, Label, Caption, Meta, Micro</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="wf-beside">
+        <figure class="wf-fig">
+          <img loading="lazy" decoding="async" src="../assets/img/cuak/system-board.webp" width="1227" height="1568" alt="The Cuak design system board in Figma: colors, type by zone, components, status colors and semantic tokens">
+          <figcaption>The design system board: colors, type by zone, components, status colors and semantic tokens.</figcaption>
+        </figure>
+        <div class="note-stack">
+          <div class="note-lg">
+            <div class="note-lg-head">
+              <span class="note-lg-ico" aria-hidden="true"><svg><use href="../assets/img/icons.svg#i-system"/></svg></span>
+              <h3>Two rules that live in the system</h3>
+            </div>
+            <p><strong>Hierarchy.</strong> A title never shares a text style with the text under it. It is written into the lint, so it no longer depends on anyone remembering it.</p>
+            <p><strong>Status colors.</strong> Credit usage picks the color: under 50% of the limit is green, 50 to 79% is amber, 80% or more is red. Those thresholds are a design decision, not measured behavior.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 SOURCE OF TRUTH -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">11 — Source of truth</span>
+      <h2 class="section-title">The JSON is <span class="accent">what Claude reads</span></h2>
+      <p class="section-text">Figma is where a token is edited. <code>tokens.json</code> is what Claude reads. The generated files are never edited by hand.</p>
+      <pre class="wf-code" aria-label="The token pipeline">Figma variables + styles
+   → export script (runs inside Figma)
+   → tokens.json + tokens.css      (generated)
+   → parity check: do the files and Figma agree?
+   → lint: do the screens obey the tokens?
+   → report</pre>
+      <p class="section-text" style="margin-top: var(--s-20)">The JSON follows the W3C design tokens format and has two layers, primitives and semantic. Components use the semantic layer:</p>
+      <pre class="wf-code" aria-label="Excerpt of tokens.json">"status": {
+  "danger": { "$value": "#DC2626", "$type": "color",
+              "$description": "Over the safe zone: 80% or more, and costs such as interest" }
+}
+...
+"text": {
+  "danger": { "$value": "{color.primitive.status.danger}", "$type": "color" }
+}</pre>
+    </div>
+  </section>
+
+  <!-- 12 LINT, RESULT, LIMITS, NEXT -->
+  <section class="section">
+    <div class="container">
+      <span class="section-label">12 — Lint, result and limits</span>
+      <h2 class="section-title">Ten rules, <span class="accent">and what they do not cover</span></h2>
+      <p class="section-text">Ten rules run inside Figma and return findings with the node id. Five are errors, five are warnings.</p>
+
+      <div class="wf-table-wrap">
+        <table class="wf-table">
+          <thead><tr><th>Rule</th><th>Type</th><th>What it checks</th></tr></thead>
+          <tbody>
+            <tr><td>color-bound</td><td><span class="wf-tag wf-tag--error">error</span></td><td>Every fill and stroke is bound to a color variable</td></tr>
+            <tr><td>text-role</td><td><span class="wf-tag wf-tag--error">error</span></td><td>Every text uses a role style, never a free size</td></tr>
+            <tr><td>hierarchy</td><td><span class="wf-tag wf-tag--error">error</span></td><td>A title never shares a style with the text under it</td></tr>
+            <tr><td>status-color</td><td><span class="wf-tag wf-tag--error">error</span></td><td>Usage bars use the color that matches their percentage</td></tr>
+            <tr><td>overflow</td><td><span class="wf-tag wf-tag--error">error</span></td><td>No text leaves the screen or its container</td></tr>
+            <tr><td>min-text-size</td><td><span class="wf-tag wf-tag--warn">warning</span></td><td>Text is at least 10 px</td></tr>
+            <tr><td>radius-bound</td><td><span class="wf-tag wf-tag--warn">warning</span></td><td>Corner radius comes from the radius variables</td></tr>
+            <tr><td>spacing-bound</td><td><span class="wf-tag wf-tag--warn">warning</span></td><td>Gap and padding on the scale are bound to variables</td></tr>
+            <tr><td>back-nav</td><td><span class="wf-tag wf-tag--warn">warning</span></td><td>Screens outside the top level have a tab bar or a back control</td></tr>
+            <tr><td>screen-structure</td><td><span class="wf-tag wf-tag--warn">warning</span></td><td>390 x 871 frame and a 24 px side margin</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="section-text" style="margin-top: var(--s-20)">When a finding is real, I fix it in Figma. When it is a false positive, I fix the rule: section labels such as "Finance" and "Account" were flagged as titles sharing a style, so the rule now knows what a section label is.</p>
+
+      <div class="wf-sheets">
+        <div class="note-lg">
+          <div class="note-lg-head">
+            <span class="note-lg-ico" aria-hidden="true"><svg><use href="../assets/img/icons.svg#i-data"/></svg></span>
+            <h3>Result</h3>
+          </div>
+          <div class="note-lg-figs note-lg-figs--even">
+            <div class="note-lg-fig-item note-lg-fig-item--warn">
+              <span class="note-lg-kicker">Colors set by hand</span>
+              <span class="note-lg-fig">151 → 0</span>
+              <p>Exceptions are brand logos, the keyboard and the card-color swatches, listed in the rules with the reason.</p>
+            </div>
+            <div class="note-lg-fig-item note-lg-fig-item--good">
+              <span class="note-lg-kicker">Text styles</span>
+              <span class="note-lg-fig">52 → 24</span>
+              <p>Role styles instead of near-duplicates.</p>
+            </div>
+          </div>
+          <p><strong>24 screens, 10 rules, 0 errors, 0 warnings</strong> on the last run. The parity check caught <strong>4 line-height values</strong> I had typed by hand into <code>tokens.json</code>; they were regenerated from Figma. The lint found the one radius off the scale, on the sign-in sheet, and it became a token, <code>radius/sheet</code>.</p>
+        </div>
+
+        <div class="note-lg">
+          <div class="note-lg-head">
+            <h3>What this does not do yet</h3>
+          </div>
+          <p><strong>It is not a CI job.</strong> It runs through Claude and the MCP server. CI would need the Figma REST API with a token.</p>
+          <p><strong>Only the 390 flow is linted.</strong> The 460-wide test screens are not.</p>
+          <p><strong>The app does not read these tokens.</strong> Its own theme file (<code>apps/mobile/constants/theme.ts</code>, Expo) is not generated from them and differs: radii of 10, 14, 20 and 28 against 8 to 24 here, and a different red.</p>
+        </div>
+      </div>
+
+      <h3 class="annotation-label" style="margin-top: var(--s-40); font-size:15px">Next</h3>
+      <ol class="wf-steps">
+        <li>Generate the app's <code>theme.ts</code> from <code>tokens.json</code> and add a drift check against the current one.</li>
+        <li>Build the six core components in code (Button, Credit card, List row, Tab bar, Input, Progress bar) and document them in Storybook.</li>
+        <li>Move the checks to CI.</li>
+      </ol>
     </div>
   </section>
 

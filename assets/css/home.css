@@ -1424,3 +1424,21 @@ body.page-home .esa-card.is-active { transform: translateY(-4px); }
   body.page-home .esa-card:focus-visible,
   body.page-home .esa-card.is-active { transform: none; }
 }
+
+/* --- NOW: what I'm working on -------------------------------------------
+   One sheet, one idea. Sits between the hero and the case studies. */
+.now { padding-block: var(--s-48) var(--s-16); }
+/* Same edges as the hero card above it. The card is the mat's content box, so
+   this takes the mat's width and the mat's side padding (60 / 34 / 18). */
+.now > .container { width: min(1280px, calc(100% - 40px)); max-width: none; padding-inline: 60px; box-sizing: border-box; }
+@media (max-width: 1099px) { .now > .container { padding-inline: 34px; } }
+@media (max-width: 640px) { .now > .container { padding-inline: 18px; } }
+.now-sheet { margin-top: var(--s-20); }
+@media (min-width: 800px) {
+  .now-sheet { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s-40); }
+  .now-sheet > .note-lg-head, .now-sheet > p:last-child { grid-column: 1 / -1; }
+  .now-sheet.note-lg > p { margin: 0; }
+  .now-sheet.note-lg > p:last-child { margin-top: var(--s-16); }
+}
+.now-link { font-weight: 700; color: var(--paper-ink); text-decoration: underline; text-underline-offset: 3px; }
+.now-link:hover { text-decoration-thickness: 2px; }
