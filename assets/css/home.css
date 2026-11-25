@@ -1275,3 +1275,152 @@ body.page-home .shot:focus-visible { outline: 2px solid #fff; outline-offset: 4p
 @media (min-width: 1100px) {
   body.page-home .hero-shots { padding: 0 60px; margin-top: -48px; }
 }
+
+/* --- CALM HERO ---------------------------------------------------------
+   Overrides at the end on purpose. The hero read as scrapbook: tape, tilted
+   cards, a green ruled mat and a lamp on a purple page. Same copy and same
+   cards, minus the craft props. Delete this block to restore the old look. */
+body.page-home .hero-mat {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+body.page-home .hero-mat::before,
+body.page-home .hero-mat::after,
+body.page-home .mat-lamp-track,
+body.page-home .mat-cuts,
+body.page-home .acc,
+body.page-home .desk-tape,
+body.page-home .shot-tape { display: none; }
+
+body.page-home .desk-card--tag,
+body.page-home .desk-card--title,
+body.page-home .desk-card--memo { transform: none; }
+
+body.page-home .desk-card {
+  filter: none;
+  border-radius: var(--r-lg, 12px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+/* Calm hero, part 2: the desktop board and the screenshot frames. */
+body.page-home .sheet--pos-1 { transform: translate(0, -26px); }
+body.page-home .sheet--pos-2 { transform: translate(calc(var(--sheet-spread) * -1), 10px); }
+body.page-home .sheet--pos-0 { transform: translate(var(--sheet-spread), 28px); }
+body.page-home .shot--cuak,
+body.page-home .shot--duogit { transform: none; filter: none; }
+body.page-home .shot-frame {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--r-lg, 12px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+body.page-home .shot--cuak .shot-frame { background: #1b1530; }
+@media (min-width: 1100px) {
+  body.page-home .hero-mat { padding-bottom: 84px; }
+}
+
+/* Calm hero, part 3: one card instead of six. The three fanned note cards on
+   the right are hidden and the tag, headline and memo share a single sheet. */
+body.page-home .hero-board { display: none; }
+@media (min-width: 1100px) {
+  body.page-home .hero-grid { grid-template-columns: 1fr; }
+}
+body.page-home .hero-desk-notes {
+  max-width: 660px;
+  gap: var(--s-16);
+  padding: 30px 34px;
+  background: var(--paper);
+  border-radius: var(--r-lg, 12px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+body.page-home .desk-card--tag,
+body.page-home .desk-card--title,
+body.page-home .desk-card--memo {
+  background: none;
+  box-shadow: none;
+  filter: none;
+  padding: 0;
+  max-width: none;
+}
+body.page-home .desk-card--tag { border-left: 0; }
+body.page-home .desk-card--tag,
+body.page-home .desk-card--title,
+body.page-home .desk-card--memo { border: 0; }
+body.page-home .desk-card--tag::after,
+body.page-home .desk-card--title::after,
+body.page-home .desk-card--memo::after { display: none; }
+
+/* Calm hero, part 5: the card spans the page width, content centred. */
+body.page-home .hero-desk-notes {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+  padding: 48px 40px;
+}
+body.page-home .desk-card--tag { align-self: center; }
+body.page-home .desk-card--title .hero-title { font-size: clamp(28px, 4vw, 52px); }
+body.page-home .desk-card--memo .hero-lead { margin-left: auto; margin-right: auto; max-width: 56ch; font-size: 15px; }
+body.page-home .desk-card--memo .hero-actions { justify-content: center; }
+@media (max-width: 640px) {
+  body.page-home .hero-desk-notes { padding: 28px 20px; }
+}
+
+/* Calm hero, part 6: inside the wide card, headline left and copy + actions
+   right (side by side from 900px; stacked and left-aligned below). */
+body.page-home .hero-desk-notes { text-align: left; align-items: stretch; }
+body.page-home .desk-card--tag { align-self: flex-start; }
+body.page-home .desk-card--memo .hero-lead { margin-left: 0; margin-right: 0; max-width: 52ch; }
+body.page-home .desk-card--memo .hero-actions { justify-content: flex-start; }
+@media (min-width: 900px) {
+  body.page-home .hero-desk-notes {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    column-gap: 64px;
+    row-gap: 18px;
+    align-items: start;
+    padding: 56px 56px;
+  }
+  body.page-home .desk-card--tag { grid-column: 1; grid-row: 1; justify-self: start; }
+  body.page-home .desk-card--title { grid-column: 1; grid-row: 2; }
+  body.page-home .desk-card--memo { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+}
+
+/* Calm hero, part 7: tag on its own row; headline and copy share one row and
+   sit on the same baseline. */
+@media (min-width: 900px) {
+  body.page-home .hero-desk-notes { row-gap: 22px; }
+  body.page-home .desk-card--tag { grid-column: 1 / -1; grid-row: 1; }
+  body.page-home .desk-card--title { grid-column: 1; grid-row: 2; align-self: end; }
+  body.page-home .desk-card--memo { grid-column: 2; grid-row: 2; align-self: end; padding-bottom: 6px; }
+  body.page-home .desk-card--memo .hero-lead { font-size: 16px; line-height: 1.6; margin-bottom: 20px; }
+}
+
+/* --- CALM ESA ----------------------------------------------------------
+   Same four state cards, minus the polaroid props: no tape, no tilt, no
+   handwriting. The state colour in the photo is what stays. */
+body.page-home .esa-tape { display: none; }
+body.page-home .esa-card:nth-of-type(n) { transform: none; }
+body.page-home .esa-card {
+  border-radius: var(--r-lg, 12px);
+  padding: 12px 12px 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 12px 28px rgba(0, 0, 0, 0.3);
+}
+body.page-home .esa-photo { border-radius: calc(var(--r-lg, 12px) - 4px); }
+body.page-home .esa-caption {
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+body.page-home .esa-card:hover,
+body.page-home .esa-card:focus-visible,
+body.page-home .esa-card.is-active { transform: translateY(-4px); }
+@media (prefers-reduced-motion: reduce) {
+  body.page-home .esa-card:hover,
+  body.page-home .esa-card:focus-visible,
+  body.page-home .esa-card.is-active { transform: none; }
+}

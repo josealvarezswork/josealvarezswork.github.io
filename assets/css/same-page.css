@@ -1,0 +1,81 @@
+/* Same Page case page. Only what pages.css and paper.css do not already give. */
+.ul-chips { display: flex; flex-wrap: wrap; gap: var(--s-12); margin-top: var(--s-24); }
+.ul-chip {
+  padding: 10px var(--s-16);
+  background: var(--bg-card);
+  border: 1px solid var(--stroke-light);
+  border-radius: var(--r-lg);
+  font-size: 13px;
+  color: var(--text);
+}
+.ul-chip.is-flag { border-color: rgba(240, 180, 41, 0.45); }
+
+.ul-two { display: grid; gap: var(--s-16); margin-top: var(--s-32); }
+@media (min-width: 800px) { .ul-two { grid-template-columns: 1fr 1fr; } }
+
+.ul-card {
+  padding: var(--s-24);
+  background: var(--bg-card);
+  border: 1px solid var(--stroke-light);
+  border-radius: var(--r-lg);
+}
+.ul-card h3 { margin: 0 0 var(--s-8); font-size: 18px; color: var(--text); }
+.ul-card p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+.ul-card p + p { margin-top: var(--s-12); }
+
+.ul-stages {
+  list-style: none;
+  margin: var(--s-32) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-12);
+}
+@media (min-width: 800px) { .ul-stages { grid-template-columns: 1fr 1fr; } }
+.ul-stages li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: var(--s-12);
+  align-items: start;
+  padding: var(--s-16);
+  background: var(--bg-card);
+  border: 1px solid var(--stroke-light);
+  border-radius: var(--r-lg);
+}
+.ul-num {
+  width: 34px; height: 34px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: rgba(167, 139, 250, 0.16);
+  color: var(--accent-text);
+  font-weight: 700;
+  font-size: 14px;
+}
+.ul-stages strong { display: block; color: var(--text); font-size: 15px; }
+.ul-stages span.ul-gate { display: block; margin-top: 2px; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+
+.ul-finding {
+  margin-top: var(--s-16);
+  padding: var(--s-20) var(--s-24);
+  background: var(--bg-card);
+  border: 1px solid var(--stroke-light);
+  border-radius: var(--r-lg);
+}
+.ul-finding .ul-was { color: var(--faint); font-size: 13px; margin: 0 0 var(--s-8); }
+.ul-finding .ul-q { margin: 0 0 var(--s-8); color: var(--text); font-size: 16px; }
+.ul-finding .ul-fix { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+
+.ul-list { margin: var(--s-24) 0 0; padding-left: 20px; color: var(--muted); font-size: 15.5px; line-height: 1.65; }
+.ul-list li + li { margin-top: var(--s-8); }
+.ul-tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border: 1px solid rgba(240, 180, 41, 0.45);
+  border-radius: 999px;
+  color: #f0b429;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}

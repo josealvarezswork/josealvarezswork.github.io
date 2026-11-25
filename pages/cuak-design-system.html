@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cuak — Design System · Jose Alvarez</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
-  <meta name="description" content="The Cuak design system: four emotional states, the palette built for emotional clarity, the 60/40 zoning model, core UI components and the type scale.">
+  <meta name="description" content="The Cuak design system: five emotional states plus a recovery moment, the palette built for emotional clarity, the 60/40 zoning model, core UI components and the type scale.">
   <meta property="og:title" content="Cuak — Design System">
-  <meta property="og:description" content="Four emotional states, a palette built for clarity, the 60/40 zoning model and the component kit behind the case study.">
+  <meta property="og:description" content="Five emotional states plus a recovery moment, a palette built for clarity, the 60/40 zoning model and the component kit behind the case study.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://odejbyjose.com/pages/cuak-design-system.html">
   <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cuak.jpg">
@@ -148,16 +148,16 @@
   <section class="section">
     <div class="container">
       <span class="section-label">02 — Mascot States</span>
-      <h2 class="section-title">4 emotional states, <span class="accent">1 behavioral arc</span></h2>
+      <h2 class="section-title">5 emotional states, <span class="accent">1 behavioral arc</span></h2>
       <p class="section-text">Each state maps to a psychological moment in the user's credit journey. The duck reacts — the user feels seen, not judged.</p>
 
       <div class="states-grid">
         <div class="state-card" style="border-color:rgba(242,239,232,.08)">
-          <img class="state-img" src="../assets/img/cuak/cuak-esperando.png" alt="Cuak neutral, waiting state">
-          <p class="state-name">Neutral — Ready</p>
-          <p class="state-trigger">Trigger: app open, no recent activity</p>
+          <img class="state-img" src="../assets/img/cuak/cuak-esperando.png" alt="Cuak waiting state">
+          <p class="state-name">Waiting — Ready</p>
+          <p class="state-trigger">Trigger: no cards added yet, or app open with no recent activity</p>
           <p class="state-desc">Pure potential. No pressure. Cuak waits with expectation — not judgment.</p>
-          <span class="state-drive">Neutral state</span>
+          <span class="state-drive">Waiting state</span>
         </div>
         <div class="state-card" style="border-color:rgba(111,186,150,.2)">
           <img loading="lazy" decoding="async" class="state-img" src="../assets/img/cuak/cuak-feliz.png" alt="Cuak happy, on track state">
@@ -166,6 +166,12 @@
           <p class="state-desc">Positive reinforcement. Cuak celebrates consistency — the system rewards, not just records.</p>
           <span class="state-drive" style="color:var(--brand-cuak);background:rgba(111,186,150,.1)">Core Drive 2: Accomplishment</span>
         </div>
+        <div class="state-card" style="border-color:rgba(251,191,36,.12)">
+          <img loading="lazy" decoding="async" class="state-img" src="../assets/img/cuak/cuak-atento.png" alt="Cuak watchful state">
+          <p class="state-name" style="color:var(--accent-amber)">Watchful — Keep an Eye</p>
+          <p class="state-trigger">Trigger: medium credit usage</p>
+          <p class="state-desc">Nothing is wrong yet. Cuak pays attention so the user does too.</p>
+        </div>
         <div class="state-card" style="border-color:rgba(251,191,36,.2)">
           <img loading="lazy" decoding="async" class="state-img" src="../assets/img/cuak/cuak-preocupado.png" alt="Cuak worried, at-risk state">
           <p class="state-name" style="color:var(--accent-amber)">Worried — At Risk</p>
@@ -173,10 +179,17 @@
           <p class="state-desc">Loss aversion activated. Cuak's distress makes risk visible and empathetic — not punitive. Most powerful retention state.</p>
           <span class="state-drive" style="color:var(--accent-amber);background:rgba(251,191,36,.1)">Core Drive 8: Loss Aversion</span>
         </div>
+        <div class="state-card" style="border-color:rgba(239,68,68,.3)">
+          <img loading="lazy" decoding="async" class="state-img" src="../assets/img/cuak/cuak-alerta.png" alt="Cuak alert state">
+          <p class="state-name" style="color:var(--accent-red-text)">Alert — Act Now</p>
+          <p class="state-trigger">Trigger: very high usage, limit maxed out or overdraft risk</p>
+          <p class="state-desc">Cuak reacts before the user makes the mistake, so the limit arrives as a face rather than a figure.</p>
+          <span class="state-drive" style="color:var(--accent-red-text);background:rgba(239,68,68,.1)">Core Drive 8: Loss Aversion</span>
+        </div>
         <div class="state-card" style="border-color:rgba(155,143,212,.2)">
-          <img loading="lazy" decoding="async" class="state-img" src="../assets/img/cuak/cuak-alerta.png" alt="Cuak alert, reset state">
-          <p class="state-name" style="color:var(--accent)">Sad — Reset</p>
-          <p class="state-trigger">Trigger: threshold crossed</p>
+          <img loading="lazy" decoding="async" class="state-img" src="../assets/img/cuak/cuak-alerta.png" alt="Cuak recovery moment after an alert">
+          <p class="state-name" style="color:var(--accent)">Sad — Reset (recovery moment)</p>
+          <p class="state-trigger">Trigger: threshold crossed. Sits outside the five states</p>
           <p class="state-desc">Emotional cost of loss, followed by resilience. Cuak mourns with the user — then invites them back without shame.</p>
           <span class="state-drive" style="color:var(--accent);background:rgba(155,143,212,.1)">Guilt-free restart</span>
         </div>
@@ -280,55 +293,12 @@
     </div>
   </section>
 
-  <!-- 04 BEFORE / AFTER -->
-  <section class="section">
-    <div class="container">
-      <span class="section-label">05 — Data Storytelling</span>
-      <h2 class="section-title">Raw data → <span class="accent">Emotional signal</span></h2>
-      <p class="section-text">Same financial information. Completely different emotional experience. This is the core design problem Cuak solves.</p>
-
-      <div class="ba-grid">
-        <div class="ba-card">
-          <div class="ba-card-header">Before — Credit card statement</div>
-          <div class="ba-card-body">
-            <div class="ba-placeholder">
-              <span style="font-size:32px">📄</span>
-              <span>Raw statement screenshot</span>
-              <span style="font-size:11px;color:var(--faint)">Add from Figma export</span>
-            </div>
-          </div>
-          <p class="ba-annotation">Cold numbers, no context. User sees debt — feels <strong>anxiety</strong>.</p>
-        </div>
-        <div class="ba-arrow">→</div>
-        <div class="ba-card">
-          <div class="ba-card-header">After — Cuak interface</div>
-          <div class="ba-card-body">
-            <div class="ba-placeholder" style="border-color:rgba(111,186,150,.3)">
-              <span style="font-size:32px">🦆</span>
-              <span>Cuak screen export</span>
-              <span style="font-size:11px;color:var(--faint)">Add from Figma export</span>
-            </div>
-          </div>
-          <p class="ba-annotation">Same data, mascot emotional proxy. User sees progress — feels <strong style="color:var(--brand-cuak)">in control</strong>.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 05 ANNOTATED UI -->
   <section class="section">
     <div class="container">
-      <span class="section-label">06 — Annotated UI</span>
+      <span class="section-label">05 — Annotated UI</span>
       <h2 class="section-title">Every pixel has a <span class="accent">purpose</span></h2>
       <p class="section-text">Strategic annotations connecting each UI element to its psychological function.</p>
-
-      <div class="annotated-wrap">
-        <div class="annotated-placeholder">
-          <span style="font-size:40px">📱</span>
-          <span>Main Cuak screen — export from Figma</span>
-          <span style="font-size:12px;color:var(--faint)">Drop annotated screen here</span>
-        </div>
-      </div>
 
       <div class="annotation-list">
         <div class="annotation-item">
@@ -349,7 +319,7 @@
           <div class="annotation-dot">3</div>
           <div>
             <p class="annotation-label">Emotional state color — 40% zone</p>
-            <p class="annotation-text">Background color shifts with Cuak's state. Green = safe, yellow = at risk, purple = reset. Visceral-level feedback (Don Norman) — no reading required.</p>
+            <p class="annotation-text">Background color shifts with Cuak's state. Green = safe, yellow = at risk, purple = your move: the reset after a loss and the primary action. Visceral-level feedback (Don Norman) — no reading required.</p>
           </div>
         </div>
         <div class="annotation-item">
@@ -366,7 +336,7 @@
   <!-- 06 CORE COMPONENTS -->
   <section class="section">
     <div class="container">
-      <span class="section-label">07 — Components</span>
+      <span class="section-label">06 — Components</span>
       <h2 class="section-title">Core <span class="accent">UI components</span></h2>
       <p class="section-text">Reusable components built around the emotional states. Each one has a defined behavioral role.</p>
 
@@ -375,7 +345,7 @@
         <div class="component-card">
           <p class="component-name">Emotional State Badge</p>
           <div class="badge-demo">
-            <span class="badge badge-neutral">Neutral</span>
+            <span class="badge badge-neutral">Waiting</span>
             <span class="badge badge-happy">On Track</span>
             <span class="badge badge-worried">At Risk</span>
             <span class="badge badge-sad">Reset</span>
@@ -433,7 +403,7 @@
   <!-- 07 TYPOGRAPHY -->
   <section class="section">
     <div class="container">
-      <span class="section-label">08 — Typography</span>
+      <span class="section-label">07 — Typography</span>
       <h2 class="section-title">Type <span class="accent">system</span></h2>
 
       <div class="type-grid">

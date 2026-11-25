@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Same Page — A Consistency Auditor · Jose Alvarez</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <meta name="description" content="Same Page is a process I built to check my own design work against itself: it quotes the exact sentence, shows where two pages disagree and a small script checks that every quote is really on the page.">
+  <meta property="og:title" content="Same Page — A Consistency Auditor">
+  <meta property="og:description" content="A process that audits my case studies for contradictions and unsupported claims. What it found, what failed, and what is still unproven.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://odejbyjose.com/pages/same-page.html">
+  <link rel="canonical" href="https://odejbyjose.com/pages/same-page.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=9" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=7">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=5">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
+  <link rel="stylesheet" href="../assets/css/same-page.css?v=3">
+</head>
+
+<body>
+  <div class="accent-bar" aria-hidden="true"></div>
+
+  <header class="site-header is-shared">
+    <nav class="nav">
+      <a class="brand" href="../index.html" aria-label="Home">
+        <svg class="brand-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <defs>
+              <filter id="brand-rough" x="-14%" y="-14%" width="128%" height="128%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="5" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+            <g filter="url(#brand-rough)">
+              <circle class="brand-ring" cx="20" cy="20" r="17"/>
+              <ellipse class="brand-o" cx="20" cy="20" rx="7.6" ry="10.2"/>
+              <line class="brand-slash" x1="26" y1="8.5" x2="14" y2="31.5"/>
+            </g>
+          </svg>
+        <span class="brand-text">
+          <span class="brand-name">Jose Alvarez</span>
+          <span class="brand-sub">Design</span>
+        </span>
+      </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+          <a href="../index.html#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Work</a>
+          <a href="./methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a href="./craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Craft</a>
+          <a href="./resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>Resume</a>
+          <a href="./about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>About</a>
+        </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="mat">
+          <div class="hero-label">
+            <span>Process design · AI workflow</span><span>·</span><span>2026</span>
+          </div>
+          <h1 class="hero-title">
+            Same Page — a <span class="accent">consistency auditor</span> for my own case studies
+          </h1>
+          <p class="hero-subtitle">
+            I built a process that checks my design work against itself. It quotes the exact sentence, shows where two pages disagree, and a small script checks that every quote really is on the page.
+          </p>
+          <div class="ul-chips">
+            <span class="ul-chip">Own tool · one user so far</span>
+            <span class="ul-chip">Role: process design, validation rules, auditing</span>
+            <span class="ul-chip">Built as a Claude skill with a Node validator</span>
+            <span class="ul-chip is-flag">Status: in use on this portfolio, not tested with other designers</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 PROBLEM -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">The problem</span>
+        <h2 class="section-title">My own pages <span class="accent">disagreed with each other</span></h2>
+        <p class="section-text">
+          I had two case studies and two design-system pages. Read one by one, they looked fine. Read side by side they were not: a state count that differed between two pages, XP values that did not match, and a test that appeared with results when it had only been planned.
+        </p>
+        <p class="section-text">
+          A reviewer will read them side by side. So the question became: can a process do that reading for me, before anyone else does?
+        </p>
+      </div>
+    </section>
+
+    <!-- 02 WHAT IT IS -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">What it is</span>
+        <h2 class="section-title">Two modes, <span class="accent">one rule: quote it or it does not count</span></h2>
+        <div class="ul-two">
+          <div class="ul-card">
+            <h3>Mode A — audit pages I already published</h3>
+            <p>It reads the pages, finds contradictions and unsupported claims, and writes each finding with the exact quote. A validator then checks every quote against the page text. If the quote is not there, the audit fails.</p>
+            <p>The findings become a fix list ranked A, B and C. I make the edits. Then it runs again in a fresh context and reports what was fixed, what is still open and what is new.</p>
+          </div>
+          <div class="ul-card">
+            <h3>Mode B — work up a project in stages</h3>
+            <p>Eight stages, each writing one file: brief, strategy, research, journey, synthesis, audit, design system and a case-study skeleton.</p>
+            <p>The last stage does not write the case study. It leaves marked holes for the decisions that are mine, and the final check fails while any hole is open.</p>
+          </div>
+        </div>
+        <p class="section-text" style="margin-top:var(--s-24)">A skill is a packaged set of instructions Claude loads for a task. The validator is a small Node script that reads my pages and checks the audit against them. Stages 1 to 8 belong to Mode B; stage 9 is Mode A.</p>
+        <ol class="ul-stages" aria-label="Stages 1 to 8 for Mode B, stage 9 for Mode A">
+          <li><span class="ul-num">1</span><div><strong>Brief</strong><span class="ul-gate">What I said, in my words. Thin fields are flagged, not filled in.</span></div></li>
+          <li><span class="ul-num">2</span><div><strong>Strategy</strong><span class="ul-gate">Counts and required keys are checked.</span></div></li>
+          <li><span class="ul-num">3</span><div><strong>Research</strong><span class="ul-gate">No evidence level above what I actually have: idea, some or real.</span></div></li>
+          <li><span class="ul-num">4</span><div><strong>Journey</strong><span class="ul-gate">At least three stages, each tied to earlier files.</span></div></li>
+          <li><span class="ul-num">5</span><div><strong>Synthesis</strong><span class="ul-gate">Every reference must copy text that exists elsewhere in the project.</span></div></li>
+          <li><span class="ul-num">6</span><div><strong>Audit</strong><span class="ul-gate">Runs in a fresh context. An auditor that remembers writing the document is a bad auditor.</span></div></li>
+          <li><span class="ul-num">7</span><div><strong>Design system</strong><span class="ul-gate">A color or a name must come from my declared inputs, or the validator fails.</span></div></li>
+          <li><span class="ul-num">8</span><div><strong>Case-study skeleton</strong><span class="ul-gate">Holes for my decisions. The final check fails while any remain.</span></div></li>
+          <li><span class="ul-num">9</span><div><strong>Page audit</strong><span class="ul-gate">Exact quotes, a fix list, then a re-audit after I edit.</span></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 03 WHAT FAILED -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">What failed</span>
+        <h2 class="section-title">My first approach <span class="accent">lost to a plain prompt</span></h2>
+        <p class="section-text">
+          My first approach had the tool write whole case studies from an idea. I tested that blind: a fully generated case study for a new idea against one written from a plain prompt. The generated one lost on every criterion: voice, how visible the decisions were, and how useful it would be in an interview. The judge called it AI-looking.
+        </p>
+        <p class="section-text">
+          That is one run, one judge and the same model family, so it is a signal and not a verdict. It was enough to stop me from presenting generated work as mine.
+        </p>
+      </div>
+    </section>
+
+    <!-- 04 WHAT I CHANGED -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">What I changed</span>
+        <h2 class="section-title">From writing the case study to <span class="accent">checking it</span></h2>
+        <div class="ul-two">
+          <div class="ul-card">
+            <h3>The tool stopped writing the case study</h3>
+            <p>Stages 1 to 6 became a consistency audit. Stage 8 became a skeleton with holes. The decisions stay with the designer.</p>
+          </div>
+          <div class="ul-card">
+            <h3>The validator got strict</h3>
+            <p>I seeded known faults into test projects to see what it caught. The first version caught 8 of 53 seeded faults. After I rewrote it to enforce the schema, it caught all 37 in a later set. The two sets were different sizes, so this is not a like-for-like comparison.</p>
+            <p>A new provenance rule: any color, name or percentage in an output must trace back to something I declared.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 WHAT IT FOUND -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">What it found on my own pages</span>
+        <h2 class="section-title">Real findings, <span class="accent">and what I did about them</span></h2>
+        <p class="section-text">
+          I ran it on the Cuak and DuoGit pages. These three examples are all from Cuak, each with what I decided.
+        </p>
+        <div class="ul-card" style="margin-top:var(--s-24)">
+          <h3>One finding, end to end</h3>
+          <p><strong>The pages said:</strong> the case study said &ldquo;map user behavior to one of five emotional states&rdquo;, and its design-system page said &ldquo;4 emotional states, 1 behavioral arc&rdquo;.</p>
+          <p><strong>The audit wrote:</strong> a contradiction, five against four, with both quotes.</p>
+          <p><strong>The script checked:</strong> that both quotes were on the pages. They were, so the finding stood. After I fixed the page, the same audit fails that check, because the second quote no longer exists. That is intended: an old audit cannot pass against a page that has changed.</p>
+        </div>
+        <div class="ul-finding">
+          <p class="ul-was">A test shown as done</p>
+          <p class="ul-q">The page reported test results and a tester quote. The test was only planned.</p>
+          <p class="ul-fix">I removed the results and the quote from six files (the case study, resume, methodology page, project data, home page and about page) and relabeled the section as a testing plan.</p>
+        </div>
+        <div class="ul-finding">
+          <p class="ul-was">An integration shown as built</p>
+          <p class="ul-q">A bank-data integration was described as part of the product. It was a design only, because bank sandboxes are hard to get access to.</p>
+          <p class="ul-fix">The pages now say designed, not connected, and name the next step.</p>
+        </div>
+        <div class="ul-finding">
+          <p class="ul-was">Two pages, two counts</p>
+          <p class="ul-q">The case study and its design-system page did not agree on how many emotional states exist.</p>
+          <p class="ul-fix">I aligned both pages on five states plus a recovery moment.</p>
+        </div>
+        <p class="section-text" style="margin-top:var(--s-24)">
+          Each re-audit also turned up new findings, some caused by my own fixes. For example, I invented two card names while aligning the states, and the next audit flagged one of them as contradicting the page. That is part of the loop, not a failure of it.
+        </p>
+      </div>
+    </section>
+
+    <!-- 06 NOT PROVEN -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">What is not proven</span>
+        <h2 class="section-title">What I <span class="accent">do not know yet</span></h2>
+        <ul class="ul-list">
+          <li>It has one user, me, on my own pages.</li>
+          <li>I have not published the test case, the judge's criteria or the seeded faults, so these numbers cannot be reproduced yet.</li>
+          <li>The blind test was one run, one judge, one model family.</li>
+          <li>I have not tested whether stages 1 to 7 earn their place, or whether a plain prompt would do as well.</li>
+          <li>I have not measured the cost of a run against that plain prompt.</li>
+          <li>I do not know whether fixing the findings changes how a reader sees the pages.</li>
+          <li>The case-study skeleton has not been generated from scratch, only on projects I had already worked on.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 07 NEXT -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">What is next</span>
+        <h2 class="section-title">An accessibility stage, <span class="accent">checked by formula</span><span class="ul-tag">Planned · not built</span></h2>
+        <p class="section-text">
+          The next stage I want is accessibility. Color contrast is a calculation, not an opinion, so it fits the rule this process already follows: a finding has to match something that can be checked. The first target is my own portfolio. I will only add it to this page once it runs.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-heading">Working on AI-assisted design workflows?</h2>
+        <p class="cta-sub">I like making the output prove itself before anyone reads it. Let's talk.</p>
+        <a class="cta-btn" href="mailto:josealvarezswork@gmail.com">Email me →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">&copy; 2026 Jose Alvarez</span>
+        <nav class="footer-nav">
+          <a href="../index.html">Work</a>
+          <a href="./duogit.html">DuoGit</a>
+          <a href="./same-page.html">Same Page</a>
+          <a href="./methodology.html">Framework</a>
+          <a href="./resume.html">Resume</a>
+          <a class="with-ico" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>Contact</a>
+        </nav>
+      </div>
+      <p class="footer-credit">Icons by <a href="https://streamlinehq.com" target="_blank" rel="noreferrer">Streamline</a> (CC BY 4.0) &middot; brand marks by <a href="https://simpleicons.org" target="_blank" rel="noreferrer">Simple Icons</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.hamburger').addEventListener('click', function() {
+      this.classList.toggle('active');
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+  </script>
+
+    <script src="../scripts/brand.js?v=1" defer></script>
+  </body>
+</html>
