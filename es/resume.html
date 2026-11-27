@@ -26,7 +26,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet" />
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=9" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=10" />
   <link rel="stylesheet" href="../assets/css/system.css?v=7">
   <link rel="stylesheet" href="../assets/css/pages.css?v=5">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
@@ -64,7 +64,7 @@
         </button>
       <div class="nav-links">
           <a href="./#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Proyectos</a>
-          <a href="../pages/methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a data-review="hidden" href="../pages/methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
           <a href="../pages/craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Oficio</a>
           <a href="./resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>CV</a>
           <a href="./about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>Sobre mí</a>
@@ -98,7 +98,7 @@
     <section class="profile-section">
       <div class="container">
         <p class="profile-text">
-          Diseñador UI/UX trabajando en <strong>interfaces de producto construidas alrededor del comportamiento</strong> — sistemas de progresión, economías de XP, niveles de recompensa, rachas, fail states, y los design systems que las mantienen coherentes una vez publicadas.
+          Diseñador UI/UX trabajando en <strong>interfaces de producto construidas alrededor del comportamiento</strong> — sistemas de progresión, rangos de liga, niveles de recompensa, rachas, fail states, y los design systems que las mantienen coherentes una vez publicadas.
           Construí ESA (Emotional State Architecture), una máquina de cuatro estados aplicada en una app fintech y una herramienta para desarrolladores.
           <strong>Cuatro años</strong> definiendo el lenguaje visual de una plataforma de contenido antes de pasar a producto. También construyo lo que diseño: este portfolio lo diseñé yo y lo construí con Claude, y el proceso de auditoría de abajo también lo construí yo. Abierto a puestos y contratos de diseño de producto — productos móviles y web, design systems, e interfaces donde lo difícil es el comportamiento.
         </p>
@@ -127,7 +127,7 @@
             <h4>Sistemas y progresión</h4>
             <div class="skill-tags">
               <span class="skill-tag">Sistemas de progresión</span>
-              <span class="skill-tag">Economías de XP</span>
+              <span class="skill-tag">Rangos de liga</span>
               <span class="skill-tag">Niveles de recompensa</span>
               <span class="skill-tag">Rankings</span>
               <span class="skill-tag">Rachas y fail states</span>
@@ -243,7 +243,7 @@
             <h3 class="exp-role">Diseñador UI/UX</h3>
             <span class="exp-date">2026</span>
           </div>
-          <p class="exp-company">Duo Git · UI Complete · iOS & Android · <a href="../pages/duogit.html">Ver case study →</a></p>
+          <p class="exp-company">Duo Git · Prototipo, sin lanzar · iOS & Android · <a href="../pages/duogit.html">Ver case study →</a></p>
 
           <ul class="exp-list">
             <li>
@@ -258,11 +258,14 @@
             <li>
               Creé una estrategia de medición con KPIs conductuales: tasa de recuperación de racha, retención a día 7, tiempo hasta el primer commit y objetivos de NPS.
             </li>
+            <li>
+              El prototipo funciona con datos simulados y todavía no tiene usuarios. La sincronización en vivo con GitHub es el siguiente paso.
+            </li>
           </ul>
 
           <div class="exp-tech">
             <span>Figma</span>
-            <span>GitHub API</span>
+            <span>GitHub API (planeada)</span>
             <span>Visualización de datos</span>
             <span>Diseño de widgets</span>
           </div>
@@ -292,6 +295,37 @@
             <span>Claude</span>
             <span>Node.js</span>
             <span>HTML/CSS</span>
+            <span>Design Systems</span>
+          </div>
+        </div>
+
+        <div class="experience-item">
+          <div class="exp-header">
+            <h3 class="exp-role">Diseñador UI/UX</h3>
+            <span class="exp-date">2026</span>
+          </div>
+          <p class="exp-company">Know your design · Verificación de design systems · <a href="../pages/know-your-design.html">Ver case study →</a></p>
+
+          <ul class="exp-list">
+            <li>
+              Una <strong>verificación de que las pantallas de Figma coincidan con su design system</strong>: recorre cada pantalla dentro del alcance y lista dónde no coinciden.
+            </li>
+            <li>
+              Definí los requisitos, pedí la auditoría, tomé las decisiones y aprobé los cambios. La herramienta se construyó y auditó con agentes de IA.
+            </li>
+            <li>
+              En Duo Git, un proyecto conceptual mío, nueve pantallas pasaron de <strong>612 errores y 434 avisos a 0 y 0</strong> con la misma herramienta y configuración. Claude hizo los cambios en Figma con mi aprobación, incluidas adiciones declaradas al sistema.
+            </li>
+            <li>
+              Los colores de iconos y las sombras quedan fuera de esa medición, y pasar no es una revisión de diseño. Probada en dos proyectos conceptuales míos; no la han probado otros diseñadores.
+            </li>
+          </ul>
+
+          <div class="exp-tech">
+            <span>Figma</span>
+            <span>Design Tokens</span>
+            <span>Claude</span>
+            <span>Node.js</span>
             <span>Design Systems</span>
           </div>
         </div>
@@ -347,7 +381,7 @@
       </div>
     </div>
   </footer>
-    <script src="../scripts/brand.js?v=1" defer></script>
+    <script src="../scripts/brand.js?v=2" defer></script>
     <script src="../scripts/tag-marquee.js?v=1" defer></script>
     <a class="lang-switch" href="../pages/resume.html" hreflang="en" lang="en" aria-label="View this page in English"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/></svg>English<span class="lang-code">EN</span></a>
   </body>

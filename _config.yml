@@ -13,3 +13,6 @@ exclude:
   - PATTERNS.md
   - DESIGN-DIRECTION.md
   - tools/
+  # waiting for review: not published, the files stay here
+  - pages/methodology.html
+  - pages/pipeline.html

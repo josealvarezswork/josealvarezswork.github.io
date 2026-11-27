@@ -34,10 +34,10 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=9" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=10" />
     <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
     <link rel="stylesheet" href="../assets/css/styles.css?v=6" />
-    <link rel="stylesheet" href="../assets/css/home.css?v=51" />
+    <link rel="stylesheet" href="../assets/css/home.css?v=83" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Display sans + handwriting for the annotation layer -->
@@ -77,7 +77,7 @@
         </button>
         <div class="nav-links">
           <a href="#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Proyectos</a>
-          <a href="../pages/methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a data-review="hidden" href="../pages/methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
           <a href="../pages/craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Oficio</a>
           <a href="./resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>CV</a>
           <a href="./about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>Sobre mí</a>
@@ -191,7 +191,7 @@
                   </p>
                   <ul class="sheet-list">
                     <li>Recuperación de racha</li>
-                    <li>Economía de XP</li>
+                    <li>Rangos por días de racha</li>
                     <li>Ranking por ligas</li>
                     <li>Familia de widgets</li>
                     <li>Guía de estilo UI</li>
@@ -241,7 +241,7 @@
       <section class="work" id="work">
         <div class="container">
           <p class="section-label">Case studies</p>
-          <p class="section-sub">Dos sistemas construidos sobre la misma idea: un bucle de progresión solo funciona si quien lo usa puede leer, en cualquier momento, en qué estado está y qué le está pidiendo el sistema. Personajes, economías de XP, rachas y <em>fail states</em> — diseñados como sistemas, no como decoración.</p>
+          <p class="section-sub">Dos sistemas construidos sobre la misma idea: un bucle de progresión solo funciona si quien lo usa puede leer, en cualquier momento, en qué estado está y qué le está pidiendo el sistema. Personajes, rangos de liga, rachas y <em>fail states</em> — diseñados como sistemas, no como decoración.</p>
         </div>
       </section>
 
@@ -253,8 +253,8 @@
         </div>
       </section>
 
-      <!-- ESA FRAMEWORK -->
-      <section class="esa">
+      <!-- ESA FRAMEWORK: hidden until reviewed -->
+      <section class="esa" data-review="hidden">
         <div class="container">
           <p class="section-label">El framework detrás de los dos</p>
 
@@ -326,7 +326,7 @@
           <p class="esa-mech" id="esa-mech">Anthropomorphism · Epley, Waytz &amp; Cacioppo</p>
           </div>
 
-          <a class="esa-link" href="../pages/methodology.html"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Leer el framework completo</a>
+          <a data-review="hidden" class="esa-link" href="../pages/methodology.html"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Leer el framework completo</a>
         </div>
       </section>
 
@@ -384,8 +384,9 @@
       </div>
     </footer>
 
-    <script src="../scripts/app.js?v=23"></script>
-      <script src="../scripts/brand.js?v=1" defer></script>
+    <script src="../scripts/app.js?v=26"></script>
+    <script src="../scripts/esa-carousel.js?v=2" defer></script>
+      <script src="../scripts/brand.js?v=2" defer></script>
     <a class="lang-switch" href="../" hreflang="en" lang="en" aria-label="View this page in English"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/></svg>English<span class="lang-code">EN</span></a>
   </body>
 </html>

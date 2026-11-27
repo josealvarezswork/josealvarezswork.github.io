@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Workflows Applied to Design · Jose Alvarez</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <meta name="description" content="Why I build flows where an AI agent checks design work, how they are put together, how the folders are organised and what is still unproven.">
+  <meta property="og:title" content="Agentic workflows applied to design">
+  <meta property="og:description" content="Why, what for and how: the flows I have built so far and what is still unproven.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://odejbyjose.com/pages/agentic-workflows.html">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://odejbyjose.com/pages/agentic-workflows.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=10" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=7">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=5">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
+  <link rel="stylesheet" href="../assets/css/same-page.css?v=3">
+  <link rel="stylesheet" href="../assets/css/agentic-workflows.css?v=1">
+</head>
+
+<body>
+  <div class="accent-bar" aria-hidden="true"></div>
+
+  <header class="site-header is-shared">
+    <nav class="nav">
+      <a class="brand" href="../index.html" aria-label="Home">
+        <svg class="brand-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <defs>
+              <filter id="brand-rough" x="-14%" y="-14%" width="128%" height="128%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="5" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+            <g filter="url(#brand-rough)">
+              <circle class="brand-ring" cx="20" cy="20" r="17"/>
+              <ellipse class="brand-o" cx="20" cy="20" rx="7.6" ry="10.2"/>
+              <line class="brand-slash" x1="26" y1="8.5" x2="14" y2="31.5"/>
+            </g>
+          </svg>
+        <span class="brand-text">
+          <span class="brand-name">Jose Alvarez</span>
+          <span class="brand-sub">Design</span>
+        </span>
+      </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+          <a href="../index.html#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Work</a>
+          <a data-review="hidden" href="./methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a href="./craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Craft</a>
+          <a href="./resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>Resume</a>
+          <a href="./about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>About</a>
+        </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-label">
+          <span>Own tools &middot; Agentic workflow</span><span>&middot;</span><span>2026</span>
+        </div>
+        <h1 class="hero-title">
+          Agentic workflows <span class="accent">applied to design</span>
+        </h1>
+        <p class="hero-subtitle">
+          Flows where an AI agent follows a written procedure, scripts check what can be checked, and I make the decisions.
+        </p>
+        <div class="ul-chips">
+          <span class="ul-chip">Two flows so far</span>
+          <span class="ul-chip">Built with Claude</span>
+          <span class="ul-chip is-flag">Status: one user, me. Not tested with other designers</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOWS -->
+    <section class="section" id="flows">
+      <div class="container">
+        <span class="section-label">The flows so far</span>
+        <h2 class="section-title">Two flows, <span class="accent">run on my own work</span></h2>
+        <div class="ul-two">
+          <article class="ul-card ag-card">
+            <h3>Know your design</h3>
+            <p>Checks Figma screens against their design system and lists where they differ.</p>
+            <p>Run on two concept projects of mine. With the current tool, neither file passes yet.</p>
+            <a class="ag-link" href="./know-your-design.html">How it works and how it was tested &rarr;</a>
+          </article>
+          <article class="ul-card ag-card">
+            <h3>Same Page</h3>
+            <p>Audits my case studies for contradictions and claims with nothing behind them.</p>
+            <p>It found real ones in my published pages, and I fixed them. A script checks that every quote is on the page.</p>
+            <a class="ag-link" href="./same-page.html">What it found and what failed &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="section" id="why">
+      <div class="container">
+        <span class="section-label">Why</span>
+        <h2 class="section-title">A clean result <span class="accent">can be wrong</span></h2>
+        <p class="section-text">
+          My first check on Cuak, a concept project of mine, reported 0 errors. It had skipped every text with more than one color. My own portfolio pages also disagreed with each other. Both problems showed up once something looked for them on purpose.
+        </p>
+      </div>
+    </section>
+
+    <!-- WHAT FOR -->
+    <section class="section" id="what-for">
+      <div class="container">
+        <span class="section-label">What for</span>
+        <h2 class="section-title">Order without <span class="accent">policing it by hand</span></h2>
+        <ul class="ul-list">
+          <li>To see where a project drifted from its own rules, screen by screen or sentence by sentence.</li>
+          <li>To repeat the same check after a change.</li>
+          <li>To keep a record of what was checked, so a claim has something behind it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- HOW -->
+    <section class="section" id="how">
+      <div class="container">
+        <span class="section-label">How</span>
+        <h2 class="section-title">The agent runs the steps, <span class="accent">code checks what it can</span></h2>
+        <ol class="ul-stages" aria-label="The parts of a flow">
+          <li><span class="ul-num">1</span><div><strong>A written procedure</strong><span class="ul-gate">A skill file says the steps, their order and when to stop.</span></div></li>
+          <li><span class="ul-num">2</span><div><strong>An agent that follows it</strong><span class="ul-gate">Claude runs the steps and says what ran and what did not.</span></div></li>
+          <li><span class="ul-num">3</span><div><strong>Scripts that check</strong><span class="ul-gate">Questions with a yes-or-no answer go to code: does this color come from the system, is this quote on the page.</span></div></li>
+          <li><span class="ul-num">4</span><div><strong>Me, deciding</strong><span class="ul-gate">What to fix, what counts as an exception and what gets published.</span></div></li>
+        </ol>
+        <p class="section-text" style="margin-top:var(--s-24)">
+          Not every step is enforced by code. Looking at the screens after a pass, for example, happens only if someone does it.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOLDERS -->
+    <section class="section" id="folders">
+      <div class="container">
+        <span class="section-label">Folder organisation</span>
+        <h2 class="section-title">A folder should answer <span class="accent">one question</span></h2>
+        <p class="section-text">
+          These are tools, not apps, so they do not follow an app layout. Files are separated by what they are for and where they run.
+        </p>
+        <div class="ul-two">
+          <figure class="ag-tree">
+            <figcaption>Know your design</figcaption>
+<pre><code>know-your-design/
+├── README.md    what it is
+├── CLAUDE.md    rules for the agent
+├── GUIDE.md     set up a project
+├── BUILD.md     build a system first
+├── skill/       the procedure
+├── engine/      runs inside Figma
+├── src/         runs in Node
+├── projects/    one config per file
+├── tests/       does the tool work?
+├── evidence/    what each run found
+└── audit/       how it was broken</code></pre>
+          </figure>
+          <figure class="ag-tree">
+            <figcaption>Same Page</figcaption>
+<pre><code>same-page/
+├── README.md    what it is
+├── CLAUDE.md    rules for the agent
+├── skill/same-page/
+│   ├── SKILL.md     the procedure
+│   ├── stages/      one guide each
+│   ├── references/  shared rules
+│   └── scripts/     the validator
+├── tests/       does the tool work?
+├── examples/    real runs
+├── docs/        design notes
+└── scripts/     syncs the skill</code></pre>
+          </figure>
+        </div>
+        <ul class="ul-list">
+          <li><strong>Configuration apart from behaviour.</strong> In Know your design, a new Figma file starts with a new config in <code>projects/</code>.</li>
+          <li><strong>Tests apart from evidence.</strong> Tests ask whether the tool works. Evidence keeps what happened on a real file.</li>
+          <li><strong>Before moving a file,</strong> check who calls it, what it receives and what it returns.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- UNPROVEN -->
+    <section class="section" id="unproven">
+      <div class="container">
+        <span class="section-label">Not proven yet</span>
+        <h2 class="section-title">What I <span class="accent">do not know</span></h2>
+        <ul class="ul-list">
+          <li>Whether anyone else can use these flows. No second person has run them.</li>
+          <li>Whether they save time. Nothing was timed.</li>
+          <li>Whether they work beyond my own concept projects and pages.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-heading">Working on AI-assisted design workflows?</h2>
+        <p class="cta-sub">I would rather show where a check fails than say it passes. Let's talk.</p>
+        <a class="cta-btn" href="mailto:josealvarezswork@gmail.com">Email me →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">&copy; 2026 Jose Alvarez</span>
+        <nav class="footer-nav">
+          <a href="../index.html">Work</a>
+          <a href="./cuak-design-system.html">Cuak system</a>
+          <a href="./duogit-design-system.html">DuoGit system</a>
+          <a href="./know-your-design.html">Know your design</a>
+          <a href="./same-page.html">Same Page</a>
+          <a href="./resume.html">Resume</a>
+          <a class="with-ico" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>Contact</a>
+        </nav>
+      </div>
+      <p class="footer-credit">Icons by <a href="https://streamlinehq.com" target="_blank" rel="noreferrer">Streamline</a> (CC BY 4.0) &middot; brand marks by <a href="https://simpleicons.org" target="_blank" rel="noreferrer">Simple Icons</a></p>
+    </div>
+  </footer>
+
+    <script src="../scripts/brand.js?v=2" defer></script>
+  </body>
+</html>

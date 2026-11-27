@@ -5,26 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DuoGit — Design System · Jose Alvarez</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
-  <meta name="description" content="The DuoGit design system: palette, four mascot states, league ranks and XP mechanics, the 60/40 zoning model, core components and the type scale.">
+  <meta name="description" content="The DuoGit design system: palette, four mascot states, eight league ranks, the 60/40 zoning model, core components and the type scale.">
   <meta property="og:title" content="DuoGit — Design System">
-  <meta property="og:description" content="Palette, four mascot states, league ranks and XP mechanics, the zoning model and the components behind the case study.">
+  <meta property="og:description" content="Palette, four mascot states, eight league ranks, the zoning model and the components behind the case study.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://odejbyjose.com/pages/duogit-design-system.html">
-  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-duogit.jpg">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-duogit-d.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="DuoGit — a behavioral design system for developer consistency">
+  <meta property="og:image:alt" content="Duo Git: commits become a mood, with the cat mascot">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://odejbyjose.com/pages/duogit-design-system.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=9" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&family=Space+Grotesk:wght@700&family=Inter:wght@400;600;700&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=10" />
   <link rel="stylesheet" href="../assets/css/system.css?v=7">
   <link rel="stylesheet" href="../assets/css/pages.css?v=5">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
   <link rel="stylesheet" href="../assets/css/design-system.css?v=1">
-  <link rel="stylesheet" href="../assets/css/duogit-design-system.css?v=1">
+  <link rel="stylesheet" href="../assets/css/duogit-design-system.css?v=2">
 </head>
 <body>
 
@@ -55,7 +55,7 @@
       </button>
       <div class="nav-links">
           <a href="../index.html#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Work</a>
-          <a href="./methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a data-review="hidden" href="./methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
           <a href="./craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Craft</a>
           <a href="./resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>Resume</a>
           <a href="./about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>About</a>
@@ -77,7 +77,7 @@
           <span class="pill accent">Gamification</span>
           <span class="pill">Developer Tools</span>
           <span class="pill">Streak Mechanics</span>
-          <span class="pill">ESA Framework</span>
+          <span class="pill" data-review="hidden">ESA Framework</span>
         </div>
         </div>
     </div>
@@ -88,55 +88,71 @@
     <div class="container">
       <span class="section-label">01 — Color Tokens</span>
       <h2 class="section-title">Palette built for <span class="accent">developer context</span></h2>
-      <p class="section-text">Dark-first palette that respects developer visual habits. Each color encodes a behavioral state — streaks, progress, and risk.</p>
+      <p class="section-text">Dark mode only. Primitives feed semantic variables named by role, and components use the semantic ones. A status color always comes with a word or an icon.</p>
 
       <div class="color-grid">
         <div class="color-swatch">
-          <div class="swatch-block" style="background:var(--accent)"></div>
+          <div class="swatch-block" style="background:#2563EB"></div>
           <div class="swatch-info">
-            <p class="swatch-name">Accent — Ghost</p>
-            <p class="swatch-token">--accent</p>
-            <p class="swatch-hex">#a78bfa</p>
+            <p class="swatch-name">Main action</p>
+            <p class="swatch-token">action/primary</p>
+            <p class="swatch-hex">#2563EB</p>
           </div>
         </div>
         <div class="color-swatch">
-          <div class="swatch-block" style="background:#10b981"></div>
+          <div class="swatch-block" style="background:#4ADE80"></div>
           <div class="swatch-info">
-            <p class="swatch-name">Streak — Active</p>
-            <p class="swatch-token">--accent-green</p>
-            <p class="swatch-hex">#10b981</p>
+            <p class="swatch-name">On track</p>
+            <p class="swatch-token">status/success</p>
+            <p class="swatch-hex">#4ADE80</p>
           </div>
         </div>
         <div class="color-swatch">
-          <div class="swatch-block" style="background:var(--accent-amber)"></div>
+          <div class="swatch-block" style="background:#FBBF24"></div>
           <div class="swatch-info">
-            <p class="swatch-name">Warning — At Risk</p>
-            <p class="swatch-token">--accent-warn</p>
-            <p class="swatch-hex">#f0b429</p>
+            <p class="swatch-name">At risk</p>
+            <p class="swatch-token">status/warning</p>
+            <p class="swatch-hex">#FBBF24</p>
           </div>
         </div>
         <div class="color-swatch">
-          <div class="swatch-block" style="background:#1E1A2E"></div>
+          <div class="swatch-block" style="background:#F87171"></div>
           <div class="swatch-info">
-            <p class="swatch-name">Background</p>
-            <p class="swatch-token">--bg</p>
-            <p class="swatch-hex">#1E1A2E</p>
+            <p class="swatch-name">Broken, urgent</p>
+            <p class="swatch-token">status/danger</p>
+            <p class="swatch-hex">#F87171</p>
           </div>
         </div>
         <div class="color-swatch">
-          <div class="swatch-block" style="background:#2D2845"></div>
+          <div class="swatch-block" style="background:#0B1118"></div>
           <div class="swatch-info">
-            <p class="swatch-name">Card Surface</p>
-            <p class="swatch-token">--bg-card</p>
-            <p class="swatch-hex">#2D2845</p>
+            <p class="swatch-name">Screen background</p>
+            <p class="swatch-token">bg/canvas</p>
+            <p class="swatch-hex">#0B1118</p>
           </div>
         </div>
         <div class="color-swatch">
-          <div class="swatch-block" style="background:#F2EFE8"></div>
+          <div class="swatch-block" style="background:#161E2C"></div>
           <div class="swatch-info">
-            <p class="swatch-name">Text Primary</p>
-            <p class="swatch-token">--text</p>
-            <p class="swatch-hex">#F2EFE8</p>
+            <p class="swatch-name">Card</p>
+            <p class="swatch-token">bg/surface</p>
+            <p class="swatch-hex">#161E2C</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#FFFFFF"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Main text</p>
+            <p class="swatch-token">text/primary</p>
+            <p class="swatch-hex">#FFFFFF</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#94A3B8"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Secondary text</p>
+            <p class="swatch-token">text/secondary</p>
+            <p class="swatch-hex">#94A3B8</p>
           </div>
         </div>
       </div>
@@ -148,36 +164,36 @@
     <div class="container">
       <span class="section-label">02 — Ghost States</span>
       <h2 class="section-title">4 emotional states, <span class="accent">1 streak arc</span></h2>
-      <p class="section-text">Ghost reacts to commit activity in real time. Each state maps to a psychological moment in the developer's consistency journey.</p>
+      <p class="section-text">Ghost is designed to react to commit activity. Each state maps to a psychological moment in the developer's consistency journey.</p>
 
       <div class="states-grid">
-        <div class="state-card" style="border-color:rgba(242,239,232,.08)">
+        <div class="state-card" style="border-color:rgba(59,130,246,.35)">
           <img class="state-img" src="../assets/img/duogit/state-neutral-crop.webp" alt="Ghost neutral, ready state">
-          <p class="state-name">Neutral — Ready</p>
-          <p class="state-trigger">Trigger: app open, no commits today</p>
+          <p class="state-name" style="color:#60A5FA">Neutral — Ready</p>
+          <p class="state-trigger">Trigger: waiting for the first commit of the day</p>
           <p class="state-desc">Day begins. Ghost is calm and expectant — no pressure, pure potential.</p>
           <span class="state-drive">Neutral state</span>
         </div>
-        <div class="state-card" style="border-color:rgba(16,185,129,.2)">
+        <div class="state-card" style="border-color:rgba(74,222,128,.2)">
           <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-happy-crop.webp" alt="Ghost happy, on-streak state">
-          <p class="state-name" style="color:#10b981">Happy — On Streak</p>
-          <p class="state-trigger">Trigger: 3+ day streak / commits today</p>
+          <p class="state-name" style="color:#4ADE80">Happy — On Track</p>
+          <p class="state-trigger">Trigger: consistent commits over the last 3 days</p>
           <p class="state-desc">Positive reinforcement. Ghost celebrates — glowing eyes, energetic posture. The system rewards consistency, not just volume.</p>
-          <span class="state-drive" style="color:#10b981;background:rgba(16,185,129,.1)">Core Drive 2: Accomplishment</span>
+          <span class="state-drive" style="color:#4ADE80;background:rgba(74,222,128,.1)">Core Drive 2: Accomplishment</span>
         </div>
         <div class="state-card" style="border-color:rgba(251,191,36,.2)">
           <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-worried-crop.webp" alt="Ghost worried, streak-at-risk state">
-          <p class="state-name" style="color:var(--accent-amber)">Worried — Streak at Risk</p>
-          <p class="state-trigger">Trigger: no commit by evening / streak about to break</p>
+          <p class="state-name" style="color:#FBBF24">Worried — At Risk</p>
+          <p class="state-trigger">Trigger: 20 hours without activity, 4 hours left</p>
           <p class="state-desc">Loss aversion activated. Ghost's distress makes the risk visible — empathetic urgency, not punishment.</p>
-          <span class="state-drive" style="color:var(--accent-amber);background:rgba(251,191,36,.1)">Core Drive 8: Loss Aversion</span>
+          <span class="state-drive" style="color:#FBBF24;background:rgba(251,191,36,.1)">Core Drive 8: Loss Aversion</span>
         </div>
-        <div class="state-card" style="border-color:rgba(155,143,212,.2)">
+        <div class="state-card" style="border-color:rgba(148,163,184,.3)">
           <img loading="lazy" decoding="async" class="state-img" src="../assets/img/duogit/state-sad-crop.webp" alt="Ghost sad, streak-broken state">
-          <p class="state-name" style="color:var(--accent)">Sad — Streak Broken</p>
-          <p class="state-trigger">Trigger: missed day, streak resets</p>
+          <p class="state-name" style="color:#94A3B8">Sad — Streak Broken</p>
+          <p class="state-trigger">Trigger: missed yesterday, streak resets</p>
           <p class="state-desc">Emotional cost acknowledged — then resilience. Ghost mourns with the developer, then invites a guilt-free restart.</p>
-          <span class="state-drive" style="color:var(--accent);background:rgba(155,143,212,.1)">Guilt-free restart</span>
+          <span class="state-drive" style="color:#CBD5E1;background:rgba(148,163,184,.12)">Guilt-free restart</span>
         </div>
       </div>
     </div>
@@ -211,52 +227,61 @@
   <section class="section">
     <div class="container">
       <span class="section-label">04 — Progression System</span>
-      <h2 class="section-title">League ranks & <span class="accent">XP mechanics</span></h2>
-      <p class="section-text">Social influence and status identity (Core Drive 5). The league system gives developers a place to belong — and a reason to keep their streak.</p>
+      <h2 class="section-title">Eight ranks, <span class="accent">earned by streak days</span></h2>
+      <p class="section-text">Social influence and status identity (Core Drive 5). The league system gives developers a place to belong — and a reason to keep their streak. Each rank asks for a minimum streak.</p>
 
       <div class="league-grid">
-        <div class="league-card" style="border-color:rgba(180,140,90,.2);background:rgba(180,140,90,.04)">
-          <div class="league-icon">🥉</div>
-          <p class="league-name" style="color:#b48c5a">Bronze</p>
-          <p class="league-xp">0 — 499 XP</p>
+        <div class="league-card">
+          <div class="league-num">#1</div>
+          <p class="league-name" style="color:#4ADE80">Jr Dev</p>
+          <p class="league-min">Starting rank</p>
         </div>
-        <div class="league-card" style="border-color:rgba(180,180,180,.2);background:rgba(180,180,180,.04)">
-          <div class="league-icon">🥈</div>
-          <p class="league-name" style="color:#b0b0b0">Silver</p>
-          <p class="league-xp">500 — 1,499 XP</p>
+        <div class="league-card">
+          <div class="league-num">#2</div>
+          <p class="league-name" style="color:#60A5FA">Mid Dev</p>
+          <p class="league-min">7 days</p>
         </div>
-        <div class="league-card" style="border-color:rgba(212,175,55,.2);background:rgba(212,175,55,.04)">
-          <div class="league-icon">🥇</div>
-          <p class="league-name" style="color:#d4af37">Gold</p>
-          <p class="league-xp">1,500 — 3,999 XP</p>
+        <div class="league-card">
+          <div class="league-num">#3</div>
+          <p class="league-name" style="color:#F97316">Sr Dev</p>
+          <p class="league-min">30 days</p>
         </div>
-        <div class="league-card" style="border-color:rgba(155,143,212,.3);background:rgba(155,143,212,.06)">
-          <div class="league-icon">💎</div>
-          <p class="league-name" style="color:var(--accent)">Diamond</p>
-          <p class="league-xp">4,000 — 9,999 XP</p>
+        <div class="league-card">
+          <div class="league-num">#4</div>
+          <p class="league-name" style="color:#CBD5E1">Commit Ninja</p>
+          <p class="league-min">60 days</p>
         </div>
-        <div class="league-card" style="border-color:rgba(255,80,120,.25);background:rgba(255,80,120,.05)">
-          <div class="league-icon">👑</div>
-          <p class="league-name" style="color:#e84c7d">Legend</p>
-          <p class="league-xp">10,000+ XP</p>
+        <div class="league-card">
+          <div class="league-num">#5</div>
+          <p class="league-name" style="color:#C084FC">Code Wizard</p>
+          <p class="league-min">90 days</p>
+        </div>
+        <div class="league-card">
+          <div class="league-num">#6</div>
+          <p class="league-name" style="color:#FBBF24">Architect</p>
+          <p class="league-min">150 days</p>
+        </div>
+        <div class="league-card">
+          <div class="league-num">#7</div>
+          <p class="league-name" style="color:#A5B4FC">Ghost Senior</p>
+          <p class="league-min">250 days</p>
+        </div>
+        <div class="league-card">
+          <div class="league-num">#8</div>
+          <p class="league-name" style="color:#38BDF8">10x Dev</p>
+          <p class="league-min">365 days</p>
         </div>
       </div>
 
-      <div style="margin-top: var(--s-20);padding: var(--s-20) var(--s-24);background:var(--bg-card);border-radius:var(--r);border:1px solid var(--stroke-light)">
-        <p style="font-size:13px;color:var(--muted);line-height:1.7">
-          <strong style="color:var(--text)">XP sources:</strong> Daily commit (+10 XP), streak milestone (+25 XP), 7-day streak (+50 XP), first commit of day (+5 XP bonus). XP decay on missed days activates loss aversion without permanent punishment.
-        </p>
-      </div>
+      <p class="section-text" style="margin-top: var(--s-20)">A separate leaderboard compares points, in Junior, Mid and Senior tabs. Points come from streak consistency and SPACE metrics.</p>
 
-      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap: var(--s-20);align-items:center;margin-top: var(--s-24)">
-        <div style="border-radius:var(--r);overflow:hidden;background:#0a0a0d;border:1px solid var(--stroke-light);padding: var(--s-16)">
-          <img loading="lazy" decoding="async" src="../assets/img/duogit/annotated-league.webp" alt="DuoGit League screen — leaderboard" style="width:100%;border-radius: var(--r-sm);display:block">
-        </div>
+      <div class="league-screen">
+        <img loading="lazy" decoding="async" src="../assets/img/duogit/system-league-rank.webp" width="553" height="1012" alt="DuoGit League screen — Mid tab leaderboard with points">
         <div class="annotation-item" style="margin:0">
           <div class="annotation-dot">4</div>
           <div>
             <p class="annotation-label">League standing — own screen</p>
-            <p class="annotation-text">A full leaderboard, not a badge stapled to the dashboard. "You" is highlighted among peers by seniority tier — social identity anchor, Core Drive 5. It's opt-in: developers navigate here, it isn't pushed at them.</p>
+            <p class="annotation-text">A full leaderboard, not a badge stapled to the dashboard. "You" is highlighted among peers in the same seniority tab — social identity anchor, Core Drive 5. It's opt-in: developers navigate here, it isn't pushed at them.</p>
           </div>
         </div>
       </div>
@@ -295,7 +320,7 @@
               <div class="zone-data-bar">60% League</div>
               <div class="zone-emotional-bar">40% Ghost</div>
             </div>
-            <p class="zone-desc">League rank + XP meter. Social identity — who you are in the developer community.</p>
+            <p class="zone-desc">League rank + points. Social identity — who you are in the developer community.</p>
             <p class="zone-drive">→ Core Drive 5: Social Influence</p>
           </div>
         </div>
@@ -337,14 +362,14 @@
           <div class="ba-card-header">After — DuoGit interface</div>
           <div class="ba-card-body cmp-slider" style="padding:0;background:#0a0a0d">
             <div class="cmp-track">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-dashboard.webp" alt="DuoGit dashboard — same activity, framed as streak and emotional state">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-metrics.webp" alt="DuoGit SPACE metrics screen">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-league.webp" alt="DuoGit league rank screen">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-profile.webp" alt="DuoGit profile screen">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-dashboard.webp" alt="" aria-hidden="true">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-metrics.webp" alt="" aria-hidden="true">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-league.webp" alt="" aria-hidden="true">
-              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/compare-profile.webp" alt="" aria-hidden="true">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/system-dashboard.webp" alt="DuoGit dashboard — same activity, framed as streak and emotional state">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/system-metrics.webp" alt="DuoGit SPACE metrics screen">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/system-league.webp" alt="DuoGit league ranks screen">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/system-league-rank.webp" alt="DuoGit league leaderboard screen">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/system-dashboard.webp" alt="" aria-hidden="true">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/system-metrics.webp" alt="" aria-hidden="true">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/system-league.webp" alt="" aria-hidden="true">
+              <img loading="lazy" decoding="async" class="cmp-img" src="../assets/img/duogit/system-league-rank.webp" alt="" aria-hidden="true">
             </div>
           </div>
           <p class="ba-annotation">Same underlying data — streak framing, Ghost's emotional state, SPACE metrics. Absence feels <strong style="color:var(--accent)">recoverable, not shameful</strong>.</p>
@@ -391,64 +416,54 @@
     <div class="container">
       <span class="section-label">08 — Components</span>
       <h2 class="section-title">Core <span class="accent">UI components</span></h2>
+      <p class="section-text">The Figma file has 13 components: Button, Badge, Chip, Progress, Header, Tab bar, Metric card, Stat row, Feature row, Rank card, Leaderboard row, Commit row and Mood card. Below, redrawn for this page: two of them, plus the streak card and the risk widget, which are not components yet.</p>
 
       <div class="component-grid">
 
         <div class="component-card">
-          <p class="component-name">Streak Counter</p>
+          <p class="component-name">Streak card</p>
           <div class="streak-counter">
-            <div class="streak-num">14</div>
+            <div class="streak-num">7</div>
             <div>
-              <p class="streak-label">Day streak 🔥</p>
-              <p class="streak-sub">Ghost is happy</p>
+              <p class="streak-label">Current streak</p>
+              <p class="streak-sub">On track</p>
             </div>
           </div>
-          <p class="component-desc">Primary retention mechanism. Streak count + Ghost state + fire emoji = social proof of consistency. Resets with emotional recovery message, not harsh punishment.</p>
+          <p class="component-desc">The main retention signal on the dashboard: day count, status word and Ghost's mood read together. The word travels with the color.</p>
         </div>
 
         <div class="component-card">
-          <p class="component-name">XP Progress Bar</p>
-          <div class="progress-demo">
-            <div class="progress-label">
-              <span>Gold League</span>
-              <span style="color:var(--accent)">2,340 / 4,000 XP</span>
-            </div>
+          <p class="component-name">Rank card</p>
+          <div class="rank-demo">
+            <p class="rank-demo-name">Mid Dev <span>Your rank</span></p>
+            <p class="rank-demo-min">Min. streak: 7 days · 7d / 30d</p>
             <div class="progress-track">
-              <div class="progress-fill" style="width:58%;background:linear-gradient(90deg,var(--accent),#b8aee0)"></div>
+              <div class="progress-fill" style="width:22%;background:#3B82F6"></div>
             </div>
           </div>
-          <div class="progress-demo">
-            <div class="progress-label">
-              <span>Diamond League</span>
-              <span style="color:#d4af37">3,890 / 4,000 XP</span>
-            </div>
-            <div class="progress-track">
-              <div class="progress-fill" style="width:97%;background:linear-gradient(90deg,#d4af37,#f0d060)"></div>
-            </div>
-          </div>
-          <p class="component-desc">Determinate progress toward next league. Near-completion state (97%) activates the Endowed Progress Effect — users close to a goal are more motivated to complete it.</p>
+          <p class="component-desc">Where the developer stands and what the next rank asks for. Ranks already passed and ranks still locked use the same card.</p>
         </div>
 
         <div class="component-card">
-          <p class="component-name">Urgency Countdown Widget</p>
-          <div style="margin: var(--s-16) 0;padding: var(--s-16);background:rgba(251,191,36,.06);border-radius: var(--r-sm);border:1px solid rgba(251,191,36,.2)">
-            <p style="font-size:11px;color:var(--accent-amber);letter-spacing:.06em;text-transform:uppercase;margin-bottom: var(--s-8)">⚠ Streak at risk</p>
-            <p style="font-size:28px;font-weight:700;color:var(--accent-amber);letter-spacing:-.01em">4h 23m</p>
-            <p style="font-size:12px;color:var(--muted);margin-top: var(--s-4)">Ghost is getting worried</p>
+          <p class="component-name">Risk widget</p>
+          <div class="risk-demo">
+            <p class="risk-demo-title">Save your streak</p>
+            <p class="risk-demo-time">03:45:12</p>
+            <p class="risk-demo-note">Don't break your streak!</p>
           </div>
-          <p class="component-desc">Home screen widget. Passive loss aversion — visible without opening the app. The most powerful retention touchpoint in the system.</p>
+          <p class="component-desc">Home screen widget with a countdown. Passive loss aversion — visible without opening the app. The most powerful retention touchpoint in the system.</p>
         </div>
 
         <div class="component-card">
-          <p class="component-name">SPACE Metric Cards</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap: var(--s-8);margin: var(--s-16) 0">
-            <div style="padding: var(--s-12);background:var(--bg-elevated);border-radius: var(--r-sm);border:1px solid var(--stroke-light)">
-              <p style="font-size:10px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase">Satisfaction</p>
-              <p style="font-size:20px;font-weight:700;color:#10b981">87%</p>
+          <p class="component-name">Metric card</p>
+          <div class="metric-demo">
+            <div>
+              <p class="metric-demo-label">Flow time</p>
+              <p class="metric-demo-value">4.5h <span>↑ +12%</span></p>
             </div>
-            <div style="padding: var(--s-12);background:var(--bg-elevated);border-radius: var(--r-sm);border:1px solid var(--stroke-light)">
-              <p style="font-size:10px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase">Activity</p>
-              <p style="font-size:20px;font-weight:700;color:var(--accent)">14d</p>
+            <div>
+              <p class="metric-demo-label">PR velocity</p>
+              <p class="metric-demo-value">2.4 <small>/day</small> <span>↑ +3</span></p>
             </div>
           </div>
           <p class="component-desc">SPACE framework metrics (Satisfaction, Performance, Activity, Communication, Efficiency) — translates GitHub data into developer wellbeing signals, not just productivity numbers.</p>
@@ -463,25 +478,40 @@
     <div class="container">
       <span class="section-label">09 — Typography</span>
       <h2 class="section-title">Type <span class="accent">system</span></h2>
+      <p class="section-text">15 text styles from 10 to 52 px. Space Grotesk for titles, Inter for text, Fira Mono for commits and points.</p>
 
       <div class="type-grid">
         <div class="type-item">
-          <p class="type-meta">Display — Bricolage Grotesque 700</p>
-          <p style="font-family:var(--serif);font-size:38px;font-weight:700;letter-spacing:-.02em;line-height:1.1">Your streak<br><em style="color:var(--accent)">is still alive.</em></p>
+          <p class="type-meta">Display/Hero — Space Grotesk 700 · 52 / 56</p>
+          <p style="font-family:'Space Grotesk',sans-serif;font-size:52px;font-weight:700;line-height:56px">7 days</p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Heading — Bricolage Grotesque 600</p>
-          <p style="font-size:22px;font-weight:600;letter-spacing:-.01em">14 day streak 🔥</p>
+          <p class="type-meta">Heading/Screen — Space Grotesk 700 · 22 / 28</p>
+          <p style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;line-height:28px">Current Streak</p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Body — Bricolage Grotesque 400 · 15px · 1.8 leading</p>
-          <p style="font-size:15px;color:var(--muted);line-height:1.8">Ghost is on your side. Every commit counts — even tiny ones. Missing a day doesn't erase your progress, it just gives Ghost something to worry about.</p>
+          <p class="type-meta">Body/Default — Inter 400 · 14 / 20</p>
+          <p style="font-family:'Inter',sans-serif;font-size:14px;color:var(--muted);line-height:20px">Your coding activity directly affects your companion's mood.</p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Label / Caption — Bricolage Grotesque 500 · 11px · 0.1em tracking</p>
-          <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Gold League · Updated just now</p>
+          <p class="type-meta">Label/Overline — Inter 700 · 11 / 16</p>
+          <p style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;line-height:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Streak history</p>
+        </div>
+        <div class="type-item">
+          <p class="type-meta">Code/Points — Fira Mono 700 · 16 / 24</p>
+          <p style="font-family:'Fira Mono',monospace;font-size:16px;font-weight:700;line-height:24px">3400</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 10 CHECKED AGAINST FIGMA -->
+  <section class="section" id="checked">
+    <div class="container">
+      <span class="section-label">10 — Checked against Figma</span>
+      <h2 class="section-title">From 612 errors to 0, <span class="accent">then 31 it had skipped</span></h2>
+      <p class="section-text">In November 2026 the nine product screens passed Know your design: 0 errors and 0 warnings, down from 612 and 434. That run left icon colors out. The check now reads them, and the screens do not pass: 31 icon colors on four screens are not bound to the system. Also outside the measurement are 14 shadows without an effect style. Contrast and visual hierarchy are not measured, and the app code does not read these tokens yet.</p>
+      <p class="section-text" style="margin-top: var(--s-16)"><a href="./know-your-design.html" style="color:var(--accent-text)">How the check works and how it was tested →</a></p>
     </div>
   </section>
 
@@ -491,13 +521,13 @@
         <p class="footer-copy">Jose Alvarez · DuoGit Design System · 2026</p>
         <nav class="footer-nav">
           <a href="./duogit.html">Case Study</a>
-          <a href="../pages/methodology.html">ESA Framework</a>
+          <a data-review="hidden" href="../pages/methodology.html">ESA Framework</a>
           <a href="../index.html">Portfolio</a>
         </nav>
       </div>
     </div>
   </footer>
 
-    <script src="../scripts/brand.js?v=1" defer></script>
+    <script src="../scripts/brand.js?v=2" defer></script>
   </body>
 </html>

@@ -7,17 +7,17 @@
   <title>DuoGit — Mobile App Case Study · Jose Alvarez</title>
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <meta name="description"
-    content="Case study: DuoGit — A cross-platform React Native app that transforms GitHub activity into visible, motivating progress through an emotional mascot system, SPACE metrics, and league ranking.">
+    content="Case study: DuoGit, a concept app prototyped in React Native with mock data. It turns GitHub activity into visible progress through an emotional mascot, SPACE metrics and a league ranking.">
   <meta property="og:title" content="DuoGit — Product Design Case Study">
   <meta property="og:description" content="Filling the market gap between utilitarian coding tools and generic gamification apps.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://odejbyjose.com/pages/duogit.html">
   <!-- JPEG at 1200x630: LinkedIn does not reliably render WebP, and a
        square image is cropped unpredictably in the feed. -->
-  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-duogit.jpg">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-duogit-d.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="DuoGit — a behavioral design system for developer consistency">
+  <meta property="og:image:alt" content="Duo Git: commits become a mood, with the cat mascot">
   <link rel="canonical" href="https://odejbyjose.com/pages/duogit.html">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
     rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=9" />
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=10" />
   <link rel="stylesheet" href="../assets/css/system.css?v=7">
   <link rel="stylesheet" href="../assets/css/pages.css?v=5">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
@@ -67,7 +67,7 @@
       </button>
       <div class="nav-links">
           <a href="../index.html#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Work</a>
-          <a href="./methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a data-review="hidden" href="./methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
           <a href="./craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Craft</a>
           <a href="./resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>Resume</a>
           <a href="./about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>About</a>
@@ -91,7 +91,7 @@
             The developer's <span class="accent">emotional companion</span>
           </h1>
           <p class="hero-subtitle">
-            GitHub tracks what you did. DuoGit makes you want to do it again. A cross-platform mobile app that turns cold commit data into motivating emotional feedback — filling the gap between utilitarian dev tools and generic gamification.
+            GitHub tracks what you did. DuoGit makes you want to do it again. A mobile app concept, prototyped with mock data, that turns cold commit data into motivating emotional feedback — filling the gap between utilitarian dev tools and generic gamification.
           </p>
           <div class="hero-image">
             <img src="../assets/img/duogit/portada.webp" alt="DuoGit — App Overview" />
@@ -122,7 +122,7 @@
           <div class="slot-box">
             <span class="slot-layer">Research · Situation</span>
             <span class="slot-name">Evidence that developers care about streaks</span>
-            <p class="slot-why"><em>Users care deeply about their coding streaks</em> is the claim the whole project rests on, and nothing on this page supports it. If it is wrong, the mascot, the league and the XP economy are all solving something nobody feels — which is worth half a day to find out before building more of them.</p>
+            <p class="slot-why"><em>Users care deeply about their coding streaks</em> is the claim the whole project rests on, and nothing on this page supports it. If it is wrong, the mascot and the league are all solving something nobody feels — which is worth half a day to find out before building more of them.</p>
             <ul class="slot-spec">
               <li>A short survey in 2–3 developer communities, <strong>n ≥ 30</strong>: do you look at your contribution graph, how often, and what happens when it breaks</li>
               <li>Cheaper alternative — a teardown of what developers already do about it: the streak bots, the README badges, the commit-a-day repos that exist today</li>
@@ -267,10 +267,6 @@
           </div>
           <p>Targets, not results — DuoGit has no users yet. These are the numbers the behavioural design is aimed at, taken from what streak mechanics achieve in comparable products.</p>
         </div>
-        <div class="quote" style="margin-top: var(--s-40);">
-          <p>"Generic habit trackers lack software development context... they require manual input and do not differentiate meaningful code from generic tasks."</p>
-          <cite>— UX Strategic Insight #4</cite>
-        </div>
       </div>
     </section>
 
@@ -405,12 +401,12 @@
       <div class="container">
         <span class="section-label"><span class="star-tag" role="img" aria-label="Action" data-star="A">A</span>The solution</span>
         <h2 class="section-title">Visualizing GitHub Progress</h2>
-        <p class="section-text" style="margin-bottom: var(--s-32)">DuoGit provides GitHub integration presented dynamically across the app's screens and widget states natively on iOS & Android, using emotional feedback to drive behavior.</p>
+        <p class="section-text" style="margin-bottom: var(--s-32)">DuoGit is designed to show GitHub activity across the app's screens and widget states, using emotional feedback to drive behavior. The React Native prototype runs on mock data; the GitHub connection and the widget are planned.</p>
         <div class="features-list">
           <div class="feature-row">
             <div class="feature-info">
               <h4>Dynamic Mascot States</h4>
-              <p>4 illustrated avatar expressions — Happy, Worried, Sad, Neutral — each with a unique glow halo. The emotional state mirrors commit activity in real time.</p>
+              <p>4 illustrated avatar expressions — Happy, Worried, Sad, Neutral — each with a unique glow halo. Each state stands for a moment in the streak; in the prototype it is set from mock data.</p>
             </div><span class="feature-badge shipped">Built</span>
           </div>
           <div class="feature-row">
@@ -434,19 +430,19 @@
           <div class="feature-row">
             <div class="feature-info">
               <h4>GitHub OAuth</h4>
-              <p>Direct integration via expo-auth-session. Connects automatically to commits — no manual tracking required.</p>
+              <p>The authorization screen is built, the sign-in is not: its button goes straight into the app. Planned with expo-auth-session, so commits arrive without manual tracking.</p>
             </div><span class="feature-badge" style="background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.3);">Designed</span>
           </div>
           <div class="feature-row">
             <div class="feature-info">
               <h4>Home Screen Widget</h4>
-              <p>iOS & Android widget showing live streak, mascot state and daily commit status at a glance from the home screen.</p>
+              <p>Planned for iOS and Android: streak, mascot state and daily commit status at a glance from the home screen.</p>
             </div><span class="feature-badge next">Next</span>
           </div>
         </div>
         <!-- GitHub OAuth Screen Preview -->
         <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom: var(--s-16);margin-top: var(--s-48);">GitHub OAuth — What's Coming</h3>
-        <p class="section-text" style="margin-bottom: var(--s-32)">The next screen to ship. A GitHub-native authorization flow via <code style="font-size:12px;background:var(--bg-card);border:1px solid var(--stroke-light);padding:2px 6px;border-radius:4px;">expo-auth-session</code> — no manual tracking, no CSV uploads. Connect once and every commit syncs automatically.</p>
+        <p class="section-text" style="margin-bottom: var(--s-32)">The next piece to wire. The plan is a GitHub authorization flow through <code style="font-size:12px;background:var(--bg-card);border:1px solid var(--stroke-light);padding:2px 6px;border-radius:4px;">expo-auth-session</code>, with no manual tracking and no CSV uploads. Today the screen exists and no account is connected.</p>
 
         <div style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius: var(--r-xl);padding: var(--s-48) var(--s-32);display:flex;gap: var(--s-48);align-items:center;justify-content:center;flex-wrap:wrap;">
 
@@ -459,10 +455,10 @@
           <div style="max-width:380px;flex:1;">
             <div style="display:flex;flex-direction:column;gap: var(--s-20);">
               <div class="note-lg">
-                <div class="note-lg-head"><h3>What the connection does</h3></div>
-                <p><strong>Native GitHub Auth.</strong> Uses <code>expo-auth-session</code> for a proper OAuth 2.0 flow — no password stored, no third-party keys, just GitHub's own consent screen.</p>
-                <p><strong>Automatic Sync.</strong> Once authorized, every commit syncs in real time. Streak tracking, SPACE metrics and Liga ranking all update without any manual input.</p>
-                <p><strong>Read-Only Scope.</strong> Minimal permissions — Duogit only reads activity. It never writes, creates, or modifies anything in your repositories.</p>
+                <div class="note-lg-head"><h3>What the connection should do</h3></div>
+                <p><strong>GitHub sign-in (planned).</strong> <code>expo-auth-session</code> for an OAuth 2.0 flow on GitHub's own consent screen, with no password stored.</p>
+                <p><strong>Automatic sync (planned).</strong> Once authorized, new commits would update the streak, the SPACE metrics and the Liga ranking without manual input.</p>
+                <p><strong>Read activity only (intent).</strong> DuoGit is meant to read activity and never write, create or modify anything in your repositories. The permissions are not defined in code yet.</p>
               </div>
               <div class="note-lg note-lg--sm">
                 <div class="note-lg-head"><h3>Implementation</h3></div>
@@ -511,7 +507,7 @@
                 <div class="note-lg-head"><h3>The widget family</h3></div>
                 <p><strong>Small — Streak at a Glance.</strong> Current streak count + happy mascot in a compact 2×2 tile. One look = full context, no app open needed.</p>
                 <p><strong>Small — Liga Rank.</strong> Current league rank and title. Motivates without friction — no need to open the app to know where you stand.</p>
-                <p><strong>Wide — Streak Alert.</strong> Real-time countdown when your streak is at risk. The worried mascot creates urgency without being annoying — emotional design with intent.</p>
+                <p><strong>Wide — Streak Alert.</strong> A countdown when your streak is at risk. The worried mascot creates urgency without being annoying — emotional design with intent.</p>
               </div>
               <div class="note-lg note-lg--sm">
                 <div class="note-lg-head"><h3>Design Principle</h3></div>
@@ -524,7 +520,7 @@
         <!-- App Screens — Infinite Slider -->
         <div style="margin-top: var(--s-64)">
           <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom: var(--s-16)">The Mobile App — 9 Screens</h3>
-          <p class="section-text" style="margin-bottom: var(--s-32)">Beyond the widget, DuoGit is built as a full React Native app. Each screen is purpose-built around a single behavioral goal: making the developer's progress impossible to ignore.</p>
+          <p class="section-text" style="margin-bottom: var(--s-32)">Beyond the widget, DuoGit is prototyped in React Native with mock data. Each screen is designed around a single behavioral goal: making the developer's progress impossible to ignore.</p>
 
           <div class="screens-slider" style="background:var(--bg-elevated);border:1px solid var(--stroke-light);border-radius: var(--r-xl);padding: var(--s-40) 0;">
             <div class="screens-track">
@@ -678,7 +674,7 @@
                   <tbody>
                     <tr style="border-bottom:1px solid var(--stroke-light)">
                       <td style="padding: 14px var(--s-12);color:var(--text-muted)">GitHub API Sync</td>
-                      <td style="padding: 14px var(--s-12);color:var(--accent)">Yes</td>
+                      <td style="padding: 14px var(--s-12);color:var(--accent-amber)">Planned</td>
                       <td style="padding: 14px var(--s-12);color:var(--text)">Yes</td>
                       <td style="padding: 14px var(--s-12);color:var(--text-faint)">No</td>
                     </tr>
@@ -706,7 +702,7 @@
             </div>
             <div>
               <div style="margin-top: var(--s-12);background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:var(--rl);overflow:hidden;padding: var(--s-28);display:flex;flex-direction:column;justify-content:center;gap: var(--s-16);">
-                <p style="font-size:15px;line-height:1.8;color:var(--text-muted);">DuoGit owns the <strong style="color:var(--text);">developer behavior layer</strong> by pairing commit sync with emotional streak coaching. It's designed to turn progress signals into motivating feedback, closing the gap between code tracking and sustained coding habits.</p>
+                <p style="font-size:15px;line-height:1.8;color:var(--text-muted);">DuoGit aims at the <strong style="color:var(--text);">developer behavior layer</strong> by pairing commit data with emotional streak coaching. It's designed to turn progress signals into motivating feedback, closing the gap between code tracking and sustained coding habits.</p>
                 <p style="font-size:15px;line-height:1.8;color:var(--text-muted);">Where GitHub tracks history and Duolingo gamifies generic habits, DuoGit is the only product built specifically for <strong style="color:var(--text);">developer consistency</strong> — not just activity.</p>
               </div>
             </div>
@@ -720,7 +716,7 @@
       <div class="container">
         <span class="section-label"><span class="star-tag" role="img" aria-label="Result" data-star="R">R</span>Results</span>
         <h2 class="section-title">Bringing it all together</h2>
-        <p class="section-text" style="margin-bottom: var(--s-40)">DuoGit is not yet in production — these are design targets benchmarked against industry data, not live metrics. The interaction loop is built and testable; the numbers below reflect what success looks like once real users are in.</p>
+        <p class="section-text" style="margin-bottom: var(--s-40)">DuoGit is not yet in production — these are design targets benchmarked against industry data, not live metrics. The interaction loop is prototyped on mock data; the numbers below reflect what success looks like once real users are in.</p>
         <div class="results-grid">
           <div class="result-card">
             <div class="result-metric">
@@ -759,7 +755,7 @@
       <div class="container">
         <span class="section-label">The UI kit</span>
         <h2 class="section-title">UI Kit built for behavioral clarity</h2>
-        <p class="section-text">Every visual decision is codified — colors map directly to emotional states, not aesthetics. The system is implemented as <strong>NativeWind tokens</strong> inside the React Native codebase.</p>
+        <p class="section-text">Colors map to emotional states, not to taste. The ones below are defined as <strong>NativeWind tokens</strong> in the React Native prototype, although some screens still write values by hand. The Figma file has since moved on: see the <a href="./duogit-design-system.html" style="color:var(--accent-text)">design system page</a>.</p>
 
         <!-- Design Tokens -->
         <div style="margin-top: var(--s-40)">
@@ -857,7 +853,7 @@
         <a href="./duogit-design-system.html" style="margin-top:36px;display:flex;align-items:center;justify-content:space-between;gap: var(--s-16);padding:22px 26px;background:var(--bg-card);border:1px solid var(--stroke-light);border-radius:14px;transition:border-color .2s">
           <span>
             <strong style="display:block;font-size:15px;margin-bottom: var(--s-4);color:var(--text)">Explore the full DuoGit Design System →</strong>
-            <span style="font-size:13px;color:var(--text-muted)">Palette, 4 mascot states, league ranks &amp; XP mechanics, the 60/40 zoning model, core components and type system.</span>
+            <span style="font-size:13px;color:var(--text-muted)">Palette, 4 mascot states, 8 league ranks, the 60/40 zoning model, core components and type system.</span>
           </span>
         </a>
 
@@ -879,7 +875,7 @@
         <nav class="footer-nav">
           <a href="../index.html">Work</a>
           <a href="./cuak.html">Cuak</a>
-          <a href="./methodology.html">Framework</a>
+          <a data-review="hidden" href="./methodology.html">Framework</a>
           <a href="./resume.html">Resume</a>
           <a class="with-ico" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>Contact</a>
         </nav>
@@ -900,6 +896,6 @@
         else { vid.pause(); btn.textContent = 'Play'; }
       });
     </script>
-    <script src="../scripts/brand.js?v=1" defer></script>
+    <script src="../scripts/brand.js?v=2" defer></script>
   </body>
 </html>

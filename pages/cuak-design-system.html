@@ -10,21 +10,21 @@
   <meta property="og:description" content="Five emotional states plus a recovery moment, a palette built for clarity, the 60/40 zoning model and the component kit behind the case study.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://odejbyjose.com/pages/cuak-design-system.html">
-  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cuak.jpg">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-cuak-d.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Cuak — a fintech companion built on emotional design">
+  <meta property="og:image:alt" content="Cuak: your credit companion, with the duck mascot">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://odejbyjose.com/pages/cuak-design-system.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=9" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=10" />
   <link rel="stylesheet" href="../assets/css/system.css?v=7">
   <link rel="stylesheet" href="../assets/css/pages.css?v=5">
   <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
   <link rel="stylesheet" href="../assets/css/design-system.css?v=1">
-  <link rel="stylesheet" href="../assets/css/cuak-design-system.css?v=2">
+  <link rel="stylesheet" href="../assets/css/cuak-design-system.css?v=4">
 </head>
 <body>
 
@@ -55,7 +55,7 @@
       </button>
       <div class="nav-links">
           <a href="../index.html#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Work</a>
-          <a href="./methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a data-review="hidden" href="./methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
           <a href="./craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Craft</a>
           <a href="./resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>Resume</a>
           <a href="./about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>About</a>
@@ -78,7 +78,7 @@
           <span class="pill accent">Mascot UX</span>
           <span class="pill">Fintech</span>
           <span class="pill">Behavioral Design</span>
-          <span class="pill">ESA Framework</span>
+          <span class="pill" data-review="hidden">ESA Framework</span>
         </div>
         </div>
     </div>
@@ -89,55 +89,79 @@
     <div class="container">
       <span class="section-label">01 — Color Tokens</span>
       <h2 class="section-title">Palette built for <span class="accent">emotional clarity</span></h2>
-      <p class="section-text">Each color maps to an emotional state. No decorative choices — every token has a behavioral role.</p>
+      <p class="section-text">Eight of the values published in <code>tokens.json</code>, which is generated from the Figma file. The three status colors are picked by credit usage; the thresholds are a design decision, not measured behavior.</p>
 
       <div class="color-grid">
         <div class="color-swatch">
-          <div class="swatch-block" style="background:var(--brand-cuak)"></div>
+          <div class="swatch-block" style="background:#6B43D9"></div>
           <div class="swatch-info">
-            <p class="swatch-name">Accent — Happy</p>
-            <p class="swatch-token">--accent</p>
-            <p class="swatch-hex">var(--brand-cuak)</p>
+            <p class="swatch-name">Primary action</p>
+            <p class="swatch-token">--action-primary</p>
+            <p class="swatch-hex">#6B43D9</p>
+            <p class="swatch-hex">Buttons, links, active tab</p>
           </div>
         </div>
         <div class="color-swatch">
-          <div class="swatch-block" style="background:var(--accent-amber)"></div>
+          <div class="swatch-block" style="background:#FFF8F1"></div>
           <div class="swatch-info">
-            <p class="swatch-name">Warning — Worried</p>
-            <p class="swatch-token">--accent-warn</p>
-            <p class="swatch-hex">var(--accent-amber)</p>
+            <p class="swatch-name">App background</p>
+            <p class="swatch-token">--bg-app</p>
+            <p class="swatch-hex">#FFF8F1</p>
+            <p class="swatch-hex">Cream</p>
           </div>
         </div>
         <div class="color-swatch">
-          <div class="swatch-block" style="background:var(--accent)"></div>
+          <div class="swatch-block" style="background:#FFFFFF"></div>
           <div class="swatch-info">
-            <p class="swatch-name">Sad — Reset</p>
-            <p class="swatch-token">--accent-sad</p>
-            <p class="swatch-hex">var(--accent)</p>
-          </div>
-        </div>
-        <div class="color-swatch">
-          <div class="swatch-block" style="background:#1E1A2E"></div>
-          <div class="swatch-info">
-            <p class="swatch-name">Background</p>
-            <p class="swatch-token">--bg</p>
-            <p class="swatch-hex">#1E1A2E</p>
-          </div>
-        </div>
-        <div class="color-swatch">
-          <div class="swatch-block" style="background:#2D2845"></div>
-          <div class="swatch-info">
-            <p class="swatch-name">Card Surface</p>
+            <p class="swatch-name">Card</p>
             <p class="swatch-token">--bg-card</p>
-            <p class="swatch-hex">#2D2845</p>
+            <p class="swatch-hex">#FFFFFF</p>
+            <p class="swatch-hex">White</p>
           </div>
         </div>
         <div class="color-swatch">
-          <div class="swatch-block" style="background:#F2EFE8"></div>
+          <div class="swatch-block" style="background:#111827"></div>
           <div class="swatch-info">
-            <p class="swatch-name">Text Primary</p>
-            <p class="swatch-token">--text</p>
-            <p class="swatch-hex">#F2EFE8</p>
+            <p class="swatch-name">Text primary</p>
+            <p class="swatch-token">--text-primary</p>
+            <p class="swatch-hex">#111827</p>
+            <p class="swatch-hex">Titles and data</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#16A34A"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Up to date</p>
+            <p class="swatch-token">--color-status-success</p>
+            <p class="swatch-hex">#16A34A</p>
+            <p class="swatch-hex">Usage under 50%</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#D97706"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Watch your usage</p>
+            <p class="swatch-token">--color-status-warning</p>
+            <p class="swatch-hex">#D97706</p>
+            <p class="swatch-hex">50% to 79%</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#DC2626"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Over the safe zone</p>
+            <p class="swatch-token">--color-status-danger</p>
+            <p class="swatch-hex">#DC2626</p>
+            <p class="swatch-hex">80% or more</p>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background:#40B8AE"></div>
+          <div class="swatch-info">
+            <p class="swatch-name">Progress</p>
+            <p class="swatch-token">--progress-fill</p>
+            <p class="swatch-hex">#40B8AE</p>
+            <p class="swatch-hex">Goals, not a status</p>
           </div>
         </div>
       </div>
@@ -319,7 +343,7 @@
           <div class="annotation-dot">3</div>
           <div>
             <p class="annotation-label">Emotional state color — 40% zone</p>
-            <p class="annotation-text">Background color shifts with Cuak's state. Green = safe, yellow = at risk, purple = your move: the reset after a loss and the primary action. Visceral-level feedback (Don Norman) — no reading required.</p>
+            <p class="annotation-text">Status color follows credit usage: green under 50% of the limit, amber from 50 to 79%, red at 80% or more. Purple is the primary action. Visceral-level feedback (Don Norman) — no reading required.</p>
           </div>
         </div>
         <div class="annotation-item">
@@ -344,7 +368,7 @@
 
         <div class="component-card">
           <p class="component-name">Emotional State Badge</p>
-          <div class="badge-demo">
+          <div class="badge-demo cuak-ui">
             <span class="badge badge-neutral">Waiting</span>
             <span class="badge badge-happy">On Track</span>
             <span class="badge badge-worried">At Risk</span>
@@ -355,43 +379,43 @@
 
         <div class="component-card">
           <p class="component-name">Credit Usage Progress Bar</p>
-          <div class="progress-demo">
+          <div class="progress-demo cuak-ui">
             <div class="progress-label">
               <span>Credit used</span>
-              <span style="color:var(--brand-cuak)">42%</span>
+              <span>42%</span>
             </div>
             <div class="progress-track">
-              <div class="progress-fill" style="width:42%"></div>
+              <div class="progress-fill is-success" style="width:42%"></div>
             </div>
           </div>
-          <div class="progress-demo">
+          <div class="progress-demo cuak-ui">
             <div class="progress-label">
               <span>Credit used</span>
-              <span style="color:var(--accent-amber)">78%</span>
+              <span>78%</span>
             </div>
             <div class="progress-track">
-              <div class="progress-fill" style="width:78%;background:linear-gradient(90deg,var(--accent-amber),#f59e0b)"></div>
+              <div class="progress-fill is-warning" style="width:78%"></div>
             </div>
           </div>
-          <p class="component-desc">Determinate progress — communicates exactly where the user stands. Color shifts at threshold to signal state change.</p>
+          <p class="component-desc">Determinate progress — communicates exactly where the user stands. The color changes at 50% and at 80% to signal the new state.</p>
         </div>
 
         <div class="component-card">
           <p class="component-name">Action Card</p>
-          <div style="margin: var(--s-16) 0;padding: var(--s-16);background:var(--bg-elevated);border-radius: var(--r-sm);border:1px solid var(--stroke-light)">
-            <p style="font-size:12px;color:var(--faint);margin-bottom:6px">Cuak suggests</p>
-            <p style="font-size:14px;font-weight:500">Pay $80 to drop below 30%</p>
-            <p style="font-size:12px;color:var(--brand-cuak);margin-top: var(--s-4)">→ This keeps me happy 🦆</p>
+          <div class="cuak-ui cuak-note">
+            <p class="cuak-note-kicker">Cuak suggests</p>
+            <p class="cuak-note-title">Pay $80 to drop below 30%</p>
+            <p class="cuak-note-link">→ This keeps me happy 🦆</p>
           </div>
           <p class="component-desc">Nudge card that appears when usage approaches a threshold. First-person mascot voice — empathetic, not punitive.</p>
         </div>
 
         <div class="component-card">
           <p class="component-name">Countdown Widget (Urgency)</p>
-          <div style="margin: var(--s-16) 0;padding: var(--s-16);background:rgba(251,191,36,.06);border-radius: var(--r-sm);border:1px solid rgba(251,191,36,.2)">
-            <p style="font-size:11px;color:var(--accent-amber);letter-spacing:.06em;text-transform:uppercase;margin-bottom: var(--s-8)">⚠ Payment due</p>
-            <p style="font-size:28px;font-weight:700;color:var(--accent-amber);letter-spacing:-.01em">3d 14h</p>
-            <p style="font-size:12px;color:var(--muted);margin-top: var(--s-4)">Before Cuak gets worried</p>
+          <div class="cuak-ui cuak-note cuak-note--warning">
+            <p class="cuak-note-kicker"><span class="cuak-dot" aria-hidden="true"></span>Payment due</p>
+            <p class="cuak-note-figure">3d 14h</p>
+            <p class="cuak-note-kicker">Before Cuak gets worried</p>
           </div>
           <p class="component-desc">Real-time countdown activates Core Drive 8 (Loss Aversion) passively. Lives on home screen widget — visible without opening the app.</p>
         </div>
@@ -406,22 +430,32 @@
       <span class="section-label">07 — Typography</span>
       <h2 class="section-title">Type <span class="accent">system</span></h2>
 
+      <p class="section-text">Inter, with 24 role styles named Zone/Variant in the tokens. Six of them:</p>
+
       <div class="type-grid">
         <div class="type-item">
-          <p class="type-meta">Display — Bricolage Grotesque 700</p>
-          <p style="font-family:var(--serif);font-size:38px;font-weight:700;letter-spacing:-.02em;line-height:1.1">Your credit<br><em style="color:var(--accent)">is doing well.</em></p>
+          <p class="type-meta">Display/Brand — 700 · 42px</p>
+          <p class="cuak-ui cuak-type cuak-type--display">Cuak</p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Heading — Bricolage Grotesque 600</p>
-          <p style="font-size:22px;font-weight:600;letter-spacing:-.01em">Credit usage: 42%</p>
+          <p class="type-meta">Title/Screen — 700 · 24px</p>
+          <p class="cuak-ui cuak-type cuak-type--title">Your credit is doing well</p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Body — Bricolage Grotesque 400 · 15px · 1.8 leading</p>
-          <p style="font-size:15px;color:var(--muted);line-height:1.8">You're using 42% of your available credit. Cuak recommends keeping this below 30% for the best credit score impact.</p>
+          <p class="type-meta">Heading/MD — 700 · 17px</p>
+          <p class="cuak-ui cuak-type cuak-type--heading">Credit usage: 42%</p>
         </div>
         <div class="type-item">
-          <p class="type-meta">Label / Caption — Bricolage Grotesque 500 · 11px · 0.1em tracking</p>
-          <p style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Credit utilization · Updated now</p>
+          <p class="type-meta">Body/Regular — 400 · 15px · 130%</p>
+          <p class="cuak-ui cuak-type cuak-type--body">You're using 42% of your available credit.</p>
+        </div>
+        <div class="type-item">
+          <p class="type-meta">Label/Regular — 400 · 13px · 18px</p>
+          <p class="cuak-ui cuak-type cuak-type--label">Under 50% of the limit counts as up to date.</p>
+        </div>
+        <div class="type-item">
+          <p class="type-meta">Meta/Strong — 700 · 11px · 1.1px tracking</p>
+          <p class="cuak-ui cuak-type cuak-type--meta">UP TO DATE</p>
         </div>
       </div>
     </div>
@@ -447,7 +481,7 @@
       <h3 class="annotation-label" style="margin-top: var(--s-40); font-size:15px">Situation — a file that drifted</h3>
       <p class="section-text">The screens came from HTML imports, so colors, radii and sizes landed as literal values. None of it showed while drawing. It showed when two screens sat side by side. Measured on the 390 flow:</p>
       <div class="wf-stats">
-        <div class="wf-stat"><span class="wf-stat-fig">151</span><p>colors set by hand, not bound to a variable</p></div>
+        <div class="wf-stat"><span class="wf-stat-fig">151</span><p>colors set by hand, not bound to a variable, in the first count</p></div>
         <div class="wf-stat"><span class="wf-stat-fig">5</span><p>different radii on content cards (8, 12, 16, 20, 24)</p></div>
         <div class="wf-stat"><span class="wf-stat-fig">52</span><p>text styles, most of them near-duplicates such as 14.16 Bold and 12.98 SemiBold</p></div>
         <div class="wf-stat"><span class="wf-stat-fig">2</span><p>versions of the same design, at 390 and at 460 wide</p></div>
@@ -563,8 +597,8 @@
   <section class="section">
     <div class="container">
       <span class="section-label">12 — Lint, result and limits</span>
-      <h2 class="section-title">Ten rules, <span class="accent">and what they do not cover</span></h2>
-      <p class="section-text">Ten rules run inside Figma and return findings with the node id. Five are errors, five are warnings.</p>
+      <h2 class="section-title">The first ten rules, <span class="accent">and what they missed</span></h2>
+      <p class="section-text">These are the ten rules of the first version. They run inside Figma and return findings with the node id. Five are errors, five are warnings. The tool has changed since: it is now its own project, <a href="./know-your-design.html" style="color:var(--accent-text)">Know your design</a>.</p>
 
       <div class="wf-table-wrap">
         <table class="wf-table">
@@ -591,25 +625,22 @@
             <span class="note-lg-ico" aria-hidden="true"><svg><use href="../assets/img/icons.svg#i-data"/></svg></span>
             <h3>Result</h3>
           </div>
-          <div class="note-lg-figs note-lg-figs--even">
-            <div class="note-lg-fig-item note-lg-fig-item--warn">
-              <span class="note-lg-kicker">Colors set by hand</span>
-              <span class="note-lg-fig">151 → 0</span>
-              <p>Exceptions are brand logos, the keyboard and the card-color swatches, listed in the rules with the reason.</p>
-            </div>
+          <div class="note-lg-figs">
             <div class="note-lg-fig-item note-lg-fig-item--good">
               <span class="note-lg-kicker">Text styles</span>
               <span class="note-lg-fig">52 → 24</span>
               <p>Role styles instead of near-duplicates.</p>
             </div>
           </div>
-          <p><strong>24 screens, 10 rules, 0 errors, 0 warnings</strong> on the last run. The parity check caught <strong>4 line-height values</strong> I had typed by hand into <code>tokens.json</code>; they were regenerated from Figma. The lint found the one radius off the scale, on the sign-in sheet, and it became a token, <code>radius/sheet</code>.</p>
+          <p><strong>Correction.</strong> This page said 0 errors and 0 colors set by hand. That was wrong: the lint skipped texts with more than one color. With that fixed, on 25 November 2026 it found hand-set colors in three texts. On 26 November the current tool ran on all 24 screens: the same 6 errors, plus 26 warnings for spacing off the scale and tab bars drawn by hand. Nothing is fixed in Figma yet.</p>
+          <p>The parity check caught <strong>4 line-height values</strong> I had typed by hand into <code>tokens.json</code>; they were regenerated from Figma. The lint also found a radius off the scale, on the sign-in sheet, and it became a token, <code>radius/sheet</code>. <a href="./know-your-design.html" style="color:inherit;text-decoration:underline">How the check was tested and fixed →</a></p>
         </div>
 
         <div class="note-lg">
           <div class="note-lg-head">
             <h3>What this does not do yet</h3>
           </div>
+          <p><strong>It has not passed.</strong> The three texts with hand-set colors still need fixing in Figma, followed by a new run.</p>
           <p><strong>It is not a CI job.</strong> It runs through Claude and the MCP server. CI would need the Figma REST API with a token.</p>
           <p><strong>Only the 390 flow is linted.</strong> The 460-wide test screens are not.</p>
           <p><strong>The app does not read these tokens.</strong> Its own theme file (<code>apps/mobile/constants/theme.ts</code>, Expo) is not generated from them and differs: radii of 10, 14, 20 and 28 against 8 to 24 here, and a different red.</p>
@@ -631,13 +662,13 @@
         <p class="footer-copy">Jose Alvarez · Cuak Design System · 2026</p>
         <nav class="footer-nav">
           <a href="./cuak.html">Case Study</a>
-          <a href="../pages/methodology.html">ESA Framework</a>
+          <a data-review="hidden" href="../pages/methodology.html">ESA Framework</a>
           <a href="../index.html">Portfolio</a>
         </nav>
       </div>
     </div>
   </footer>
 
-    <script src="../scripts/brand.js?v=1" defer></script>
+    <script src="../scripts/brand.js?v=2" defer></script>
   </body>
 </html>

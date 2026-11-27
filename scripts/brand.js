@@ -25,3 +25,17 @@
   trigger.addEventListener('mouseenter', play);
   trigger.addEventListener('focus', play);
 })();
+
+/* A link inside the open phone menu closes it. A link to a section of the same
+   page loads nothing new, so the menu would stay on top of where it landed. */
+(function () {
+  var menu = document.querySelector('.nav-links');
+  var button = document.querySelector('.hamburger');
+  if (!menu || !button) return;
+
+  menu.addEventListener('click', function (event) {
+    if (!event.target.closest('a')) return;
+    menu.classList.remove('active');
+    button.classList.remove('active');
+  });
+})();

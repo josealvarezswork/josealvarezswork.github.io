@@ -91,14 +91,39 @@ const ESA_STATES = {
     duogit: './assets/img/duogit/cat-worried.png',
     trigger: 'Trigger — inactivity, or a threshold approaching',
     text: 'Loss aversion, activated. The mascot’s distress makes the risk visible and empathetic rather than punitive. The strongest retention state of the four.',
-    mech: 'Prospect Theory · Kahneman & Tversky (Nobel, 2002)'
+    mech: 'Prospect Theory · Kahneman & Tversky (Kahneman, Nobel 2002)'
   },
   broken: {
     cuak: './assets/img/cuak/cuak-alerta.png',
     duogit: './assets/img/duogit/cat-sad.png',
     trigger: 'Trigger — streak broken, or threshold crossed',
     text: 'The emotional cost of loss, followed by resilience. The system mourns with the user, then invites them back without shame.',
-    mech: 'Nudge Theory · Thaler & Sunstein (Nobel, 2017)'
+    mech: 'Nudge Theory · Thaler & Sunstein (Thaler, Nobel 2017)'
+  }
+};
+
+/* The same four states in Spanish, for the pages under /es/. Only the words:
+   theory names stay as the Spanish page already writes them. */
+const ESA_WORDS_ES = {
+  waiting: {
+    trigger: 'Disparador — inicio del día, sin actividad',
+    text: 'Potencial puro. El día empieza sin presión. Una postura expectante: el personaje espera, no juzga.',
+    mech: 'Anthropomorphism · Epley, Waytz & Cacioppo'
+  },
+  happy: {
+    trigger: 'Disparador — racha de 3 días o más, o una métrica sana',
+    text: 'Refuerzo positivo tras un comportamiento constante. Brillo intenso, ojos encendidos. El sistema celebra la racha en vez de limitarse a registrarla.',
+    mech: 'Recompensa variable · condicionamiento operante'
+  },
+  worried: {
+    trigger: 'Disparador — inactividad, o un umbral que se acerca',
+    text: 'Se activa la aversión a la pérdida. La angustia del personaje hace visible el riesgo desde la empatía, no desde el castigo. El estado que más retiene de los cuatro.',
+    mech: 'Prospect Theory · Kahneman & Tversky (Kahneman, Nobel 2002)'
+  },
+  broken: {
+    trigger: 'Disparador — racha rota, o umbral superado',
+    text: 'El costo emocional de la pérdida, seguido de resiliencia. El sistema acompaña el duelo y luego invita a volver, sin vergüenza.',
+    mech: 'Nudge Theory · Thaler & Sunstein (Thaler, Nobel 2017)'
   }
 };
 
@@ -114,7 +139,8 @@ function initEsaStates() {
   const mech = document.getElementById('esa-mech');
 
   function select(name) {
-    const s = ESA_STATES[name];
+    const words = document.documentElement.lang.startsWith('es') ? ESA_WORDS_ES : ESA_STATES;
+    const s = words[name];
     if (!s) return;
 
     trigger.textContent = s.trigger;

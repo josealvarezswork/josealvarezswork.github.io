@@ -1343,6 +1343,9 @@ body.page-home .desk-card--memo {
   filter: none;
   padding: 0;
   max-width: none;
+  /* With no padding left, a rounded clipping box cuts the first letter. */
+  overflow: visible;
+  border-radius: 0;
 }
 body.page-home .desk-card--tag { border-left: 0; }
 body.page-home .desk-card--tag,
@@ -1442,3 +1445,90 @@ body.page-home .esa-card.is-active { transform: translateY(-4px); }
 }
 .now-link { font-weight: 700; color: var(--paper-ink); text-decoration: underline; text-underline-offset: 3px; }
 .now-link:hover { text-decoration-thickness: 2px; }
+.now-title { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.now-title:hover { text-decoration-thickness: 2px; }
+
+/* --- PROJECT RAIL --------------------------------------------------------
+   One row moved sideways: a tall picture, then name, one line and a tag.
+   Same ground, paper and project colours as the rest of the home.         */
+.hero-open { display: flex; align-items: center; gap: var(--s-8); margin: var(--s-16) 0; font-size: 14px; font-weight: 700; color: #245445; }
+.hero-open::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+body.page-home .hero { padding-bottom: var(--s-32); }
+
+/* The rail starts on the same line as the sheets above it. */
+.rail { --edge: max(calc(20px + clamp(18px, 4.6vw, 60px)), calc((100% - 1280px) / 2 + 60px)); padding-block: 0 var(--s-32); scroll-margin-top: 104px; }
+.rail-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-16); padding-inline: var(--edge); }
+.rail-head .section-label { margin: 0; }
+.rail-controls { display: flex; align-items: center; gap: var(--s-8); }
+.rail-controls[hidden], .rail-line[hidden] { display: none; }
+.rail-hint { margin-right: var(--s-8); font-size: 12px; color: var(--muted); }
+.rail-btn { width: 40px; height: 40px; border: 1px solid var(--stroke-light); border-radius: 50%; background: var(--bg-card); color: var(--text); font-family: inherit; font-size: 16px; font-weight: 700; line-height: 1; cursor: pointer; }
+.rail-btn:hover { background: var(--accent); color: var(--bg); }
+.rail-btn[aria-disabled="true"] { opacity: .35; cursor: default; background: var(--bg-card); color: var(--text); }
+.rail-btn:focus-visible, .rail-track:focus-visible, .rail-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* The row stays inside the page width and shows whole cards. The 8px on each
+   side is room for the focus outline, which the scrolling box would cut. */
+.rail-track { container-type: inline-size; overflow-x: auto; overscroll-behavior-x: contain; margin-inline: calc(var(--edge) - 8px); scroll-snap-type: x mandatory; scroll-padding-inline: 8px; scrollbar-width: none; }
+.rail-track::-webkit-scrollbar { display: none; }
+.rail-list { list-style: none; display: flex; align-items: stretch; gap: var(--s-24); width: max-content; margin: 0; padding: var(--s-24) 8px; }
+.rail-card { --shown: 4; width: calc((100cqi - 16px - (var(--shown) - 1) * var(--s-24)) / var(--shown)); flex-shrink: 0; scroll-snap-align: start; }
+@media (max-width: 1099px) { .rail-card { --shown: 3; } }
+.rail-link { display: flex; flex-direction: column; gap: var(--s-8); height: 100%; text-decoration: none; color: var(--text); border-radius: var(--r-sm); transition: transform .4s cubic-bezier(.16, 1, .3, 1); }
+.rail-link:hover { transform: translateY(-8px); }
+
+.rail-art { display: block; position: relative; aspect-ratio: 4 / 5; overflow: hidden; margin-bottom: var(--s-8); border-radius: var(--r-sm); }
+.rail-art img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* The four covers share one paper ground. */
+.rail-art--cuak, .rail-art--duo, .rail-art--kyd, .rail-art--same { background: #efeae1; }
+.rail-art--char { background: #fdf8f2; padding: var(--s-16); }
+.rail-art--esa { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: var(--s-4); padding: var(--s-16); background: #d9d0f2; }
+.rail-art--esa img { min-height: 0; }
+
+.rail-name { font-size: 17px; font-weight: 700; line-height: 1.25; }
+.rail-text { font-size: 13px; line-height: 1.55; color: var(--muted); }
+.rail-meta { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s-8); margin-top: auto; padding-top: var(--s-4); font-size: 12px; color: var(--faint); align-content: flex-start; min-height: 50px; }
+.rail-tag { padding: 3px 10px; border-radius: 999px; background: var(--tag, var(--paper)); color: #19132e; font-size: 11px; font-weight: 700; }
+.rail-tag--ai { background: transparent; color: var(--tag, var(--paper)); box-shadow: inset 0 0 0 1px var(--tag, var(--paper)); }
+.rail-card--cuak { --tag: #cfe8d9; }
+.rail-card--duo  { --tag: #ddd3ff; }
+.rail-card--kyd  { --tag: #d3e6ff; }
+.rail-card--char { --tag: #fbe0c8; }
+.rail-card--esa  { --tag: #f0dcf7; }
+.rail-card--same { --tag: #fbe7a8; }
+
+/* Where you are in the row. */
+.rail-line { position: relative; height: 2px; margin-inline: var(--edge); background: var(--stroke-light); border-radius: 2px; }
+.rail-thumb { position: absolute; top: -2px; left: 0; height: 6px; border-radius: 999px; background: var(--accent); }
+
+@media (max-width: 760px) {
+  .rail-card { width: min(68vw, 250px); }
+  .rail-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .rail-link { transition: none; } }
+
+/* --- ESA ON THE MOVE -----------------------------------------------------
+   scripts/esa-carousel.js advances the selection. Under 760px the four tall
+   cards become one row, one card in the middle and its neighbours peeking. */
+body.page-home .esa-controls { display: flex; align-items: center; justify-content: center; gap: var(--s-16); margin: -14px 0 var(--s-24); }
+body.page-home .esa-dots { display: none; }
+body.page-home .esa-play { min-height: 36px; padding: 0 var(--s-16); border: 1px solid var(--stroke-light); border-radius: 999px; background: var(--bg-card); color: var(--text); font-family: inherit; font-size: 12px; font-weight: 700; line-height: 1; cursor: pointer; }
+body.page-home .esa-play:focus-visible, body.page-home .esa-dot:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+@media (max-width: 759px) {
+  body.page-home .esa-cycle {
+    --card: min(64vw, 240px);
+    display: flex; gap: var(--s-12);
+    margin-bottom: var(--s-24); padding: var(--s-8) calc(50% - var(--card) / 2) var(--s-16);
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+  }
+  body.page-home .esa-cycle::-webkit-scrollbar { display: none; }
+  body.page-home .esa-cycle > .esa-card { flex: 0 0 var(--card); scroll-snap-align: center; }
+  /* Every card stays readable; the chosen one gets a ring in its state colour. */
+  body.page-home .esa-cycle > .esa-card.is-active { box-shadow: 0 0 0 3px rgb(var(--state)), 0 12px 28px rgba(0, 0, 0, 0.3); }
+  body.page-home .esa-photo { aspect-ratio: 1; }
+  body.page-home .esa-dots { display: flex; }
+  body.page-home .esa-dot { display: grid; place-items: center; width: 32px; height: 36px; padding: 0; border: 0; background: none; cursor: pointer; }
+  body.page-home .esa-dot::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: rgb(var(--state) / .4); transition: width .3s cubic-bezier(.16, 1, .3, 1); }
+  body.page-home .esa-dot[aria-current="true"]::before { width: 22px; background: rgb(var(--state)); }
+}

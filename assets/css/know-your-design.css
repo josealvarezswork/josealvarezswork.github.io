@@ -1,0 +1,176 @@
+/* Know your design page. Chips, cards, steps and lists come from same-page.css;
+   this file holds only the flow diagram, the result table and the screen pairs. */
+
+/* Flow diagram on a dotted canvas. Boxes are steps, diamonds are decisions and
+   the dashed rail is the way back after a fix. The "Yes" line goes straight down
+   and each "No" leaves from the side: narrow screens keep the line on the right
+   so the "No" box fits beside it; wide screens centre it. */
+.kyd-flow {
+  --line: #d9586f;
+  --gap: 40px;
+  --d: 140px;      /* diamond side */
+  --pad: 28px;     /* room for the rail on narrow screens */
+  --rail: 8px;
+  --spine: calc(100% - var(--d) / 2);
+  --yl: calc(var(--gap) + var(--d) + 36px); /* where a "No" box joins the rail */
+  margin-top: var(--s-32);
+  padding: var(--s-20) var(--s-16) var(--s-24);
+  border-radius: var(--r-lg);
+  background: var(--paper) radial-gradient(rgba(30, 22, 54, .2) 1px, transparent 1.5px) 0 0 / 22px 22px;
+  color: var(--paper-ink);
+}
+.kyd-flow ul, .kyd-flow ol { list-style: none; margin: 0; padding: 0; }
+
+.kyd-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-8) var(--s-20); margin-bottom: var(--s-24) !important; font-size: 12.5px; }
+.kyd-legend li { display: flex; align-items: center; gap: var(--s-8); }
+.kyd-shape { display: inline-block; }
+.kyd-shape--step { width: 22px; height: 15px; border-radius: 4px; background: #fff; box-shadow: 0 0 0 1.5px rgba(30, 22, 54, .45); }
+.kyd-shape--decision { width: 18px; height: 18px; background: #c98a12; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.kyd-who { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 4px; border-radius: 999px; background: #fff; box-shadow: 0 0 0 1px rgba(30, 22, 54, .14); font-size: 12px; font-weight: 700; line-height: 1.4; }
+.kyd-who::before { content: ""; width: 14px; height: 14px; border-radius: 50%; }
+.kyd-who--script::before { background: #2f9e6e; border-radius: 4px; }
+.kyd-who--agent::before { background: #7c5ce0; }
+.kyd-who--me::before { background: #e8903a; }
+
+.kyd-row { position: relative; display: flex; flex-direction: column; align-items: center; padding-left: var(--pad); }
+.kyd-row + .kyd-row { padding-top: var(--gap); }
+/* Line down to the next shape, with its arrow head. */
+.kyd-row + .kyd-row::before {
+  content: ""; position: absolute; top: 0; left: calc(var(--spine) - 5px); width: 10px; height: var(--gap); background: var(--line);
+  clip-path: polygon(4px 0, 6px 0, 6px calc(100% - 7px), 100% calc(100% - 7px), 50% 100%, 0 calc(100% - 7px), 4px calc(100% - 7px));
+}
+
+/* The rail back to the first decision, drawn one row at a time. */
+.kyd-row.is-loop-start::after, .kyd-row.is-loop::after, .kyd-row.is-loop-end::after {
+  content: ""; position: absolute; box-sizing: border-box; left: var(--rail); border: 0 dashed var(--line); border-left-width: 2px; pointer-events: none;
+}
+.kyd-row.is-loop::after { top: 0; bottom: 0; }
+.kyd-row.is-loop-start::after { top: calc(var(--gap) / 2 - 1px); bottom: 0; width: calc(var(--spine) - var(--rail)); border-top-width: 2px; border-top-left-radius: 14px; }
+.kyd-row.is-loop-end::after { top: 0; height: var(--yl); width: calc(var(--pad) - var(--rail) + 2px); border-bottom-width: 2px; border-bottom-left-radius: 14px; }
+.kyd-return { position: absolute; z-index: 1; left: 0; top: calc(var(--gap) / 2 - 11px); padding: 2px 8px; border-radius: 999px; background: var(--line); color: #fff; font-size: 11px; font-weight: 700; white-space: nowrap; }
+
+.kyd-node, .kyd-aside, .kyd-end { box-sizing: border-box; background: #fff; border-radius: 16px; box-shadow: 0 10px 24px -16px rgba(30, 22, 54, .55); }
+.kyd-node { position: relative; display: flex; align-items: flex-start; gap: var(--s-12); width: 100%; padding: var(--s-16); border: 1px solid rgba(30, 22, 54, .12); }
+
+.kyd-ico { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; }
+.kyd-ico svg { width: 24px; height: 24px; fill: none; stroke: var(--paper-ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.kyd-ico--lilac { background: #ddd3fb; }
+.kyd-ico--sky { background: #c4e3f2; }
+.kyd-ico--mint { background: #c9ebd9; }
+.kyd-ico--rose { background: #f9cfd4; }
+
+.kyd-body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-4); min-width: 0; font-size: 13.5px; line-height: 1.5; }
+.kyd-body strong { font-size: 16px; line-height: 1.3; }
+.kyd-tag { padding: 1px 8px; border-radius: 6px; background: #e8f3ec; color: #1f5c43; font-size: 11.5px; font-weight: 700; }
+.kyd-actors { display: flex; flex-wrap: wrap; gap: var(--s-8); margin-top: var(--s-4); }
+
+.kyd-diamond { position: relative; isolation: isolate; align-self: flex-end; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: var(--d); height: var(--d); text-align: center; line-height: 1.2; }
+.kyd-diamond::before, .kyd-diamond::after { content: ""; position: absolute; z-index: -1; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.kyd-diamond::before { inset: 0; background: #c98a12; }
+.kyd-diamond::after { inset: 3px; background: #fdf0c4; }
+.kyd-diamond strong { max-width: 92px; font-size: 15px; }
+.kyd-diamond-tag { color: #6f4b06; font-size: 10.5px; font-weight: 700; }
+
+.kyd-aside { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-4); align-self: flex-start; width: calc(100% - var(--d) / 2 - 24px); margin-top: 12px; padding: var(--s-12); border: 1.5px dashed var(--line); font-size: 13px; line-height: 1.5; }
+.kyd-aside strong { font-size: 15px; line-height: 1.3; }
+.kyd-again { font-weight: 700; color: #8c2438; }
+/* "No": from the side of the diamond down into the box. */
+.kyd-aside::after { content: ""; position: absolute; box-sizing: border-box; bottom: 100%; left: 36px; right: 44px; height: calc(var(--d) / 2 + 13px); border: 0 dashed var(--line); border-top-width: 2px; border-left-width: 2px; border-top-left-radius: 14px; }
+.kyd-through { position: absolute; top: calc(var(--gap) + var(--d) - 1px); bottom: 0; left: calc(var(--spine) - 1px); width: 2px; background: var(--line); }
+.kyd-row.is-back > .kyd-aside::before { content: ""; position: absolute; right: 100%; top: 22px; width: calc(var(--pad) - var(--rail)); border-top: 2px dashed var(--line); }
+
+/* What the code enforces. The label says it in words; the diamond fill repeats it. */
+.kyd-gate { display: inline-block; padding: 1px 8px; border: 1.5px solid var(--paper-ink); border-radius: 6px; font-size: 11.5px; font-weight: 700; line-height: 1.6; }
+.kyd-gate--code { background: var(--paper-ink); color: #fff; }
+.kyd-gate--part { background: #fdf0c4; }
+.kyd-gate--none { border-style: dashed; border-color: #8c2438; background: #fff; color: #8c2438; }
+.kyd-diamond.is-open::after { background: #fff; }
+.kyd-diamond.is-partial::after { background: linear-gradient(90deg, #fdf0c4 50%, #fff 50%); }
+
+.kyd-answer { position: absolute; z-index: 1; padding: 1px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; line-height: 1.5; }
+.kyd-answer--yes { top: calc(var(--gap) / 2 - 3px); left: var(--spine); transform: translate(-50%, -50%); background: #c9ebd9; color: #1f5c43; }
+.kyd-answer--no { top: -18px; left: 37px; transform: translate(-50%, -50%); background: #f9cfd4; color: #7a1f30; }
+
+.kyd-end { display: flex; flex-direction: column; align-items: center; gap: var(--s-4); width: 100%; padding: var(--s-16) var(--s-24); border: 2px solid #2f9e6e; border-radius: 40px; background: #dcf3e6; text-align: center; font-size: 13px; line-height: 1.5; }
+.kyd-end strong { font-size: 16px; line-height: 1.3; }
+
+@media (min-width: 900px) {
+  .kyd-flow { --gap: 48px; --d: 172px; --pad: 0px; --spine: 50%; --yl: calc(var(--gap) + var(--d) / 2); padding: var(--s-32); }
+  .kyd-diamond { align-self: start; }
+  .kyd-diamond strong { max-width: 104px; }
+  .kyd-row.is-loop-start::after { top: calc(var(--gap) + var(--d) / 2 - 1px); width: calc(50% - var(--d) / 2 - var(--rail) + 4px); }
+  .kyd-return { top: calc(var(--gap) + var(--d) / 2 - 34px); }
+  .kyd-row { display: grid; grid-template-columns: minmax(0, 1fr) 320px minmax(0, 1fr); align-items: start; justify-items: center; }
+  .kyd-row > .kyd-node, .kyd-row > .kyd-diamond, .kyd-row > .kyd-end { grid-column: 2; grid-row: 1; }
+  .kyd-aside { grid-row: 1; width: 100%; margin-top: calc(var(--d) / 2 - 34px); padding: var(--s-12) var(--s-16); }
+  .kyd-aside.is-right { grid-column: 3; justify-self: start; max-width: 260px; }
+  .kyd-aside.is-left { grid-column: 1; justify-self: end; width: calc(100% - 40px); }
+  /* The line leaves the side of the diamond: 76px is half of (320 - 172), plus 2. */
+  .kyd-aside::after { bottom: auto; top: 31px; left: auto; right: auto; height: 0; width: 76px; border-left-width: 0; border-radius: 0; }
+  .kyd-aside.is-right::after { right: 100%; }
+  .kyd-aside.is-left::after { left: 100%; }
+  .kyd-aside.is-right .kyd-answer--no { top: 34px; left: -40px; }
+  .kyd-aside.is-left .kyd-answer--no { top: 34px; left: calc(100% + 38px); }
+  .kyd-row.is-back > .kyd-aside::before { top: 31px; width: 32px; }
+  .kyd-row.is-loop-end::after { width: 34px; }
+}
+
+/* Four steps that each carry a paragraph: one column reads better than two. */
+.kyd-steps.ul-stages { grid-template-columns: 1fr; }
+
+.kyd-table-wrap { margin-top: var(--s-32); overflow-x: auto; }
+.kyd-table { width: 100%; max-width: 640px; border-collapse: collapse; font-size: 14px; }
+.kyd-table th, .kyd-table td {
+  padding: var(--s-12) var(--s-8);
+  text-align: left;
+  border-bottom: 1px solid var(--stroke-light);
+}
+.kyd-table thead th { color: var(--faint); font-size: 12px; font-weight: 600; }
+.kyd-table tbody td { color: var(--muted); }
+.kyd-table tbody td:first-child { color: var(--text); }
+.kyd-table tfoot th, .kyd-table tfoot td { color: var(--text); font-weight: 700; }
+.kyd-table th.kyd-num, .kyd-table td.kyd-num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Before and after, two phones. One column on a narrow screen so the text
+   inside the screenshot stays readable. */
+.kyd-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 360px);
+  justify-content: center;
+  gap: var(--s-32) var(--s-24);
+  margin-top: var(--s-32);
+}
+@media (min-width: 640px) { .kyd-pair { grid-template-columns: repeat(2, minmax(0, 360px)); } }
+.kyd-shot { margin: 0; }
+.kyd-shot img { display: block; width: 100%; height: auto; }
+
+/* Evidence: the two files side by side, one column until there is room. */
+.kyd-cases { display: grid; gap: var(--s-24); margin-top: var(--s-32); }
+@media (min-width: 900px) { .kyd-cases { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.kyd-case { display: flex; flex-direction: column; gap: var(--s-20); min-width: 0; padding: var(--s-20); border: 1px solid var(--stroke-light); border-radius: var(--r-lg); }
+.kyd-case-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-8); }
+.kyd-case-head h3 { margin: 0; color: var(--text); font-size: 22px; }
+.kyd-case-head p { flex-basis: 100%; margin: 0; color: var(--faint); font-size: 13px; }
+.kyd-verdict { padding: 3px 12px; border: 1.5px solid #f2899b; border-radius: 999px; color: #f2899b; font-size: 12px; font-weight: 700; }
+.kyd-case-shot { width: min(100%, 300px); margin: 0 auto; }
+.kyd-case-shot img { display: block; width: 100%; height: auto; }
+.kyd-case-shot figcaption { color: var(--muted); font-size: 13px; line-height: 1.5; text-align: center; }
+.kyd-case-shot figcaption strong { color: var(--text); }
+.kyd-history { list-style: none; display: grid; gap: var(--s-12); margin: 0; padding: 0; }
+.kyd-history li { display: flex; flex-direction: column; gap: 2px; padding-left: var(--s-12); border-left: 3px solid var(--stroke-light); color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+.kyd-history li:last-child { border-left-color: #f2899b; }
+.kyd-history li.is-wrong strong { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.kyd-history strong { color: var(--text); font-size: 18px; font-variant-numeric: tabular-nums; }
+.kyd-when { color: var(--faint); font-size: 12px; font-weight: 600; }
+.kyd-findings { width: 100%; border-collapse: collapse; font-size: 13px; line-height: 1.5; }
+.kyd-findings caption { padding-bottom: var(--s-8); color: var(--text); font-weight: 700; text-align: left; }
+.kyd-findings th, .kyd-findings td { padding: var(--s-8) var(--s-8) var(--s-8) 0; border-bottom: 1px solid var(--stroke-light); text-align: left; vertical-align: top; }
+.kyd-findings thead th { color: var(--faint); font-size: 12px; font-weight: 600; }
+.kyd-findings tbody th { width: 28%; color: var(--text); font-weight: 600; }
+.kyd-findings tbody td { color: var(--muted); }
+.kyd-findings .kyd-num { padding-right: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.kyd-hex { display: inline-flex; align-items: center; gap: 5px; margin-right: 6px; font-family: ui-monospace, Consolas, monospace; font-size: 12px; white-space: nowrap; }
+.kyd-hex i { width: 11px; height: 11px; border: 1px solid var(--stroke-light); border-radius: 3px; }
+.kyd-open { margin: auto 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+.kyd-open strong { color: var(--text); }
+.kyd-case-link { color: var(--accent-text); font-size: 14px; font-weight: 600; }

@@ -163,3 +163,7 @@
   --accent-yellow: var(--accent-amber);
   --accent-warn: var(--accent-amber);
 }
+
+/* Work waiting for review: ESA and From state to frame. To show it again,
+   delete this rule and the two pages listed in _config.yml and sitemap.xml. */
+[data-review="hidden"] { display: none !important; }

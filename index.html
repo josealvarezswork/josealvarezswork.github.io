@@ -33,10 +33,10 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="./assets/css/tokens.css?v=9" />
+    <link rel="stylesheet" href="./assets/css/tokens.css?v=10" />
     <link rel="stylesheet" href="./assets/css/paper.css?v=28" />
     <link rel="stylesheet" href="./assets/css/styles.css?v=6" />
-    <link rel="stylesheet" href="./assets/css/home.css?v=67" />
+    <link rel="stylesheet" href="./assets/css/home.css?v=83" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Display sans + handwriting for the annotation layer -->
@@ -76,7 +76,7 @@
         </button>
         <div class="nav-links">
           <a href="#work"><svg class="nav-ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-view"/></svg>Work</a>
-          <a href="./pages/methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a data-review="hidden" href="./pages/methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-read"/></svg>Framework</a>
           <a href="./pages/craft.html"><svg class="nav-ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-build"/></svg>Craft</a>
           <a href="./pages/resume.html"><svg class="nav-ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-resume"/></svg>Resume</a>
           <a href="./pages/about.html"><svg class="nav-ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-about"/></svg>About</a>
@@ -131,16 +131,14 @@
               <div class="desk-tape" aria-hidden="true"></div>
               <p class="hero-eyebrow">
                 <span class="eyebrow-name">Jose Alvarez</span>
-                <span class="eyebrow-sep">·</span>
-                <span class="eyebrow-role">UI/UX Designer</span>
               </p>
             </div>
 
             <!-- Piece 2: Core Statement / Headline Sheet -->
             <div class="desk-card desk-card--title paper-surface" data-card="title">
               <h1 class="hero-title">
-                I design interfaces <br> that show you <br>
-                <span class="hl-state">what state</span> you're in.
+                UI/UX designer, <br> getting closer <br>
+                to <span class="hl-state">the code</span>.
               </h1>
             </div>
 
@@ -148,8 +146,9 @@
             <div class="desk-card desk-card--memo paper-surface" data-card="memo">
               <div class="desk-tape" aria-hidden="true"></div>
               <p class="hero-lead">
-                Progression systems, character states and the design systems behind them. Two case studies below, both running on the same four-state framework.
+                I design product interfaces and their design systems, and I use checks built with AI agents to see whether the screens follow them.
               </p>
+              <p class="hero-open">Open to UI/UX and product design roles</p>
               <div class="hero-actions">
                 <a class="btn btn-primary" href="./pages/resume.html"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-resume"/></svg>View resume</a>
                 <a class="btn btn-ghost" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-mail"/></svg>Email me</a>
@@ -190,7 +189,7 @@
                   </p>
                   <ul class="sheet-list">
                     <li>Streak recovery</li>
-                    <li>XP economy</li>
+                    <li>Streak-day ranks</li>
                     <li>League ranking</li>
                     <li>Widget family</li>
                     <li>UI style guide</li>
@@ -225,6 +224,71 @@
 
       </section>
 
+      <!-- PROJECTS: one row you move through sideways, right after the hero -->
+      <section class="rail" id="work">
+        <div class="rail-head">
+          <p class="section-label">Projects</p>
+          <div class="rail-controls" hidden>
+            <span class="rail-hint">Scroll sideways</span>
+            <button type="button" class="rail-btn" data-rail="-1" aria-label="Previous project">&larr;</button>
+            <button type="button" class="rail-btn" data-rail="1" aria-label="Next project">&rarr;</button>
+          </div>
+        </div>
+        <div class="rail-track" tabindex="0" role="region" aria-label="Projects, scroll sideways">
+          <ul class="rail-list">
+            <li class="rail-card rail-card--cuak" id="p-cuak">
+              <a class="rail-link" href="./pages/cuak.html">
+                <span class="rail-art rail-art--cuak" aria-hidden="true"><img loading="lazy" decoding="async" src="./assets/img/cuak/cover-d.webp" width="720" height="900" alt=""></span>
+                <span class="rail-name">Cuak</span>
+                <span class="rail-text">A credit-card companion where a character shows your state before the numbers.</span>
+                <span class="rail-meta"><span class="rail-tag">Concept</span> 24 screens</span>
+              </a>
+            </li>
+            <li class="rail-card rail-card--duo" id="p-duo">
+              <a class="rail-link" href="./pages/duogit.html">
+                <span class="rail-art rail-art--duo" aria-hidden="true"><img loading="lazy" decoding="async" src="./assets/img/duogit/cover-d.webp" width="720" height="900" alt=""></span>
+                <span class="rail-name">Duo Git</span>
+                <span class="rail-text">GitHub activity becomes a mood, a streak rank and a leaderboard.</span>
+                <span class="rail-meta"><span class="rail-tag">Concept</span> 9 screens</span>
+              </a>
+            </li>
+            <li class="rail-card rail-card--kyd" id="p-kyd">
+              <a class="rail-link" href="./pages/know-your-design.html">
+                <span class="rail-art rail-art--kyd" aria-hidden="true"><img loading="lazy" decoding="async" src="./assets/img/kyd/cover-d.webp" width="720" height="900" alt=""></span>
+                <span class="rail-name">Know your design</span>
+                <span class="rail-text">Checks Figma screens against their design system and lists where they differ.</span>
+                <span class="rail-meta"><span class="rail-tag">Own tool</span><span class="rail-tag rail-tag--ai">Agentic workflow</span> run on 2 projects</span>
+              </a>
+            </li>
+            <li class="rail-card rail-card--char" id="p-char" data-review="hidden">
+              <a data-review="hidden" class="rail-link" href="./pages/pipeline.html">
+                <span class="rail-art rail-art--char" aria-hidden="true"><img loading="lazy" decoding="async" src="./assets/img/cuak/process-ref-arms-up.webp" alt=""></span>
+                <span class="rail-name">From state to frame</span>
+                <span class="rail-text">One state change traced from design decision to finished frame.</span>
+                <span class="rail-meta"><span class="rail-tag">Character work</span> 2 layers done, 1 at concept</span>
+              </a>
+            </li>
+            <li class="rail-card rail-card--esa" id="p-esa" data-review="hidden">
+              <a data-review="hidden" class="rail-link" href="./pages/methodology.html">
+                <span class="rail-art rail-art--esa" aria-hidden="true"><img loading="lazy" decoding="async" src="./assets/img/cuak/cuak-esperando.png" alt=""><img loading="lazy" decoding="async" src="./assets/img/cuak/cuak-feliz.png" alt=""><img loading="lazy" decoding="async" src="./assets/img/cuak/cuak-preocupado.png" alt=""><img loading="lazy" decoding="async" src="./assets/img/duogit/state-sad-crop.webp" alt=""></span>
+                <span class="rail-name">Emotional State Architecture</span>
+                <span class="rail-text">Every state has a trigger, a mechanism and an action it invites.</span>
+                <span class="rail-meta"><span class="rail-tag">Framework</span> 4 states</span>
+              </a>
+            </li>
+            <li class="rail-card rail-card--same" id="p-same">
+              <a class="rail-link" href="./pages/same-page.html">
+                <span class="rail-art rail-art--same" aria-hidden="true"><img loading="lazy" decoding="async" src="./assets/img/same-page/cover-d.webp" width="720" height="900" alt=""></span>
+                <span class="rail-name">Same Page</span>
+                <span class="rail-text">A process that audits my own case studies for contradictions.</span>
+                <span class="rail-meta"><span class="rail-tag">Own tool</span><span class="rail-tag rail-tag--ai">Agentic workflow</span> 9 stages</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="rail-line" aria-hidden="true" hidden><span class="rail-thumb"></span></div>
+      </section>
+
       <!-- NOW: what I'm working on -->
       <section class="work now" id="now">
         <div class="container">
@@ -232,19 +296,19 @@
           <div class="note-lg now-sheet">
             <div class="note-lg-head">
               <span class="note-lg-ico" aria-hidden="true"><svg><use href="./assets/img/icons.svg#i-system"/></svg></span>
-              <h3>AI agent workflows for design projects</h3>
+              <h3><a class="now-title" href="./pages/agentic-workflows.html">Agentic workflows applied to design</a></h3>
             </div>
-            <p>I'm building flows where an AI agent does the keeping-in-order: it reads a design file, checks it against its own rules and reports what drifted, so a project stays organised without me policing it by hand.</p>
-            <p><strong>The first one is small and real.</strong> Claude connected to Figma, one JSON file of tokens, and a ten-rule lint over Cuak's 24 screens. <strong>Next</strong> is the same approach for the rest of a project: briefs, handoffs and checks.</p>
-            <p><a class="now-link" href="./pages/cuak-design-system.html#system-workflow">See how the Cuak workflow runs <span aria-hidden="true">&rarr;</span></a></p>
+            <p>Right now I'm building agentic workflows for design work: an AI agent reads a design file, checks it against the project's own rules and reports what drifted, so the project stays organised without me policing it by hand.</p>
+            <p><strong>The first one is small and real.</strong> Know your design checks Figma screens against their design system. I have run it on two concept projects of mine, and it was audited to find where it breaks.</p>
+            <p><a class="now-link" href="./pages/agentic-workflows.html">Why, what for and how <span aria-hidden="true">&rarr;</span></a></p>
           </div>
         </div>
       </section>
 
-      <section class="work" id="work">
+      <section class="work">
         <div class="container">
           <p class="section-label">Case Studies</p>
-          <p class="section-sub">Two systems built on the same idea: a progression loop only works if the person using it can read, at any moment, what state they're in and what the system is asking of them. Characters, XP economies, streaks and <em>fail states</em> — designed as systems, not decorations.</p>
+          <p class="section-sub">Two systems built on the same idea: a progression loop only works if the person using it can read, at any moment, what state they're in and what the system is asking of them. Characters, league ranks, streaks and <em>fail states</em> — designed as systems, not decorations.</p>
         </div>
       </section>
 
@@ -256,8 +320,8 @@
         </div>
       </section>
 
-      <!-- ESA FRAMEWORK -->
-      <section class="esa">
+      <!-- ESA FRAMEWORK: hidden until reviewed -->
+      <section class="esa" data-review="hidden">
         <div class="container">
           <p class="section-label">The framework behind both</p>
 
@@ -329,7 +393,7 @@
           <p class="esa-mech" id="esa-mech">Anthropomorphism · Epley, Waytz &amp; Cacioppo</p>
           </div>
 
-          <a class="esa-link" href="./pages/methodology.html"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-read"/></svg>Read the full framework</a>
+          <a data-review="hidden" class="esa-link" href="./pages/methodology.html"><svg class="ico" aria-hidden="true"><use href="./assets/img/icons.svg#i-read"/></svg>Read the full framework</a>
         </div>
       </section>
 
@@ -387,8 +451,10 @@
       </div>
     </footer>
 
-    <script src="./scripts/app.js?v=23"></script>
-      <script src="./scripts/brand.js?v=1" defer></script>
+    <script src="./scripts/app.js?v=26"></script>
+    <script src="./scripts/esa-carousel.js?v=2" defer></script>
+      <script src="./scripts/brand.js?v=2" defer></script>
+      <script src="./scripts/rail.js?v=2" defer></script>
     <a class="lang-switch" href="./es/" hreflang="es" lang="es" aria-label="Ver esta página en español"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/></svg>Español<span class="lang-code">ES</span></a>
   </body>
 </html>

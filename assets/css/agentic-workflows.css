@@ -1,0 +1,11 @@
+/* Agentic workflows page. Chips, cards, steps and lists come from same-page.css. */
+.ag-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-12); }
+.ag-card h3, .ag-card p, .ag-card p + p { margin: 0; }
+.ag-link { margin-top: auto; padding-top: var(--s-8); color: var(--accent-text); font-size: 14px; font-weight: 600; }
+
+/* A folder tree scrolls inside its own box on narrow screens. */
+.ag-tree { min-width: 0; margin: 0; padding: var(--s-20); background: var(--bg-card); border: 1px solid var(--stroke-light); border-radius: var(--r-lg); }
+.ag-tree figcaption { margin-bottom: var(--s-12); color: var(--text); font-size: 15px; font-weight: 700; }
+.ag-tree pre { margin: 0; overflow-x: auto; color: var(--muted); font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; line-height: 1.7; }
+
+#folders .ul-list strong { color: var(--text); }

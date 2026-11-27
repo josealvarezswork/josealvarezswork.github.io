@@ -4,10 +4,10 @@
       "id": "duogit",
       "title": "Duo Git",
       "meta": "2026 · Sistema de progresión y feedback",
-      "description": "Casi toda la gamificación castiga la ausencia: una racha rota se vuelve una razón para abandonar en vez de para volver. DuoGit diseña el fail state como parte del bucle y no como su final — una máquina de cuatro estados reconoce el hueco sin juzgarlo, y la mecánica de regreso viene incorporada. Nueve pantallas, una familia completa de widgets de pantalla de inicio para iOS y Android, ranking por ligas y economía de XP, una guía de estilo UI documentada, y métricas de retención para comprobar que el sistema funciona de verdad: tasa de recuperación de racha, retención a día 7 y tiempo hasta el primer commit.",
+      "description": "Casi toda la gamificación castiga la ausencia: una racha rota se vuelve una razón para abandonar en vez de para volver. DuoGit diseña el fail state como parte del bucle y no como su final — una máquina de cuatro estados reconoce el hueco sin juzgarlo, y la mecánica de regreso viene incorporada. Nueve pantallas, una familia completa de widgets de pantalla de inicio para iOS y Android, ocho rangos por días de racha, una tabla por puntos, una guía de estilo UI documentada, y métricas de retención para comprobar que el sistema funciona de verdad: tasa de recuperación de racha, retención a día 7 y tiempo hasta el primer commit.",
       "tags": [
         "Sistema de progresión",
-        "XP y ranking",
+        "Rangos y ranking",
         "Estados de personaje",
         "Guía de estilo UI"
       ],

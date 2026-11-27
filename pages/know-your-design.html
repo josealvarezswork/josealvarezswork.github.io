@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Know your design — Screens Checked Against a Design System · Jose Alvarez</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <meta name="description" content="Know your design checks Figma screens against their design system. How it was tested, where it was wrong, what changed and what is still unproven.">
+  <meta property="og:title" content="Know your design">
+  <meta property="og:description" content="A check that Figma screens agree with their design system: test, break, fix, retest.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://odejbyjose.com/pages/know-your-design.html">
+  <meta property="og:image" content="https://odejbyjose.com/assets/img/og-kyd-d.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Know your design: do the screens agree? One color set by hand next to one from the system">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://odejbyjose.com/pages/know-your-design.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=10" />
+  <link rel="stylesheet" href="../assets/css/system.css?v=7">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=5">
+  <link rel="stylesheet" href="../assets/css/paper.css?v=28" />
+  <link rel="stylesheet" href="../assets/css/same-page.css?v=3">
+  <link rel="stylesheet" href="../assets/css/know-your-design.css?v=7">
+</head>
+
+<body>
+  <div class="accent-bar" aria-hidden="true"></div>
+
+  <header class="site-header is-shared">
+    <nav class="nav">
+      <a class="brand" href="../index.html" aria-label="Home">
+        <svg class="brand-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <defs>
+              <filter id="brand-rough" x="-14%" y="-14%" width="128%" height="128%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="5" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+            <g filter="url(#brand-rough)">
+              <circle class="brand-ring" cx="20" cy="20" r="17"/>
+              <ellipse class="brand-o" cx="20" cy="20" rx="7.6" ry="10.2"/>
+              <line class="brand-slash" x1="26" y1="8.5" x2="14" y2="31.5"/>
+            </g>
+          </svg>
+        <span class="brand-text">
+          <span class="brand-name">Jose Alvarez</span>
+          <span class="brand-sub">Design</span>
+        </span>
+      </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+          <a href="../index.html#work"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-view"/></svg>Work</a>
+          <a data-review="hidden" href="./methodology.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-read"/></svg>Framework</a>
+          <a href="./craft.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-build"/></svg>Craft</a>
+          <a href="./resume.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-resume"/></svg>Resume</a>
+          <a href="./about.html"><svg class="nav-ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-about"/></svg>About</a>
+        </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="mat">
+          <div class="hero-label">
+            <span>Own tool · Design systems</span><span>·</span><span>2026</span>
+          </div>
+          <h1 class="hero-title">
+            Know your design — do the screens <span class="accent">agree with the system?</span>
+          </h1>
+          <p class="hero-subtitle">
+            A check I run on Figma files: it reads the design system, goes through every screen in scope and lists where they disagree. Then I had it audited, to see where it breaks.
+          </p>
+          <div class="ul-chips">
+            <span class="ul-chip">Run on two concept projects, both mine</span>
+            <span class="ul-chip">My role: I set the requirements, asked for the audit, made the decisions and approved the changes</span>
+            <span class="ul-chip">Built and audited with AI agents</span>
+            <span class="ul-chip is-flag">Status: one user, not tested with other designers</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVIDENCE: BOTH FILES -->
+    <section class="section" id="evidence">
+      <div class="container">
+        <span class="section-label">The answer, on two files</span>
+        <h2 class="section-title">So far, <span class="accent">neither one passes</span></h2>
+        <p class="section-text">Cuak and DuoGit are concept projects of mine. The numbers and rows below come from the saved results of each run.</p>
+        <div class="kyd-cases">
+          <article class="kyd-case">
+            <header class="kyd-case-head">
+              <h3>Cuak</h3>
+              <span class="kyd-verdict">Not passed</span>
+              <p>24 screens &middot; last run 26 November 2026</p>
+            </header>
+            <figure class="kyd-case-shot">
+              <img loading="lazy" decoding="async" src="../assets/img/kyd/cuak-simulator-findings.webp" width="553" height="1009" alt="Cuak purchase simulator screen with a card showing the limit status after the purchase, 35 percent">
+              <figcaption><strong>Purchase simulator.</strong> &ldquo;Limit status after purchase&rdquo; and its &ldquo;35%&rdquo; carry colors set by hand.</figcaption>
+            </figure>
+            <ol class="kyd-history">
+              <li class="is-wrong"><span class="kyd-when">First run &middot; 10 rules</span><strong>0 errors, 0 warnings</strong><span>Wrong: texts with more than one color were skipped.</span></li>
+              <li><span class="kyd-when">Tool fixed &middot; 11 rules</span><strong>6 errors, 6 warnings</strong><span>18 of 24 screens clean. The warnings come from the added rule.</span></li>
+              <li><span class="kyd-when">Current tool &middot; 11 rules</span><strong>6 errors, 26 warnings</strong><span>12 of 24 screens clean. It now also reports spacing off the scale.</span></li>
+            </ol>
+            <table class="kyd-findings">
+              <caption>What the last run of Cuak found</caption>
+              <thead><tr><th scope="col">Screen</th><th scope="col">What disagrees</th><th scope="col" class="kyd-num">Findings</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Home · Visa Platinum</th><td>Text &ldquo;Monthly payment&rdquo;, colors set by hand <span class="kyd-hex"><i style="background:#6B7280" aria-hidden="true"></i>#6B7280</span> <span class="kyd-hex"><i style="background:#111827" aria-hidden="true"></i>#111827</span></td><td class="kyd-num">2</td></tr>
+                <tr><th scope="row">Home · Mastercard Black</th><td>Text &ldquo;Monthly payment&rdquo;, colors set by hand <span class="kyd-hex"><i style="background:#6B7280" aria-hidden="true"></i>#6B7280</span> <span class="kyd-hex"><i style="background:#111827" aria-hidden="true"></i>#111827</span></td><td class="kyd-num">2</td></tr>
+                <tr><th scope="row">Purchase simulator</th><td>Text &ldquo;Limit status after purchase&rdquo;, colors set by hand <span class="kyd-hex"><i style="background:#6B7280" aria-hidden="true"></i>#6B7280</span> <span class="kyd-hex"><i style="background:#111827" aria-hidden="true"></i>#111827</span></td><td class="kyd-num">2</td></tr>
+                <tr><th scope="row">12 screens</th><td>Gap or padding off the spacing scale (warning)</td><td class="kyd-num">20</td></tr>
+                <tr><th scope="row">6 screens</th><td>Tab bar drawn by hand instead of using the component (warning)</td><td class="kyd-num">6</td></tr>
+              </tbody>
+            </table>
+            <p class="kyd-open"><strong>Open:</strong> the 32 findings are not fixed in Figma. Writing down why each exception exists showed that three screens with their own back button were excused from the back rule. Their layers are renamed, and the rule now checks 19 screens instead of 10.</p>
+            <a class="kyd-case-link" href="./cuak-design-system.html">The Cuak system &rarr;</a>
+          </article>
+          <article class="kyd-case">
+            <header class="kyd-case-head">
+              <h3>DuoGit</h3>
+              <span class="kyd-verdict">Not passed</span>
+              <p>9 screens &middot; last run 26 November 2026</p>
+            </header>
+            <figure class="kyd-case-shot">
+              <img loading="lazy" decoding="async" src="../assets/img/kyd/duogit-league-findings.webp" width="553" height="1012" alt="DuoGit league screen listing eight developer ranks, each with a colored icon">
+              <figcaption><strong>League.</strong> 17 icon strokes on this screen carry colors set by hand.</figcaption>
+            </figure>
+            <ol class="kyd-history">
+              <li><span class="kyd-when">Before the system was applied &middot; 7 rules</span><strong>612 errors, 434 warnings</strong><span>The screens as they were.</span></li>
+              <li><span class="kyd-when">After the changes in Figma</span><strong>0 errors, 0 warnings</strong><span>Approved, but icon colors were left out of the check.</span></li>
+              <li><span class="kyd-when">Icon colors checked too</span><strong>31 errors, 0 warnings</strong><span>5 of 9 screens clean.</span></li>
+            </ol>
+            <table class="kyd-findings">
+              <caption>What the last run of DuoGit found</caption>
+              <thead><tr><th scope="col">Screen</th><th scope="col">What disagrees</th><th scope="col" class="kyd-num">Findings</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">League</th><td>Icon strokes set by hand <span class="kyd-hex"><i style="background:#22C55E" aria-hidden="true"></i>#22C55E</span> <span class="kyd-hex"><i style="background:#F59E0B" aria-hidden="true"></i>#F59E0B</span> <span class="kyd-hex"><i style="background:#38BDF8" aria-hidden="true"></i>#38BDF8</span> <span class="kyd-hex"><i style="background:#A78BFA" aria-hidden="true"></i>#A78BFA</span></td><td class="kyd-num">17</td></tr>
+                <tr><th scope="row">Metrics</th><td>Icon strokes set by hand <span class="kyd-hex"><i style="background:#0A84FF" aria-hidden="true"></i>#0A84FF</span> <span class="kyd-hex"><i style="background:#30D158" aria-hidden="true"></i>#30D158</span></td><td class="kyd-num">7</td></tr>
+                <tr><th scope="row">Current streak</th><td>Icon strokes set by hand <span class="kyd-hex"><i style="background:#EAB308" aria-hidden="true"></i>#EAB308</span></td><td class="kyd-num">6</td></tr>
+                <tr><th scope="row">Profile</th><td>Icon stroke set by hand <span class="kyd-hex"><i style="background:#4ADE80" aria-hidden="true"></i>#4ADE80</span></td><td class="kyd-num">1</td></tr>
+              </tbody>
+            </table>
+            <p class="kyd-open"><strong>Open:</strong> the 31 strokes are not fixed in Figma. Only one has a system color with the same value, so the rest need a design decision.</p>
+            <a class="kyd-case-link" href="./duogit-design-system.html">The DuoGit system &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">The problem</span>
+        <h2 class="section-title">My report said 0 errors. <span class="accent">It was wrong.</span></h2>
+        <p class="section-text">
+          Cuak, a concept project of mine, passed its first check. The check skipped any text with more than one color. Once that was fixed, it found colors set by hand in three texts. A clean result had meant &ldquo;not looked at&rdquo;.
+        </p>
+        <p class="section-text">
+          So the question changed from &ldquo;does the file pass?&rdquo; to &ldquo;can this tool be trusted when it says so?&rdquo;
+        </p>
+      </div>
+    </section>
+
+    <!-- WHAT IT DOES -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">What it does</span>
+        <h2 class="section-title">Figma is <span class="accent">the source</span></h2>
+        <p class="section-text">A box is a step that always happens. A diamond is a yes-or-no decision. After a fix, the file goes through the check again. The labels show what the code enforces and what only happens if the flow is followed.</p>
+
+        <div class="kyd-flow">
+          <ul class="kyd-legend" aria-label="How to read the diagram">
+            <li><span class="kyd-shape kyd-shape--step" aria-hidden="true"></span>Step</li>
+            <li><span class="kyd-shape kyd-shape--decision" aria-hidden="true"></span>Decision</li>
+            <li><span class="kyd-gate kyd-gate--code">Code enforces it</span> no pass without it</li>
+            <li><span class="kyd-gate kyd-gate--none">Not enforced</span> depends on following the flow</li>
+            <li><span class="kyd-who kyd-who--script">Script</span> reads Figma and checks</li>
+            <li><span class="kyd-who kyd-who--agent">Agent</span> runs the steps and edits Figma</li>
+            <li><span class="kyd-who kyd-who--me">Me</span> the decisions and approvals</li>
+          </ul>
+
+          <ol class="kyd-path" aria-label="How a run works">
+            <li class="kyd-row">
+              <div class="kyd-node">
+                <span class="kyd-ico kyd-ico--lilac" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 10v10"/></svg></span>
+                <div class="kyd-body">
+                  <span class="kyd-tag">Start</span>
+                  <strong>The Figma file</strong>
+                  <span>Variables, text styles, a written system and the screens.</span>
+                  <span class="kyd-actors"><span class="kyd-who kyd-who--me">Me</span></span>
+                </div>
+              </div>
+            </li>
+            <li class="kyd-row is-loop-start">
+              <span class="kyd-return">Run again</span>
+              <i class="kyd-through" aria-hidden="true"></i>
+              <div class="kyd-diamond">
+                <span class="kyd-diamond-tag">Phase 0</span>
+                <strong>System ready?</strong>
+                <span class="kyd-who kyd-who--script">Script</span>
+              </div>
+              <div class="kyd-aside is-right">
+                <span class="kyd-answer kyd-answer--no">No</span>
+                <strong>Add what is missing</strong>
+                <span>The report does not pass until the system check is ready.</span>
+                <span class="kyd-gate kyd-gate--code">Code enforces it</span>
+                <span class="kyd-again">&#8635; Check again</span>
+                <span class="kyd-actors"><span class="kyd-who kyd-who--me">Me</span></span>
+              </div>
+            </li>
+            <li class="kyd-row is-loop">
+              <span class="kyd-answer kyd-answer--yes">Yes</span>
+              <div class="kyd-node">
+                <span class="kyd-ico kyd-ico--sky" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="16" rx="2"/><rect x="14" y="4" width="7" height="16" rx="2"/></svg></span>
+                <div class="kyd-body">
+                  <span class="kyd-tag">Phase 1 · Count</span>
+                  <strong>Find every screen</strong>
+                  <span>It also says which ones it left out.</span>
+                  <span class="kyd-actors"><span class="kyd-who kyd-who--script">Script</span></span>
+                </div>
+              </div>
+            </li>
+            <li class="kyd-row is-loop">
+              <i class="kyd-through" aria-hidden="true"></i>
+              <div class="kyd-diamond is-partial">
+                <span class="kyd-diamond-tag">Phase 1</span>
+                <strong>Right count?</strong>
+                <span class="kyd-who kyd-who--me">Me</span>
+              </div>
+              <div class="kyd-aside is-right">
+                <span class="kyd-answer kyd-answer--no">No</span>
+                <strong>Fix the scope</strong>
+                <span>Change what counts as a screen.</span>
+                <span class="kyd-gate kyd-gate--part">Enforced if a count is set</span>
+                <span class="kyd-again">&#8635; Find the screens again</span>
+                <span class="kyd-actors"><span class="kyd-who kyd-who--agent">Agent</span></span>
+              </div>
+            </li>
+            <li class="kyd-row is-loop">
+              <span class="kyd-answer kyd-answer--yes">Yes</span>
+              <div class="kyd-node">
+                <span class="kyd-ico kyd-ico--mint" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="4"/><rect x="13" y="13" width="8" height="8" rx="2"/><path d="M17 3l4 7h-8z"/></svg></span>
+                <div class="kyd-body">
+                  <span class="kyd-tag">Phase 2 · Tokens</span>
+                  <strong>Export the tokens</strong>
+                  <span>The token file is generated from Figma. The report does not pass until the two match.</span>
+                  <span class="kyd-gate kyd-gate--code">Code enforces it</span>
+                  <span class="kyd-actors"><span class="kyd-who kyd-who--script">Script</span></span>
+                </div>
+              </div>
+            </li>
+            <li class="kyd-row is-loop">
+              <div class="kyd-node">
+                <span class="kyd-ico kyd-ico--rose" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.500" cy="10.500" r="6.500"/><path d="M15.500 15.500L21 21"/></svg></span>
+                <div class="kyd-body">
+                  <span class="kyd-tag">Phase 3 · Check</span>
+                  <strong>Check each screen</strong>
+                  <span>Up to eleven rules, chosen for each project.</span>
+                  <span class="kyd-actors"><span class="kyd-who kyd-who--script">Script</span></span>
+                </div>
+              </div>
+            </li>
+            <li class="kyd-row is-loop">
+              <div class="kyd-node">
+                <span class="kyd-ico kyd-ico--lilac" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></svg></span>
+                <div class="kyd-body">
+                  <span class="kyd-tag">Phase 4 · Report</span>
+                  <strong>Write the report</strong>
+                  <span>What failed and why. A missed screen or a rule that looked at nothing fails the run.</span>
+                  <span class="kyd-gate kyd-gate--code">Code enforces it</span>
+                  <span class="kyd-actors"><span class="kyd-who kyd-who--script">Script</span></span>
+                </div>
+              </div>
+            </li>
+            <li class="kyd-row is-loop is-back">
+              <i class="kyd-through" aria-hidden="true"></i>
+              <div class="kyd-diamond">
+                <span class="kyd-diamond-tag">Report</span>
+                <strong>Passed?</strong>
+                <span class="kyd-who kyd-who--script">Script</span>
+              </div>
+              <div class="kyd-aside is-left">
+                <span class="kyd-answer kyd-answer--no">No</span>
+                <strong>Fix it</strong>
+                <span>A real finding is fixed in Figma, a false alarm in the rule. Nothing checks which is which; the report lists every exception.</span>
+                <span class="kyd-gate kyd-gate--code">Errors block, warnings pass</span>
+                <span class="kyd-actors"><span class="kyd-who kyd-who--agent">Agent</span><span class="kyd-who kyd-who--me">Me</span></span>
+              </div>
+            </li>
+            <li class="kyd-row is-loop">
+              <span class="kyd-answer kyd-answer--yes">Yes</span>
+              <div class="kyd-node">
+                <span class="kyd-ico kyd-ico--sky" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12s3.500-6 10-6 10 6 10 6-3.500 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                <div class="kyd-body">
+                  <span class="kyd-tag">Review</span>
+                  <strong>Look at the screens</strong>
+                  <span>A pass can still miss things. On DuoGit it missed numbers printed over their units and a button in the wrong color.</span>
+                  <span class="kyd-gate kyd-gate--none">Not enforced</span>
+                  <span class="kyd-actors"><span class="kyd-who kyd-who--agent">Agent</span><span class="kyd-who kyd-who--me">Me</span></span>
+                </div>
+              </div>
+            </li>
+            <li class="kyd-row is-loop-end is-back">
+              <i class="kyd-through" aria-hidden="true"></i>
+              <div class="kyd-diamond is-open">
+                <span class="kyd-diamond-tag">Review</span>
+                <strong>Approved?</strong>
+                <span class="kyd-who kyd-who--me">Me</span>
+              </div>
+              <div class="kyd-aside is-left">
+                <span class="kyd-answer kyd-answer--no">No</span>
+                <strong>Fix what looks wrong</strong>
+                <span>Then the file goes through the check again. A later change in Figma does not undo an approval.</span>
+                <span class="kyd-gate kyd-gate--none">Not enforced</span>
+                <span class="kyd-actors"><span class="kyd-who kyd-who--agent">Agent</span><span class="kyd-who kyd-who--me">Me</span></span>
+              </div>
+            </li>
+            <li class="kyd-row">
+              <span class="kyd-answer kyd-answer--yes">Yes</span>
+              <div class="kyd-end">
+                <strong>Approved and recorded</strong>
+                <span>On DuoGit: an approval note and a named version in Figma.</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <p class="section-text" style="margin-top:var(--s-24)">
+          A run does not pass just because it found nothing. It also fails when a screen was not checked, when no screen was found, or when a rule had nothing to look at, unless the project accepts that explicitly. Each report says how many items every rule looked at.
+        </p>
+      </div>
+    </section>
+
+    <!-- HOW IT WAS TESTED -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">How it was tested</span>
+        <h2 class="section-title">Test, break, fix, <span class="accent">retest</span></h2>
+        <ol class="ul-stages kyd-steps" aria-label="Four rounds of testing">
+          <li><span class="ul-num">1</span><div><strong>Break it on purpose</strong><span class="ul-gate">Two independent AI auditors: one to break the rules against a fake Figma, one to read the project as a stranger. For the first group of fixes, 52 of 61 new tests failed on the old code; all 61 passed after.</span></div></li>
+          <li><span class="ul-num">2</span><div><strong>Run it on a real file</strong><span class="ul-gate">That is where the false &ldquo;0 errors&rdquo; showed up.</span></div></li>
+          <li><span class="ul-num">3</span><div><strong>Run it on a second project</strong><span class="ul-gate">DuoGit, with only a new config. It exposed seven problems in the tool, all then fixed. Two examples: two screens with the same name were merged into one in the work list, and the generated CSS wrote one font for every text style while the check said &ldquo;in sync&rdquo;.</span></div></li>
+          <li><span class="ul-num">4</span><div><strong>Act on the report</strong><span class="ul-gate">Trying to act on DuoGit&rsquo;s report showed that none of the 418 measured colors on its screens was bound to its design system. 256 of them had passed because they were bound to leftovers of an HTML import. After the fix, errors went from 356 to 612 on unchanged screens.</span></div></li>
+        </ol>
+        <p class="section-text" style="margin-top:var(--s-24)"><strong>The number got worse because the tool got better.</strong></p>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">Result</span>
+        <h2 class="section-title">DuoGit: nine screens, <span class="accent">from 612 errors to 0</span></h2>
+        <p class="section-text">Same tool, same config, nine screens, seven rules. Icon colors were left out of both runs. DuoGit is a concept project.</p>
+        <div class="kyd-table-wrap">
+          <table class="kyd-table">
+            <thead><tr><th scope="col">Rule</th><th scope="col">Type</th><th scope="col" class="kyd-num">Before</th><th scope="col" class="kyd-num">After</th></tr></thead>
+            <tbody>
+              <tr><td>Colors bound to the system</td><td>error</td><td class="kyd-num">418</td><td class="kyd-num">0</td></tr>
+              <tr><td>Text uses a system style</td><td>error</td><td class="kyd-num">192</td><td class="kyd-num">0</td></tr>
+              <tr><td>Text overflow</td><td>error</td><td class="kyd-num">2</td><td class="kyd-num">0</td></tr>
+              <tr><td>Spacing bound</td><td>warning</td><td class="kyd-num">316</td><td class="kyd-num">0</td></tr>
+              <tr><td>Radius bound</td><td>warning</td><td class="kyd-num">95</td><td class="kyd-num">0</td></tr>
+              <tr><td>Components used</td><td>warning</td><td class="kyd-num">12</td><td class="kyd-num">0</td></tr>
+              <tr><td>Minimum text size</td><td>warning</td><td class="kyd-num">11</td><td class="kyd-num">0</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><th scope="row" colspan="2">Errors</th><td class="kyd-num">612</td><td class="kyd-num">0</td></tr>
+              <tr><th scope="row" colspan="2">Warnings</th><td class="kyd-num">434</td><td class="kyd-num">0</td></tr>
+            </tfoot>
+          </table>
+        </div>
+        <p class="section-text" style="margin-top:var(--s-24)">
+          Claude made the changes in Figma. I approved the plan, then a one-screen pilot, then the other eight, and the final screens.
+        </p>
+        <div class="ul-two">
+          <div class="ul-card">
+            <h3>What changed in the system to get there</h3>
+            <p>Two spacing steps, new gold and bronze primitives (plus faint versions for medals), and six medal variables where the plan said three. No rule, exception or scope was changed.</p>
+          </div>
+          <div class="ul-card">
+            <h3>What you can see</h3>
+            <p>Fonts moved to the system&rsquo;s, tab labels went from 18 to 12, screen titles are centered, and gray text that failed contrast became the secondary text color.</p>
+          </div>
+        </div>
+        <div class="kyd-pair">
+          <figure class="shot kyd-shot">
+            <img loading="lazy" decoding="async" src="../assets/img/kyd/dashboard-before.webp" width="553" height="1012" alt="DuoGit dashboard before the design system was applied">
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>Dashboard, before.</strong> Fonts and values from an HTML import.</figcaption>
+          </figure>
+          <figure class="shot kyd-shot">
+            <img loading="lazy" decoding="async" src="../assets/img/kyd/dashboard-after.webp" width="553" height="1012" alt="DuoGit dashboard after the design system was applied">
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>Dashboard, after.</strong> The system&rsquo;s fonts, colors and tab bar.</figcaption>
+          </figure>
+        </div>
+        <div class="kyd-pair">
+          <figure class="shot kyd-shot">
+            <img loading="lazy" decoding="async" src="../assets/img/kyd/league-rank-before.webp" width="553" height="1012" alt="DuoGit league leaderboard before the design system was applied">
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>League, before.</strong></figcaption>
+          </figure>
+          <figure class="shot kyd-shot">
+            <img loading="lazy" decoding="async" src="../assets/img/kyd/league-rank-after.webp" width="553" height="1012" alt="DuoGit league leaderboard after the design system was applied">
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>League, after.</strong> System text styles and tab bar.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- A PASS IS NOT A REVIEW -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">A pass is not a design review</span>
+        <h2 class="section-title">At 0 and 0, <span class="accent">two things were still wrong</span></h2>
+        <p class="section-text">
+          Looking at the screens showed numbers printed on top of their units in two Dashboard cards, and the main button of another screen in the information color instead of the action color, a mistake in the mapping plan. Both were found by looking, not by the lint, and then fixed.
+        </p>
+        <div class="kyd-pair">
+          <figure class="shot kyd-shot">
+            <img loading="lazy" decoding="async" src="../assets/img/kyd/dashboard-pass-broken.webp" width="553" height="1012" alt="DuoGit dashboard with zero lint findings, where the numbers 4.5h and 2.4 overlap their units">
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>0 errors, 0 warnings.</strong> And two metric cards you cannot read.</figcaption>
+          </figure>
+          <figure class="shot kyd-shot">
+            <img loading="lazy" decoding="async" src="../assets/img/kyd/dashboard-fixed.webp" width="553" height="1012" alt="DuoGit dashboard with each number and its unit side by side">
+            <figcaption class="note"><span class="note-tape" aria-hidden="true"></span><strong>Fixed by looking.</strong> Number and unit sit side by side.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOT PROVEN -->
+    <section class="section">
+      <div class="container">
+        <span class="section-label">What is not proven</span>
+        <h2 class="section-title">What I <span class="accent">do not know yet</span></h2>
+        <ul class="ul-list">
+          <li>That comparison left out 31 icon colors. The tool now checks them, and DuoGit does not pass: 31 errors on four screens, not yet fixed in Figma.</li>
+          <li>14 shadows are outside what is measured. Gradients and images are not checked.</li>
+          <li>Contrast, visual hierarchy and content were not rules in this run. A 0 does not show good design.</li>
+          <li>Both projects are concepts by me, named in a similar way. I do not know if it works on other files.</li>
+          <li>The report used to say PASSED with the system check blocked or the tokens never checked. It now requires both and lists the exceptions. The cases where one of those two steps is missing or fails were tested on a fake Figma file only.</li>
+          <li>The order of the other steps, whether an exception is justified, the screen review and the approval are still not enforced.</li>
+          <li>Nobody else has run it, nothing was timed, and no other designer or user has seen the screens.</li>
+          <li>What the tool found in Cuak is not fixed in Figma.</li>
+          <li>Known gaps remain: a wrong-sized screen is filtered out before the size rule can report it; shared library styles, ellipses and wrap spacing are not read.</li>
+          <li>DuoGit&rsquo;s app code does not read these tokens.</li>
+          <li>The tool and the evidence files are not published, so you cannot check these numbers yourself yet.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-heading">Working on design systems?</h2>
+        <p class="cta-sub">I would rather show where a check fails than say it passes. Let's talk.</p>
+        <a class="cta-btn" href="mailto:josealvarezswork@gmail.com">Email me →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">&copy; 2026 Jose Alvarez</span>
+        <nav class="footer-nav">
+          <a href="../index.html">Work</a>
+          <a href="./cuak-design-system.html">Cuak system</a>
+          <a href="./duogit-design-system.html">DuoGit system</a>
+          <a href="./same-page.html">Same Page</a>
+          <a href="./resume.html">Resume</a>
+          <a class="with-ico" href="mailto:josealvarezswork@gmail.com"><svg class="ico" aria-hidden="true"><use href="../assets/img/icons.svg#i-mail"/></svg>Contact</a>
+        </nav>
+      </div>
+      <p class="footer-credit">Icons by <a href="https://streamlinehq.com" target="_blank" rel="noreferrer">Streamline</a> (CC BY 4.0) &middot; brand marks by <a href="https://simpleicons.org" target="_blank" rel="noreferrer">Simple Icons</a></p>
+    </div>
+  </footer>
+
+    <script src="../scripts/brand.js?v=2" defer></script>
+  </body>
+</html>
